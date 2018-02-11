@@ -21,7 +21,7 @@ enum Camera_Movement
 	UP,
 	DOWN
 };
-
+// TODO maybe implement in a .cpp
 class Camera
 {
 public:
@@ -46,13 +46,13 @@ public:
 	}
 
 
-	inline glm::vec3* GetPos() { return &m_position; };
+	inline const glm::vec3* GetPos() const { return &m_position; };
 	inline void SetPos(glm::vec3 pos) { m_position = pos; };
 
-	inline glm::vec3* GetForward() { return &m_forward; };
-	inline glm::vec3* GetUp() { return &m_up; };
-	inline glm::vec3 GetLeft() { return cross(m_up, m_forward); };
-	inline glm::vec3 GetRight() { return cross(m_forward, m_up); };
+	inline const glm::vec3* GetForward() const { return &m_forward; };
+	inline const glm::vec3* GetUp() const { return &m_up; };
+	inline const glm::vec3 GetLeft() const { return cross(m_up, m_forward); };
+	inline const glm::vec3 GetRight() const { return cross(m_forward, m_up); };
 	
 	
 
@@ -63,8 +63,8 @@ public:
 		camera = translate(camera, translationVector);
 	}*/
 
-	// Local rotations
 	// TODO make global ones too and maybe place the rotations in a separate header
+	// Local rotations
 	void RotateX(float angle)
 	{
 		m_forward = glm::rotate(m_forward, -angle, GetRight());
@@ -83,6 +83,9 @@ public:
 	}
 
 	
+	//TODO translation by vector
+	//maybe m_position += translationVector;
+
 	void Translate(Camera_Movement direction, float amount)
 	{
 		switch (direction)

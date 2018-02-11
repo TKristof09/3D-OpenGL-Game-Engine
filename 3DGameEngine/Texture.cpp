@@ -5,6 +5,8 @@
 #include <iostream>
 
 
+
+
 Texture::Texture(const std::string& fileName)
 {
 	int width, height, numComponents;
@@ -23,18 +25,18 @@ Texture::Texture(const std::string& fileName)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
 	stbi_image_free(imageData);
-
 }
-
 
 Texture::~Texture()
 {
+	std::cout << "texture destructor called" << std::endl;
 	glDeleteTextures(1, &m_texture);
 }
 
-void Texture::Bind(unsigned int unit)
+void Texture::Bind (unsigned int unit) const 
 {
 	assert(unit >= 0 && unit <= 31);
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 }
+

@@ -2,6 +2,7 @@
 #define BASICSHADER_H
 
 #include "Shader.h"
+#include "Material.h"
 class BasicShader : public Shader
 {
 public:
@@ -11,10 +12,7 @@ public:
 	{
 		Shader::Bind();
 	};
-	void Update(const Transform& transform, const Camera& camera)
-	{
-		Shader::Update(transform, camera);
-	};
+	void Update(const Transform& transform, const Camera& camera, Material material);
 };
 
 

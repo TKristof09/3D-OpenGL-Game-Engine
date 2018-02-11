@@ -10,20 +10,22 @@
 class Vertex
 {
 public:
-	Vertex(const glm::vec3& pos, const glm::vec2& textCoord)
+	Vertex(const glm::vec3& pos, const glm::vec2& textCoord, const glm::vec3& normal)
 	{
 		this->pos = pos;
 		this->textCoord.x = textCoord.x;
 		this->textCoord.y = 1 - textCoord.y;
+		this->normal = normal;
 		
-	}
-	inline glm::vec3* GetPos() { return &pos; };
-	inline glm::vec2* GetTextCoord() { return &textCoord; };
-	
+	};
+	inline const glm::vec3* GetPos() const { return &pos; };
+	inline const glm::vec2* GetTextCoord() const { return &textCoord; };
+	inline const glm::vec3* GetNormal() const { return &normal; };
 	
 private:
 	glm::vec3 pos;
 	glm::vec2 textCoord;
+	glm::vec3 normal;
 	
 };
 
@@ -42,7 +44,7 @@ private:
 	{
 		POSITION_VB,
 		TEXTCOORD_VB,
-		//NORMAL_VB,
+		NORMAL_VB,
 
 		INDEX_VB,
 

@@ -24,11 +24,15 @@ public:
 	void Bind();
 	
 	void Update(const Transform& transform, const Camera& camera);
-	//void UpdateUniforms(glm::mat4 worldMatrix, glm::mat4 projectionMatrix);
-	inline GLuint GetUniformLocation(const GLchar* uniform)
+	void SetUniform(const GLchar* uniform, float value);
+	void SetUniform(const GLchar* uniform, const glm::vec3& value);
+	void SetUniform(const GLchar* uniform, const glm::vec4& value);
+	void SetUniform(const GLchar* uniform, const glm::mat4& value);
+	inline GLuint GetUniformLocation(const GLchar* uniform) const
 	{
 		return glGetUniformLocation(m_program, uniform);
 	};
+	
 
 private:
 	static const unsigned int NUM_SHADERS = 2;

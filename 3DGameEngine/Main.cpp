@@ -1,22 +1,42 @@
 #include <iostream>
 #include "Core.h"
 #include "Input.h"
+#include "Timer.h"
 #include "Mesh.h"
 #include "Shader.h"
 #include "Transform.h"
 #include "Camera.h"
 #include "Texture.h"
 #include "BasicShader.h"
-
+#include "PhongShader.h"
+#include "Material.h"
+#include "BaseLight.h"
+#include "DirectionalLight.h"
 
 #include <glm\ext.hpp>
 
+#ifdef __cplusplus
+extern "C"
+#endif
+
+const int FPS_CAP = 60;
+const glm::vec3 X_AXIS = glm::vec3(1, 0, 0);
+const glm::vec3 Y_AXIS = glm::vec3(0, 1, 0);
+const glm::vec3 Z_AXIS = glm::vec3(0, 0, 1);
+
+
+void Update()
+{
+	// Just for future stuff
+}
+
+
 int main(int argc, char *argv[])
 {
-	
-	const glm::vec3 X_AXIS = glm::vec3(1, 0, 0);
-	const glm::vec3 Y_AXIS = glm::vec3(0, 1, 0);
-	const glm::vec3 Z_AXIS = glm::vec3(0, 0, 1);
+
+	bool capFPS = true;
+
+	Timer timer;	
 
 
 	Uint64 NOW = SDL_GetPerformanceCounter();
@@ -24,30 +44,24 @@ int main(int argc, char *argv[])
 	double deltaTime = 0;
 
 
-	Core display(800, 600, "3D Game Engine");
+	Core display(1024, 720, "3D Game Engine");
 	std::cout << "Hello world" << std::endl;
 	
 	Camera camera(glm::vec3(0, 0, -10), glm::vec3(0, 0, 1), glm::vec3(0, 1, 0), 70.0f, * display.GetWidth() / (float)*display.GetHeight(), 0.01f, 1000.0f);
 
-	//Vertex vertices[] = { Vertex(glm::vec3(-1, -1, 0), glm::vec2(0, 0)),
-	//					Vertex(glm::vec3(0, 1, 0), glm::vec2(0.5f, 0)),
-	//					Vertex(glm::vec3(1, -1, 0), glm::vec2(1.0f, 0)),
-	//					Vertex(glm::vec3(0, -1, 1), glm::vec2(0.5f, 1.0f)) };
-
-	//unsigned int indices[] = { 3,1,0,
-	//							2,1,3,
-	//							0,1,2,
-	//							0,2,3 };
-
-	//Mesh mesh2(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
-
+	Texture texture(".\\res\\uv_checker.png");
+	Material material(texture, glm::vec3(1,1,1), 2, 32);
 	Mesh mesh(".\\res\\cubeUV.obj");
 
 	Transform transform;
 
-	BasicShader shader;
+	PhongShader phongShader;
 
-	Texture texture(".\\res\\texture.jpg");
+
+	BaseLight baseLight(glm::vec3(1, 1, 1), 1.0f);
+	DirectionalLight directionalLight(baseLight, glm::vec3(0, 0, 1));
+
+	
 	
 	float counter = 0.0f;
 
@@ -61,14 +75,18 @@ int main(int argc, char *argv[])
 		NOW = SDL_GetPerformanceCounter();
 		deltaTime = ((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency()) * 0.001;
 				
-
+		
 		float sinCounter = sin(counter);
 		float cosCounter = cos(counter);
 
-		display.Clear(0.1f, 0.3f, 0.5f, 1.0f);
+		display.Clear(0.5, 0.5, 0.5, 1.0f);
 
+		glm::vec3 rot = *transform.GetRotation();
+		rot.y = counter * 3;
+		//transform.SetRotation(rot);
+		
 		// Set up inputs here
-		// TODO consider switch statement
+		// TODO make better input handling
 
 		if (Input::GetKeyDown(SDL_SCANCODE_UP))
 			camera.Translate(FORWARD, 5 * deltaTime);
@@ -102,16 +120,20 @@ int main(int argc, char *argv[])
 			camera.RotateZ(deltaTime);
 
 	
-		//cout << to_string(*camera.GetForward()) << endl;
-		
-		shader.Bind();
-		shader.Update(transform, camera);
-		texture.Bind(0);
-		//mesh2.Draw();
+		Update(); // TODO maybe not right place for this
+		//material.SetTexture(texture);
+		//texture.Bind(0);
+		phongShader.SetAmbientLight(glm::vec3(0.05f, 0.05f, 0.05f));
+		phongShader.SetDirectionalLight(directionalLight);
+		phongShader.Bind();
+		phongShader.Update(transform, camera, material);
 		mesh.Draw();
 		display.Update();
 		
-		
+		if (capFPS && timer.GetTicks() < 1000 / FPS_CAP)
+		{
+			SDL_Delay((1000 / FPS_CAP) - timer.GetTicks());
+		}
 
 		counter += 0.005f;
 	}

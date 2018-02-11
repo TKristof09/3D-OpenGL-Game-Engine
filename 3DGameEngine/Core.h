@@ -16,9 +16,9 @@ public:
 	void Clear(float r, float g, float b, float a);
 	void Update();
 
-	inline int* GetWidth() { return &m_width; };
-	inline int* GetHeight() { return &m_height; };
-	inline bool IsClosed() { return isClosed; };
+	inline const int* GetWidth() const { return &m_width; };
+	inline const int* GetHeight() const { return &m_height; };
+	inline bool IsClosed() const { return isClosed; };
 
 
 private:

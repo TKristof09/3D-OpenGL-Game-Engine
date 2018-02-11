@@ -15,7 +15,7 @@ public:
 		m_scale(scale)
 	{};
 
-	inline glm::mat4 GetModel() const
+	inline glm::mat4 GetModel()  const
 	{
 		glm::mat4 translationMatrix = glm::translate(m_position);
 		glm::mat4 rotationXMatrix = glm::rotate(m_rotation.x, glm::vec3(1, 0, 0));
@@ -28,12 +28,12 @@ public:
 		return translationMatrix * rotationMatrix * scaleMatrix;
 	};
 
-	inline glm::vec3* GetPosition() { return &m_position; };
-	inline glm::vec3* GetRotation() { return &m_rotation; };
-	inline glm::vec3* GetScale() { return &m_scale; };
+	inline const glm::vec3* GetPosition() const { return &m_position; };
+	inline const glm::vec3* GetRotation() const { return &m_rotation; };
+	inline const glm::vec3* GetScale() const { return &m_scale; };
 
-	inline void SetPos(const glm::vec3& position) { this->m_position = position; };
-	inline void SetRot(const glm::vec3& rotation) { this->m_rotation = rotation; };
+	inline void SetPosition(const glm::vec3& position) { this->m_position = position; };
+	inline void SetRotation(const glm::vec3& rotation) { this->m_rotation = rotation; };
 	inline void SetScale(const glm::vec3& scale) { this->m_scale = scale; };
 
 private:

@@ -63,15 +63,6 @@ void Core::Update()
 		case SDL_QUIT:
 			isClosed = true;
 			break;
-		//case SDL_KEYDOWN:	// Keyboard input handling gets called less often then the one in input namespace
-		//	switch (e.key.keysym.sym)
-		//	{
-		//	case SDLK_LEFT: cout << "LEFT" << endl; break;
-		//	//case SDLK_UP: cout << "UP" << endl; break;
-		//	case SDLK_RIGHT: cout << "RIGHT" << endl; break;
-		//	case SDLK_DOWN: cout << "DOWN" << endl; break;
-		//	}
-		//	break;
 
 		case SDL_MOUSEBUTTONDOWN:	// Mouse input handling only gets called on the initial press
 			switch(e.button.button)

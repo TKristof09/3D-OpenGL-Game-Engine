@@ -62,13 +62,33 @@ void Shader::AddShader(const string& fileName, unsigned int type)
 
 	
 }
-
+// TODO remove
 void Shader::Update(const Transform& transform, const Camera& camera)
 {
 	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+}
+
+void Shader::SetUniform(const GLchar* uniform, float value)
+{
+	glUniform1f(glGetUniformLocation(m_program, uniform), value);
+}
+
+void Shader::SetUniform(const GLchar* uniform, const glm::vec3& value)
+{
+	glUniform3fv(glGetUniformLocation(m_program, uniform), 1, glm::value_ptr(value));
+}
+
+void Shader::SetUniform(const GLchar* uniform, const glm::vec4& value)
+{
+	glUniform4fv(glGetUniformLocation(m_program, uniform), 1, glm::value_ptr(value));
+}
+
+void Shader::SetUniform(const GLchar* uniform, const glm::mat4& value)
+{
+	glUniformMatrix4fv(glGetUniformLocation(m_program, uniform), 1, GL_FALSE, &value[0][0]);
 }
 
 void Shader::Bind()
@@ -119,7 +139,8 @@ static string LoadShader(const string& fileName)
 	{
 		cerr << "Unable to load shader:" << fileName << endl;
 	}
-	cout << output << endl;
+	// only if need to debug
+	// cout << output << endl;
 	return output;
 }
 
