@@ -4,7 +4,7 @@
 #include <glm\glm.hpp>
 #include "BaseLight.h"
 
-class DirectionalLight : public BaseLight
+class DirectionalLight
 {
 public: 
 	DirectionalLight(const BaseLight& base=BaseLight(glm::vec3(1,1,1), 1.0f), const glm::vec3& direction=glm::vec3(0,0,0))

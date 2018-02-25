@@ -1,8 +1,8 @@
-#include "Texture.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 #include <cassert>
 #include <iostream>
+#include "Texture.h"
+#include "..\stb_image.h"
 
 
 

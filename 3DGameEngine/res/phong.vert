@@ -14,5 +14,5 @@ void main(){
 	gl_Position = projectedTransform * vec4(position, 1.0);
 	textCoord0 = textCoord;
 	normal0 = (transform * vec4(normal, 0.0)).xyz;
-	worldPos0 = (transform * vec(position, 1.0)).xyz;
+	worldPos0 = (transform * vec4(position, 1.0)).xyz;
 }

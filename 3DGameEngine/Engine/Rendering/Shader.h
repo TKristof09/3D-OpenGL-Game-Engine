@@ -4,8 +4,8 @@
 #include <string>
 using namespace std;
 #include <GL\glew.h>
-#include "Transform.h"
-#include "Camera.h"
+#include "..\Core\Transform.h"
+#include "..\Camera.h"
 
 enum ShaderType
 {

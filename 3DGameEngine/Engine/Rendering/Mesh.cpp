@@ -8,7 +8,7 @@ Mesh::Mesh(const std::string& fileName)
 	InitMesh(model);
 }
 
-Mesh::Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
+Mesh::Mesh(Vertex vertices[], unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
 {
 	IndexedModel model;
 

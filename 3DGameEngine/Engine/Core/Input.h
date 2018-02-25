@@ -8,14 +8,8 @@ class Input
 {
 public:
 	// TODO new function that only sends signal when key is pressed
-	static bool GetKeyDown(SDL_Scancode scanCode)
-	{
-		const Uint8 *state = SDL_GetKeyboardState(NULL);
-		if (state[scanCode])
-			return true;
-		else
-			return false;
-	}
+	static bool GetKeyDown(SDL_Scancode scanCode);
+	static void Update();
 };
 
 #endif

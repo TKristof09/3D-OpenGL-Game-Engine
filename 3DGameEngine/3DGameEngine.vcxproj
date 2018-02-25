@@ -144,33 +144,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasicShader.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="OBJloader.cpp" />
-    <ClCompile Include="PhongShader.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Engine\Core\CoreEngine.cpp" />
+    <ClCompile Include="Engine\Core\Input.cpp" />
+    <ClCompile Include="Engine\Rendering\BasicShader.cpp" />
+    <ClCompile Include="Engine\Core\Window.cpp" />
+    <ClCompile Include="Engine\Main.cpp" />
+    <ClCompile Include="Engine\Rendering\Material.cpp" />
+    <ClCompile Include="Engine\Rendering\Mesh.cpp" />
+    <ClCompile Include="Engine\OBJloader.cpp" />
+    <ClCompile Include="Engine\Rendering\PhongShader.cpp" />
+    <ClCompile Include="Engine\Rendering\Shader.cpp" />
+    <ClCompile Include="Engine\Rendering\Texture.cpp" />
+    <ClCompile Include="Engine\Core\Time.cpp" />
+    <ClCompile Include="Engine\TestGame.cpp" />
+    <ClCompile Include="Engine\Core\SDL_Backend.cpp" />
+    <ClCompile Include="Engine\Core\GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseLight.h" />
-    <ClInclude Include="BasicShader.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Core.h" />
-    <ClInclude Include="DirectionalLight.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="OBJloader.h" />
-    <ClInclude Include="PhongShader.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Engine\Core\CoreEngine.h" />
+    <ClInclude Include="Engine\Core\Game.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\Attenuation.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\BaseLight.h" />
+    <ClInclude Include="Engine\Rendering\BasicShader.h" />
+    <ClInclude Include="Engine\Camera.h" />
+    <ClInclude Include="Engine\Core\Window.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\DirectionalLight.h" />
+    <ClInclude Include="Engine\Core\Input.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\SpotLight.h" />
+    <ClInclude Include="Engine\Rendering\Material.h" />
+    <ClInclude Include="Engine\Rendering\Mesh.h" />
+    <ClInclude Include="Engine\OBJloader.h" />
+    <ClInclude Include="Engine\Rendering\PhongShader.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\PointLight.h" />
+    <ClInclude Include="Engine\Rendering\Shader.h" />
+    <ClInclude Include="Engine\stb_image.h" />
+    <ClInclude Include="Engine\Rendering\Texture.h" />
+    <ClInclude Include="Engine\Core\Time.h" />
+    <ClInclude Include="Engine\Core\Transform.h" />
+    <ClInclude Include="Engine\TestGame.h" />
+    <ClInclude Include="Engine\Core\SDL_Backend.h" />
+    <ClInclude Include="Engine\Core\GameObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

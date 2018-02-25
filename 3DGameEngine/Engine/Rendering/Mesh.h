@@ -5,8 +5,8 @@
 
 #include <glm\glm.hpp>
 #include <GL\glew.h>
-#include "OBJloader.h"
-
+#include "..\OBJloader.h"
+// TODO make calculate normals for meshes without normals
 class Vertex
 {
 public:
@@ -32,7 +32,7 @@ private:
 class Mesh
 {
 public:
-	Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
+	Mesh(Vertex vertices[], unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
 	Mesh(const std::string& fileName);
 	~Mesh();
 

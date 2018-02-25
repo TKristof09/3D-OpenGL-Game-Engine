@@ -14,9 +14,9 @@ public:
 	inline void SetColor(const glm::vec3& color) { m_color = color; };
 	inline const Texture* GetTexture() const { return &m_texture; };
 	inline void SetTexture(const Texture& texture) { m_texture = texture; };
-	inline const float* GetSpecularIntensity() { return &m_specularIntensity; };
+	inline const float* GetSpecularIntensity() const { return &m_specularIntensity; };
 	inline void SetSpecularIntensity(const float& intensity) { m_specularIntensity = intensity; };
-	inline const float* GetSpecularExponent() { return &m_specularExponent; };
+	inline const float* GetSpecularExponent() const { return &m_specularExponent; };
 	inline void SetSpecularExponent(const float& exponent) { m_specularExponent = exponent; };
 
 private:
