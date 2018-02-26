@@ -12,7 +12,7 @@ public:
 	{
 		Shader::Bind();
 	};
-	void Update(const Transform& transform, const Camera& camera, Material material);
+	void Update(const Transform& transform, const Camera& camera, const Material &material);
 };
 
 

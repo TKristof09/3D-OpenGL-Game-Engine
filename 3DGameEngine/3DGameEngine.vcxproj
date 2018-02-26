@@ -163,6 +163,8 @@
   <ItemGroup>
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Game.h" />
+    <ClInclude Include="Engine\GameComponents\GameComponent.h" />
+    <ClInclude Include="Engine\GameComponents\MeshRenderer.h" />
     <ClInclude Include="Engine\Rendering\Lighting\Attenuation.h" />
     <ClInclude Include="Engine\Rendering\Lighting\BaseLight.h" />
     <ClInclude Include="Engine\Rendering\BasicShader.h" />

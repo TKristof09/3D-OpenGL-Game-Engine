@@ -11,21 +11,26 @@
 #include "Rendering\Lighting\BaseLight.h"
 #include "Rendering\Lighting\DirectionalLight.h"
 #include "Camera.h"
+#include "Core\GameObject.h"
+#include "GameComponents\MeshRenderer.h"
 
 #include <glm\ext.hpp>
+
 class TestGame : public Game
 {
 public:
 	TestGame();
-	~TestGame();
+	~TestGame() override;
 	void Init() override;
 	void Render() override;
 	void Update() override;
 	void Input() override;
 private:
-	PhongShader* m_shader;
+	GameObject m_root;
+	MeshRenderer* m_meshRenderer;
+
+	//PhongShader* m_shader;
 	Mesh* m_mesh;
-	Transform* m_transform;
 	Camera* m_camera;
 	Material* m_material;
 	Texture* m_texture;

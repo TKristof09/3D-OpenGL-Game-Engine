@@ -15,12 +15,12 @@ PhongShader::~PhongShader()
 
 }
 
-void PhongShader::Update(const Transform& transform, const Camera& camera, const Material& material)
+void PhongShader::Update(const Transform& transform, const Camera& camera, Material& material)
 {
-	m_material = material;
-	if (m_material.GetTexture() != NULL)
+	m_material = &material;
+	if (m_material->GetTexture() != NULL)
 	{
-		m_material.GetTexture()->Bind();
+		m_material->GetTexture()->Bind();
 	}
 	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("transform", transform.GetModel());

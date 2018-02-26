@@ -12,24 +12,27 @@ TestGame::TestGame()
 TestGame::~TestGame()
 {
 	delete m_mesh;
-	delete m_shader;
+	//delete m_shader;
 	delete m_camera;
-	delete m_material;
-	delete m_transform;
 	delete m_texture;
+	delete m_material;
+	delete m_meshRenderer;
 }
 
 void TestGame::Init()
 {
+	m_root = GameObject();
 	m_camera = new Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, (float)800/(float)600, 0.01f, 1000.0f);
 	
-	m_texture = new Texture(".\\res\\checkerboard.png");
+	m_texture = new Texture(".\\res\\uv_checker.png");
+	
 	m_material = new Material(*m_texture, glm::vec3(0.3f, 0.3f, 0.3f), 8, 32);
 	m_mesh = new Mesh(".\\res\\plane.obj");
-	
-	m_transform = new Transform();
-	
-	m_shader = new PhongShader();
+	m_meshRenderer = new MeshRenderer(m_mesh, *m_material);
+
+	m_root.AddComponent(m_meshRenderer);
+
+	//m_shader = new PhongShader();
 	//TODO make RGB(0-255,0-255,0-255) (and HEX) color picking 
 	directionalLight = DirectionalLight(BaseLight(glm::vec3(244.0f/255.0f, 150.0f/255.0f, 28.0f/255.0f), 1), glm::vec3(0, -1, -1));
 	PointLight pLight1(BaseLight(glm::vec3(1, 0, 0), 10), Attenuation(1, 0, 0), 10, glm::vec3(3, 3, 0));
@@ -42,10 +45,10 @@ void TestGame::Init()
 	
 	SpotLight sLight1(PointLight(BaseLight(glm::vec3(0, 1, 0), 20), Attenuation(1,0,0), 10, glm::vec3(0, 1, 3)), glm::vec3(0, -1, -10), cos(glm::radians(35.0f)));
 	spotLights[0] = sLight1;
-	m_shader->SetAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
-//	m_shader->SetDirectionalLight(directionalLight);
-	m_shader->SetPointLights(pointLights, 2);
-	m_shader->SetSpotLights(spotLights, 1);
+	//m_shader->SetAmbientLight(glm::vec3(0.1f, 0.1f, 0.1f));
+	//m_shader->SetDirectionalLight(directionalLight);
+	//m_shader->SetPointLights(pointLights, 2);
+	//m_shader->SetSpotLights(spotLights, 1);
 			
 }
 
@@ -85,13 +88,10 @@ void TestGame::Input()
 
 void TestGame::Update()
 {
-
+	m_root.Update();
 }
 
 void TestGame::Render()
 {
-	m_shader->Bind();
-	m_shader->Update(*m_transform, *m_camera, *m_material);
-			
-	m_mesh->Draw();
+	m_root.Render(*m_camera);
 }
