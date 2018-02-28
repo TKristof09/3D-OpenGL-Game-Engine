@@ -159,6 +159,7 @@
     <ClCompile Include="Engine\TestGame.cpp" />
     <ClCompile Include="Engine\Core\SDL_Backend.cpp" />
     <ClCompile Include="Engine\Core\GameObject.cpp" />
+    <ClCompile Include="Engine\Core\RenderingEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Core\CoreEngine.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Engine\TestGame.h" />
     <ClInclude Include="Engine\Core\SDL_Backend.h" />
     <ClInclude Include="Engine\Core\GameObject.h" />
+    <ClInclude Include="Engine\Core\RenderingEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

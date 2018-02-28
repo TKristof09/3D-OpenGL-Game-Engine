@@ -21,7 +21,8 @@ public:
 		Shader::Bind();
 	};
 	
-	void Update(const Transform& transform, const Camera& camera, Material& material);
+	void Update(const Transform& transform, /*const Camera& camera,*/ const Material& material) override;
+
 	void SetUniform(const GLchar* uniform, const Attenuation& attenuation);
 	void SetUniform(const GLchar* uniform, const DirectionalLight& directionalLight);
 	void SetUniform(const GLchar* uniform, const BaseLight& baseLight);
@@ -63,7 +64,7 @@ public:
 	};
 
 private:
-	Material* m_material;
+	Material m_material;
 	glm::vec3 m_ambientLight;
 	DirectionalLight m_directionalLight;
 	PointLight m_pointLights[MAX_POINT_LIGHTS];

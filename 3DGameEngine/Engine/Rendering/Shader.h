@@ -2,10 +2,12 @@
 #define SHADER_H
 
 #include <string>
-using namespace std;
 #include <GL\glew.h>
 #include "..\Core\Transform.h"
 #include "..\Camera.h"
+#include "Material.h"
+#include "..\Core\RenderingEngine.h"
+
 
 enum ShaderType
 {
@@ -19,15 +21,19 @@ public:
 	Shader();
 	~Shader();
 
-	void AddShader(const string& fileName, unsigned int type);
+	void AddShader(const std::string& fileName, unsigned int type);
 
 	void Bind();
 	
-	void Update(const Transform& transform, const Camera& camera);
+	virtual void Update(const Transform& transform, /*const Camera& camera,*/ const Material& material);
 	void SetUniform(const GLchar* uniform, float value);
 	void SetUniform(const GLchar* uniform, const glm::vec3& value);
 	void SetUniform(const GLchar* uniform, const glm::vec4& value);
 	void SetUniform(const GLchar* uniform, const glm::mat4& value);
+
+	inline const RenderingEngine* GetRenderingEngine() const { return m_renderingEngine; };
+	inline void SetRenderingEngine(RenderingEngine* renderingEngine) { m_renderingEngine = renderingEngine; };
+
 	inline GLuint GetUniformLocation(const GLchar* uniform) const
 	{
 		return glGetUniformLocation(m_program, uniform);
@@ -47,6 +53,8 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
+
+	RenderingEngine* m_renderingEngine;
 };
 
 

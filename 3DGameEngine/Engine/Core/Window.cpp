@@ -3,6 +3,9 @@
 #include <SDL2\SDL.h>
 #include "SDL_Backend.h"
 
+int Window::m_width = 0;
+int Window::m_height = 0;
+std::string Window::m_title = "Title";
 
 void Window::Create(int width, int height, const std::string& title)
 {
@@ -26,12 +29,7 @@ void Window::Create(int width, int height, const std::string& title)
 		std::cerr << "Glew failed to initialize!" << std::endl;
 	
 
-	//glEnable(GL_FRAMEBUFFER_SRGB);
-	glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
+
 
 	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 
@@ -42,12 +40,6 @@ void Window::Close()
 	SDLDestroyWindow();
 	SDL_Quit();
 	SDL_Quit();
-}
-
-void Window::ClearScreen()
-{
-	//glClearColor(0.5f, 0.5f, 0.5f, 1);
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::Render()

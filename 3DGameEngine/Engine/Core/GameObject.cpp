@@ -34,16 +34,16 @@ void GameObject::Update()
 		child.Update();
 	}
 }
-void GameObject::Render(const Camera& camera)
+void GameObject::Render(Shader* shader)
 {
 	for (GameComponent* component : components)
 	{
-		component->Render(m_transform, camera);
+		component->Render(m_transform, shader);
 	}
 
 	for(GameObject child : children)
 	{
-		child.Render(camera);
+		child.Render(shader);
 	}
 }
 void GameObject::Input()

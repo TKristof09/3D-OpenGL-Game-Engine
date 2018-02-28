@@ -4,25 +4,21 @@
 #include "Time.h"
 #include "Input.h"
 #include "SDL_Backend.h"
-CoreEngine::CoreEngine(int width, int height, double framerate, Game* game, Window* window)
-{
-	m_isRunning = false;
-	m_width = width;
-	m_height = height;
-	m_frameTime = 1 / framerate;
-	m_game = game;
-	m_window = window;
-}
+CoreEngine::CoreEngine(int width, int height, double framerate, Game* game):
+	m_isRunning(false), m_width(width), m_height(height), m_frameTime(1.0 / framerate), m_game(game), m_renderingEngine(nullptr) {}
 
 
 CoreEngine::~CoreEngine()
 {
-	m_window->Close();
+	Window::Close();
+	if(m_renderingEngine)
+		delete m_renderingEngine;
 }
 
 void CoreEngine::CreateWindow(const std::string& title)
 {
-	m_window->Create(m_width, m_height, title);
+	Window::Create(m_width, m_height, title);
+	m_renderingEngine = new RenderingEngine();
 }
 
 void CoreEngine::Start()
@@ -64,7 +60,7 @@ void CoreEngine::Run()
 		{
 			render = true;
 
-			if (m_window->IsCloseRequested())
+			if (Window::IsCloseRequested())
 				Stop();
 
 			Time::SetDelta(m_frameTime);
@@ -78,9 +74,8 @@ void CoreEngine::Run()
 
 		if (render)
 		{
-			m_window->ClearScreen();
-			m_game->Render();
-			m_window->Render();
+			Window::Render();
+			m_renderingEngine->Render(*m_game->GetRootObject());
 		}
 		else
 		{

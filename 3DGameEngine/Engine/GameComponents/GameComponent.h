@@ -3,6 +3,7 @@
 
 #include "..\Camera.h"
 #include "..\Core\Transform.h"
+#include "..\Rendering\Shader.h"
 
 class GameComponent
 {
@@ -12,7 +13,7 @@ public:
 	virtual void SetGameObject() {};
 	virtual void Input() {};
 	virtual void Update() {};
-	virtual void Render(const Transform& transform, const Camera& camera) {};
+	virtual void Render(const Transform& transform, Shader* shader) {};
 };
 
 #endif // !GAMECOMPONENT_H

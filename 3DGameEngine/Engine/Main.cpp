@@ -163,15 +163,19 @@
 	extern "C"
 #endif
 
+//TODO Delete 
+//extern Camera mainCamera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, (float)800 / (float)600, 0.01f, 1000.0f);
+
 int main(int argc, char *argv[])
 {
 	TestGame testGame;
 	Game* game = &testGame;
-	Window window;
-	CoreEngine engine(800, 600, 60, game, &window);
+	CoreEngine engine(800, 600, 60, game);
 	engine.CreateWindow("3D Game Engine");
 	engine.Start();
 
 	return 0;
 }
 //TODO Color class with RGB(0-255), RGB(0-1) and HEX picker, also some presets
+//TODO remake constructors with NAME() : m_variable(parameter)...
+//TODO Look up how what a getter should return

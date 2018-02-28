@@ -8,11 +8,16 @@ class BasicShader : public Shader
 public:
 	BasicShader();
 	~BasicShader();
+	static BasicShader* GetInstance()
+	{
+		static BasicShader instance;
+		return &instance;
+	}
 	void Bind()
 	{
 		Shader::Bind();
 	};
-	void Update(const Transform& transform, const Camera& camera, const Material &material);
+	void Update(const Transform& transform,/* const Camera& camera,*/ const Material &material) override;
 };
 
 

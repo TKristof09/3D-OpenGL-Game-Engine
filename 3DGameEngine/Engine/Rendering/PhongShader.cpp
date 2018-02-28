@@ -15,20 +15,20 @@ PhongShader::~PhongShader()
 
 }
 
-void PhongShader::Update(const Transform& transform, const Camera& camera, Material& material)
+void PhongShader::Update(const Transform& transform, /*const Camera& camera,*/ const Material& material)
 {
-	m_material = &material;
-	if (m_material->GetTexture() != NULL)
+	m_material = material;
+	if (m_material.GetTexture() != NULL)
 	{
-		m_material->GetTexture()->Bind();
+		m_material.GetTexture()->Bind();
 	}
-	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
+	glm::mat4 model = GetRenderingEngine()->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("transform", transform.GetModel());
 	Shader::SetUniform("projectedTransform", model);
 	Shader::SetUniform("materialColor", *material.GetColor());
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
-	Shader::SetUniform("eyePos", *camera.GetPos());
+	Shader::SetUniform("eyePos", *GetRenderingEngine()->GetMainCamera()->GetPos());
 
 	Shader::SetUniform("ambientLight", m_ambientLight);
 	SetUniform("directionalLight", m_directionalLight);

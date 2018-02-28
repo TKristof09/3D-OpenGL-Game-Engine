@@ -10,13 +10,13 @@ BasicShader::BasicShader()
 	
 }
 
-void BasicShader::Update(const Transform& transform, const Camera& camera, const Material& material)
+void BasicShader::Update(const Transform& transform,/* const Camera& camera,*/ const Material& material)
 {
 	if (material.GetTexture() != NULL)
 	{
 		material.GetTexture()->Bind();
 	}
-	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
+	glm::mat4 model = GetRenderingEngine()->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	SetUniform("transform", model);
 	SetUniform("color", *material.GetColor());
 }

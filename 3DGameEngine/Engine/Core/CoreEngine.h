@@ -4,11 +4,12 @@
 #include <string>
 #include "Game.h"
 #include "Window.h"
+#include "RenderingEngine.h"
 
 class CoreEngine
 {
 public:
-	CoreEngine(int width, int height, double framerate, Game* game, Window* window);
+	CoreEngine(int width, int height, double framerate, Game* game);
 	~CoreEngine();
 	void CreateWindow(const std::string& title);
 	void Start();
@@ -23,7 +24,7 @@ private:
 	int m_height;
 	double m_frameTime;
 	Game* m_game;
-	Window* m_window;
+	RenderingEngine* m_renderingEngine;
 
 };
 

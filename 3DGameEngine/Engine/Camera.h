@@ -25,20 +25,27 @@ enum Camera_Movement
 class Camera
 {
 public:
-	Camera(const glm::vec3& pos, glm::vec3& forward, glm::vec3& up, float fov, float aspect, float zNear, float zFar)
-	{
-		
-		m_fov = fov;
-		m_aspect = aspect;
-		m_zNear = zNear;
-		m_zFar = zFar;
+	Camera(float fov, float aspect, float zNear, float zFar):
+		m_forward(glm::vec3(0, 0, -1)),
+		m_position(glm::vec3(0, 0, 0)),
+		m_up(glm::vec3(0, 1, 0)),
+		m_fov(fov),
+		m_aspect(aspect),
+		m_zNear(zNear),
+		m_zFar(zFar)
+	{}
 
-		m_position = pos;
-		m_forward = normalize(forward);
-		m_up = normalize(up);
+	Camera(const glm::vec3& pos, glm::vec3& forward, glm::vec3& up, float fov, float aspect, float zNear, float zFar):
+		m_fov(fov),
+		m_aspect(aspect),
+		m_zNear(zNear),
+		m_zFar(zFar),
 
-		
-	}
+		m_position(pos),
+		m_forward(normalize(forward)),
+		m_up(normalize(up))
+		{}
+			
 
 	inline glm::mat4 GetViewProjection() const
 	{

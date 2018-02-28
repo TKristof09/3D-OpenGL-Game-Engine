@@ -3,9 +3,9 @@
 #include <fstream>
 
 
-static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string&errorMessage);
-static string LoadShader(const string& fileName);
-static GLuint CreateShader(const string& text, unsigned int shaderType);
+static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string&errorMessage);
+static std::string LoadShader(const std::string& fileName);
+static GLuint CreateShader(const std::string& text, unsigned int shaderType);
 
 
 Shader::Shader()
@@ -27,7 +27,7 @@ Shader::~Shader()
 
 }
 
-void Shader::AddShader(const string& fileName, unsigned int type)
+void Shader::AddShader(const std::string& fileName, unsigned int type)
 {
 	switch (type)
 	{
@@ -41,7 +41,7 @@ void Shader::AddShader(const string& fileName, unsigned int type)
 			m_shaders[2] = CreateShader(LoadShader(fileName + ".geom"), GL_GEOMETRY_SHADER);
 			break;
 		default:
-			std::cerr << "Shader type not specified" << endl;
+			std::cerr << "Shader type not specified" << std::endl;
 			break;
 	}
 
@@ -63,12 +63,12 @@ void Shader::AddShader(const string& fileName, unsigned int type)
 	
 }
 // TODO remove
-void Shader::Update(const Transform& transform, const Camera& camera)
+void Shader::Update(const Transform& transform, /*const Camera& camera,*/ const Material& material)
 {
-	glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
+	/*glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
 	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
 
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);*/
 }
 
 void Shader::SetUniform(const GLchar* uniform, float value)
@@ -96,18 +96,18 @@ void Shader::Bind()
 	glUseProgram(m_program);
 }
 
-static GLuint CreateShader(const string& text, unsigned int shaderType)
+static GLuint CreateShader(const std::string& text, unsigned int shaderType)
 {
 	GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
-		cerr << "Error: Shader creation failed!" << endl;
+		std::cerr << "Error: Shader creation failed!" << std::endl;
 
 	const GLchar* shaderSourceStrings[1];
 	GLint shaderSourceStringLengths[1];
 	shaderSourceStrings[0] = text.c_str();
 	if (text.length() > pow(2, 31))
 	{
-		cerr << "text.length is greater than 2^31 so GLint can't hold it (shader.cpp line 65)" << endl;
+		std::cerr << "text.length is greater than 2^31 so GLint can't hold it (shader.cpp line 65)" << std::endl;
 	}
 	shaderSourceStringLengths[0] = text.length();
 
@@ -119,13 +119,13 @@ static GLuint CreateShader(const string& text, unsigned int shaderType)
 	return shader;
 }
 
-static string LoadShader(const string& fileName)
+static std::string LoadShader(const std::string& fileName)
 {
-	ifstream file;
+	std::ifstream file;
 	file.open(fileName.c_str());
 
-	string output;
-	string line;
+	std::string output;
+	std::string line;
 
 	if (file.is_open())
 	{
@@ -137,14 +137,14 @@ static string LoadShader(const string& fileName)
 	}
 	else
 	{
-		cerr << "Unable to load shader:" << fileName << endl;
+		std::cerr << "Unable to load shader:" << fileName << std::endl;
 	}
 	// only if need to debug
 	// cout << output << endl;
 	return output;
 }
 
-static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const string&errorMessage)
+static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string&errorMessage)
 {
 	GLint succes = 0;
 	GLchar error[1024] = { 0 };
@@ -161,6 +161,6 @@ static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const s
 		else
 			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 
-		cerr << errorMessage << ":" << error << "'" << endl;
+		std::cerr << errorMessage << ":" << error << "'" << std::endl;
 	}
 }
