@@ -10,7 +10,7 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-	
+   
 }
 
 void GameObject::AddChild(GameObject child)
@@ -34,16 +34,16 @@ void GameObject::Update()
 		child.Update();
 	}
 }
-void GameObject::Render(Shader* shader)
+void GameObject::Render(Shader* shader, RenderingEngine* renderingEngine)
 {
 	for (GameComponent* component : components)
 	{
-		component->Render(m_transform, shader);
+		component->Render(m_transform, shader, renderingEngine);
 	}
 
 	for(GameObject child : children)
 	{
-		child.Render(shader);
+		child.Render(shader, renderingEngine);
 	}
 }
 void GameObject::Input()

@@ -149,6 +149,7 @@
     <ClCompile Include="Engine\Rendering\BasicShader.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
+    <ClCompile Include="Engine\Rendering\Lighting\ForwardAmbient.cpp" />
     <ClCompile Include="Engine\Rendering\Material.cpp" />
     <ClCompile Include="Engine\Rendering\Mesh.cpp" />
     <ClCompile Include="Engine\OBJloader.cpp" />
@@ -160,6 +161,9 @@
     <ClCompile Include="Engine\Core\SDL_Backend.cpp" />
     <ClCompile Include="Engine\Core\GameObject.cpp" />
     <ClCompile Include="Engine\Core\RenderingEngine.cpp" />
+    <ClCompile Include="Engine\Rendering\Lighting\ForwardDirectional.cpp" />
+    <ClCompile Include="Engine\Rendering\Lighting\ForwardPoint.cpp" />
+    <ClCompile Include="Engine\Rendering\Lighting\ForwardSpot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Core\CoreEngine.h" />
@@ -167,12 +171,12 @@
     <ClInclude Include="Engine\GameComponents\GameComponent.h" />
     <ClInclude Include="Engine\GameComponents\MeshRenderer.h" />
     <ClInclude Include="Engine\Rendering\Lighting\Attenuation.h" />
-    <ClInclude Include="Engine\Rendering\Lighting\BaseLight.h" />
     <ClInclude Include="Engine\Rendering\BasicShader.h" />
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Engine\Rendering\Lighting\DirectionalLight.h" />
     <ClInclude Include="Engine\Core\Input.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />
     <ClInclude Include="Engine\Rendering\Lighting\SpotLight.h" />
     <ClInclude Include="Engine\Rendering\Material.h" />
     <ClInclude Include="Engine\Rendering\Mesh.h" />
@@ -188,6 +192,12 @@
     <ClInclude Include="Engine\Core\SDL_Backend.h" />
     <ClInclude Include="Engine\Core\GameObject.h" />
     <ClInclude Include="Engine\Core\RenderingEngine.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\ForwardDirectional.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\ForwardPoint.h" />
+    <ClInclude Include="Engine\Rendering\Lighting\ForwardSpot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Plans.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

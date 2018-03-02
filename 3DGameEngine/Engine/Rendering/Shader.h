@@ -25,14 +25,11 @@ public:
 
 	void Bind();
 	
-	virtual void Update(const Transform& transform, /*const Camera& camera,*/ const Material& material);
+    virtual void UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) {};
 	void SetUniform(const GLchar* uniform, float value);
 	void SetUniform(const GLchar* uniform, const glm::vec3& value);
 	void SetUniform(const GLchar* uniform, const glm::vec4& value);
 	void SetUniform(const GLchar* uniform, const glm::mat4& value);
-
-	inline const RenderingEngine* GetRenderingEngine() const { return m_renderingEngine; };
-	inline void SetRenderingEngine(RenderingEngine* renderingEngine) { m_renderingEngine = renderingEngine; };
 
 	inline GLuint GetUniformLocation(const GLchar* uniform) const
 	{
@@ -53,8 +50,6 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLuint m_uniforms[NUM_UNIFORMS];
-
-	RenderingEngine* m_renderingEngine;
 };
 
 

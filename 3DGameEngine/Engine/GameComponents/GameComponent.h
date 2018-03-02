@@ -4,6 +4,7 @@
 #include "..\Camera.h"
 #include "..\Core\Transform.h"
 #include "..\Rendering\Shader.h"
+#include "..\Core\RenderingEngine.h"
 
 class GameComponent
 {
@@ -13,7 +14,7 @@ public:
 	virtual void SetGameObject() {};
 	virtual void Input() {};
 	virtual void Update() {};
-	virtual void Render(const Transform& transform, Shader* shader) {};
+	virtual void Render(const Transform& transform, Shader* shader, RenderingEngine* renderingEngine) {};
 };
 
 #endif // !GAMECOMPONENT_H

@@ -8,7 +8,6 @@
 #include "Rendering\Texture.h"
 #include "Rendering\PhongShader.h"
 #include "Rendering\Material.h"
-#include "Rendering\Lighting\BaseLight.h"
 #include "Rendering\Lighting\DirectionalLight.h"
 #include "Camera.h"
 #include "Core\GameObject.h"
@@ -29,15 +28,15 @@ public:
 private:
 	GameObject* m_root;
 	MeshRenderer* m_meshRenderer;
+	MeshRenderer* meshRenderer2;
 
 	//PhongShader* m_shader;
 	Mesh* m_mesh;
+	Mesh* mesh2;
 	Camera* m_camera;
 	Material* m_material;
+	Material* material2;
 	Texture* m_texture;
-	DirectionalLight directionalLight;
-	PointLight pointLights[2] = {};
-	SpotLight spotLights[1] = {};
 };
 
 #endif // !TESTGAME_H

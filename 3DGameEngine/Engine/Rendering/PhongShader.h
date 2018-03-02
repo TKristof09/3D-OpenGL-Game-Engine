@@ -21,13 +21,9 @@ public:
 		Shader::Bind();
 	};
 	
-	void Update(const Transform& transform, /*const Camera& camera,*/ const Material& material) override;
+	void UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) override;
 
 	void SetUniform(const GLchar* uniform, const Attenuation& attenuation);
-	void SetUniform(const GLchar* uniform, const DirectionalLight& directionalLight);
-	void SetUniform(const GLchar* uniform, const BaseLight& baseLight);
-	void SetUniform(const GLchar* uniform, const PointLight& pointLight);
-	void SetUniform(const GLchar* uniform, const SpotLight& spotLight);
 
 	inline const glm::vec3* GetAmbientLight() const { return &m_ambientLight; };
 	inline void SetAmbientLight(const glm::vec3& ambientLight) { m_ambientLight = ambientLight; };

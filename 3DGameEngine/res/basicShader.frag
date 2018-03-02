@@ -2,7 +2,7 @@
 
 out vec4 fragColor;
 in vec2 textCoord0;
-in vec3 normal0;
+//in vec3 normal0;
 
 uniform sampler2D sampler;
 uniform vec3 color;

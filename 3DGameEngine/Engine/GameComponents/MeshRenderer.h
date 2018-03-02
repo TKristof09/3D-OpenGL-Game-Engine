@@ -15,10 +15,10 @@ public:
 		m_mesh = &mesh;
 		m_material = &material;
 	}
-	void Render(const Transform& transform, Shader* shader) override
+	void Render(const Transform& transform, Shader* shader, RenderingEngine* renderingEngine) override
 	{
 		shader->Bind();
-		shader->Update(transform, *m_material);
+		shader->UpdateUniforms(transform, *m_material, renderingEngine);
 
 		m_mesh->Draw();
 	};

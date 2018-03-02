@@ -1,0 +1,57 @@
+#version 330
+
+out vec4 fragColor;
+
+in vec3 worldPos0;
+in vec2 textCoord0;
+in vec3 normal0;
+
+struct BaseLight{
+	
+	vec3 color;
+	float intensity;
+};
+
+struct DirectionalLight{
+	BaseLight base;
+	vec3 direction;
+};
+
+uniform vec3 eyePos;
+
+uniform sampler2D diffuse;
+
+uniform float specularIntensity;
+uniform float specularExponent;
+
+uniform DirectionalLight directionalLight;
+
+
+vec4 CalcLight(BaseLight base,vec3 direction){
+	// TODO idk why this is needed but it is 
+	direction = -direction;
+	// ambient
+
+    // diffuse 
+    vec3 norm = normalize(normal0);
+    float angle = max(dot(norm, direction), 0.0);
+    vec3 color = angle * base.color * base.intensity;
+    
+    // specular
+    vec3 viewDir = normalize(eyePos - worldPos0);
+    vec3 reflectDir = reflect(-direction, norm);  
+    float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), specularExponent);
+    vec3 specular = specularIntensity * specularFactor * base.color;  
+        
+    vec3 result = color + specular;
+    return vec4(result,1.0);
+}
+
+vec4 CalcDirectionalLight(DirectionalLight directionalLight){
+	return CalcLight(directionalLight.base, directionalLight.direction);
+}
+
+void main()
+{
+	fragColor = CalcDirectionalLight(directionalLight) * texture(diffuse, textCoord0.xy);
+} 

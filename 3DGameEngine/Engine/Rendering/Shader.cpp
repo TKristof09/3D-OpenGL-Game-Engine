@@ -46,8 +46,8 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	}
 
 
-	glBindAttribLocation(m_program, 0, "position");
-	glBindAttribLocation(m_program, 1, "textCoord");
+	//glBindAttribLocation(m_program, 0, "position");
+	//glBindAttribLocation(m_program, 1, "textCoord");
 
 	for (unsigned int i = 0; i < NUM_SHADERS; i++)
 	{
@@ -61,14 +61,6 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
 
 	
-}
-// TODO remove
-void Shader::Update(const Transform& transform, /*const Camera& camera,*/ const Material& material)
-{
-	/*glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
-	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
-
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);*/
 }
 
 void Shader::SetUniform(const GLchar* uniform, float value)

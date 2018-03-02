@@ -2,7 +2,7 @@
 #define ATTENUATION_H
 
 #include <glm\glm.hpp>
-#include "BaseLight.h"
+
 class Attenuation
 {
 public:

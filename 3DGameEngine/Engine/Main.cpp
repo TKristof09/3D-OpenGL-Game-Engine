@@ -56,7 +56,6 @@
 //	Transform transform;
 //
 //	PhongShader phongShader;
-//	//TODO make RGB(0-255,0-255,0-255) (and HEX) color picking 
 //	DirectionalLight directionalLight(BaseLight(glm::vec3(244.0f/255.0f, 150.0f/255.0f, 28.0f/255.0f), 1), glm::vec3(0, -1, -1));
 //	PointLight pLight1(BaseLight(glm::vec3(1, 0, 0), 10), Attenuation(1, 0, 0), 10, glm::vec3(3, 3, 0));
 //	PointLight pLight2(BaseLight(glm::vec3(0, 0, 1), 10), Attenuation(1, 0, 0), 10, glm::vec3(-3, 3, 0));
@@ -98,7 +97,7 @@
 //		//cout << glm::to_string(*pLight2.GetPosition()) << endl;
 //		
 //		// Set up inputs here
-//		// TODO make better input handling
+//
 //
 //		if (Input::GetKeyDown(SDL_SCANCODE_UP))
 //			camera.Translate(FORWARD, 5 * deltaTime);
@@ -176,6 +175,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-//TODO Color class with RGB(0-255), RGB(0-1) and HEX picker, also some presets
-//TODO remake constructors with NAME() : m_variable(parameter)...
-//TODO Look up how what a getter should return

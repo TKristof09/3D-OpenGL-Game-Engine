@@ -17,7 +17,7 @@ public:
 	{
 		Shader::Bind();
 	};
-	void Update(const Transform& transform,/* const Camera& camera,*/ const Material &material) override;
+	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) override;
 };
 
 
