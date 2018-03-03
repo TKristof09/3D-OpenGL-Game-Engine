@@ -16,6 +16,7 @@ public:
 	{
 		m_root.Input();
 	};
+    void SetRenderingEngine(RenderingEngine* renderingEngine) { m_root.SetRenderingEngine(renderingEngine); };
 
 	GameObject* GetRootObject() { return &m_root; };
 

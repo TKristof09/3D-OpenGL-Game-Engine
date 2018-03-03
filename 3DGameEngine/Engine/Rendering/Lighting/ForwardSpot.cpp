@@ -1,5 +1,5 @@
 #include "ForwardSpot.h"
-
+#include "..\Engine\Core\RenderingEngine.h"
 
 
 ForwardSpot::ForwardSpot()
@@ -16,7 +16,7 @@ ForwardSpot::~ForwardSpot()
 }
 
 
-void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine)
+void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
     if (material.GetTexture() != NULL)
     {
@@ -28,32 +28,32 @@ void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& cam
     Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
     Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
     Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPos());
-    SetUniform("spotLight", *renderingEngine->GetSpotLight());
+    SetUniform("spotLight", *(SpotLight*)&renderingEngine->GetActiveLight());
 }
 
-void ForwardSpot::SetUniform(const GLchar* uniform, const Attenuation& attenuation)
+void ForwardSpot::SetUniform(const GLchar* uniform, const Attenuation& attenuation) const
 {
     GLchar* exponent = new GLchar[strlen(uniform) + 9];
     strcpy(exponent, uniform);
     strcat(exponent, ".exponent");
 
-    Shader::SetUniform(exponent, *attenuation.GetExponent());
+    Shader::SetUniform(exponent, attenuation.GetExponent());
 
     GLchar* linear = new GLchar[strlen(uniform) + 7];
     strcpy(linear, uniform);
     strcat(linear, ".linear");
 
-    Shader::SetUniform(linear, *attenuation.GetLinear());
+    Shader::SetUniform(linear, attenuation.GetLinear());
 
     GLchar* constant = new GLchar[strlen(uniform) + 9];
     strcpy(constant, uniform);
     strcat(constant, ".constant");
 
-    Shader::SetUniform(constant, *attenuation.GetConstant());
+    Shader::SetUniform(constant, attenuation.GetConstant());
 
 }
 
-void ForwardSpot::SetUniform(const GLchar* uniform, const PointLight& pointLight)
+void ForwardSpot::SetUniform(const GLchar* uniform, const PointLight& pointLight) const
 {
     GLchar* color = new GLchar[strlen(uniform) + 1];
     strcpy(color, uniform);
@@ -83,16 +83,16 @@ void ForwardSpot::SetUniform(const GLchar* uniform, const PointLight& pointLight
     strcpy(position, uniform);
     strcat(position, ".position");
 
-    Shader::SetUniform(position, *pointLight.GetPosition());
+    Shader::SetUniform(position, *pointLight.GetTransform().GetPosition());
 }
 
-void ForwardSpot::SetUniform(const GLchar* uniform, const SpotLight& spotLight)
+void ForwardSpot::SetUniform(const GLchar* uniform, const SpotLight& spotLight) const
 {
     GLchar* pointLight = new GLchar[strlen(uniform) + 11];
     strcpy(pointLight, uniform);
     strcat(pointLight, ".pointLight");
     
-    SetUniform(pointLight, *spotLight.GetPointLight());
+    SetUniform(pointLight, *(PointLight*)&spotLight);
     
     
     GLchar* direction = new GLchar[strlen(uniform) + 10];

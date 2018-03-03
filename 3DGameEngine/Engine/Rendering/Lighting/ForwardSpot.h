@@ -3,7 +3,11 @@
 
 #include "..\Shader.h"
 #include "..\Material.h"
-#include "SpotLight.h"
+
+class RenderingEngine;
+class SpotLight;
+class PointLight;
+class Attenuation;
 
 class ForwardSpot : public Shader
 {
@@ -20,10 +24,10 @@ public:
     {
         Shader::Bind();
     };
-    void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) override;
-    void SetUniform(const GLchar* uniform, const PointLight& pointLight);
-    void SetUniform(const GLchar* uniform, const Attenuation& attenuation);
-    void SetUniform(const GLchar* uniform, const SpotLight& spotLight);
+    void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) const override;
+    void SetUniform(const GLchar* uniform, const PointLight& pointLight) const;
+    void SetUniform(const GLchar* uniform, const Attenuation& attenuation) const;
+    void SetUniform(const GLchar* uniform, const SpotLight& spotLight) const;
 };
 
 

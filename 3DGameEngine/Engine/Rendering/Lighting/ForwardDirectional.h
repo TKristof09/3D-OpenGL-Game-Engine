@@ -3,6 +3,10 @@
 
 #include "..\Shader.h"
 #include "..\Material.h"
+
+class RenderingEngine;
+class DirectionalLight;
+
 class ForwardDirectional : public Shader
 {
 public:
@@ -18,8 +22,8 @@ public:
 	{
 		Shader::Bind();
 	};
-	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) override;
-	void SetUniform(const GLchar* uniform, const DirectionalLight& directionalLight);
+	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) const override;
+	void SetUniform(const GLchar* uniform, const DirectionalLight& directionalLight) const;
 private:
 };
 

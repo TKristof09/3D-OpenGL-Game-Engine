@@ -1,20 +1,13 @@
 #include "RenderingEngine.h"
-#include "..\Rendering\BasicShader.h"
 #include "Window.h"
 #include "GameObject.h"
 #include "Input.h"
 #include "Time.h"
-#include "..\Rendering\Lighting\ForwardAmbient.h"
-#include "..\Rendering\Lighting\ForwardDirectional.h"
-#include "..\Rendering\Lighting\ForwardPoint.h"
-#include "..\Rendering\Lighting\ForwardSpot.h"
+
 
 RenderingEngine::RenderingEngine():
 mainCamera(Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, (float)*Window::GetWidth() / (float)*Window::GetHeight(), 0.01f, 1000.0f)),
-m_ambientLight(glm::vec3(0.1f,0.1f,0.1f)),
-m_directional(DirectionalLight(glm::vec3(244.0f / 255.0f, 150.0f / 255.0f, 28.0f / 255.0f), 0.1f, glm::vec3(1, -1, 0))),
-m_point(PointLight(glm::vec3(1, 0, 0), 1, Attenuation(1, 0, 0), 100, glm::vec3(-2, 1, 0))),
-m_spot(SpotLight(PointLight(glm::vec3(0, 0, 1), 10, Attenuation(1, 0, 0), 100, glm::vec3(2, 1, 0)), glm::vec3(0, -1, -3), cos(glm::radians(40.0f))))
+m_ambientLight(glm::vec3(0.05f,0.05f,0.05f))
 {
 	glClearColor(0, 0, 0, 0);
 	//glEnable(GL_FRAMEBUFFER_SRGB);
@@ -24,21 +17,6 @@ m_spot(SpotLight(PointLight(glm::vec3(0, 0, 1), 10, Attenuation(1, 0, 0), 100, g
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 
-
-    //just for fun
-    float lightFieldStartX = -10;
-    float lightFieldStartY = -10;
-    float lightFieldStepX = 5;
-    float lightFieldStepY = 5;
-    
-    for (int i = 0; i < 5; i++)
-    {
-        for (int j = 0; j < 5; j++)
-        {
-            pLights.push_back(PointLight(glm::vec3(1, 0, 0), 0.4f, Attenuation(1, 0, 0), 100, glm::vec3(lightFieldStartX + lightFieldStepX * i, 1, lightFieldStartY + lightFieldStepY * j)));
-        }
-    }
-    m_point = pLights[0];
 }
 
 
@@ -58,16 +36,14 @@ void RenderingEngine::Render(GameObject object)
 	glDepthMask(false);
 	glDepthFunc(GL_EQUAL);
 
-	object.Render(ForwardDirectional::GetInstance(), this);
 
 
-    for (size_t i = 0; i < pLights.size(); i++)
+    for (const BaseLight* light : m_lights)
     {
-        m_point = pLights[i];
-        object.Render(ForwardPoint::GetInstance(), this);
+        m_activeLight = light;
+        object.Render(m_activeLight->GetShader(), this);
     }
 
-    object.Render(ForwardSpot::GetInstance(), this);
 
 	glDepthFunc(GL_LESS);
 	glDepthMask(true);

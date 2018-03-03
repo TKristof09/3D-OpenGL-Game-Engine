@@ -1,5 +1,5 @@
 #include "ForwardDirectional.h"
-
+#include "..\Engine\Core\RenderingEngine.h"
 
 
 ForwardDirectional::ForwardDirectional()
@@ -10,7 +10,7 @@ ForwardDirectional::ForwardDirectional()
 
 }
 
-void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine)
+void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
 	if (material.GetTexture() != NULL)
 	{
@@ -22,7 +22,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
 	Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPos());
-	SetUniform("directionalLight", *renderingEngine->GetDirectionalLight());
+	SetUniform("directionalLight", *(const DirectionalLight*)&renderingEngine->GetActiveLight());
 
 }
 
@@ -31,7 +31,7 @@ ForwardDirectional::~ForwardDirectional()
 
 }
 
-void ForwardDirectional::SetUniform(const GLchar* uniform, const DirectionalLight& directionalLight)
+void ForwardDirectional::SetUniform(const GLchar* uniform, const DirectionalLight& directionalLight) const
 {
 	GLchar* color = new GLchar[strlen(uniform) + 11];
 	strcpy(color, uniform);

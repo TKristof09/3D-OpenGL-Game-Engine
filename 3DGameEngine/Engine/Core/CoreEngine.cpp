@@ -5,7 +5,9 @@
 #include "Input.h"
 #include "SDL_Backend.h"
 CoreEngine::CoreEngine(int width, int height, double framerate, Game* game):
-	m_isRunning(false), m_width(width), m_height(height), m_frameTime(1.0 / framerate), m_game(game), m_renderingEngine(nullptr) {}
+	m_isRunning(false), m_width(width), m_height(height), m_frameTime(1.0 / framerate), m_game(game), m_renderingEngine(nullptr) 
+{
+}
 
 
 CoreEngine::~CoreEngine()
@@ -42,6 +44,7 @@ void CoreEngine::Run()
 	m_isRunning = true;
 
 	m_game->Init();
+    m_game->SetRenderingEngine(m_renderingEngine);
 
 	double lastTime = Time::GetTime();
 	double unprocessedTime = 0;

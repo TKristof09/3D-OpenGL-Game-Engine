@@ -1,4 +1,5 @@
 #include "ForwardAmbient.h"
+#include "..\Engine\Core\RenderingEngine.h"
 
 
 
@@ -10,15 +11,15 @@ ForwardAmbient::ForwardAmbient()
 
 }
 
-void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine)
+void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
 	if (material.GetTexture() != NULL)
 	{
 		material.GetTexture()->Bind();
 	}
 	glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
-	SetUniform("MVP", MVP);
-	SetUniform("ambientIntensity", *renderingEngine->GetAmbientLight());
+	Shader::SetUniform("MVP", MVP);
+	Shader::SetUniform("ambientIntensity", *renderingEngine->GetAmbientLight());
 }
 
 ForwardAmbient::~ForwardAmbient()

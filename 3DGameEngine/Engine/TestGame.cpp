@@ -1,5 +1,6 @@
 #include "TestGame.h"
 #include "Core\Time.h"
+#include "Rendering\Lighting\Lighting.h"
 
 //extern Camera mainCamera;
 
@@ -26,16 +27,22 @@ void TestGame::Init()
 {
 	GameObject planeOBJ = GameObject();
 	GameObject cubeOBJ = GameObject();
+    GameObject* pLight = new GameObject();
+    GameObject* sLight = new GameObject();
 	m_root = GetRootObject();
-	//m_camera = new Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, (float)800/(float)600, 0.01f, 1000.0f);
-	
-	//m_camera = &mainCamera;
 	m_texture = new Texture(".\\res\\uv_checker.png");
 	
 	m_material = new Material(*m_texture, glm::vec3(0.3f, 0.3f, 0.3f), 2, 32);
 	m_mesh = new Mesh(".\\res\\plane.obj");
 	m_meshRenderer = new MeshRenderer(*m_mesh, *m_material);
-	planeOBJ.AddComponent(m_meshRenderer);
+    planeOBJ.AddComponent(m_meshRenderer);
+    planeOBJ.AddComponent(new DirectionalLight(glm::vec3(244.0f / 255.0f, 150.0f / 255.0f, 28.0f / 255.0f), 0.15f, glm::vec3(0, -1, -1)));
+
+    pLight->AddComponent(new PointLight(glm::vec3(1, 0, 0), 1, Attenuation(1, 0, 0)));
+    pLight->GetTransform()->SetPosition(glm::vec3(-3, 1, -5));
+
+    sLight->AddComponent(new SpotLight(glm::vec3(0, 0, 1), 10, Attenuation(1, 0, 0), glm::vec3(0, -1, 5), cos(glm::radians(45.0f))));
+    sLight->GetTransform()->SetPosition(glm::vec3(0, 1, 3));
 
 	material2 = new Material(*m_texture, glm::vec3(0.3f, 0.3f, 0.3f), 2, 32);
 	mesh2 = new Mesh(".\\res\\cubeUV.obj");
@@ -45,6 +52,8 @@ void TestGame::Init()
 
 
     m_root->AddChild(planeOBJ);
+    m_root->AddChild(*pLight);
+    m_root->AddChild(*sLight);
     //m_root->AddChild(cubeOBJ);
 				
 }

@@ -63,27 +63,27 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	
 }
 
-void Shader::SetUniform(const GLchar* uniform, float value)
+void Shader::SetUniform(const GLchar* uniform, float value) const
 {
 	glUniform1f(glGetUniformLocation(m_program, uniform), value);
 }
 
-void Shader::SetUniform(const GLchar* uniform, const glm::vec3& value)
+void Shader::SetUniform(const GLchar* uniform, const glm::vec3& value) const
 {
 	glUniform3fv(glGetUniformLocation(m_program, uniform), 1, glm::value_ptr(value));
 }
 
-void Shader::SetUniform(const GLchar* uniform, const glm::vec4& value)
+void Shader::SetUniform(const GLchar* uniform, const glm::vec4& value) const
 {
 	glUniform4fv(glGetUniformLocation(m_program, uniform), 1, glm::value_ptr(value));
 }
 
-void Shader::SetUniform(const GLchar* uniform, const glm::mat4& value)
+void Shader::SetUniform(const GLchar* uniform, const glm::mat4& value) const
 {
 	glUniformMatrix4fv(glGetUniformLocation(m_program, uniform), 1, GL_FALSE, &value[0][0]);
 }
 
-void Shader::Bind()
+void Shader::Bind() const
 {
 	glUseProgram(m_program);
 }

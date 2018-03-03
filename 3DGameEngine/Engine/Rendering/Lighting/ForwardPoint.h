@@ -3,7 +3,11 @@
 
 #include "..\Shader.h"
 #include "..\Material.h"
-#include "PointLight.h"
+
+class RenderingEngine;
+class PointLight;
+class Attenuation;
+
 class ForwardPoint : public Shader
 {
 public:
@@ -19,9 +23,9 @@ public:
 	{
 		Shader::Bind();
 	};
-	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) override;
-    void SetUniform(const GLchar* uniform, const PointLight& pointLight);
-    void SetUniform(const GLchar* uniform, const Attenuation& attenuation);
+	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) const override;
+    void SetUniform(const GLchar* uniform, const PointLight& pointLight) const;
+    void SetUniform(const GLchar* uniform, const Attenuation& attenuation) const;
 };
 
 

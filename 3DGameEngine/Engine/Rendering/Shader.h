@@ -6,8 +6,8 @@
 #include "..\Core\Transform.h"
 #include "..\Camera.h"
 #include "Material.h"
-#include "..\Core\RenderingEngine.h"
 
+class RenderingEngine;
 
 enum ShaderType
 {
@@ -23,13 +23,13 @@ public:
 
 	void AddShader(const std::string& fileName, unsigned int type);
 
-	void Bind();
+	void Bind() const;
 	
-    virtual void UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) {};
-	void SetUniform(const GLchar* uniform, float value);
-	void SetUniform(const GLchar* uniform, const glm::vec3& value);
-	void SetUniform(const GLchar* uniform, const glm::vec4& value);
-	void SetUniform(const GLchar* uniform, const glm::mat4& value);
+    virtual void UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const {};
+	void SetUniform(const GLchar* uniform, float value) const;
+	void SetUniform(const GLchar* uniform, const glm::vec3& value) const;
+	void SetUniform(const GLchar* uniform, const glm::vec4& value) const;
+	void SetUniform(const GLchar* uniform, const glm::mat4& value) const;
 
 	inline GLuint GetUniformLocation(const GLchar* uniform) const
 	{

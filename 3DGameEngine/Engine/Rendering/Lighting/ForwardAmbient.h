@@ -3,6 +3,9 @@
 
 #include "..\Shader.h"
 #include "..\Material.h"
+
+class RenderingEngine;
+
 class ForwardAmbient : public Shader
 {
 public:
@@ -18,7 +21,7 @@ public:
 	{
 		Shader::Bind();
 	};
-	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) override;
+	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) const override;
 private:
 };
 

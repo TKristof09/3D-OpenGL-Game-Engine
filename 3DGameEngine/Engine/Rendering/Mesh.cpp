@@ -67,7 +67,7 @@ void Mesh::InitMesh(const IndexedModel model)
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw()
+void Mesh::Draw() const
 {
 	glBindVertexArray(m_vertexArrayObject);
 

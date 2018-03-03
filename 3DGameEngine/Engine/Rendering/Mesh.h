@@ -38,7 +38,7 @@ public:
 	~Mesh();
 
 
-	void Draw();
+	void Draw() const;
 
 private:
 	enum

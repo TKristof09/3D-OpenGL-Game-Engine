@@ -2,27 +2,30 @@
 #define GAMEOBJECT_H
 
 #include <vector>
-#include "..\GameComponents\GameComponent.h"
 #include "Transform.h"
-#include "..\Rendering\Shader.h"
-#include "RenderingEngine.h"
+
+class Shader;
+class RenderingEngine;
+class GameComponent;
 
 class GameObject
 {
 public:
-	GameObject();
-	~GameObject();
+    GameObject() :m_renderingEngine(nullptr) {};
+    ~GameObject() {};
 	void Update();
-	void Render(Shader* shader, RenderingEngine* renderingEngine);
+	void Render(const Shader* shader, RenderingEngine* renderingEngine);
 	void Input();
 	void AddChild(GameObject child);
 	void AddComponent(GameComponent* component);
+    void SetRenderingEngine(RenderingEngine* renderingEngine);
 	Transform* GetTransform() { return &m_transform; };
 
 private:
 	Transform m_transform;
-	std::vector<GameObject> children;
-	std::vector<GameComponent*> components;
+	std::vector<GameObject> m_children;
+	std::vector<GameComponent*> m_components;
+    RenderingEngine* m_renderingEngine;
 };
 
 #endif // !GAMEOBJECT_H

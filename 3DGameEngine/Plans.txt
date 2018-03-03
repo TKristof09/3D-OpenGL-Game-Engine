@@ -1,6 +1,6 @@
 
 	TODO:
-		+Remove BaseLight
+		Make light's direction be based on the gameobject's rotation
 		Remake the SetUniform methods for the lights
 
 	Color class with RGB(0-255), RGB(0-1) and HEX picker, also some presets
