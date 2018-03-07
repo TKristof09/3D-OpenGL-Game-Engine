@@ -4,9 +4,9 @@
 
 
 
-void GameObject::AddChild(GameObject child)
+void GameObject::AddChild(GameObject* child)
 {
-    child.SetRenderingEngine(m_renderingEngine);
+    child->SetRenderingEngine(m_renderingEngine);
     m_children.push_back(child);
 }
 
@@ -22,21 +22,21 @@ void GameObject::Update()
 	{
 		component->Update();
 	}
-	for(GameObject child : m_children)
+	for(GameObject* child : m_children)
 	{
-		child.Update();
+		child->Update();
 	}
 }
 void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine)
 {
 	for (GameComponent* component : m_components)
 	{
-		component->Render(m_transform, shader, renderingEngine);
+		component->Render(shader, renderingEngine);
 	}
 
-	for(GameObject child : m_children)
+	for(GameObject* child : m_children)
 	{
-		child.Render(shader, renderingEngine);
+		child->Render(shader, renderingEngine);
 	}
 }
 void GameObject::Input()
@@ -45,9 +45,9 @@ void GameObject::Input()
 	{
 		component->Input();
 	}
-	for(GameObject child : m_children)
+	for(GameObject* child : m_children)
 	{
-		child.Input();
+		child->Input();
 	}
 }
 void GameObject::SetRenderingEngine(RenderingEngine* renderingEngine)
@@ -61,9 +61,9 @@ void GameObject::SetRenderingEngine(RenderingEngine* renderingEngine)
             component->AddToEngine(renderingEngine);
         }
 
-        for (GameObject child : m_children)
+        for (GameObject* child : m_children)
         {
-            child.SetRenderingEngine(renderingEngine);
+            child->SetRenderingEngine(renderingEngine);
         }
     }
 }

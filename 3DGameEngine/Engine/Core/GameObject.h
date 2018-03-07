@@ -16,14 +16,14 @@ public:
 	void Update();
 	void Render(const Shader* shader, RenderingEngine* renderingEngine);
 	void Input();
-	void AddChild(GameObject child);
+	void AddChild(GameObject* child);
 	void AddComponent(GameComponent* component);
     void SetRenderingEngine(RenderingEngine* renderingEngine);
 	Transform* GetTransform() { return &m_transform; };
 
 private:
 	Transform m_transform;
-	std::vector<GameObject> m_children;
+	std::vector<GameObject*> m_children;
 	std::vector<GameComponent*> m_components;
     RenderingEngine* m_renderingEngine;
 };
