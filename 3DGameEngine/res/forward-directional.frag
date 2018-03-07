@@ -28,18 +28,17 @@ uniform DirectionalLight directionalLight;
 
 
 vec4 CalcLight(BaseLight base,vec3 direction){
-	// TODO idk why this is needed but it is 
-	direction = -direction;
 	// ambient
 
     // diffuse 
     vec3 norm = normalize(normal0);
-    float angle = max(dot(norm, direction), 0.0);
+    vec3 lightDir = normalize(-direction);  
+    float angle = clamp(dot(norm, lightDir), 0.0, 1.0);
     vec3 color = angle * base.color * base.intensity;
     
     // specular
     vec3 viewDir = normalize(eyePos - worldPos0);
-    vec3 reflectDir = reflect(-direction, norm);  
+    vec3 reflectDir = reflect(-lightDir, norm);  
     float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), specularExponent);
     vec3 specular = specularIntensity * specularFactor * base.color;  
         

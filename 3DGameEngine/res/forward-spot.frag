@@ -1,8 +1,5 @@
 #version 330
 
-const int MAX_POINT_LIGHTS = 4;
-const int MAX_SPOT_LIGHTS = 4;
-
 out vec4 fragColor;
 
 in vec3 worldPos0;
@@ -46,7 +43,7 @@ uniform SpotLight spotLight;
 
 vec4 CalcLight(BaseLight base,vec3 direction){
 	// TODO idk why this is needed but it is 
-	direction = -direction;
+	direction = normalize(-direction);
 	// ambient
 
     // diffuse 
