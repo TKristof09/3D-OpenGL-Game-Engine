@@ -18,12 +18,13 @@ public:
 	inline glm::mat4 GetModel()  const
 	{
 		glm::mat4 translationMatrix = glm::translate(m_position);
+
 		glm::mat4 rotationXMatrix = glm::rotate(m_rotation.x, glm::vec3(1, 0, 0));
 		glm::mat4 rotationYMatrix = glm::rotate(m_rotation.y, glm::vec3(0, 1, 0));
 		glm::mat4 rotationZMatrix = glm::rotate(m_rotation.z, glm::vec3(0, 0, 1));
-		glm::mat4 scaleMatrix = glm::scale(m_scale);
-
 		glm::mat4 rotationMatrix = rotationZMatrix * rotationYMatrix * rotationXMatrix;
+
+		glm::mat4 scaleMatrix = glm::scale(m_scale);
 
 		return translationMatrix * rotationMatrix * scaleMatrix;
 	};
