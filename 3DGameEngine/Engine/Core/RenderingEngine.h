@@ -3,7 +3,7 @@
 
 //#include "..\Core\GameObject.h"
 #include "..\Camera.h"
-#include "..\Rendering\Lighting\Lighting.h"
+#include "..\GameComponents\Lighting.h"
 #include <vector>
 
 class GameObject;

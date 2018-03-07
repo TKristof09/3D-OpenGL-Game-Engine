@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Input.h"
 #include "Time.h"
+#include "..\Rendering\Lighting\ForwardAmbient.h"
 
 
 RenderingEngine::RenderingEngine():
