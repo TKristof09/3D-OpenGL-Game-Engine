@@ -12,10 +12,10 @@ public:
         m_mesh(mesh),
 		m_material(material)
     {}
-	void Render(const Transform& transform, const Shader* shader, RenderingEngine* renderingEngine) override
+	void Render(const Shader* shader, RenderingEngine* renderingEngine) override
 	{
         shader->Bind();
-		shader->UpdateUniforms(transform, m_material, renderingEngine);
+		shader->UpdateUniforms(*GetTransform(), m_material, renderingEngine);
 
 		m_mesh.Draw();
 	};

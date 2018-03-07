@@ -15,11 +15,12 @@ public:
 
     virtual void Input() {};
     virtual void Update() {};
-    virtual void Render(const Transform& transform, const Shader* shader, RenderingEngine* renderingEngine) {};
+    virtual void Render(const Shader* shader, RenderingEngine* renderingEngine) {};
     virtual void AddToEngine(RenderingEngine* renderingEngine) {};
     
     inline Transform* GetTransform() { return m_parent->GetTransform(); };
-    inline const Transform& GetTransform() const { return *m_parent->GetTransform(); };
+    //This doesn't seem to work
+    inline const Transform& GetTransform() const { return *m_parent->GetTransform(); }; 
 
     virtual void SetParent(GameObject* parent) { m_parent = parent; };
 
