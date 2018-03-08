@@ -2,8 +2,6 @@
 #include "Core\Time.h"
 #include "GameComponents\Lighting.h"
 
-//extern Camera mainCamera;
-
 TestGame::TestGame()
 {
 

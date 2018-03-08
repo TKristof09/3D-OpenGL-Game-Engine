@@ -162,9 +162,6 @@
 	extern "C"
 #endif
 
-//TODO Delete 
-//extern Camera mainCamera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, (float)800 / (float)600, 0.01f, 1000.0f);
-
 int main(int argc, char *argv[])
 {
 	TestGame testGame;
