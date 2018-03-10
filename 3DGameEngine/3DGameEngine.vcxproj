@@ -169,7 +169,7 @@
     <ClInclude Include="Engine\Core\Game.h" />
     <ClInclude Include="Engine\GameComponents\GameComponent.h" />
     <ClInclude Include="Engine\GameComponents\MeshRenderer.h" />
-    <ClInclude Include="Engine\Camera.h" />
+    <ClInclude Include="Engine\Core\Camera.h" />
     <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Engine\GameComponents\Lighting.h" />
     <ClInclude Include="Engine\Core\Input.h" />

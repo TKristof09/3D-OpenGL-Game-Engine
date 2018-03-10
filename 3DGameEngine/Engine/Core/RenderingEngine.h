@@ -2,7 +2,7 @@
 #define RENDERINGENGINE_H
 
 //#include "..\Core\GameObject.h"
-#include "..\Camera.h"
+#include "Camera.h"
 #include "..\GameComponents\Lighting.h"
 #include <vector>
 

@@ -4,6 +4,7 @@
 		+Review Gamecomponent.Render()
 		Remake the SetUniform methods for the lights
 		Remake constructors with NAME() : m_variable(parameter)...
+		Review includes in testgame
 
 	Color class with RGB(0-255), RGB(0-1) and HEX picker, also some presets
 	Look up how what a getter should return

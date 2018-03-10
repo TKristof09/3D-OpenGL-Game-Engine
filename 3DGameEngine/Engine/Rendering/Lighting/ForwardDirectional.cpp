@@ -49,5 +49,6 @@ void ForwardDirectional::SetUniform(const GLchar* uniform, const DirectionalLigh
 	strcpy(direction, uniform);
 	strcat(direction, ".direction");
 
-	Shader::SetUniform(direction, glm::normalize(*directionalLight.GetTransform().GetRotation()));
+	Shader::SetUniform(direction, directionalLight.GetTransform().GetForward());
+
 }

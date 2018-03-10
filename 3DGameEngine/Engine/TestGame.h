@@ -7,7 +7,7 @@
 #include "Rendering\Shader.h"
 #include "Rendering\Texture.h"
 #include "Rendering\Material.h"
-#include "Camera.h"
+#include "Core\Camera.h"
 #include "Core\GameObject.h"
 #include "GameComponents\MeshRenderer.h"
 

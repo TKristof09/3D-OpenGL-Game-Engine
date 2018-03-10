@@ -99,7 +99,7 @@ void ForwardSpot::SetUniform(const GLchar* uniform, const SpotLight& spotLight) 
     strcpy(direction, uniform);
     strcat(direction, ".direction");
     
-    Shader::SetUniform(direction, glm::normalize(*spotLight.GetTransform().GetRotation()));
+    Shader::SetUniform(direction, spotLight.GetTransform().GetForward());
     	
     GLchar* range = new GLchar[strlen(uniform) + 7];
     strcpy(range, uniform);
