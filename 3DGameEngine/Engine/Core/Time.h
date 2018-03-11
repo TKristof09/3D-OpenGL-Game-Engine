@@ -8,7 +8,6 @@ public:
 	static double GetDelta();
 
 	static void SetDelta(double value);
-protected:
 private:
 	static double m_delta;
 };

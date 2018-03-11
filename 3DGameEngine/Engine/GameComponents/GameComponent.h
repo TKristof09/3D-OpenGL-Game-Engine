@@ -10,7 +10,7 @@ class Shader;
 class GameComponent
 {
 public:
-    GameComponent() :m_parent(0) {};
+    GameComponent() :m_parent(nullptr) {};
     virtual ~GameComponent() {};
 
     virtual void Input() {};

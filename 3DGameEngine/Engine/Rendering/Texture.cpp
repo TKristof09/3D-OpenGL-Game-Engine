@@ -11,7 +11,7 @@ Texture::Texture(const std::string& fileName)
 {
 	int width, height, numComponents;
 	stbi_uc* imageData = stbi_load(fileName.c_str(), &width, &height, &numComponents, 4);
-	if (imageData == NULL)
+	if (imageData == nullptr)
 		std::cerr << "Texture loading failed for texture: " << fileName << std::endl;
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);

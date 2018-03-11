@@ -12,7 +12,7 @@ ForwardDirectional::ForwardDirectional()
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
-	if (material.GetTexture() != NULL)
+	if (material.GetTexture() != nullptr)
 	{
 		material.GetTexture()->Bind();
 	}
@@ -22,7 +22,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
 	Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPos());
-	SetUniform("directionalLight", *(const DirectionalLight*)&renderingEngine->GetActiveLight());
+	SetUniform("directionalLight", *static_cast<const DirectionalLight*>(&renderingEngine->GetActiveLight()));
 
 }
 

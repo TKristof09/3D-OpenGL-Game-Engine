@@ -20,7 +20,7 @@ public:
         static ForwardSpot instance;
         return &instance;
     }
-    void Bind()
+    void Bind() const
     {
         Shader::Bind();
     };

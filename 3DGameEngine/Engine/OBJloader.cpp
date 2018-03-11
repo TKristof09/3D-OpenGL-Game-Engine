@@ -131,7 +131,7 @@ IndexedModel OBJModel::ToIndexedModel()
 		//Create model which properly separates texture coordinates
 		unsigned int previousVertexLocation = FindLastVertexIndex(indexLookup, currentIndex, result);
 
-		if (previousVertexLocation == (unsigned int)-1)
+		if (previousVertexLocation == static_cast<unsigned int>(-1))
 		{
 			resultModelIndex = result.positions.size();
 
@@ -249,7 +249,7 @@ void OBJModel::CreateOBJFace(const std::string& line)
 	this->OBJIndices.push_back(ParseOBJIndex(tokens[2], &this->hasUVs, &this->hasNormals));
 	this->OBJIndices.push_back(ParseOBJIndex(tokens[3], &this->hasUVs, &this->hasNormals));
 
-	if ((int)tokens.size() > 4)
+	if (static_cast<int>(tokens.size()) > 4)
 	{
 		this->OBJIndices.push_back(ParseOBJIndex(tokens[1], &this->hasUVs, &this->hasNormals));
 		this->OBJIndices.push_back(ParseOBJIndex(tokens[3], &this->hasUVs, &this->hasNormals));

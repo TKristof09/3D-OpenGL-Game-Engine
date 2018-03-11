@@ -3,7 +3,7 @@
 #include "Window.h"
 #include "Time.h"
 #include "Input.h"
-#include "SDL_Backend.h"
+
 CoreEngine::CoreEngine(int width, int height, double framerate, Game* game):
 	m_isRunning(false), m_width(width), m_height(height), m_frameTime(1.0 / framerate), m_game(game), m_renderingEngine(nullptr) 
 {

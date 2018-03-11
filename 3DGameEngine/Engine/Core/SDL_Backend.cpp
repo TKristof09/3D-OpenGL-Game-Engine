@@ -19,7 +19,7 @@ bool SDLGetIsCloseRequested()
 
 void SDLSetFullScreen(bool value)
 {
-	int mode = 0;
+	int mode;
 	if (value)
 		mode = SDL_WINDOW_FULLSCREEN;
 	else

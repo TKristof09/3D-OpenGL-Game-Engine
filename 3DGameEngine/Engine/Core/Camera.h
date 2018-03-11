@@ -1,15 +1,12 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <iostream>
-
 #include <glm\ext.hpp> // used to make vectors to string
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
 #include <glm\gtx\rotate_vector.hpp>
-#include <glm\gtc\quaternion.hpp>
 
 
 enum Camera_Movement
@@ -26,13 +23,13 @@ class Camera
 {
 public:
 	Camera(float fov, float aspect, float zNear, float zFar):
-		m_forward(glm::vec3(0, 0, -1)),
-		m_position(glm::vec3(0, 0, 0)),
-		m_up(glm::vec3(0, 1, 0)),
 		m_fov(fov),
 		m_aspect(aspect),
 		m_zNear(zNear),
-		m_zFar(zFar)
+		m_zFar(zFar),
+		m_position(glm::vec3(0, 0, 0)),
+		m_forward(glm::vec3(0, 0, -1)),
+		m_up(glm::vec3(0, 1, 0))
 	{}
 
 	Camera(const glm::vec3& pos, glm::vec3& forward, glm::vec3& up, float fov, float aspect, float zNear, float zFar):
@@ -58,8 +55,9 @@ public:
 
 	inline const glm::vec3* GetForward() const { return &m_forward; };
 	inline const glm::vec3* GetUp() const { return &m_up; };
-	inline const glm::vec3 GetLeft() const { return cross(m_up, m_forward); };
-	inline const glm::vec3 GetRight() const { return cross(m_forward, m_up); };
+	inline glm::vec3 GetLeft() const { return cross(m_up, m_forward); };
+	inline glm::vec3 GetRight() const { return cross(m_forward, m_up); };
+    
 	
 	
 
@@ -137,8 +135,6 @@ public:
 
 private:	
 
-	
-	
 	float m_fov;
 	float m_aspect;
 	float m_zNear;

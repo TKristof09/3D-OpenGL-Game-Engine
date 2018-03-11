@@ -13,7 +13,7 @@ ForwardAmbient::ForwardAmbient()
 
 void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
-	if (material.GetTexture() != NULL)
+	if (material.GetTexture() != nullptr)
 	{
 		material.GetTexture()->Bind();
 	}

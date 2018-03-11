@@ -2,6 +2,7 @@
 #include <GL\glew.h>
 #include <SDL2\SDL.h>
 #include "SDL_Backend.h"
+#include <iostream>
 
 int Window::m_width = 0;
 int Window::m_height = 0;
@@ -31,7 +32,7 @@ void Window::Create(int width, int height, const std::string& title)
 
 
 
-	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
+	printf("OpenGL version supported by this platform (%p): \n", glGetString(GL_VERSION));
 
 }
 

@@ -1,8 +1,6 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <string>
-
 #include <glm\glm.hpp>
 #include <GL\glew.h>
 #include "..\OBJloader.h"
@@ -32,7 +30,11 @@ private:
 class Mesh
 {
 public:
-	Mesh() {};
+	Mesh()
+        : m_vertexArrayObject(0),
+          m_drawCount(0)
+    {
+    } ;
 	Mesh(Vertex vertices[], unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
 	Mesh(const std::string& fileName);
 	~Mesh();

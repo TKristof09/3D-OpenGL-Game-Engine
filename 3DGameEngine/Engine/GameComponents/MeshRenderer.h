@@ -4,6 +4,7 @@
 #include "GameComponent.h"
 #include "..\Rendering\Mesh.h"
 #include "..\Rendering\Material.h"
+#include "..\Rendering\Shader.h"
 
 class MeshRenderer : public GameComponent
 {

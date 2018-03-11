@@ -18,7 +18,7 @@ ForwardSpot::~ForwardSpot()
 
 void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
-    if (material.GetTexture() != NULL)
+    if (material.GetTexture() != nullptr)
     {
         material.GetTexture()->Bind();
     }
@@ -28,7 +28,7 @@ void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& cam
     Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
     Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
     Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPos());
-    SetUniform("spotLight", *(SpotLight*)&renderingEngine->GetActiveLight());
+    SetUniform("spotLight", *static_cast<const SpotLight*>(&renderingEngine->GetActiveLight()));
 }
 
 void ForwardSpot::SetUniform(const GLchar* uniform, const Attenuation& attenuation) const
@@ -92,7 +92,7 @@ void ForwardSpot::SetUniform(const GLchar* uniform, const SpotLight& spotLight) 
     strcpy(pointLight, uniform);
     strcat(pointLight, ".pointLight");
     
-    SetUniform(pointLight, *(PointLight*)&spotLight);
+    SetUniform(pointLight, *static_cast<const PointLight*>(&spotLight));
     
     
     GLchar* direction = new GLchar[strlen(uniform) + 10];

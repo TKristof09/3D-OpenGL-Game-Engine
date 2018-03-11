@@ -1,17 +1,12 @@
 #ifndef TESTGAME_H
 #define TESTGAME_H
 #include "Core\Game.h"
-#include "Core\Input.h"
-#include "Core\Transform.h"
 #include "Rendering\Mesh.h"
-#include "Rendering\Shader.h"
 #include "Rendering\Texture.h"
 #include "Rendering\Material.h"
 #include "Core\Camera.h"
 #include "Core\GameObject.h"
 #include "GameComponents\MeshRenderer.h"
-
-#include <glm\ext.hpp>
 
 
 class TestGame : public Game
@@ -29,10 +24,10 @@ private:
 
 	Mesh* m_mesh;
 	Mesh* mesh2;
-	Camera* m_camera;
 	Material* m_material;
 	Material* material2;
 	Texture* m_texture;
+    Texture* m_texture2;
 };
 
 #endif // !TESTGAME_H

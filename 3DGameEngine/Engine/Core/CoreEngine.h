@@ -1,9 +1,7 @@
 #ifndef COREENGINE_H
 #define COREENGINE_H
 
-#include <string>
 #include "Game.h"
-#include "Window.h"
 #include "RenderingEngine.h"
 
 class CoreEngine

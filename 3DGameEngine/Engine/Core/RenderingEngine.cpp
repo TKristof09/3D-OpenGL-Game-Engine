@@ -4,20 +4,22 @@
 #include "Input.h"
 #include "Time.h"
 #include "..\Rendering\Lighting\ForwardAmbient.h"
+#include <iostream>
 
 
-RenderingEngine::RenderingEngine():
-mainCamera(Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, (float)*Window::GetWidth() / (float)*Window::GetHeight(), 0.01f, 1000.0f)),
-m_ambientLight(glm::vec3(0.05f,0.05f,0.05f))
+RenderingEngine::RenderingEngine()
+    :
+    mainCamera(Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, static_cast<float>(*Window::GetWidth()) / static_cast<float>(*Window::GetHeight()), 0.01f, 1000.0f)),
+    m_ambientLight(glm::vec3(0.05f, 0.05f, 0.05f)),
+    m_activeLight(nullptr)
 {
-	glClearColor(0, 0, 0, 0);
-	//glEnable(GL_FRAMEBUFFER_SRGB);
-	glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
-
+    glClearColor(0, 0, 0, 0);
+    //glEnable(GL_FRAMEBUFFER_SRGB);
+    glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 }
 
 
