@@ -12,7 +12,7 @@ class GameObject
 {
 public:
     GameObject() :m_renderingEngine(nullptr) {};
-    ~GameObject() {};
+    ~GameObject() = default;;
 	void Update();
 	void Render(const Shader* shader, RenderingEngine* renderingEngine);
 	void Input();

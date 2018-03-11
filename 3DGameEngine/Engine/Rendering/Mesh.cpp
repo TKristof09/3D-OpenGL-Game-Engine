@@ -4,11 +4,11 @@
 
 Mesh::Mesh(const std::string& fileName)
 {
-	IndexedModel model = OBJModel(fileName).ToIndexedModel();
+    const auto model = OBJModel(fileName).ToIndexedModel();
 	InitMesh(model);
 }
 
-Mesh::Mesh(Vertex vertices[], unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
+Mesh::Mesh(Vertex vertices[], const unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
 {
 	IndexedModel model;
 

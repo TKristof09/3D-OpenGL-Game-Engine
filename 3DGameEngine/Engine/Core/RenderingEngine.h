@@ -12,28 +12,23 @@ class RenderingEngine
 {
 public:
 	RenderingEngine();
-	~RenderingEngine();
+	~RenderingEngine() = default;
 	void Render(GameObject object);
 	void Input();
     void AddLight(const BaseLight& light) { m_lights.push_back(&light); };
 
-    void SetCamera(const Camera& camera) { mainCamera = camera; };
+    void SetCamera(const Camera& camera) { m_mainCamera = camera; };
 
-	inline const Camera* GetMainCamera() const { return &mainCamera; };
+	inline const Camera* GetMainCamera() const { return &m_mainCamera; };
 	inline const glm::vec3* GetAmbientLight() const{ return &m_ambientLight; };
     inline const BaseLight& GetActiveLight() const { return *m_activeLight; };
 
 private:
-	Camera mainCamera;
+	Camera m_mainCamera;
 	glm::vec3 m_ambientLight;
 
     std::vector<const BaseLight*> m_lights;
     const BaseLight* m_activeLight;
-
-	DirectionalLight m_directional;
-    PointLight m_point;
-    std::vector<PointLight> pLights;
-    SpotLight m_spot;
 };
 
 #endif // !RENDERINGENGINE_H

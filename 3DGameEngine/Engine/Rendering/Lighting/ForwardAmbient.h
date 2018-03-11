@@ -10,7 +10,7 @@ class ForwardAmbient : public Shader
 {
 public:
 	ForwardAmbient();
-	~ForwardAmbient();
+	~ForwardAmbient() = default;
 	static ForwardAmbient* GetInstance()
 	{
 

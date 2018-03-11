@@ -7,9 +7,9 @@
 
 struct OBJIndex
 {
-	unsigned int vertexIndex;
-	unsigned int uvIndex;
-	unsigned int normalIndex;
+	int vertexIndex;
+	int uvIndex;
+	int normalIndex;
 
 	bool operator<(const OBJIndex& r) const { return vertexIndex < r.vertexIndex; }
 };

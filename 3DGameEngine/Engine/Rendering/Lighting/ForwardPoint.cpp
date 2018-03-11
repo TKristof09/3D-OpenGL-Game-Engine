@@ -4,16 +4,10 @@
 
 ForwardPoint::ForwardPoint()
 {
-    Shader();
     AddShader(".\\res\\forward-point", GL_VERTEX_SHADER);
     AddShader(".\\res\\forward-point", GL_FRAGMENT_SHADER);
 }
 
-
-ForwardPoint::~ForwardPoint()
-{
-
-}
 
 
 void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
@@ -22,13 +16,13 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& ca
 	{
 		material.GetTexture()->Bind();
 	}
-	glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
+    const glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
 	Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPos());
-	SetUniform("pointLight", *static_cast<const PointLight*>(&renderingEngine->GetActiveLight()));
+	SetUniform("pointLight", *dynamic_cast<const PointLight*>(&renderingEngine->GetActiveLight()));
 }
 
 void ForwardPoint::SetUniform(const GLchar* uniform, const Attenuation& attenuation) const
@@ -59,7 +53,7 @@ void ForwardPoint::SetUniform(const GLchar* uniform, const PointLight& pointLigh
     strcpy(color, uniform);
     strcat(color, ".base.color");
 
-    Shader::SetUniform(color, *pointLight.GetColor());
+    Shader::SetUniform(color, pointLight.GetColor()->ToVec3());
 
     GLchar* intensity = new GLchar[strlen(uniform) + 15];
     strcpy(intensity, uniform);

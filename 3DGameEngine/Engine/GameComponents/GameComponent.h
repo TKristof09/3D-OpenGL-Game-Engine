@@ -11,7 +11,7 @@ class GameComponent
 {
 public:
     GameComponent() :m_parent(nullptr) {};
-    virtual ~GameComponent() {};
+    virtual ~GameComponent() = default;;
 
     virtual void Input() {};
     virtual void Update() {};

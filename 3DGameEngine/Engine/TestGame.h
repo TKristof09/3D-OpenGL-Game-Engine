@@ -4,7 +4,6 @@
 #include "Rendering\Mesh.h"
 #include "Rendering\Texture.h"
 #include "Rendering\Material.h"
-#include "Core\Camera.h"
 #include "Core\GameObject.h"
 #include "GameComponents\MeshRenderer.h"
 
@@ -20,12 +19,12 @@ public:
 private:
 	GameObject* m_root;
 	MeshRenderer* m_meshRenderer;
-	MeshRenderer* meshRenderer2;
+	MeshRenderer* m_meshRenderer2;
 
 	Mesh* m_mesh;
-	Mesh* mesh2;
+	Mesh* m_mesh2;
 	Material* m_material;
-	Material* material2;
+	Material* m_material2;
 	Texture* m_texture;
     Texture* m_texture2;
 };

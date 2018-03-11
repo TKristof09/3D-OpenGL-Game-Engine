@@ -24,8 +24,8 @@ void Window::Create(int width, int height, const std::string& title)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	SDLCreateWindow(m_title.c_str(), m_width, m_height, false);
-	
-	GLenum result = glewInit();
+
+    const auto result = glewInit();
 	if (result != GLEW_OK)
 		std::cerr << "Glew failed to initialize!" << std::endl;
 	

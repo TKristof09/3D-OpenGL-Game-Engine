@@ -17,10 +17,10 @@ Shader::Shader()
 Shader::~Shader()
 {
 
-	for (unsigned int i = 0; i < NUM_SHADERS; i++)
+	for(auto shader : m_shaders)
 	{
-		glDetachShader(m_program, m_shaders[i]);
-		glDeleteShader(m_shaders[i]);
+		glDetachShader(m_program, shader);
+		glDeleteShader(shader);
 	}
 
 	glDeleteProgram(m_program);
@@ -37,9 +37,9 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 		case GL_FRAGMENT_SHADER:
 			m_shaders[1] = CreateShader(LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
 			break;
-		case GL_GEOMETRY_SHADER:
-			m_shaders[2] = CreateShader(LoadShader(fileName + ".geom"), GL_GEOMETRY_SHADER);
-			break;
+//		case GL_GEOMETRY_SHADER:
+//			m_shaders[2] = CreateShader(LoadShader(fileName + ".geom"), GL_GEOMETRY_SHADER);
+//			break;
 		default:
 			std::cerr << "Shader type not specified" << std::endl;
 			break;
@@ -49,9 +49,9 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	//glBindAttribLocation(m_program, 0, "position");
 	//glBindAttribLocation(m_program, 1, "textCoord");
 
-	for (unsigned int i = 0; i < NUM_SHADERS; i++)
+	for(auto shader : m_shaders)
 	{
-		glAttachShader(m_program, m_shaders[i]);
+		glAttachShader(m_program, shader);
 	}	
 
 	glLinkProgram(m_program);
@@ -90,7 +90,7 @@ void Shader::Bind() const
 
 static GLuint CreateShader(const std::string& text, unsigned int shaderType)
 {
-	GLuint shader = glCreateShader(shaderType);
+    const GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
 		std::cerr << "Error: Shader creation failed!" << std::endl;
 

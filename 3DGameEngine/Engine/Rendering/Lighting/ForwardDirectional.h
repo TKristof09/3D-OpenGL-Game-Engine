@@ -11,7 +11,7 @@ class ForwardDirectional : public Shader
 {
 public:
 	ForwardDirectional();
-	~ForwardDirectional();
+	~ForwardDirectional() = default;
 	static ForwardDirectional* GetInstance()
 	{
 

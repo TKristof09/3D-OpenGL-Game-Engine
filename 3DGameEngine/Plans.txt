@@ -2,11 +2,11 @@
 	TODO:
 		+Make light's direction be based on the gameobject's rotation
 		+Review Gamecomponent.Render()
+		+Remake constructors with NAME() : m_variable(parameter)...
 		Remake the SetUniform methods for the lights
-		Remake constructors with NAME() : m_variable(parameter)...
 		Review includes in testgame
 
-	Color class with RGB(0-255), RGB(0-1) and HEX picker, also some presets
+	+Color class with RGB(0-255) and HEX picker, also some presets
 	Look up how what a getter should return
 	Better input handling
 	Rotation/Translation in a unified class (not in camera class)

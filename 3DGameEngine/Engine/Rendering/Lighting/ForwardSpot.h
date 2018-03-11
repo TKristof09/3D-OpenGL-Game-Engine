@@ -13,7 +13,7 @@ class ForwardSpot : public Shader
 {
 public:
     ForwardSpot();
-    ~ForwardSpot();
+    ~ForwardSpot() = default;
     static ForwardSpot* GetInstance()
     {
 

@@ -38,7 +38,7 @@ class BaseLight : public GameComponent
 {
 public:
 
-    BaseLight(const glm::vec3& color, float intensity, const Shader* shader) :
+    BaseLight(const Color& color, float intensity, const Shader* shader) :
         m_color(color),
         m_intensity(intensity),
         m_shader(shader)
@@ -47,15 +47,15 @@ public:
 
     virtual void AddToEngine(RenderingEngine* renderingEngine);
 
-    inline const glm::vec3* GetColor() const { return &m_color; };
+    inline const Color* GetColor() const { return &m_color; };
     inline const float* GetIntensity() const { return &m_intensity; };
     inline const Shader* GetShader() const { return m_shader; };
 
-    inline void SetColor(const glm::vec3& color) { m_color = color; };
+    inline void SetColor(const Color& color) { m_color = color; };
     inline void SetIntensity(float intensity) { m_intensity = intensity; };
 
 private:
-    glm::vec3 m_color;
+    Color m_color;
     float m_intensity;
     const Shader* m_shader;
 };
@@ -63,7 +63,7 @@ private:
 class DirectionalLight : public BaseLight
 {
 public:
-    DirectionalLight(const glm::vec3& color = glm::vec3(0, 0, 0), float intensity = 0) :
+    DirectionalLight(const Color& color = Color(0, 0, 0), float intensity = 0) :
         BaseLight(color, intensity, ForwardDirectional::GetInstance())
     {
     };
@@ -75,13 +75,13 @@ public:
 class PointLight : public BaseLight
 {
 public:
-    PointLight(const glm::vec3& color = glm::vec3(0, 0, 0), float intensity = 0, const Attenuation& attenuation = Attenuation(), const Shader* shader = ForwardPoint::GetInstance()) :
+    PointLight(const Color& color = Color(0, 0, 0), float intensity = 0, const Attenuation& attenuation = Attenuation(), const Shader* shader = ForwardPoint::GetInstance()) :
         BaseLight(color, intensity, shader),
         m_attenuation(attenuation)
     {
         float a = m_attenuation.GetExponent();
         float b = m_attenuation.GetLinear();
-        float c = m_attenuation.GetConstant() - COLOR_DEPTH * intensity * glm::compMax(color);
+        float c = m_attenuation.GetConstant() - COLOR_DEPTH * intensity * glm::max(color.r, glm::max(color.g, color.b));
 
         m_range = (-b + sqrtf(b*b - 4 * a*c)) / (2 * a);
     }
@@ -103,7 +103,7 @@ class SpotLight : public PointLight
 {
 public:
 
-    SpotLight(const glm::vec3& color = glm::vec3(0, 0, 0), float intensity = 0, const Attenuation& attenuation = Attenuation(), float cutoff = 0) :
+    SpotLight(const Color& color = Color(0, 0, 0), float intensity = 0, const Attenuation& attenuation = Attenuation(), float cutoff = 0) :
         PointLight(color, intensity, attenuation, ForwardSpot::GetInstance()),
         m_cutoff(cutoff)
     {

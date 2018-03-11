@@ -9,21 +9,20 @@ class Vertex
 {
 public:
 	Vertex(const glm::vec3& pos, const glm::vec2& textCoord, const glm::vec3& normal)
-	{
-		this->pos = pos;
-		this->textCoord.x = textCoord.x;
-		this->textCoord.y = 1 - textCoord.y;
-		this->normal = normal;
+        :
+		m_pos(pos),
+		m_textCoord(textCoord.x, 1-textCoord.y),
+		m_normal(normal)
 		
-	};
-	inline const glm::vec3* GetPos() const { return &pos; };
-	inline const glm::vec2* GetTextCoord() const { return &textCoord; };
-	inline const glm::vec3* GetNormal() const { return &normal; };
+        {};
+	inline const glm::vec3* GetPos() const { return &m_pos; };
+	inline const glm::vec2* GetTextCoord() const { return &m_textCoord; };
+	inline const glm::vec3* GetNormal() const { return &m_normal; };
 	
 private:
-	glm::vec3 pos;
-	glm::vec2 textCoord;
-	glm::vec3 normal;
+	glm::vec3 m_pos;
+	glm::vec2 m_textCoord;
+	glm::vec3 m_normal;
 	
 };
 
@@ -54,7 +53,7 @@ private:
 		NUM_BUFFERS
 	};
 
-	void InitMesh(const IndexedModel model);
+	void InitMesh(IndexedModel model);
 
 	GLuint m_vertexArrayObject;
 	GLuint m_vertexArrayBuffers[NUM_BUFFERS];

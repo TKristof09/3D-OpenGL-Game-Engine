@@ -4,10 +4,8 @@
 
 ForwardDirectional::ForwardDirectional()
 {
-	Shader();
 	AddShader(".\\res\\forward-directional", GL_VERTEX_SHADER);
 	AddShader(".\\res\\forward-directional", GL_FRAGMENT_SHADER);
-
 }
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
@@ -16,18 +14,13 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	{
 		material.GetTexture()->Bind();
 	}
-	glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
+    const glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
 	Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPos());
-	SetUniform("directionalLight", *static_cast<const DirectionalLight*>(&renderingEngine->GetActiveLight()));
-
-}
-
-ForwardDirectional::~ForwardDirectional()
-{
+	SetUniform("directionalLight", *dynamic_cast<const DirectionalLight*>(&renderingEngine->GetActiveLight()));
 
 }
 
@@ -37,7 +30,7 @@ void ForwardDirectional::SetUniform(const GLchar* uniform, const DirectionalLigh
 	strcpy(color, uniform);
 	strcat(color, ".base.color");
 	
-    Shader::SetUniform(color, *directionalLight.GetColor());
+    Shader::SetUniform(color, directionalLight.GetColor()->ToVec3());
 
     GLchar* intensity = new GLchar[strlen(uniform) + 15];
     strcpy(intensity, uniform);

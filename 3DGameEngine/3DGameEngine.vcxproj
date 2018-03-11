@@ -165,6 +165,7 @@
     <ClCompile Include="Engine\Rendering\Lighting\ForwardSpot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Core\Color.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Game.h" />
     <ClInclude Include="Engine\GameComponents\GameComponent.h" />

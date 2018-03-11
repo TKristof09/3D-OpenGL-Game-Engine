@@ -12,7 +12,7 @@ class ForwardPoint : public Shader
 {
 public:
 	ForwardPoint();
-	~ForwardPoint();
+	~ForwardPoint() = default;
 	static ForwardPoint* GetInstance()
 	{
 
