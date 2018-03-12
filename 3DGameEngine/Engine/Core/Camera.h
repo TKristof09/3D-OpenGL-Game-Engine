@@ -21,7 +21,7 @@ enum Camera_Movement
 class Camera
 {
 public:
-	Camera(float fov, float aspect, float zNear, float zFar):
+	Camera(const float fov, const float aspect, const float zNear, const float zFar):
 		m_fov(fov),
 		m_aspect(aspect),
 		m_zNear(zNear),
@@ -31,7 +31,7 @@ public:
 		m_up(glm::vec3(0, 1, 0))
 	{}
 
-	Camera(const glm::vec3& pos, glm::vec3& forward, glm::vec3& up, float fov, float aspect, float zNear, float zFar):
+	Camera(const glm::vec3& pos, glm::vec3& forward, glm::vec3& up, const float fov, const float aspect, const float zNear, const float zFar):
 		m_fov(fov),
 		m_aspect(aspect),
 		m_zNear(zNear),
@@ -49,8 +49,8 @@ public:
 	}
 
 
-	inline const glm::vec3* GetPos() const { return &m_position; };
-	inline void SetPos(glm::vec3 pos) { m_position = pos; };
+	inline const glm::vec3* GetPosition() const { return &m_position; };
+	inline void SetPosition(const glm::vec3& position) { m_position = position; };
 
 	inline const glm::vec3* GetForward() const { return &m_forward; };
 	inline const glm::vec3* GetUp() const { return &m_up; };
@@ -69,19 +69,19 @@ public:
 
 	// TODO make global ones too and maybe place the rotations in a separate header
 	// Local rotations
-	void RotateX(float angle)
+	void RotateX(const float angle)
 	{
 		m_forward = glm::rotate(m_forward, -angle, GetRight());
 		glm::vec3 right = glm::cross(m_forward, *GetUp());
 		m_up = glm::cross(right, m_forward);
 	}
 
-	void RotateY(float angle)
+	void RotateY(const float angle)
 	{
 		m_forward = glm::rotate(m_forward, angle, m_up);
 	}
 
-	void RotateZ(float angle)
+	void RotateZ(const float angle)
 	{
 		m_up = glm::rotate(m_up, angle, *GetForward());
 	}
@@ -90,7 +90,7 @@ public:
 	//TODO translation by vector
 	//maybe m_position += translationVector;
 
-	void Translate(Camera_Movement direction, float amount)
+	void Translate(const Camera_Movement direction, const float amount)
 	{
 		switch (direction)
 		{

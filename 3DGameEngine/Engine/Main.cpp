@@ -83,18 +83,18 @@
 //
 //		display.Clear(0, 0, 0, 1.0f);
 //
-//		glm::vec3 rot = *transform.GetRotation();
+//		glm::vec3 rot = *transform.GetLocalRotation();
 //		rot.y = counter;
-//		//transform.SetRotation(rot);
+//		//transform.SetLocalRotation(rot);
 //
 //		directionalLight.SetDirection(glm::vec3(0, sin(counter + pi/2), sin(counter) ));
-//		pLight1.SetPosition(glm::vec3(sin(counter * 10) * 5, 3, cos(counter * 10) * 5));
-//		pLight2.SetPosition(glm::vec3(-sin(counter * 10) * 5, 3, cos(counter * 10) * 5));
-//		//pLight2.SetPosition(glm::vec3(sin(counter * 10 + pi * 0.5f) * 5, 3, cos(counter * 10 + pi * 0.5f) * 5));
-//		//cout << glm::to_string(*pLight1.GetPosition()) << endl;
-//		//pLight3.SetPosition(glm::vec3(sin(counter * 10 + pi) * 5, 3, cos(counter * 10 + pi) * 5));
-//		//pLight4.SetPosition(glm::vec3(sin(counter * 10 + pi * 1.5f) * 5, 3, cos(counter * 10 + pi * 1.5f) * 5));
-//		//cout << glm::to_string(*pLight2.GetPosition()) << endl;
+//		pLight1.SetLocalPosition(glm::vec3(sin(counter * 10) * 5, 3, cos(counter * 10) * 5));
+//		pLight2.SetLocalPosition(glm::vec3(-sin(counter * 10) * 5, 3, cos(counter * 10) * 5));
+//		//pLight2.SetLocalPosition(glm::vec3(sin(counter * 10 + pi * 0.5f) * 5, 3, cos(counter * 10 + pi * 0.5f) * 5));
+//		//cout << glm::to_string(*pLight1.GetLocalPosition()) << endl;
+//		//pLight3.SetLocalPosition(glm::vec3(sin(counter * 10 + pi) * 5, 3, cos(counter * 10 + pi) * 5));
+//		//pLight4.SetLocalPosition(glm::vec3(sin(counter * 10 + pi * 1.5f) * 5, 3, cos(counter * 10 + pi * 1.5f) * 5));
+//		//cout << glm::to_string(*pLight2.GetLocalPosition()) << endl;
 //		
 //		// Set up inputs here
 //

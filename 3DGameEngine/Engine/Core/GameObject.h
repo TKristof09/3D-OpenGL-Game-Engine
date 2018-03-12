@@ -11,7 +11,8 @@ class GameComponent;
 class GameObject
 {
 public:
-    GameObject() :m_renderingEngine(nullptr) {};
+    GameObject():
+        m_renderingEngine(nullptr) {};
     ~GameObject() = default;;
 	void Update();
 	void Render(const Shader* shader, RenderingEngine* renderingEngine);
