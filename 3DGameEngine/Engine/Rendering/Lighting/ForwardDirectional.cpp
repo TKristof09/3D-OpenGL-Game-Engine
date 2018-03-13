@@ -1,5 +1,6 @@
 #include "ForwardDirectional.h"
 #include "..\Engine\Core\RenderingEngine.h"
+#include "..\Engine\GameComponents\Lighting.h"
 
 
 ForwardDirectional::ForwardDirectional()
@@ -19,7 +20,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
-	Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPosition());
+	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
 	SetUniform("directionalLight", *dynamic_cast<const DirectionalLight*>(&renderingEngine->GetActiveLight()));
 
 }

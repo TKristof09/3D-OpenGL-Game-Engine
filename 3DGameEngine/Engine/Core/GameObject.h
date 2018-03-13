@@ -2,10 +2,10 @@
 #define GAMEOBJECT_H
 
 #include <vector>
-#include "Transform.h"
+#include "Transform.h"  
 
-class Shader;
 class RenderingEngine;
+class Shader;
 class GameComponent;
 
 class GameObject
@@ -14,9 +14,9 @@ public:
     GameObject():
         m_renderingEngine(nullptr) {};
     ~GameObject() = default;;
-	void Update();
-	void Render(const Shader* shader, RenderingEngine* renderingEngine);
-	void Input();
+	void Update() const;
+	void Render(const Shader* shader, RenderingEngine* renderingEngine) const;
+	void Input() const;
 	void AddChild(GameObject* child);
 	void AddComponent(GameComponent* component);
     void SetRenderingEngine(RenderingEngine* renderingEngine);

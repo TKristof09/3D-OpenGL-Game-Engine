@@ -4,11 +4,16 @@
 		+Review Gamecomponent.Render()
 		+Remake constructors with NAME() : m_variable(parameter)...
 		Remake the SetUniform methods for the lights
-		Review includes in testgame
 		Camera as GameComponent
+
+
+		!!!Review all includes to prevent further circular includes!!!
 
 	+Color class with RGB(0-255) and HEX picker, also some presets
 	Look up how what a getter should return
 	Better input handling
 	Rotation/Translation in a unified class (not in camera class)
 	PBR
+	FBX importer
+
+	Physics Engine

@@ -143,10 +143,10 @@
     <ClInclude Include="Engine\GameComponents\Lighting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Core\Camera.h">
+    <ClInclude Include="Engine\Core\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Core\Color.h">
+    <ClInclude Include="Engine\GameComponents\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

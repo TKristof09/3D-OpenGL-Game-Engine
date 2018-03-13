@@ -1,5 +1,6 @@
 #include "TestGame.h"
 #include "GameComponents\Lighting.h"
+#include "Core\Window.h"
 
 TestGame::TestGame()
     : m_root(nullptr),
@@ -61,6 +62,7 @@ void TestGame::Init()
     cubeOBJ->GetTransform()->SetLocalPosition(glm::vec3(0, -2, 0));
     //cubeOBJ->GetTransform()->SetLocalRotation(angleAxis(glm::radians(-60.0f), glm::vec3(1, 1, 0)));
     cubeOBJ->AddComponent(m_meshRenderer2);
+    cubeOBJ->AddComponent(new Camera(70.0f, static_cast<float>(*Window::GetWidth()) / static_cast<float>(*Window::GetHeight()), 0.01f, 1000.0f));
 
 
     m_root->AddChild(planeOBJ);

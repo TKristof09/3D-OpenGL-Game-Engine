@@ -4,7 +4,7 @@
 #include <string>
 #include <GL\glew.h>
 #include "..\Core\Transform.h"
-#include "..\Core\Camera.h"
+#include "..\GameComponents\Camera.h"
 #include "Material.h"
 
 class RenderingEngine;

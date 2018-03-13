@@ -1,5 +1,6 @@
 #include "ForwardPoint.h"
 #include "..\Engine\Core\RenderingEngine.h"
+#include "..\Engine\GameComponents\Lighting.h"
 
 
 ForwardPoint::ForwardPoint()
@@ -21,7 +22,7 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& ca
 	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
-	Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPosition());
+	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
 	SetUniform("pointLight", *dynamic_cast<const PointLight*>(&renderingEngine->GetActiveLight()));
 }
 

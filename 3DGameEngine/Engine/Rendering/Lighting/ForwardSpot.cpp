@@ -1,5 +1,6 @@
 #include "ForwardSpot.h"
 #include "..\Engine\Core\RenderingEngine.h"
+#include "..\Engine\GameComponents\Lighting.h"
 
 
 ForwardSpot::ForwardSpot()
@@ -21,7 +22,7 @@ void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& cam
     Shader::SetUniform("model", transform.GetModel());
     Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
     Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
-    Shader::SetUniform("eyePos", *renderingEngine->GetMainCamera()->GetPosition());
+    Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
     SetUniform("spotLight", *dynamic_cast<const SpotLight*>(&renderingEngine->GetActiveLight()));
 }
 

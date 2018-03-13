@@ -17,7 +17,7 @@ void GameObject::AddComponent(GameComponent* component)
     m_components.push_back(component);
 }
 
-void GameObject::Update()
+void GameObject::Update() const
 {
 	for (GameComponent* component : m_components)
 	{
@@ -28,7 +28,7 @@ void GameObject::Update()
 		child->Update();
 	}
 }
-void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine)
+void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine) const
 {
 	for (GameComponent* component : m_components)
 	{
@@ -40,7 +40,7 @@ void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine)
 		child->Render(shader, renderingEngine);
 	}
 }
-void GameObject::Input()
+void GameObject::Input() const
 {
 	for (GameComponent* component : m_components)
 	{
