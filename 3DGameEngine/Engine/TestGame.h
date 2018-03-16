@@ -14,8 +14,6 @@ public:
 	TestGame();
 	~TestGame() override;
 	void Init() override;
-	void Update() override;
-	void Input() override;
 private:
 	GameObject* m_root;
 	MeshRenderer* m_meshRenderer;

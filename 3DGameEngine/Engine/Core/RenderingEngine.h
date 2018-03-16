@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <glm\glm.hpp>
+#include "Transform.h"
 
 class GameObject;
 class Camera;
@@ -18,14 +19,14 @@ public:
 	void Input();
     void AddLight(const BaseLight& light) { m_lights.push_back(&light); };
 
-    void SetMainCamera(const Camera& camera) { m_mainCamera = &camera; };
+    void SetMainCamera( Camera& camera) { m_mainCamera = &camera;};
 
 	inline const Camera* GetMainCamera() const { return m_mainCamera; };
 	inline const glm::vec3* GetAmbientLight() const{ return &m_ambientLight; };
     inline const BaseLight& GetActiveLight() const { return *m_activeLight; };
 
 private:
-	const Camera* m_mainCamera;
+	Camera* m_mainCamera;
 	glm::vec3 m_ambientLight;
 
     std::vector<const BaseLight*> m_lights;

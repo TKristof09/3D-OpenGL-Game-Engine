@@ -16,15 +16,12 @@ Shader::Shader()
 
 Shader::~Shader()
 {
-
 	for(auto shader : m_shaders)
 	{
 		glDetachShader(m_program, shader);
 		glDeleteShader(shader);
 	}
-
 	glDeleteProgram(m_program);
-
 }
 
 void Shader::AddShader(const std::string& fileName, unsigned int type)

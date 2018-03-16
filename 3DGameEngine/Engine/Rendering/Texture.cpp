@@ -2,7 +2,7 @@
 #include <cassert>
 #include <iostream>
 #include "Texture.h"
-#include "..\stb_image.h"
+#include "..\Utils\stb_image.h"
 
 
 

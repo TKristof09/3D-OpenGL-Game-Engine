@@ -4,7 +4,7 @@
 		+Review Gamecomponent.Render()
 		+Remake constructors with NAME() : m_variable(parameter)...
 		Remake the SetUniform methods for the lights
-		Camera as GameComponent
+		+Camera as GameComponent
 
 
 		!!!Review all includes to prevent further circular includes!!!

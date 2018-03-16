@@ -36,7 +36,7 @@ public:
 
 	inline glm::mat4 GetViewProjection() const
 	{
-		return glm::perspective(glm::radians(m_fov), m_aspect, m_zNear, m_zFar) * lookAt(GetTransform().GetWorldPosition(), GetTransform().GetForward(), GetTransform().GetUp());
+		return glm::perspective(glm::radians(m_fov), m_aspect, m_zNear, m_zFar) * glm::lookAt(GetTransform().GetPosition(), GetTransform().GetForward() + GetTransform().GetPosition(), glm::vec3(0,1,0));
 	}
 
 private:

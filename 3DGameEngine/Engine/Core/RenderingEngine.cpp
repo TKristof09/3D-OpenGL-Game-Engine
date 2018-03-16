@@ -12,7 +12,7 @@ RenderingEngine::RenderingEngine()
     :
 //   m_mainCamera(Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, static_cast<float>(*Window::GetWidth()) / static_cast<float>(*Window::GetHeight()), 0.01f, 1000.0f)),
     m_mainCamera(nullptr),
-    m_ambientLight(glm::vec3(0.05f, 0.05f, 0.05f)),
+    m_ambientLight(glm::vec3(0.25f, 0.25f, 0.25f)),
     m_activeLight(nullptr)
 {
     glClearColor(0, 0, 0, 0);
@@ -56,33 +56,30 @@ void RenderingEngine::Input()
 {
 //	double deltaTime = Time::GetDelta();
 //	if (Input::GetKeyDown(SDL_SCANCODE_UP))
-//		m_mainCamera.Translate(FORWARD, 5 * deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalPosition(m_mainCamera->GetTransform()->GetLocalPosition() + m_mainCamera->GetTransform()->GetForward() * 5 * deltaTime);
 //	if (Input::GetKeyDown(SDL_SCANCODE_RIGHT))
-//		m_mainCamera.Translate(RIGHT, 5 * deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalPosition(m_mainCamera->GetTransform()->GetLocalPosition() + m_mainCamera->GetTransform()->GetRight() * 5 * deltaTime);
 //	if (Input::GetKeyDown(SDL_SCANCODE_DOWN))
-//		m_mainCamera.Translate(BACKWARD, 5 * deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalPosition(m_mainCamera->GetTransform()->GetLocalPosition() + m_mainCamera->GetTransform()->GetForward() * -5 * deltaTime);
 //	if (Input::GetKeyDown(SDL_SCANCODE_LEFT))
-//		m_mainCamera.Translate(LEFT, 5 * deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalPosition(m_mainCamera->GetTransform()->GetLocalPosition() + m_mainCamera->GetTransform()->GetRight() * -5 * deltaTime);
 //	if (Input::GetKeyDown(SDL_SCANCODE_SPACE))
-//		m_mainCamera.Translate(UP, 5 * deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalPosition(m_mainCamera->GetTransform()->GetLocalPosition() + m_mainCamera->GetTransform()->GetUp() * 5 * deltaTime);
 //	if (Input::GetKeyDown(SDL_SCANCODE_LCTRL))
-//		m_mainCamera.Translate(DOWN, 5 * deltaTime);
-//	if (Input::GetKeyDown(SDL_SCANCODE_BACKSPACE))
-//		std::cout << m_mainCamera.GetForward()->x << ";" << m_mainCamera.GetForward()->y << ";" << m_mainCamera.GetForward()->z << ";" << std::endl;
-//
-//
+//		m_mainCamera->GetTransform()->SetLocalPosition(m_mainCamera->GetTransform()->GetLocalPosition() + m_mainCamera->GetTransform()->GetUp() * -5 * deltaTime);
+//	
 //
 //	if (Input::GetKeyDown(SDL_SCANCODE_W))
-//		m_mainCamera.RotateX(deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(static_cast<float>(deltaTime)), m_mainCamera->GetTransform()->GetRight()));
 //	if (Input::GetKeyDown(SDL_SCANCODE_S))
-//		m_mainCamera.RotateX(-deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(static_cast<float>(-deltaTime)), m_mainCamera->GetTransform()->GetRight()));
 //	if (Input::GetKeyDown(SDL_SCANCODE_A))
-//		m_mainCamera.RotateY(deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(static_cast<float>(deltaTime)), m_mainCamera->GetTransform()->GetUp()));
 //	if (Input::GetKeyDown(SDL_SCANCODE_D))
-//		m_mainCamera.RotateY(-deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(static_cast<float>(-deltaTime)), m_mainCamera->GetTransform()->GetRight()));
 //	if (Input::GetKeyDown(SDL_SCANCODE_Q))
-//		m_mainCamera.RotateZ(-deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(static_cast<float>(deltaTime)), m_mainCamera->GetTransform()->GetForward()));
 //	if (Input::GetKeyDown(SDL_SCANCODE_E))
-//		m_mainCamera.RotateZ(deltaTime);
+//		m_mainCamera->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(static_cast<float>(-deltaTime)), m_mainCamera->GetTransform()->GetForward()));
 }
 

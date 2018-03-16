@@ -10,65 +10,70 @@
 class Transform
 {
 public:
-	Transform(const glm::vec3& localPosition = glm::vec3(0,0,0), const glm::quat& localRotation = glm::quat(1,0,0,0), const glm::vec3& localScale = glm::vec3(1, 1, 1)) :
+	Transform(const glm::vec3& position = glm::vec3(0,0,0), const glm::quat& rotation = glm::quat(1,0,0,0), const glm::vec3& scale = glm::vec3(1, 1, 1)) :
         m_parent(nullptr),
-		m_localPosition(localPosition),
-		m_localRotation(localRotation),
-        m_localScale(localScale)
+		m_position(position),
+		m_rotation(rotation),
+        m_scale(scale)
 	{};
 
-	inline glm::mat4 GetModel()  const
+    
+
+    
+	glm::mat4 GetModel()  const
 	{
-		glm::mat4 translationMatrix = glm::translate(GetWorldPosition());
+		glm::mat4 translationMatrix = glm::translate(m_position);
 
-        glm::mat4 rotationMatrix = glm::toMat4(GetWorldRotation());
+        glm::mat4 rotationMatrix = glm::toMat4(m_rotation);
 
-		glm::mat4 scaleMatrix = glm::scale(GetWorldScale());
+		glm::mat4 scaleMatrix = glm::scale(m_scale);
 
-		return translationMatrix * rotationMatrix * scaleMatrix;
+		return GetParentMatrix() * translationMatrix * rotationMatrix * scaleMatrix;
 	};
 
-	const glm::vec3* GetLocalPosition() const { return &m_localPosition; };
-	const glm::quat* GetLocalRotation() const { return &m_localRotation; };
-	const glm::vec3* GetLocalScale() const { return &m_localScale; };
-    glm::vec3 GetWorldPosition() const
-    {
-        if (m_parent)
-            return m_localPosition + m_parent->GetWorldPosition();
-        else
-            return m_localPosition;
-    };
-    glm::quat GetWorldRotation() const
-    {
-        if (m_parent)
-            return m_localRotation * m_parent->GetWorldRotation();
-        else
-            return m_localRotation;
-    };
-    glm::vec3 GetWorldScale() const
-    {
-        if (m_parent)
-            return m_localScale * m_parent->GetWorldScale();
-        else
-            return m_localScale;
-    };
 
-    glm::vec3 GetForward() const { return GetWorldRotation() * glm::vec3(0,0,-1); };
-    glm::vec3 GetRight() const { return GetWorldRotation() * glm::vec3(1, 0, 0); };
-    glm::vec3 GetUp() const { return GetWorldRotation() * glm::vec3(0, 1, 0); };
+	glm::vec3 GetPosition() const { return m_position; };
+	glm::quat GetRotation() const { return m_rotation; };
+	glm::vec3 GetScale() const { return m_scale; };
+    
+    glm::vec3 GetForward() const { return glm::normalize(m_rotation * glm::vec3(0, 0, -1)); };
+    glm::vec3 GetUp() const { return glm::normalize(m_rotation * glm::vec3(0, 1, 0)); };
+    glm::vec3 GetRight() const { return glm::normalize(m_rotation * glm::vec3(1, 0, 0)); };
 
-	void SetLocalPosition(const glm::vec3& position) { this->m_localPosition = position; };
-	void SetLocalRotation(const glm::quat& rotation) { this->m_localRotation = rotation; };
-	void SetLocalScale(const glm::vec3& scale) { this->m_localScale = scale; };
+	void SetPosition(const glm::vec3& position) { m_position = position; };
+	void SetRotation(const glm::quat& rotation) { m_rotation = rotation; };
+	void SetScale(const glm::vec3& scale) { m_scale = scale; };
     void SetParent(Transform* parent) { m_parent = parent; };
+
+    void Rotate(const glm::quat& rotation)
+    {
+        m_rotation = glm::normalize(rotation * m_rotation);
+    }
+
+    void Rotate(float angle, const glm::vec3 axis)
+    {
+        Rotate(glm::quat(cos(angle / 2), axis.x * sin(angle / 2), axis.y * sin(angle / 2), axis.z * sin(angle / 2)));
+    }
 
 private:
 
+    glm::mat4 GetParentMatrix() const
+    {
+        if (m_parent != nullptr)
+        {
+            return m_parent->GetModel();
+        }
+        else
+        {
+            return glm::mat4(1.0);
+        }
+    }
+
     Transform* m_parent;
 
-	glm::vec3 m_localPosition;
-	glm::quat m_localRotation;
-	glm::vec3 m_localScale;
+	glm::vec3 m_position;
+	glm::quat m_rotation;
+	glm::vec3 m_scale;
 };
 
 

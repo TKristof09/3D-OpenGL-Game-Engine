@@ -32,7 +32,7 @@ void Window::Create(int width, int height, const std::string& title)
 
 
 
-	printf("OpenGL version supported by this platform (%p): \n", glGetString(GL_VERSION));
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 
 }
 

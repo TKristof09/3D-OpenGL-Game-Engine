@@ -159,8 +159,9 @@
 #include "TestGame.h"
 
 #ifdef __cplusplus
-	extern "C"
+extern "C"
 #endif
+
 
 int main(int argc, char *argv[])
 {

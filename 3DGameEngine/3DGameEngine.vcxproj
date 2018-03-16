@@ -104,6 +104,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,12 +148,13 @@
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
     <ClCompile Include="Engine\Core\Input.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />
+    <ClCompile Include="Engine\GameComponents\FreeLook.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
     <ClCompile Include="Engine\Rendering\Lighting\ForwardAmbient.cpp" />
     <ClCompile Include="Engine\GameComponents\Lighting.cpp" />
     <ClCompile Include="Engine\Rendering\Material.cpp" />
     <ClCompile Include="Engine\Rendering\Mesh.cpp" />
-    <ClCompile Include="Engine\OBJloader.cpp" />
+    <ClCompile Include="Engine\Utils\OBJloader.cpp" />
     <ClCompile Include="Engine\Rendering\Shader.cpp" />
     <ClCompile Include="Engine\Rendering\Texture.cpp" />
     <ClCompile Include="Engine\Core\Time.cpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Engine\Core\Color.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Game.h" />
+    <ClInclude Include="Engine\GameComponents\FreeLook.h" />
     <ClInclude Include="Engine\GameComponents\GameComponent.h" />
     <ClInclude Include="Engine\GameComponents\MeshRenderer.h" />
     <ClInclude Include="Engine\GameComponents\Camera.h" />
@@ -177,9 +180,9 @@
     <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />
     <ClInclude Include="Engine\Rendering\Material.h" />
     <ClInclude Include="Engine\Rendering\Mesh.h" />
-    <ClInclude Include="Engine\OBJloader.h" />
+    <ClInclude Include="Engine\Utils\OBJloader.h" />
     <ClInclude Include="Engine\Rendering\Shader.h" />
-    <ClInclude Include="Engine\stb_image.h" />
+    <ClInclude Include="Engine\Utils\stb_image.h" />
     <ClInclude Include="Engine\Rendering\Texture.h" />
     <ClInclude Include="Engine\Core\Time.h" />
     <ClInclude Include="Engine\Core\Transform.h" />

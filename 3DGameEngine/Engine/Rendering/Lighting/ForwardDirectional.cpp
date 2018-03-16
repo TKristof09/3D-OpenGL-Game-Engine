@@ -20,7 +20,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
 	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
-	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
+	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetPosition());
 	SetUniform("directionalLight", *dynamic_cast<const DirectionalLight*>(&renderingEngine->GetActiveLight()));
 
 }

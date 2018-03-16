@@ -3,7 +3,7 @@
 
 #include <glm\glm.hpp>
 #include <GL\glew.h>
-#include "..\OBJloader.h"
+#include "..\Utils\OBJloader.h"
 // TODO make calculate normals for meshes without normals
 class Vertex
 {
