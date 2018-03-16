@@ -3,9 +3,10 @@
 		+Make light's direction be based on the gameobject's rotation
 		+Review Gamecomponent.Render()
 		+Remake constructors with NAME() : m_variable(parameter)...
-		Remake the SetUniform methods for the lights
 		+Camera as GameComponent
-
+		
+		Remake the SetUniform methods for the lights
+		Checker to see if transform has changed
 
 		!!!Review all includes to prevent further circular includes!!!
 

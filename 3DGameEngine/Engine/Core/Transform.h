@@ -35,10 +35,33 @@ public:
 	glm::vec3 GetPosition() const { return m_position; };
 	glm::quat GetRotation() const { return m_rotation; };
 	glm::vec3 GetScale() const { return m_scale; };
+
+    glm::vec3 GetWorldPosition() const
+    {
+        return GetParentMatrix() * glm::vec4(m_position, 1);
+        if (m_parent)
+            return m_position + m_parent->GetWorldPosition();
+        else
+            return m_position;
+    };
+    glm::quat GetWorldRotation() const
+    {
+        if (m_parent)
+            return m_rotation * m_parent->GetWorldRotation();
+        else
+            return m_rotation;
+    };
+    glm::vec3 GetWorldScale() const
+    {
+        if (m_parent)
+            return m_scale * m_parent->GetWorldScale();
+        else
+            return m_scale;
+    };
     
-    glm::vec3 GetForward() const { return glm::normalize(m_rotation * glm::vec3(0, 0, -1)); };
-    glm::vec3 GetUp() const { return glm::normalize(m_rotation * glm::vec3(0, 1, 0)); };
-    glm::vec3 GetRight() const { return glm::normalize(m_rotation * glm::vec3(1, 0, 0)); };
+    glm::vec3 GetForward() const { return glm::normalize(GetWorldRotation() * glm::vec3(0, 0, -1)); };
+    glm::vec3 GetUp() const { return glm::normalize(GetWorldRotation() * glm::vec3(0, 1, 0)); };
+    glm::vec3 GetRight() const { return glm::normalize(GetWorldRotation() * glm::vec3(1, 0, 0)); };
 
 	void SetPosition(const glm::vec3& position) { m_position = position; };
 	void SetRotation(const glm::quat& rotation) { m_rotation = rotation; };
@@ -52,7 +75,17 @@ public:
 
     void Rotate(float angle, const glm::vec3 axis)
     {
-        Rotate(glm::quat(cos(angle / 2), axis.x * sin(angle / 2), axis.y * sin(angle / 2), axis.z * sin(angle / 2)));
+        Rotate(glm::angleAxis(angle, axis));
+    }
+
+    void Translate(const glm::vec3& vector)
+    {
+        m_position += vector;
+    }
+
+    void Translate(const glm::vec3& direction, float amount)
+    {
+        Translate(direction * amount);
     }
 
 private:
@@ -63,10 +96,8 @@ private:
         {
             return m_parent->GetModel();
         }
-        else
-        {
-            return glm::mat4(1.0);
-        }
+
+        return glm::mat4(1.0);
     }
 
     Transform* m_parent;

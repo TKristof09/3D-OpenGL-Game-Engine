@@ -12,7 +12,7 @@ RenderingEngine::RenderingEngine()
     :
 //   m_mainCamera(Camera(glm::vec3(0, 3, 10), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 70.0f, static_cast<float>(*Window::GetWidth()) / static_cast<float>(*Window::GetHeight()), 0.01f, 1000.0f)),
     m_mainCamera(nullptr),
-    m_ambientLight(glm::vec3(0.25f, 0.25f, 0.25f)),
+    m_ambientLight(glm::vec3(0.05f, 0.05f, 0.05f)),
     m_activeLight(nullptr)
 {
     glClearColor(0, 0, 0, 0);

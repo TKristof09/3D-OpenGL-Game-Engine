@@ -52,8 +52,7 @@ void TestGame::Init()
     //dLight->GetTransform()->SetRotation(glm::angleAxis(glm::radians(-135.0f), glm::vec3(1, 0, 0)));
 
     pLight->AddComponent(new PointLight(Color::Red(), 1, Attenuation(1, 0, 0)));
-    pLight->GetTransform()->SetPosition(glm::vec3(-5, 3, 1));
-    pLight->GetTransform()->SetScale(glm::vec3(1, 1, 2));
+    pLight->GetTransform()->SetPosition(glm::vec3(0, 1.5f, 0));
 
     sLight->AddComponent(new SpotLight(Color::Blue(), 2, Attenuation(1, 0, 0), cos(glm::radians(45.0f))));
     sLight->GetTransform()->SetPosition(glm::vec3(-2, 1, 0));
@@ -63,7 +62,8 @@ void TestGame::Init()
     m_material2 = new Material(*m_texture2, 2, 32);
     m_mesh2 = new Mesh(".\\res\\cubeUV.obj");
     m_meshRenderer2 = new MeshRenderer(*m_mesh2, *m_material2);
-    cubeOBJ->GetTransform()->SetPosition(glm::vec3(0, -2, 0));
+    cubeOBJ->GetTransform()->SetPosition(glm::vec3(-5, 1, 0));
+    cubeOBJ->GetTransform()->SetScale(glm::vec3(2, 1, 1));
     //cubeOBJ->GetTransform()->SetLocalRotation(angleAxis(glm::radians(-60.0f), glm::vec3(1, 1, 0)));
     cubeOBJ->AddComponent(m_meshRenderer2);
     
@@ -73,18 +73,19 @@ void TestGame::Init()
     //cameraOBJ->GetTransform()->SetLocalRotation(glm::angleAxis(glm::radians(-45.0f), glm::vec3(1, 0, 0)) /** glm::angleAxis(glm::radians(180.0f), glm::vec3(0,1,0))*/);
     cameraOBJ->AddComponent(new FreeLook());
     
-//    cubeOBJ2->GetTransform()->SetLocalPosition(glm::vec3(1, 0, 0));
-//    cubeOBJ->GetTransform()->SetLocalRotation(angleAxis(glm::radians(-60.0f), glm::vec3(1, 1, 0)));
-//    cubeOBJ2->AddComponent(new MeshRenderer(*new Mesh(".\\res\\cubeUV.obj"), *new Material(*new Texture(".\\res\\texture.jpg"), 2, 32)));
+    cubeOBJ2->AddComponent(new MeshRenderer(*new Mesh(".\\res\\cubeUV.obj"), *new Material(*new Texture(".\\res\\uv_checker.png"), 2, 32)));
+    cubeOBJ2->GetTransform()->SetPosition(glm::vec3(3, 0, 0));
+    //cubeOBJ->GetTransform()->SetRotation(angleAxis(glm::radians(-30.0f), glm::vec3(0, 1, 0)));
 
     m_root->AddChild(planeOBJ);
     m_root->AddChild(cameraOBJ);
-
+    m_root->AddChild(cubeOBJ);
+    cubeOBJ->AddChild(pLight);
     cubeOBJ->AddChild(cubeOBJ2);
 
-    m_root->AddChild(dLight);
-    m_root->AddChild(pLight);
+    //m_root->AddChild(dLight);
+    //m_root->AddChild(pLight);
     m_root->AddChild(sLight);
-    pLight->AddChild(cubeOBJ);
+    //pLight->AddChild(cubeOBJ);
 }
 
