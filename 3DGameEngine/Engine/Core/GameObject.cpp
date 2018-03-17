@@ -14,14 +14,16 @@ void GameObject::AddChild(GameObject* child)
 void GameObject::AddComponent(GameComponent* component)
 {
     component->SetParent(this);
-    m_components.push_back(component);
+    m_components[typeid(*component)] = component;
 }
+
+
 
 void GameObject::Update() const
 {
-	for (GameComponent* component : m_components)
+	for (const auto& pair : m_components)
 	{
-		component->Update();
+        pair.second->Update();
 	}
 	for(GameObject* child : m_children)
 	{
@@ -30,9 +32,9 @@ void GameObject::Update() const
 }
 void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine) const
 {
-	for (GameComponent* component : m_components)
+	for (const auto& pair : m_components)
 	{
-		component->Render(shader, renderingEngine);
+        pair.second->Render(shader, renderingEngine);
 	}
 
 	for(GameObject* child : m_children)
@@ -42,9 +44,9 @@ void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine) 
 }
 void GameObject::Input() const
 {
-	for (GameComponent* component : m_components)
+	for (const auto& pair : m_components)
 	{
-		component->Input();
+        pair.second->Input();
 	}
 	for(GameObject* child : m_children)
 	{
@@ -57,9 +59,9 @@ void GameObject::SetRenderingEngine(RenderingEngine* renderingEngine)
     {
         m_renderingEngine = renderingEngine;
 
-        for (GameComponent* component : m_components)
+        for (const auto& pair : m_components)
         {
-            component->AddToEngine(renderingEngine);
+            pair.second->AddToEngine(renderingEngine);
         }
 
         for (GameObject* child : m_children)

@@ -1,7 +1,9 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <map>
 #include <vector>
+#include <typeindex>
 #include "Transform.h"  
 
 class RenderingEngine;
@@ -21,11 +23,20 @@ public:
 	void AddComponent(GameComponent* component);
     void SetRenderingEngine(RenderingEngine* renderingEngine);
 	Transform* GetTransform() { return &m_transform; };
-
+    template<typename T>
+    T* GetComponent()
+    {
+        auto it = m_components.find(std::type_index(typeid(T)));
+        if (it != m_components.end())
+        {
+            return dynamic_cast<T*>(it->second);
+        }
+        return nullptr;
+    }
 private:
 	Transform m_transform;
 	std::vector<GameObject*> m_children;
-	std::vector<GameComponent*> m_components;
+	std::map<std::type_index,GameComponent*> m_components;
     RenderingEngine* m_renderingEngine;
 };
 

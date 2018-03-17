@@ -50,9 +50,10 @@ void TestGame::Init()
 
     dLight->AddComponent(new DirectionalLight(Color(244.0f, 150.0f, 28.0f), 0.2f));
     //dLight->GetTransform()->SetRotation(glm::angleAxis(glm::radians(-135.0f), glm::vec3(1, 0, 0)));
-
-    pLight->AddComponent(new PointLight(Color::Red(), 1, Attenuation(1, 0, 0)));
+    PointLight* light = new PointLight(Color::Red(), 1, Attenuation(1, 0, 0));
+    pLight->AddComponent(light);
     pLight->GetTransform()->SetPosition(glm::vec3(0, 1.5f, 0));
+    
 
     sLight->AddComponent(new SpotLight(Color::Blue(), 2, Attenuation(1, 0, 0), cos(glm::radians(45.0f))));
     sLight->GetTransform()->SetPosition(glm::vec3(-2, 1, 0));
@@ -87,5 +88,6 @@ void TestGame::Init()
     //m_root->AddChild(pLight);
     m_root->AddChild(sLight);
     //pLight->AddChild(cubeOBJ);
+    pLight->GetComponent<PointLight>()->SetColor(Color::Green());
 }
 

@@ -39,10 +39,7 @@ public:
     glm::vec3 GetWorldPosition() const
     {
         return GetParentMatrix() * glm::vec4(m_position, 1);
-        if (m_parent)
-            return m_position + m_parent->GetWorldPosition();
-        else
-            return m_position;
+        
     };
     glm::quat GetWorldRotation() const
     {
