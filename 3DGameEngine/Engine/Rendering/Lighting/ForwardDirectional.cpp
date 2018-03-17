@@ -11,15 +11,12 @@ ForwardDirectional::ForwardDirectional()
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
-	if (material.GetTexture() != nullptr)
-	{
-		material.GetTexture()->Bind();
-	}
+	material.GetTexture("diffuse").Bind();
     const glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("model", transform.GetModel());
-	Shader::SetUniform("specularIntensity", *material.GetSpecularIntensity());
-	Shader::SetUniform("specularExponent", *material.GetSpecularExponent());
+	Shader::SetUniform("specularIntensity", material.GetFloat("specularIntensity"));
+	Shader::SetUniform("specularExponent", material.GetFloat("specularExponent"));
 	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
 	SetUniform("directionalLight", *dynamic_cast<const DirectionalLight*>(&renderingEngine->GetActiveLight()));
 

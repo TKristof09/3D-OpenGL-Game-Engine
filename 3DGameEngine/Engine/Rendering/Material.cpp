@@ -1,14 +1,22 @@
 #include "Material.h"
 
 
-Material::Material():
-	m_texture(Texture()), m_specularIntensity(2), m_specularExponent(32){ }
+Material::Material(const float& specularIntensity, const float& specularExponent) :
+    m_defaultTexture(Texture()),
+    m_defaultVector3(glm::vec3(0, 0, 0))
+{ 
+    m_floatMap["specularIntensity"] = specularIntensity;
+    m_floatMap["specularExponent"] = specularExponent;
+}
 
-Material::Material(const float& specularIntensity, const float& specularExponent):
-	m_texture(Texture()), m_specularIntensity(specularIntensity), m_specularExponent(specularExponent) { }
-
-Material::Material(const Texture& texture, const float& specularIntensity, const float& specularExponent):
-	m_texture(texture), m_specularIntensity(specularIntensity), m_specularExponent(specularExponent){ }
+Material::Material(const Texture& diffuseTexture, const float& specularIntensity, const float& specularExponent) :
+    m_defaultTexture(Texture()),
+    m_defaultVector3(glm::vec3(0, 0, 0))
+{
+    m_textureMap["diffuse"] = diffuseTexture;
+    m_floatMap["specularIntensity"] = specularIntensity;
+    m_floatMap["specularExponent"] = specularExponent;
+}
 
 Material::~Material()
 {
