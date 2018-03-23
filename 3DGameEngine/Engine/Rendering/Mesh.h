@@ -4,27 +4,25 @@
 #include <glm\glm.hpp>
 #include <GL\glew.h>
 #include "..\Utils\OBJloader.h"
-#include "..\3DMath\3DMath.h"
-
 // TODO make calculate normals for meshes without normals
 class Vertex
 {
 public:
-	Vertex(const math::Vector3& pos, const math::Vector2& textCoord, const math::Vector3& normal)
+	Vertex(const glm::vec3& pos, const glm::vec2& textCoord, const glm::vec3& normal)
         :
 		m_pos(pos),
 		m_textCoord(textCoord.x, 1-textCoord.y),
 		m_normal(normal)
 		
         {};
-	inline const math::Vector3* GetPos() const { return &m_pos; };
-	inline const math::Vector2* GetTextCoord() const { return &m_textCoord; };
-	inline const math::Vector3* GetNormal() const { return &m_normal; };
+	inline const glm::vec3* GetPos() const { return &m_pos; };
+	inline const glm::vec2* GetTextCoord() const { return &m_textCoord; };
+	inline const glm::vec3* GetNormal() const { return &m_normal; };
 	
 private:
-	math::Vector3 m_pos;
-	math::Vector2 m_textCoord;
-	math::Vector3 m_normal;
+	glm::vec3 m_pos;
+	glm::vec2 m_textCoord;
+	glm::vec3 m_normal;
 	
 };
 

@@ -12,13 +12,8 @@
 
 		!!!Review all includes to prevent further circular includes!!!
 
-		Normals when not equally scaled
-
 	Plans:
 		+Color class with RGB(0-255) and HEX picker, also some presets
-
-		Assimp
-		Text rendering
 		Look up how what a getter should return
 		Better input handling: mouse,(joystick)
 		PBR

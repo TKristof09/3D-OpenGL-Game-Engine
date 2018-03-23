@@ -79,7 +79,7 @@ void CoreEngine::Run()
 		if (render)
 		{
 			Window::Render();
-			m_game->Render(m_renderingEngine);
+			m_renderingEngine->Render(*m_game->GetRootObject());
 		}
 		else
 		{

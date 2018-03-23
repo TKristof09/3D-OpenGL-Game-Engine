@@ -1,6 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include <glm\ext.hpp> // used to make vectors to string
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm\glm.hpp>
 #include "..\GameComponents\GameComponent.h"
 #include "..\Core\RenderingEngine.h"
 
@@ -30,9 +34,9 @@ public:
         renderingEngine->SetMainCamera(*this);
 	}
 
-	math::Matrix4x4 GetViewProjection() const
+	inline glm::mat4 GetViewProjection() const
 	{
-		return math::perspective(math::ToRadians(m_fov), m_aspect, m_zNear, m_zFar) * math::toMat4(math::conjugate(GetTransform().GetWorldRotation())) * math::translate(GetTransform().GetWorldPosition() * -1.0f);
+		return glm::perspective(glm::radians(m_fov), m_aspect, m_zNear, m_zFar) * glm::lookAt(GetTransform().GetPosition(), GetTransform().GetForward() + GetTransform().GetPosition(), glm::vec3(0,1,0));
 	}
 
 private:

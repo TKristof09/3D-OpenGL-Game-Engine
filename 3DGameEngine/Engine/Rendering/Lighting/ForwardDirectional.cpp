@@ -5,14 +5,14 @@
 
 ForwardDirectional::ForwardDirectional()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-directional", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-directional", GL_FRAGMENT_SHADER);
+	AddShader(".\\res\\forward-directional", GL_VERTEX_SHADER);
+	AddShader(".\\res\\forward-directional", GL_FRAGMENT_SHADER);
 }
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
 {
 	material.GetTexture("diffuse").Bind();
-    const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
+    const glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("specularIntensity", material.GetFloat("specularIntensity"));
@@ -28,7 +28,7 @@ void ForwardDirectional::SetUniform(const GLchar* uniform, const DirectionalLigh
 	strcpy(color, uniform);
 	strcat(color, ".base.color");
 	
-    Shader::SetUniform(color, directionalLight.GetColor()->ToVector3());
+    Shader::SetUniform(color, directionalLight.GetColor()->ToVec3());
 
     GLchar* intensity = new GLchar[strlen(uniform) + 15];
     strcpy(intensity, uniform);

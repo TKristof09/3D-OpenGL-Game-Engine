@@ -1,12 +1,16 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include "..\3DMath\3DMath.h"
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm\glm.hpp>
+#include <glm\gtx\transform.hpp>
+#include <glm\gtx\quaternion.hpp>
+
 
 class Transform
 {
 public:
-	Transform(const math::Vector3 position = math::Vector3(0,0,0), const math::Quaternion& rotation = math::Quaternion(1,0,0,0), const math::Vector3& scale = math::Vector3(1, 1, 1)) :
+	Transform(const glm::vec3& position = glm::vec3(0,0,0), const glm::quat& rotation = glm::quat(1,0,0,0), const glm::vec3& scale = glm::vec3(1, 1, 1)) :
         m_parent(nullptr),
 		m_position(position),
 		m_rotation(rotation),
@@ -16,35 +20,35 @@ public:
     
 
     
-	math::Matrix4x4 GetModel()  const
+	glm::mat4 GetModel()  const
 	{
-		math::Matrix4x4 translationMatrix = math::translate(m_position);
+		glm::mat4 translationMatrix = glm::translate(m_position);
 
-        math::Matrix4x4 rotationMatrix = math::toMat4(m_rotation);
+        glm::mat4 rotationMatrix = glm::toMat4(m_rotation);
 
-		math::Matrix4x4 scaleMatrix = math::scale(m_scale);
+		glm::mat4 scaleMatrix = glm::scale(m_scale);
 
 		return GetParentMatrix() * translationMatrix * rotationMatrix * scaleMatrix;
 	};
 
 
-	math::Vector3 GetPosition() const { return m_position; };
-	math::Quaternion GetRotation() const { return m_rotation; };
-	math::Vector3 GetScale() const { return m_scale; };
+	glm::vec3 GetPosition() const { return m_position; };
+	glm::quat GetRotation() const { return m_rotation; };
+	glm::vec3 GetScale() const { return m_scale; };
 
-    math::Vector3 GetWorldPosition() const
+    glm::vec3 GetWorldPosition() const
     {
-        return GetParentMatrix() * math::Vector4(m_position, 1);
+        return GetParentMatrix() * glm::vec4(m_position, 1);
         
     };
-    math::Quaternion GetWorldRotation() const
+    glm::quat GetWorldRotation() const
     {
         if (m_parent)
             return m_rotation * m_parent->GetWorldRotation();
         else
             return m_rotation;
     };
-    math::Vector3 GetWorldScale() const
+    glm::vec3 GetWorldScale() const
     {
         if (m_parent)
             return m_scale * m_parent->GetWorldScale();
@@ -52,52 +56,52 @@ public:
             return m_scale;
     };
     
-    math::Vector3 GetForward() const { return math::normalize(math::rotate(math::Vector3(0, 0, -1), GetWorldRotation())); };
-    math::Vector3 GetUp() const { return math::normalize(math::rotate(math::Vector3(0,1,0), GetWorldRotation())); };
-    math::Vector3 GetRight() const { return math::normalize(math::rotate(math::Vector3(1, 0, 0), GetWorldRotation())); };
+    glm::vec3 GetForward() const { return glm::normalize(GetWorldRotation() * glm::vec3(0, 0, -1)); };
+    glm::vec3 GetUp() const { return glm::normalize(GetWorldRotation() * glm::vec3(0, 1, 0)); };
+    glm::vec3 GetRight() const { return glm::normalize(GetWorldRotation() * glm::vec3(1, 0, 0)); };
 
-	void SetPosition(const math::Vector3& position) { m_position = position; };
-	void SetRotation(const math::Quaternion& rotation) { m_rotation = rotation; };
-	void SetScale(const math::Vector3& scale) { m_scale = scale; };
+	void SetPosition(const glm::vec3& position) { m_position = position; };
+	void SetRotation(const glm::quat& rotation) { m_rotation = rotation; };
+	void SetScale(const glm::vec3& scale) { m_scale = scale; };
     void SetParent(Transform* parent) { m_parent = parent; };
 
-    void Rotate(const math::Quaternion& rotation)
+    void Rotate(const glm::quat& rotation)
     {
-        m_rotation = math::normalize(rotation * m_rotation);
+        m_rotation = glm::normalize(rotation * m_rotation);
     }
 
-    void Rotate(float angle, const math::Vector3 axis)
+    void Rotate(float angle, const glm::vec3 axis)
     {
-        Rotate(math::Quaternion(angle, axis));
+        Rotate(glm::angleAxis(angle, axis));
     }
 
-    void Translate(const math::Vector3& vector)
+    void Translate(const glm::vec3& vector)
     {
         m_position += vector;
     }
 
-    void Translate(const math::Vector3& direction, float amount)
+    void Translate(const glm::vec3& direction, float amount)
     {
         Translate(direction * amount);
     }
 
 private:
 
-    math::Matrix4x4 GetParentMatrix() const
+    glm::mat4 GetParentMatrix() const
     {
         if (m_parent != nullptr)
         {
             return m_parent->GetModel();
         }
 
-        return math::Matrix4x4();
+        return glm::mat4(1.0);
     }
 
     Transform* m_parent;
 
-	math::Vector3 m_position;
-	math::Quaternion m_rotation;
-	math::Vector3 m_scale;
+	glm::vec3 m_position;
+	glm::quat m_rotation;
+	glm::vec3 m_scale;
 };
 
 

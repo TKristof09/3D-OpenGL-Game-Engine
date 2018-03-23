@@ -15,7 +15,7 @@ class GameObject
 public:
     GameObject():
         m_renderingEngine(nullptr) {};
-    ~GameObject();
+    ~GameObject() = default;;
 	void Update() const;
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) const;
 	void Input() const;
@@ -36,7 +36,7 @@ public:
 private:
 	Transform m_transform;
 	std::vector<GameObject*> m_children;
-	std::map<std::type_index, GameComponent*> m_components;
+	std::map<std::type_index,GameComponent*> m_components;
     RenderingEngine* m_renderingEngine;
 };
 

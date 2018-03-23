@@ -150,8 +150,6 @@
     <ClCompile Include="Engine\Core\Window.cpp" />
     <ClCompile Include="Engine\GameComponents\FreeLook.cpp" />
     <ClCompile Include="Engine\Main.cpp" />
-    <ClCompile Include="Engine\Physics\AABB.cpp" />
-    <ClCompile Include="Engine\Physics\BoundingSphere.cpp" />
     <ClCompile Include="Engine\Rendering\Lighting\ForwardAmbient.cpp" />
     <ClCompile Include="Engine\GameComponents\Lighting.cpp" />
     <ClCompile Include="Engine\Rendering\Material.cpp" />
@@ -169,13 +167,6 @@
     <ClCompile Include="Engine\Rendering\Lighting\ForwardSpot.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\3DMath\3DMath.h" />
-    <ClInclude Include="Engine\3DMath\Matrix.h" />
-    <ClInclude Include="Engine\3DMath\Quaternion.h" />
-    <ClInclude Include="Engine\3DMath\Vector.h" />
-    <ClInclude Include="Engine\3DMath\Vector2.h" />
-    <ClInclude Include="Engine\3DMath\Vector3.h" />
-    <ClInclude Include="Engine\3DMath\Vector4.h" />
     <ClInclude Include="Engine\Core\Color.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Game.h" />
@@ -186,9 +177,6 @@
     <ClInclude Include="Engine\Core\Window.h" />
     <ClInclude Include="Engine\GameComponents\Lighting.h" />
     <ClInclude Include="Engine\Core\Input.h" />
-    <ClInclude Include="Engine\Physics\AABB.h" />
-    <ClInclude Include="Engine\Physics\BoundingSphere.h" />
-    <ClInclude Include="Engine\Physics\IntersectData.h" />
     <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />
     <ClInclude Include="Engine\Rendering\Material.h" />
     <ClInclude Include="Engine\Rendering\Mesh.h" />

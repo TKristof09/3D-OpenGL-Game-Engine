@@ -4,7 +4,6 @@
 #include "..\Shader.h"
 #include "..\Material.h"
 
-class Transform;
 class RenderingEngine;
 class DirectionalLight;
 

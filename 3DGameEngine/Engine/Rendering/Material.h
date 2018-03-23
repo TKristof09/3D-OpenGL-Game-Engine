@@ -1,16 +1,16 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
+#include <glm\glm.hpp>
 #include <map>
 #include "Texture.h"
 #include "..\Core\Color.h"
-#include "..\3DMath\3DMath.h"
 
 class Material
 {
 public:
 	Material():
     m_defaultTexture(Texture()),
-    m_defaultVector3(math::Vector3(0,0,0)){ }
+    m_defaultVector3(glm::vec3(0,0,0)){ }
     Material(const float& specularIntensity, const float& specularExponent);
 	Material(const Texture& texture, const float& specularIntensity, const float& specularExponent);
 	~Material();
@@ -29,12 +29,12 @@ public:
 
         return m_defaultTexture;
 	}
-    void AddVector3(const std::string& name, const math::Vector3& vector)
+    void AddVector3(const std::string& name, const glm::vec3& vector)
     {
         m_vec3Map[name] = vector;
     }
 
-    const math::Vector3& GetVector3(const std::string& name) const
+    const glm::vec3& GetVector3(const std::string& name) const
     {
         auto it = m_vec3Map.find(name);
         if (it != m_vec3Map.end())
@@ -63,9 +63,9 @@ public:
 
 private:
     Texture m_defaultTexture;
-    math::Vector3 m_defaultVector3;
+    glm::vec3 m_defaultVector3;
     std::map<std::string, Texture> m_textureMap;
-    std::map<std::string, math::Vector3> m_vec3Map;
+    std::map<std::string, glm::vec3> m_vec3Map;
     std::map<std::string, float> m_floatMap;
 };
 
