@@ -8,5 +8,5 @@ uniform vec3 ambientIntensity;
 uniform sampler2D diffuse;
 
 void main(){
-	fragColor = texture(diffuse, textCoord0.xy) * vec4(ambientIntensity, 1);
+	fragColor =  vec4(1.0, 0.5, 0.0, 1.0);
 }

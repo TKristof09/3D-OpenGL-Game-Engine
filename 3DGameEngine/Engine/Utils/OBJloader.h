@@ -1,7 +1,7 @@
 #ifndef OBJLOADER_H
 #define OBJLOADER_H
 
-#include <glm/glm.hpp>
+#include "..\3DMath/3DMath.h"
 #include <vector>
 #include <string>
 
@@ -17,9 +17,9 @@ struct OBJIndex
 class IndexedModel
 {
 public:
-	std::vector<glm::vec3> positions;
-	std::vector<glm::vec2> texCoords;
-	std::vector<glm::vec3> normals;
+	std::vector<math::Vector3> positions;
+	std::vector<math::Vector2> texCoords;
+	std::vector<math::Vector3> normals;
 	std::vector<unsigned int> indices;
 
 	void CalcNormals();
@@ -29,9 +29,9 @@ class OBJModel
 {
 public:
 	std::vector<OBJIndex> OBJIndices;
-	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> uvs;
-	std::vector<glm::vec3> normals;
+	std::vector<math::Vector3> vertices;
+	std::vector<math::Vector2> uvs;
+	std::vector<math::Vector3> normals;
 	bool hasUVs;
 	bool hasNormals;
 
@@ -42,8 +42,8 @@ private:
 	unsigned int FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex, const IndexedModel& result);
 	void CreateOBJFace(const std::string& line);
 
-	glm::vec2 ParseOBJVec2(const std::string& line);
-	glm::vec3 ParseOBJVec3(const std::string& line);
+	math::Vector2 ParseOBJVec2(const std::string& line);
+	math::Vector3 ParseOBJVec3(const std::string& line);
 	OBJIndex ParseOBJIndex(const std::string& token, bool* hasUVs, bool* hasNormals);
 };
 

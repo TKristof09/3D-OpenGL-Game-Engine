@@ -2,6 +2,17 @@
 #include "..\Engine\GameComponents\GameComponent.h"
 
 
+GameObject::~GameObject()
+{
+    for (const auto& pair : m_components)
+    {
+        delete pair.second;
+    }
+    for (GameObject* child : m_children)
+    {
+        delete child;
+    }
+}
 
 
 void GameObject::AddChild(GameObject* child)

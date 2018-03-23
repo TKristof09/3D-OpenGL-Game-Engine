@@ -3,6 +3,7 @@
 #include <fstream>
 
 
+
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string&errorMessage);
 static std::string LoadShader(const std::string& fileName);
 static GLuint CreateShader(const std::string& text, unsigned int shaderType);
@@ -65,17 +66,17 @@ void Shader::SetUniform(const GLchar* uniform, float value) const
 	glUniform1f(glGetUniformLocation(m_program, uniform), value);
 }
 
-void Shader::SetUniform(const GLchar* uniform, const glm::vec3& value) const
+void Shader::SetUniform(const GLchar* uniform, const math::Vector3& value) const
 {
-	glUniform3fv(glGetUniformLocation(m_program, uniform), 1, glm::value_ptr(value));
+    glUniform3fv(glGetUniformLocation(m_program, uniform), 1, math::value_ptr(value));
 }
 
-void Shader::SetUniform(const GLchar* uniform, const glm::vec4& value) const
+void Shader::SetUniform(const GLchar* uniform, const math::Vector4& value) const
 {
-	glUniform4fv(glGetUniformLocation(m_program, uniform), 1, glm::value_ptr(value));
+	glUniform4fv(glGetUniformLocation(m_program, uniform), 1, math::value_ptr(value));
 }
 
-void Shader::SetUniform(const GLchar* uniform, const glm::mat4& value) const
+void Shader::SetUniform(const GLchar* uniform, const math::Matrix4x4& value) const
 {
 	glUniformMatrix4fv(glGetUniformLocation(m_program, uniform), 1, GL_FALSE, &value[0][0]);
 }

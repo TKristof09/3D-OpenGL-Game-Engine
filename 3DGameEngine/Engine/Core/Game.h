@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "GameObject.h"
+#include "RenderingEngine.h"
 
 class Game
 {
@@ -16,9 +17,13 @@ public:
 	{
 		m_root.Input();
 	};
+    void Render(RenderingEngine* renderingEngine)
+    {
+        renderingEngine->Render(m_root);
+    }
     void SetRenderingEngine(RenderingEngine* renderingEngine) { m_root.SetRenderingEngine(renderingEngine); };
 
-	GameObject* GetRootObject() { return &m_root; };
+    void AddToScene(GameObject* gameObject) { m_root.AddChild(gameObject); };
 
 private:
 	GameObject m_root;

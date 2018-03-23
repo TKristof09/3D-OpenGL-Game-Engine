@@ -62,10 +62,10 @@ void IndexedModel::CalcNormals()
 		int i1 = indices[i + 1];
 		int i2 = indices[i + 2];
 
-		glm::vec3 v1 = positions[i1] - positions[i0];
-		glm::vec3 v2 = positions[i2] - positions[i0];
+		math::Vector3 v1 = positions[i1] - positions[i0];
+		math::Vector3 v2 = positions[i2] - positions[i0];
 
-		glm::vec3 normal = glm::normalize(glm::cross(v1, v2));
+		math::Vector3 normal = math::normalize(math::cross(v1, v2));
 
 		normals[i0] += normal;
 		normals[i1] += normal;
@@ -73,7 +73,7 @@ void IndexedModel::CalcNormals()
 	}
 
 	for (unsigned int i = 0; i < positions.size(); i++)
-		normals[i] = glm::normalize(normals[i]);
+		normals[i] = math::normalize(normals[i]);
 }
 
 IndexedModel OBJModel::ToIndexedModel()
@@ -97,19 +97,19 @@ IndexedModel OBJModel::ToIndexedModel()
 	{
 		OBJIndex* currentIndex = &OBJIndices[i];
 
-		glm::vec3 currentPosition = vertices[currentIndex->vertexIndex];
-		glm::vec2 currentTexCoord;
-		glm::vec3 currentNormal;
+		math::Vector3 currentPosition = vertices[currentIndex->vertexIndex];
+		math::Vector2 currentTexCoord;
+		math::Vector3 currentNormal;
 
 		if (hasUVs)
 			currentTexCoord = uvs[currentIndex->uvIndex];
 		else
-			currentTexCoord = glm::vec2(0, 0);
+			currentTexCoord = math::Vector2(0, 0);
 
 		if (hasNormals)
 			currentNormal = normals[currentIndex->normalIndex];
 		else
-			currentNormal = glm::vec3(0, 0, 0);
+			currentNormal = math::Vector3(0, 0, 0);
 
 		unsigned int normalModelIndex;
 		unsigned int resultModelIndex;
@@ -198,19 +198,19 @@ unsigned int OBJModel::FindLastVertexIndex(const std::vector<OBJIndex*>& indexLo
 				else if ((!hasUVs || possibleIndex->uvIndex == currentIndex->uvIndex)
 					&& (!hasNormals || possibleIndex->normalIndex == currentIndex->normalIndex))
 				{
-					glm::vec3 currentPosition = vertices[currentIndex->vertexIndex];
-					glm::vec2 currentTexCoord;
-					glm::vec3 currentNormal;
+					math::Vector3 currentPosition = vertices[currentIndex->vertexIndex];
+					math::Vector2 currentTexCoord;
+					math::Vector3 currentNormal;
 
 					if (hasUVs)
 						currentTexCoord = uvs[currentIndex->uvIndex];
 					else
-						currentTexCoord = glm::vec2(0, 0);
+						currentTexCoord = math::Vector2(0, 0);
 
 					if (hasNormals)
 						currentNormal = normals[currentIndex->normalIndex];
 					else
-						currentNormal = glm::vec3(0, 0, 0);
+						currentNormal = math::Vector3(0, 0, 0);
 
 					for (unsigned int j = 0; j < result.positions.size(); j++)
 					{
@@ -293,7 +293,7 @@ OBJIndex OBJModel::ParseOBJIndex(const std::string& token, bool* hasUVs, bool* h
 	return result;
 }
 
-glm::vec3 OBJModel::ParseOBJVec3(const std::string& line)
+math::Vector3 OBJModel::ParseOBJVec3(const std::string& line)
 {
 	unsigned int tokenLength = line.length();
 	const char* tokenString = line.c_str();
@@ -321,12 +321,12 @@ glm::vec3 OBJModel::ParseOBJVec3(const std::string& line)
 
 	float z = ParseOBJFloatValue(line, vertIndexStart, vertIndexEnd);
 
-	return glm::vec3(x, y, z);
+	return math::Vector3(x, y, z);
 
-	//glm::vec3(atof(tokens[1].c_str()), atof(tokens[2].c_str()), atof(tokens[3].c_str()))
+	//math::Vector3(atof(tokens[1].c_str()), atof(tokens[2].c_str()), atof(tokens[3].c_str()))
 }
 
-glm::vec2 OBJModel::ParseOBJVec2(const std::string& line)
+math::Vector2 OBJModel::ParseOBJVec2(const std::string& line)
 {
 	unsigned int tokenLength = line.length();
 	const char* tokenString = line.c_str();
@@ -349,7 +349,7 @@ glm::vec2 OBJModel::ParseOBJVec2(const std::string& line)
 
 	float y = ParseOBJFloatValue(line, vertIndexStart, vertIndexEnd);
 
-	return glm::vec2(x, y);
+	return math::Vector2(x, y);
 }
 
 static bool CompareOBJIndexPtr(const OBJIndex* a, const OBJIndex* b)
