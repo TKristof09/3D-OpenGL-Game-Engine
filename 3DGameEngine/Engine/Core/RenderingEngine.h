@@ -3,7 +3,7 @@
 
 
 #include <vector>
-#include <glm\glm.hpp>
+#include "3DMath\3DMath.h"
 #include "Transform.h"
 
 class GameObject;
@@ -16,18 +16,17 @@ public:
 	RenderingEngine();
 	~RenderingEngine() = default;
 	void Render(const GameObject& object);
-	void Input();
     void AddLight(const BaseLight& light) { m_lights.push_back(&light); };
 
     void SetMainCamera( Camera& camera) { m_mainCamera = &camera;};
 
 	inline const Camera* GetMainCamera() const { return m_mainCamera; };
-	inline const glm::vec3* GetAmbientLight() const{ return &m_ambientLight; };
+	inline const math::Vector3* GetAmbientLight() const{ return &m_ambientLight; };
     inline const BaseLight& GetActiveLight() const { return *m_activeLight; };
 
 private:
 	Camera* m_mainCamera;
-	glm::vec3 m_ambientLight;
+	math::Vector3 m_ambientLight;
 
     std::vector<const BaseLight*> m_lights;
     const BaseLight* m_activeLight;

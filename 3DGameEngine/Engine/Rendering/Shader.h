@@ -27,9 +27,9 @@ public:
 	
     virtual void UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const {};
 	void SetUniform(const GLchar* uniform, float value) const;
-	void SetUniform(const GLchar* uniform, const glm::vec3& value) const;
-	void SetUniform(const GLchar* uniform, const glm::vec4& value) const;
-	void SetUniform(const GLchar* uniform, const glm::mat4& value) const;
+	void SetUniform(const GLchar* uniform, const math::Vector3& value) const;
+	void SetUniform(const GLchar* uniform, const math::Vector4& value) const;
+	void SetUniform(const GLchar* uniform, const math::Matrix4x4& value) const;
 
 	inline GLuint GetUniformLocation(const GLchar* uniform) const
 	{

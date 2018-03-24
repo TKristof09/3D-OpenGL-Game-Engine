@@ -1,5 +1,6 @@
 ﻿#ifndef COLOR_H
 #define COLOR_H
+#include "3DMath\3DMath.h"
 
 struct Color
 {
@@ -19,7 +20,7 @@ struct Color
         g((HEX & 0x00ff00) >> 8),
         b((HEX & 0x0000ff))
     {};
-    glm::vec3 ToVec3() const { return glm::vec3(r, g, b); }
+    math::Vector3 ToVector3() const { return math::Vector3(r, g, b); }
 
     static Color Red() { return Color(255,0,0); };
     static Color Green() { return Color(0,255,0); };

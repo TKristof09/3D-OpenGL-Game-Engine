@@ -13,7 +13,7 @@ void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& 
 {
 	
 	material.GetTexture("diffuse").Bind();
-    const glm::mat4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
+    const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("ambientIntensity", *renderingEngine->GetAmbientLight());
 }

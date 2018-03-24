@@ -193,6 +193,13 @@
     <ClInclude Include="Engine\Rendering\Lighting\ForwardDirectional.h" />
     <ClInclude Include="Engine\Rendering\Lighting\ForwardPoint.h" />
     <ClInclude Include="Engine\Rendering\Lighting\ForwardSpot.h" />
+    <ClInclude Include="include\3DMath\3DMath.h" />
+    <ClInclude Include="include\3DMath\Matrix.h" />
+    <ClInclude Include="include\3DMath\Quaternion.h" />
+    <ClInclude Include="include\3DMath\Vector.h" />
+    <ClInclude Include="include\3DMath\Vector2.h" />
+    <ClInclude Include="include\3DMath\Vector3.h" />
+    <ClInclude Include="include\3DMath\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Plans.txt" />

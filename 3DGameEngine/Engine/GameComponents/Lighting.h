@@ -1,9 +1,7 @@
 #ifndef LIGHTING_H
 #define LIGHTING_H
 
-#include <glm\glm.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm\gtx\component_wise.hpp>
+#include "3DMath\3DMath.h"
 
 #include "..\Engine\GameComponents\GameComponent.h"
 #include "..\Rendering\Lighting\ForwardDirectional.h"
@@ -81,7 +79,7 @@ public:
     {
         const float a = m_attenuation.GetExponent();
         const float b = m_attenuation.GetLinear();
-        const float c = m_attenuation.GetConstant() - COLOR_DEPTH * intensity * glm::max(color.r, glm::max(color.g, color.b));
+        const float c = m_attenuation.GetConstant() - COLOR_DEPTH * intensity * math::max(color.r, math::max(color.g, color.b));
 
         m_range = (-b + sqrtf(b*b - 4 * a*c)) / (2 * a);
     }
