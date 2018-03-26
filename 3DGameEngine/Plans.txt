@@ -9,13 +9,13 @@
 
 		Remake the SetUniform methods for the lights
 		Checker to see if transform has changed
+		Look up how what a getter should return
 
 		!!!Review all includes to prevent further circular includes!!!
 
 	Plans:
 		+Color class with RGB(0-255) and HEX picker, also some presets
 		+Try to get own math library to work
-		Look up how what a getter should return
 		Better input handling: mouse,(joystick)
 		PBR
 		FBX importer
