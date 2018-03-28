@@ -17,8 +17,10 @@ public:
 		m_root.Input();
 	};
     void SetRenderingEngine(RenderingEngine* renderingEngine) { m_root.SetRenderingEngine(renderingEngine); };
+    void Render(RenderingEngine* renderingEngine);
+    
 
-	GameObject* GetRootObject() { return &m_root; };
+    void AddToScene(GameObject* gameObject) { m_root.AddChild(gameObject); };
 
 private:
 	GameObject m_root;

@@ -22,6 +22,7 @@ public:
 
 	inline const Camera* GetMainCamera() const { return m_mainCamera; };
 	inline const math::Vector3* GetAmbientLight() const{ return &m_ambientLight; };
+    
     inline const BaseLight& GetActiveLight() const { return *m_activeLight; };
 
 private:
