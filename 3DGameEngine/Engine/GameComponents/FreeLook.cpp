@@ -14,11 +14,11 @@ void FreeLook::Input()
 {
     if(Input::GetKeyDown(SDL_SCANCODE_W))
     {
-        GetTransform()->Rotate(math::ToRadians(1.0f), GetTransform()->GetRight());
+        GetTransform()->Rotate(math::ToRadians(-1.0f), GetTransform()->GetRight());
     }
     if (Input::GetKeyDown(SDL_SCANCODE_S))
     {
-        GetTransform()->Rotate(math::ToRadians(-1.0f), GetTransform()->GetRight());
+        GetTransform()->Rotate(math::ToRadians(1.0f), GetTransform()->GetRight());
     }
     if (Input::GetKeyDown(SDL_SCANCODE_D))
     {

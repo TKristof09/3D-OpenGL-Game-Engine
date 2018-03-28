@@ -3,6 +3,7 @@
 #include "Core\Window.h"
 #include <iostream>
 #include "GameComponents\FreeLook.h"
+#include "GameComponents\FreeMove.h"
 
 TestGame::TestGame()
     : m_root(nullptr),
@@ -79,6 +80,7 @@ void TestGame::Init()
     cameraOBJ->GetTransform()->SetPosition(math::Vector3(-5, 3, 15));
     //cameraOBJ->GetTransform()->SetLocalRotation(math::Quaternion(math::ToRadians(-45.0f), math::Vector3(1, 0, 0)) /** math::Quaternion(math::ToRadians(180.0f), math::Vector3(0,1,0))*/);
     cameraOBJ->AddComponent(new FreeLook());
+    cameraOBJ->AddComponent(new FreeMove());
     
     cubeOBJ2->AddComponent(new MeshRenderer(*new Mesh(".\\res\\cubeUV.obj"), *new Material(*new Texture(".\\res\\uv_checker.png"), 2, 32)));
     cubeOBJ2->GetTransform()->SetPosition(math::Vector3(3, 0, 0));
