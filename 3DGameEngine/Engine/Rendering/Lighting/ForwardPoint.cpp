@@ -5,75 +5,58 @@
 
 ForwardPoint::ForwardPoint()
 {
-    AddShader(".\\res\\forward-point", GL_VERTEX_SHADER);
-    AddShader(".\\res\\forward-point", GL_FRAGMENT_SHADER);
+	AddShader(".\\res\\forward-point", GL_VERTEX_SHADER);
+	AddShader(".\\res\\forward-point", GL_FRAGMENT_SHADER);
 }
 
 
-
-void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material, RenderingEngine* renderingEngine) const
+void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material,
+                                  RenderingEngine* renderingEngine) const
 {
-    material.GetTexture("diffuse").Bind();
-    const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
+	material.GetTexture("diffuse").Bind();
+	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
+	Shader::SetUniform("color", material.GetVector3("color"));
 	Shader::SetUniform("model", transform.GetModel());
-    Shader::SetUniform("specularIntensity", material.GetFloat("specularIntensity"));
-    Shader::SetUniform("specularExponent", material.GetFloat("specularExponent"));
+	Shader::SetUniform("specularIntensity", material.GetFloat("specularIntensity"));
+	Shader::SetUniform("specularExponent", material.GetFloat("specularExponent"));
 	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
-	SetUniform("pointLight", *dynamic_cast<const PointLight*>(&renderingEngine->GetActiveLight()));
+	SetUniform("pointLight", *dynamic_cast<const PointLight*>(renderingEngine->GetActiveLight()));
 }
 
-void ForwardPoint::SetUniform(const GLchar* uniform, const Attenuation& attenuation) const
+void ForwardPoint::SetUniform(std::string uniform, const Attenuation& attenuation) const
 {
-    GLchar* exponent = new GLchar[strlen(uniform) + 9];
-    strcpy(exponent, uniform);
-    strcat(exponent, ".exponent");
+	std::string exponent = uniform + ".exponent";
 
-    Shader::SetUniform(exponent, attenuation.GetExponent());
+	Shader::SetUniform(exponent, attenuation.GetExponent());
 
-    GLchar* linear = new GLchar[strlen(uniform) + 7];
-    strcpy(linear, uniform);
-    strcat(linear, ".linear");
+	std::string linear = uniform + ".linear";
 
-    Shader::SetUniform(linear, attenuation.GetLinear());
+	Shader::SetUniform(linear, attenuation.GetLinear());
 
-    GLchar* constant = new GLchar[strlen(uniform) + 9];
-    strcpy(constant, uniform);
-    strcat(constant, ".constant");
+	std::string constant = uniform + ".constant";
 
-    Shader::SetUniform(constant, attenuation.GetConstant());
-
+	Shader::SetUniform(constant, attenuation.GetConstant());
 }
 
-void ForwardPoint::SetUniform(const GLchar* uniform, const PointLight& pointLight) const
+void ForwardPoint::SetUniform(std::string uniform, const PointLight& pointLight) const
 {
-    GLchar* color = new GLchar[strlen(uniform) + 1];
-    strcpy(color, uniform);
-    strcat(color, ".base.color");
+	std::string color = uniform + ".base.color"; 
+	Shader::SetUniform(color, pointLight.GetColor()->ToVector3());
 
-    Shader::SetUniform(color, pointLight.GetColor()->ToVector3());
+	std::string intensity = uniform + ".base.intensity";
 
-    GLchar* intensity = new GLchar[strlen(uniform) + 15];
-    strcpy(intensity, uniform);
-    strcat(intensity, ".base.intensity");
+	Shader::SetUniform(intensity, *pointLight.GetIntensity());
 
-    Shader::SetUniform(intensity, *pointLight.GetIntensity());
+	std::string attenuation = uniform + ".attenuation";
 
-    GLchar* attenuation = new GLchar[strlen(uniform) + 12];
-    strcpy(attenuation, uniform);
-    strcat(attenuation, ".attenuation");
+	SetUniform(attenuation, *pointLight.GetAttenuation());
 
-    SetUniform(attenuation, *pointLight.GetAttenuation());
+	std::string range = uniform + ".range";
 
-    GLchar* range = new GLchar[strlen(uniform) + 6];
-    strcpy(range, uniform);
-    strcat(range, ".range");
+	Shader::SetUniform(range, *pointLight.GetRange());
 
-    Shader::SetUniform(range, *pointLight.GetRange());
+	std::string position = uniform + ".position";
 
-    GLchar* position = new GLchar[strlen(uniform) + 9];
-    strcpy(position, uniform);
-    strcat(position, ".position");
-
-    Shader::SetUniform(position, pointLight.GetTransform().GetWorldPosition());
+	Shader::SetUniform(position, pointLight.GetTransform().GetWorldPosition());
 }

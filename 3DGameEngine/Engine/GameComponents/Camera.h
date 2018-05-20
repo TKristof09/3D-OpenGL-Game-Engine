@@ -12,22 +12,21 @@ public:
 		m_fov(fov),
 		m_aspect(aspect),
 		m_zNear(zNear),
-		m_zFar(zFar)
-		{}
-			
-    void AddToEngine(RenderingEngine* renderingEngine) override
+		m_zFar(zFar) {}
+
+	void AddToRenderingEngine(RenderingEngine* renderingEngine) override
 	{
-        renderingEngine->SetMainCamera(*this);
+		renderingEngine->SetMainCamera(*this);
 	}
 
-    math::Matrix4x4 GetViewProjection() const
-    {
-        // need to take conjugate because everything appears to rotate opposite to the camera
-        const math::Matrix4x4 cameraRotation = math::toMat4(math::conjugate(GetTransform().GetWorldRotation()));
-        // need to take the opposite here too because everything appears to move to the opposite direction than the camera
-        const math::Matrix4x4 cameraPosition = math::translate(GetTransform().GetWorldPosition() * -1.0f);
-        return math::perspective(math::ToRadians(m_fov), m_aspect, m_zNear, m_zFar) * cameraRotation * cameraPosition;
-    }
+	math::Matrix4x4 GetViewProjection() const
+	{
+		// need to take conjugate because everything appears to rotate opposite to the camera
+		const math::Matrix4x4 cameraRotation = math::toMat4(math::conjugate(GetTransform().GetWorldRotation()));
+		// need to take the opposite here too because everything appears to move to the opposite direction than the camera
+		const math::Matrix4x4 cameraPosition = math::translate(GetTransform().GetWorldPosition() * -1.0f);
+		return math::perspective(math::ToRadians(m_fov), m_aspect, m_zNear, m_zFar) * cameraRotation * cameraPosition;
+	}
 
 private:
 	float m_fov;

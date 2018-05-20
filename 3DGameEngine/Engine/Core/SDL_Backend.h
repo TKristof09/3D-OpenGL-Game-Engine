@@ -10,5 +10,3 @@ void SDLSwapBuffers();
 void SDLDestroyWindow();
 
 #endif // !SDL_BACKEND_H
-
-

@@ -26,6 +26,7 @@ uniform float specularExponent;
 
 uniform DirectionalLight directionalLight;
 
+uniform vec3 color;
 
 vec4 CalcLight(BaseLight base,vec3 direction){
 	// ambient
@@ -52,5 +53,5 @@ vec4 CalcDirectionalLight(DirectionalLight directionalLight){
 
 void main()
 {
-	fragColor = CalcDirectionalLight(directionalLight) * texture(diffuse, textCoord0.xy);
+	fragColor = vec4(color, 1) * CalcDirectionalLight(directionalLight) * texture(diffuse, textCoord0.xy);
 } 

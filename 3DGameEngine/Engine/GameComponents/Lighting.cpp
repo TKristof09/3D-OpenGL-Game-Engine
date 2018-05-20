@@ -1,7 +1,14 @@
 #include "Lighting.h"
 #include "..\Engine\Core\RenderingEngine.h"
 
-void BaseLight::AddToEngine(RenderingEngine* renderingEngine)
+#include "../Utils/DebuggingMacros.h"
+#include "../Rendering/DebugDrawer.h"
+
+void BaseLight::AddToRenderingEngine(RenderingEngine* renderingEngine)
 {
-    renderingEngine->AddLight(*this);
+#if DEBUG_LIGHT_DIRECTION == 1
+	DebugLineDrawer::AddLine(math::rotate(math::Vector3(0, 0, -1), GetTransform()->GetWorldRotation()));
+#endif
+
+	renderingEngine->AddLight(*this);
 }

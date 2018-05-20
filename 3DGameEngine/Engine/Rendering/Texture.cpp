@@ -5,8 +5,6 @@
 #include "..\Utils\stb_image.h"
 
 
-
-
 Texture::Texture(const std::string& fileName)
 {
 	int width, height, numComponents;
@@ -33,10 +31,9 @@ Texture::~Texture()
 	glDeleteTextures(1, &m_texture);
 }
 
-void Texture::Bind (unsigned int unit) const 
+void Texture::Bind(unsigned int unit) const
 {
 	assert(unit >= 0 && unit <= 31);
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 }
-

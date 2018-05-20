@@ -10,12 +10,12 @@ class MeshRenderer : public GameComponent
 {
 public:
 	MeshRenderer(const Mesh& mesh, const Material& material):
-        m_mesh(mesh),
-		m_material(material)
-    {}
+		m_mesh(mesh),
+		m_material(material) {}
+
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) override
 	{
-        shader->Bind();
+		shader->Bind();
 		shader->UpdateUniforms(*GetTransform(), m_material, renderingEngine);
 
 		m_mesh.Draw();

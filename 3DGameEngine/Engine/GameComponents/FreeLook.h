@@ -5,12 +5,11 @@
 class FreeLook : public GameComponent
 {
 public:
-    FreeLook();
-    ~FreeLook();
-    void Input() override;
+	FreeLook() = default;
+	~FreeLook() = default;
+	void Update() override;
 
 private:
-    
 };
 
 #endif //!FREELOOK_H

@@ -39,7 +39,8 @@ public:
 
 	IndexedModel ToIndexedModel();
 private:
-	unsigned int FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex, const IndexedModel& result);
+	unsigned int FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex,
+	                                 const IndexedModel& result);
 	void CreateOBJFace(const std::string& line);
 
 	math::Vector2 ParseOBJVec2(const std::string& line);

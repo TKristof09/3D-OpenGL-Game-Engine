@@ -9,7 +9,7 @@ static bool CompareOBJIndexPtr(const OBJIndex* a, const OBJIndex* b);
 static inline unsigned int FindNextChar(unsigned int start, const char* str, unsigned int length, char token);
 static inline unsigned int ParseOBJIndexValue(const std::string& token, unsigned int start, unsigned int end);
 static inline float ParseOBJFloatValue(const std::string& token, unsigned int start, unsigned int end);
-static inline std::vector<std::string> SplitString(const std::string &s, char delim);
+static inline std::vector<std::string> SplitString(const std::string& s, char delim);
 
 OBJModel::OBJModel(const std::string& fileName)
 {
@@ -34,18 +34,18 @@ OBJModel::OBJModel(const std::string& fileName)
 
 			switch (lineCStr[0])
 			{
-			case 'v':
-				if (lineCStr[1] == 't')
-					this->uvs.push_back(ParseOBJVec2(line));
-				else if (lineCStr[1] == 'n')
-					this->normals.push_back(ParseOBJVec3(line));
-				else if (lineCStr[1] == ' ' || lineCStr[1] == '\t')
-					this->vertices.push_back(ParseOBJVec3(line));
-				break;
-			case 'f':
-				CreateOBJFace(line);
-				break;
-			default: break;
+				case 'v':
+					if (lineCStr[1] == 't')
+						this->uvs.push_back(ParseOBJVec2(line));
+					else if (lineCStr[1] == 'n')
+						this->normals.push_back(ParseOBJVec3(line));
+					else if (lineCStr[1] == ' ' || lineCStr[1] == '\t')
+						this->vertices.push_back(ParseOBJVec3(line));
+					break;
+				case 'f':
+					CreateOBJFace(line);
+					break;
+				default: break;
 			};
 		}
 	}
@@ -132,7 +132,7 @@ IndexedModel OBJModel::ToIndexedModel()
 		//Create model which properly separates texture coordinates
 		unsigned int previousVertexLocation = FindLastVertexIndex(indexLookup, currentIndex, result);
 
-		if (previousVertexLocation == static_cast<unsigned int>(-1))
+		if (previousVertexLocation == (unsigned int)-1)
 		{
 			resultModelIndex = result.positions.size();
 
@@ -159,7 +159,8 @@ IndexedModel OBJModel::ToIndexedModel()
 	return result;
 };
 
-unsigned int OBJModel::FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex, const IndexedModel& result)
+unsigned int OBJModel::FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex,
+                                           const IndexedModel& result)
 {
 	unsigned int start = 0;
 	unsigned int end = indexLookup.size();
@@ -278,7 +279,8 @@ OBJIndex OBJModel::ParseOBJIndex(const std::string& token, bool* hasUVs, bool* h
 	vertIndexEnd = FindNextChar(vertIndexStart, tokenString, tokenLength, '/');
 
 	result.uvIndex = ParseOBJIndexValue(token, vertIndexStart, vertIndexEnd);
-	if (result.uvIndex != -1) // atof returns 0 if invalid and we substract 1 from it so if the string is invalid as a float we will have -1 and that means no UVs
+	if (result.uvIndex != -1)
+		// atof returns 0 if invalid and we substract 1 from it so if the string is invalid as a float we will have -1 and that means no UVs
 		*hasUVs = true;
 
 	if (vertIndexEnd >= tokenLength)
@@ -288,7 +290,7 @@ OBJIndex OBJModel::ParseOBJIndex(const std::string& token, bool* hasUVs, bool* h
 	vertIndexEnd = FindNextChar(vertIndexStart, tokenString, tokenLength, '/');
 
 	result.normalIndex = ParseOBJIndexValue(token, vertIndexStart, vertIndexEnd);
-	if(result.normalIndex != -1) // same as with the UVs
+	if (result.normalIndex != -1) // same as with the UVs
 		*hasNormals = true;
 
 	return result;
@@ -381,7 +383,7 @@ static inline float ParseOBJFloatValue(const std::string& token, unsigned int st
 	return atof(token.substr(start, end - start).c_str());
 }
 
-static inline std::vector<std::string> SplitString(const std::string &s, char delim)
+static inline std::vector<std::string> SplitString(const std::string& s, char delim)
 {
 	std::vector<std::string> elems;
 

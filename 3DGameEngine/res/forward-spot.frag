@@ -41,6 +41,8 @@ uniform float specularExponent;
 
 uniform SpotLight spotLight;
 
+uniform vec3 color;
+
 vec4 CalcLight(BaseLight base,vec3 direction){
 	// TODO idk why this is needed but it is 
 	direction = normalize(-direction);
@@ -90,5 +92,5 @@ vec4 CalcSpotLight(SpotLight spotLight){
 
 void main()
 {
-	fragColor = CalcSpotLight(spotLight) * texture(sampler, textCoord0.xy);
+	fragColor = vec4(color, 1) * CalcSpotLight(spotLight) * texture(sampler, textCoord0.xy);
 } 

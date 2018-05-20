@@ -5,12 +5,11 @@
 class FreeMove : public GameComponent
 {
 public:
-    FreeMove();
-    ~FreeMove();
-    void Input() override;
+	FreeMove() = default;
+	~FreeMove() = default;
+	void Update() override;
 
 private:
-
 };
 
 #endif //!FREELOOK_H

@@ -3,8 +3,7 @@
 
 
 #include <vector>
-#include "3DMath\3DMath.h"
-#include "Transform.h"
+#include "Color.h"
 
 class GameObject;
 class Camera;
@@ -16,23 +15,34 @@ public:
 	RenderingEngine();
 	~RenderingEngine() = default;
 	void Render(const GameObject& object);
-    void AddLight(const BaseLight& light) { m_lights.push_back(&light); };
+	void AddLight(const BaseLight& light) { m_lights.push_back(&light); };
 
-    void SetMainCamera( Camera& camera) { m_mainCamera = &camera;};
+	void SetMainCamera(Camera& camera) { m_mainCamera = &camera; };
 
-	inline const Camera* GetMainCamera() const { return m_mainCamera; };
-	inline const math::Vector3* GetAmbientLight() const{ return &m_ambientLight; };
-    
-    inline const BaseLight& GetActiveLight() const { return *m_activeLight; };
+	const Camera* GetMainCamera() const { return m_mainCamera; };
+	Color GetAmbientLightColor() const { return m_ambientLightColor; };
+	float GetAmbientLightIntensity() const { return m_ambientLightIntensity; };
+
+	const BaseLight* GetActiveLight() const { return m_activeLight; };
+
+	void SetAmbientLightColor(const Color& ambientLightColor)
+	{
+		m_ambientLightColor = ambientLightColor;
+	}
+
+	void SetAmbientLightIntensity(float ambientLightIntensity)
+	{
+		m_ambientLightIntensity = ambientLightIntensity;
+	}
 
 private:
 	Camera* m_mainCamera;
-	math::Vector3 m_ambientLight;
 
-    std::vector<const BaseLight*> m_lights;
-    const BaseLight* m_activeLight;
+	Color m_ambientLightColor;
+	float m_ambientLightIntensity;
+
+	std::vector<const BaseLight*> m_lights;
+	const BaseLight* m_activeLight;
 };
 
 #endif // !RENDERINGENGINE_H
-
-

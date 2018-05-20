@@ -35,7 +35,9 @@ void SDLCreateWindow(const char* title, int width, int height, bool fullscreen)
 	if (fullscreen)
 		mode = SDL_WINDOW_FULLSCREEN;
 
-	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | mode);
+	//BUG this takes a really long time to execute
+	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+	                          SDL_WINDOW_OPENGL | mode);
 	glContext = SDL_GL_CreateContext(window);
 
 	//SDL_GL_SetSwapInterval(1); This is VSync(i think)

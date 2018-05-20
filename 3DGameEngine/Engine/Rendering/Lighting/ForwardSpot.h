@@ -12,25 +12,25 @@ class Attenuation;
 class ForwardSpot : public Shader
 {
 public:
-    ForwardSpot();
-    ~ForwardSpot() = default;
-    static ForwardSpot* GetInstance()
-    {
+	ForwardSpot();
+	~ForwardSpot() = default;
 
-        static ForwardSpot instance;
-        return &instance;
-    }
-    void Bind() const
-    {
-        Shader::Bind();
-    };
-    void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material &material, RenderingEngine* renderingEngine) const override;
-    void SetUniform(const GLchar* uniform, const PointLight& pointLight) const;
-    void SetUniform(const GLchar* uniform, const Attenuation& attenuation) const;
-    void SetUniform(const GLchar* uniform, const SpotLight& spotLight) const;
+	static ForwardSpot* GetInstance()
+	{
+		static ForwardSpot instance;
+		return &instance;
+	}
+
+	void Bind() const
+	{
+		Shader::Bind();
+	};
+	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
+	                    RenderingEngine* renderingEngine) const override;
+	void SetUniform(std::string uniform, const PointLight& pointLight) const;
+	void SetUniform(std::string uniform, const Attenuation& attenuation) const;
+	void SetUniform(std::string uniform, const SpotLight& spotLight) const;
 };
 
 
-
 #endif // !FORWARD_SPOT_H
-

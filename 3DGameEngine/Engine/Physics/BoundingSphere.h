@@ -2,30 +2,28 @@
 #define BOUNDINGSPHERE_H
 
 #include "3DMath\3DMath.h"
-#include "IntersectData.h"
+#include "../GameComponents/Collider.h"
+#include <BulletCollision/CollisionShapes/btSphereShape.h>
 
-class BoundingSphere
+class BoundingSphere : public Collider
 {
 public:
-    BoundingSphere(const math::Vector3& center, float radius):
-    m_center(center),
-    m_radius(radius){};
+	BoundingSphere(float radius):
+		Collider(TYPE_SPHERE, new btSphereShape(radius), this),
+		m_radius(radius) {};
+	float GetRadius() const
+	{
+		return m_radius;
+	}
 
-    IntersectData IntersectBoundingSphere(const BoundingSphere& other) const;
-
-    math::Vector3 GetCenter() const
-    {
-        return m_center;
-    }
-
-    float GetRadius() const
-    {
-        return m_radius;
-    }
+protected:
+	int GetColliderType() override
+	{
+		return TYPE_SPHERE;
+	}
 
 private:
-    math::Vector3 m_center;
-    float m_radius;
+	float m_radius;
 };
 
 #endif //!BOUNDINGSPHERE_H

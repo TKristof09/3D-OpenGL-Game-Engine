@@ -2,42 +2,50 @@
 #define GAMEOBJECT_H
 
 #include <map>
+#include <utility>
 #include <vector>
 #include <typeindex>
-#include "Transform.h"  
+#include "Transform.h"
 
 class RenderingEngine;
+class PhysicsEngine;
 class Shader;
 class GameComponent;
 
 class GameObject
 {
 public:
-    GameObject():
-        m_renderingEngine(nullptr) {};
-    ~GameObject() = default;;
+	GameObject(std::string name = "GameObject"):
+		name(std::move(name)),
+		m_renderingEngine(nullptr),
+		m_physicsEngine(nullptr) {};
+	~GameObject() = default;;
 	void Update() const;
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) const;
 	void Input() const;
 	void AddChild(GameObject* child);
 	void AddComponent(GameComponent* component);
-    void SetRenderingEngine(RenderingEngine* renderingEngine);
+	void SetRenderingEngine(RenderingEngine* renderingEngine);
+	void SetPhysicsEngine(PhysicsEngine* physicsEngine);
 	Transform* GetTransform() { return &m_transform; };
-    template<typename T>
-    T* GetComponent()
-    {
-        auto it = m_components.find(std::type_index(typeid(T)));
-        if (it != m_components.end())
-        {
-            return dynamic_cast<T*>(it->second);
-        }
-        return nullptr;
-    }
+
+	template <typename T>
+	T* GetComponent()
+	{
+		auto it = m_components.find(std::type_index(typeid(T)));
+		if (it != m_components.end())
+		{
+			return dynamic_cast<T*>(it->second);
+		}
+		return nullptr;
+	}
+	std::string name;
 private:
 	Transform m_transform;
 	std::vector<GameObject*> m_children;
-	std::map<std::type_index,GameComponent*> m_components;
-    RenderingEngine* m_renderingEngine;
+	std::map<std::type_index, GameComponent*> m_components;
+	RenderingEngine* m_renderingEngine;
+	PhysicsEngine* m_physicsEngine;
 };
 
 #endif // !GAMEOBJECT_H

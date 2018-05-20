@@ -3,7 +3,7 @@
 #include <fstream>
 
 
-static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string&errorMessage);
+static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 static std::string LoadShader(const std::string& fileName);
 static GLuint CreateShader(const std::string& text, unsigned int shaderType);
 
@@ -16,7 +16,7 @@ Shader::Shader()
 
 Shader::~Shader()
 {
-	for(auto shader : m_shaders)
+	for (auto shader : m_shaders)
 	{
 		glDetachShader(m_program, shader);
 		glDeleteShader(shader);
@@ -34,50 +34,45 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 		case GL_FRAGMENT_SHADER:
 			m_shaders[1] = CreateShader(LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
 			break;
-//		case GL_GEOMETRY_SHADER:
-//			m_shaders[2] = CreateShader(LoadShader(fileName + ".geom"), GL_GEOMETRY_SHADER);
-//			break;
+			//		case GL_GEOMETRY_SHADER:
+			//			m_shaders[2] = CreateShader(LoadShader(fileName + ".geom"), GL_GEOMETRY_SHADER);
+			//			break;
 		default:
 			std::cerr << "Shader type not specified" << std::endl;
 			break;
 	}
 
-
-	//glBindAttribLocation(m_program, 0, "position");
-	//glBindAttribLocation(m_program, 1, "textCoord");
-
-	for(auto shader : m_shaders)
+	
+	for (auto shader : m_shaders)
 	{
 		glAttachShader(m_program, shader);
-	}	
+	}
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: program linking failed: ");
 
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
-
-	
 }
 
-void Shader::SetUniform(const GLchar* uniform, float value) const
+void Shader::SetUniform(const std::string& uniform, float value) const
 {
-	glUniform1f(glGetUniformLocation(m_program, uniform), value);
+	glUniform1f(glGetUniformLocation(m_program, uniform.c_str()), value);
 }
 
-void Shader::SetUniform(const GLchar* uniform, const math::Vector3& value) const
+void Shader::SetUniform(const std::string& uniform, const math::Vector3& value) const
 {
-	glUniform3fv(glGetUniformLocation(m_program, uniform), 1, math::value_ptr(value));
+	glUniform3fv(glGetUniformLocation(m_program, uniform.c_str()), 1, math::value_ptr(value));
 }
 
-void Shader::SetUniform(const GLchar* uniform, const math::Vector4& value) const
+void Shader::SetUniform(const std::string& uniform, const math::Vector4& value) const
 {
-	glUniform4fv(glGetUniformLocation(m_program, uniform), 1, math::value_ptr(value));
+	glUniform4fv(glGetUniformLocation(m_program, uniform.c_str()), 1, math::value_ptr(value));
 }
 
-void Shader::SetUniform(const GLchar* uniform, const math::Matrix4x4& value) const
+void Shader::SetUniform(const std::string& uniform, const math::Matrix4x4& value) const
 {
-	glUniformMatrix4fv(glGetUniformLocation(m_program, uniform), 1, GL_FALSE, &value[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(m_program, uniform.c_str()), 1, GL_FALSE, &value[0][0]);
 }
 
 void Shader::Bind() const
@@ -87,7 +82,7 @@ void Shader::Bind() const
 
 static GLuint CreateShader(const std::string& text, unsigned int shaderType)
 {
-    const GLuint shader = glCreateShader(shaderType);
+	const GLuint shader = glCreateShader(shaderType);
 	if (shader == 0)
 		std::cerr << "Error: Shader creation failed!" << std::endl;
 
@@ -133,10 +128,10 @@ static std::string LoadShader(const std::string& fileName)
 	return output;
 }
 
-static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string&errorMessage)
+static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
 	GLint succes = 0;
-	GLchar error[1024] = { 0 };
+	GLchar error[1024] = {0};
 
 	if (isProgram)
 		glGetProgramiv(shader, flag, &succes);

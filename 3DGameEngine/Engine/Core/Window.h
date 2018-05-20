@@ -23,10 +23,7 @@ private:
 	static int m_width;
 	static int m_height;
 	static std::string m_title;
-
-
 };
 
 
 #endif // !WINDOW_H
-

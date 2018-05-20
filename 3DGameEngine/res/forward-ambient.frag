@@ -6,7 +6,8 @@ in vec2 textCoord0;
 
 uniform vec3 ambientIntensity;
 uniform sampler2D diffuse;
+uniform vec3 color;
 
 void main(){
-	fragColor = texture(diffuse, textCoord0.xy) * vec4(ambientIntensity, 1);
+	fragColor = vec4(color, 1) * texture(diffuse, textCoord0.xy) * vec4(ambientIntensity, 1);
 }

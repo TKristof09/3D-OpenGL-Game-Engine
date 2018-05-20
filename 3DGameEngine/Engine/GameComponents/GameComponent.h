@@ -3,29 +3,48 @@
 
 #include "..\Core\Transform.h"
 #include "..\Engine\Core\GameObject.h"
+#include <iostream>
 
 class RenderingEngine;
+class PhysicsEngine;
 class Shader;
+
+
 
 class GameComponent
 {
 public:
-    GameComponent() :m_parent(nullptr) {};
-    virtual ~GameComponent() = default;;
+	GameComponent() : m_parent(nullptr) {};
+	virtual ~GameComponent() = default;;
 
-    virtual void Input() {};
-    virtual void Update() {};
-    virtual void Render(const Shader* shader, RenderingEngine* renderingEngine) {};
-    virtual void AddToEngine(RenderingEngine* renderingEngine) {};
-    
-    inline Transform* GetTransform() { return m_parent->GetTransform(); };
-    //This doesn't seem to work
-    inline const Transform& GetTransform() const { return *m_parent->GetTransform(); }; 
+	virtual void Input() {};
+	virtual void Update() {};
+	virtual void Render(const Shader* shader, RenderingEngine* renderingEngine) {};
+	virtual void AddToRenderingEngine(RenderingEngine* renderingEngine) {};
+	virtual void AddToPhysicsEngine(PhysicsEngine* physicsEngine) {}
 
-    virtual void SetParent(GameObject* parent) { m_parent = parent; };
+	Transform* GetTransform() { return m_parent->GetTransform(); };
+	const Transform& GetTransform() const { return *m_parent->GetTransform(); };
 
+	void SetGameObject(GameObject* parent) { m_parent = parent; };
+	GameObject* GetGameObject() const
+	{
+		return m_parent;
+	}
+
+	template<typename T>
+	void RequireComponent() const //Call it in the AddToGameObjectCallback
+	{
+		if(!m_parent->GetComponent<T>())
+		{
+			std::cerr << GetGameObject()->name <<" doesn't have a component of: " << typeid(T).name() << std::endl;
+			assert(false);
+		}
+	}
+	
+	virtual void AddToGameObjectCallback(){} 
 private:
-    GameObject* m_parent;
+	GameObject* m_parent;
 };
 
 #endif // !GAMECOMPONENT_H

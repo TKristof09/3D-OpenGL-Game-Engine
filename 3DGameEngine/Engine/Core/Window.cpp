@@ -15,25 +15,24 @@ void Window::Create(int width, int height, const std::string& title)
 	m_title = title;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	
+
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32); //32 bit depth buffer to increase precision to prevent Z-fighting 
+
 
 	SDLCreateWindow(m_title.c_str(), m_width, m_height, false);
 
-    const auto result = glewInit();
+	const auto result = glewInit();
 	if (result != GLEW_OK)
 		std::cerr << "Glew failed to initialize!" << std::endl;
-	
 
 
-
-	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
-
+	std::cout<<"OpenGL version supported by this platform: " << glGetString(GL_VERSION)<<std::endl;
 }
 
 void Window::Close()

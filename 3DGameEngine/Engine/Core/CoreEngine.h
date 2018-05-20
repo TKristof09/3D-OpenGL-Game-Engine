@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include "RenderingEngine.h"
+#include "../Physics/PhysicsEngine.h"
 
 class CoreEngine
 {
@@ -23,9 +24,7 @@ private:
 	double m_frameTime;
 	Game* m_game;
 	RenderingEngine* m_renderingEngine;
-
+	PhysicsEngine* m_physicsEngine;
 };
 
 #endif // !COREENGINE_H
-
-
