@@ -7,12 +7,15 @@
 		+Rotation/Translation in a unified class (not in camera class)
 		+GetComponent<Type> method to get a component of a certain type from the gameobject
 		+Change ambient light to Color, Intensity
+		+ASSIMP(current loader is shit)
 
 		Remake the SetUniform methods for the lights
 		Checker to see if transform has changed
-		ASSIMP(current loader is shit)
 
 		!!!Review all includes to prevent further circular includes!!!
+
+		Destructors for inherited classes
+
 
 	Plans:
 		+Color class with RGB(0-255) and HEX picker, also some presets
@@ -20,6 +23,7 @@
 		+Basic Physics Engine
 		Better input handling: mouse,(joystick)
 		PBR
-		FBX importer
+		Reflection Probes
 		Runtime debug menu/UI
+		GameObject hierarchy viewer
 		(Scripting system)
