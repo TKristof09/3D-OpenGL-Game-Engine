@@ -7,6 +7,7 @@ in vec2 textCoord0;
 in vec3 normal0;
 
 struct BaseLight{
+	
 	vec3 color;
 	float intensity;
 };
@@ -25,13 +26,20 @@ struct PointLight{
 	float range;
 };
 
-uniform sampler2D diffuse;
+struct SpotLight{
+	PointLight pointLight;
+	vec3 direction;
+	float cutoff;
+};
 
 uniform vec3 eyePos;
-uniform float specularIntensity;
+
+uniform sampler2D diffuse;
+uniform sampler2D specular;
+
 uniform float specularExponent;
 
-uniform PointLight pointLight;
+uniform SpotLight spotLight;
 
 uniform vec3 color;
 
@@ -43,15 +51,15 @@ vec4 CalcLight(BaseLight base,vec3 direction){
     // diffuse 
     vec3 norm = normalize(normal0);
     float angle = max(dot(norm, direction), 0.0);
-    vec3 color = angle * base.color * base.intensity;
+    vec3 diffuse = angle * base.color * base.intensity;
     
     // specular
     vec3 viewDir = normalize(eyePos - worldPos0);
     vec3 reflectDir = reflect(-direction, norm);  
     float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), specularExponent);
-    vec3 specular = specularIntensity * specularFactor * base.color;  
+    vec3 specular = specularFactor * base.color * texture(specular, textCoord0).rgb;  
         
-    vec3 result = color + specular;
+    vec3 result = diffuse + specular;
     return vec4(result,1.0);
 }
 
@@ -72,7 +80,17 @@ vec4 CalcPointLight(PointLight pointLight){
 	return color * attenuation;
 }
 
+vec4 CalcSpotLight(SpotLight spotLight){
+	vec3 lightDir = normalize(worldPos0 - spotLight.pointLight.position);
+	float angle = dot(lightDir, normalize(spotLight.direction));
+	if(angle > spotLight.cutoff){
+		return CalcPointLight(spotLight.pointLight) * (1.0 -(1.0 - angle) / (1.0 - spotLight.cutoff));
+	}
+	else
+		return vec4(0,0,0,0);
+}
+
 void main()
 {
-	fragColor = vec4(color, 1) * CalcPointLight(pointLight) * texture(diffuse, textCoord0.xy);
+	fragColor = vec4(color, 1) * CalcSpotLight(spotLight) * texture(diffuse, textCoord0.xy);
 } 

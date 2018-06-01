@@ -13,10 +13,10 @@ public:
 	{
 		btConvexHullShape* shape = static_cast<btConvexHullShape*>(GetBtCollisionShape());
 		m_vertices.reserve(mesh.GetNumVertices());
-		for (math::Vector3 vertex : mesh.GetVerticesPosition())
+		for (Vertex vertex : mesh.GetVertices())
 		{
-			shape->addPoint(vertex.ToBtVector3());
-			m_vertices.push_back(vertex);
+			shape->addPoint(vertex.position.ToBtVector3());
+			m_vertices.push_back(vertex.position);
 		}
 		shape->optimizeConvexHull();
 	}

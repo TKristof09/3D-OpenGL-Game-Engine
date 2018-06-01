@@ -11,8 +11,15 @@ ForwardAmbient::ForwardAmbient()
 void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
                                     RenderingEngine* renderingEngine) const
 {
-	material.GetTexture("diffuse").Bind();
+	material.GetTexture("albedo").Bind();
+	material.GetTexture("normal").Bind(1);
+	Shader::SetUniform("normalMap", 1);
+	material.GetTexture("rougness").Bind(2);
+	Shader::SetUniform("roughnessMap", 2);
+	
+	//Shader::SetUniform("irradianceMap", 3);
 	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
+	Shader::SetUniform("model", transform.GetModel());
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("color", material.GetVector3("color"));
 	Shader::SetUniform("ambientIntensity",

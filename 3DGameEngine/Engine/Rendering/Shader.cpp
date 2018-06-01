@@ -55,24 +55,88 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
 }
 
+void Shader::SetUniform(const std::string& uniform, int value) const
+{
+	GLuint loc;
+	if (m_uniformMap.find(uniform) != m_uniformMap.end())
+	{
+		loc = m_uniformMap[uniform];
+		glUniform1i(loc, value);
+	}
+	else
+	{
+		loc = glGetUniformLocation(m_program, uniform.c_str());
+		glUniform1i(loc, value);
+		m_uniformMap[uniform] = loc;
+	}
+}
+
 void Shader::SetUniform(const std::string& uniform, float value) const
 {
-	glUniform1f(glGetUniformLocation(m_program, uniform.c_str()), value);
+	GLuint loc;
+	if(m_uniformMap.find(uniform) != m_uniformMap.end())
+	{
+		loc = m_uniformMap[uniform];
+		glUniform1f(loc, value);
+	}
+	else
+	{
+		loc = glGetUniformLocation(m_program, uniform.c_str());
+		glUniform1f(loc, value);
+		m_uniformMap[uniform] = loc;
+	}
 }
+
 
 void Shader::SetUniform(const std::string& uniform, const math::Vector3& value) const
 {
+	GLuint loc;
+	if (m_uniformMap.find(uniform) != m_uniformMap.end())
+	{
+		loc = m_uniformMap[uniform];
+		glUniform3fv(loc, 1, math::value_ptr(value));
+	}
+	else
+	{
+		loc = glGetUniformLocation(m_program, uniform.c_str());
+		glUniform3fv(loc, 1, math::value_ptr(value));
+		m_uniformMap[uniform] = loc;
+	}
 	glUniform3fv(glGetUniformLocation(m_program, uniform.c_str()), 1, math::value_ptr(value));
 }
 
 void Shader::SetUniform(const std::string& uniform, const math::Vector4& value) const
 {
+	GLuint loc;
+	if (m_uniformMap.find(uniform) != m_uniformMap.end())
+	{
+		loc = m_uniformMap[uniform];
+		glUniform4fv(loc, 1, math::value_ptr(value));
+	}
+	else
+	{
+		loc = glGetUniformLocation(m_program, uniform.c_str());
+		glUniform4fv(loc, 1, math::value_ptr(value));
+		m_uniformMap[uniform] = loc;
+	}
 	glUniform4fv(glGetUniformLocation(m_program, uniform.c_str()), 1, math::value_ptr(value));
 }
 
 void Shader::SetUniform(const std::string& uniform, const math::Matrix4x4& value) const
 {
-	glUniformMatrix4fv(glGetUniformLocation(m_program, uniform.c_str()), 1, GL_FALSE, &value[0][0]);
+	GLuint loc;
+	if (m_uniformMap.find(uniform) != m_uniformMap.end())
+	{
+		loc = m_uniformMap[uniform];
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &value[0][0]);
+	}
+	else
+	{
+		loc = glGetUniformLocation(m_program, uniform.c_str());
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &value[0][0]);
+		m_uniformMap[uniform] = loc;
+	}
+	
 }
 
 void Shader::Bind() const

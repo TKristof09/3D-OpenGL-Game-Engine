@@ -41,14 +41,14 @@ public:
 		m_intensity(intensity),
 		m_shader(shader) { }
 
-	virtual void AddToRenderingEngine(RenderingEngine* renderingEngine) override;
+	void AddToRenderingEngine(RenderingEngine* renderingEngine) override;
 
-	inline const Color* GetColor() const { return &m_color; };
-	inline const float* GetIntensity() const { return &m_intensity; };
-	inline const Shader* GetShader() const { return m_shader; };
+	const Color* GetColor() const { return &m_color; };
+	const float* GetIntensity() const { return &m_intensity; };
+	const Shader* GetShader() const { return m_shader; };
 
-	inline void SetColor(const Color& color) { m_color = color; };
-	inline void SetIntensity(const float intensity) { m_intensity = intensity; };
+	void SetColor(const Color& color) { m_color = color; };
+	void SetIntensity(const float intensity) { m_intensity = intensity; };
 
 private:
 	Color m_color;
@@ -80,11 +80,11 @@ public:
 		m_range = (-b + sqrtf(b * b - 4 * a * c)) / (2 * a);
 	}
 
-	inline const Attenuation* GetAttenuation() const { return &m_attenuation; };
-	inline const float* GetRange() const { return &m_range; };
+	const Attenuation* GetAttenuation() const { return &m_attenuation; };
+	const float* GetRange() const { return &m_range; };
 
-	inline void SetAttenuation(const Attenuation& attenuation) { m_attenuation = attenuation; };
-	inline void SetRange(const float& range) { m_range = range; };
+	void SetAttenuation(const Attenuation& attenuation) { m_attenuation = attenuation; };
+	void SetRange(const float& range) { m_range = range; };
 
 private:
 	Attenuation m_attenuation;
@@ -101,8 +101,8 @@ public:
 		PointLight(color, intensity, attenuation, ForwardSpot::GetInstance()),
 		m_cutoff(cutoff) { }
 
-	inline const float* GetCutoff() const { return &m_cutoff; };
-	inline void SetCutoff(const float& cutoff) { m_cutoff = cutoff; };
+	const float* GetCutoff() const { return &m_cutoff; };
+	void SetCutoff(const float& cutoff) { m_cutoff = cutoff; };
 
 private:
 	float m_cutoff;

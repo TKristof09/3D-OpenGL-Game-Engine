@@ -104,14 +104,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;BT_THREADSAFE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>A:\Programozas\C++\3DGameEngine - Copy\3DGameEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3DGameEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;Bullet2FileLoader.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;Bullet3OpenCL_clew.lib;BulletCollision.lib;BulletDynamics.lib;BulletFileLoader.lib;BulletInverseDynamics.lib;BulletInverseDynamicsUtils.lib;BulletRobotics.lib;BulletSoftBody.lib;BulletWorldImporter.lib;BulletXmlWorldImporter.lib;ConvexDecomposition.lib;GIMPACTUtils.lib;HACD.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3DGameEngine\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;OpenGL32.lib;assimp-vc140-mt.lib;Bullet2FileLoader.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;Bullet3OpenCL_clew.lib;BulletCollision.lib;BulletDynamics.lib;BulletFileLoader.lib;BulletInverseDynamics.lib;BulletInverseDynamicsUtils.lib;BulletRobotics.lib;BulletSoftBody.lib;BulletWorldImporter.lib;BulletXmlWorldImporter.lib;ConvexDecomposition.lib;GIMPACTUtils.lib;HACD.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\AssimpTestGame.cpp" />
     <ClCompile Include="Engine\Core\Color.cpp" />
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
     <ClCompile Include="Engine\Core\Game.cpp" />
@@ -162,16 +163,18 @@
     <ClCompile Include="Engine\PhysicsTestGame.cpp" />
     <ClCompile Include="Engine\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="Engine\Physics\TriggerCollider.cpp" />
+    <ClCompile Include="Engine\Rendering\CubeMap.cpp" />
     <ClCompile Include="Engine\Rendering\DebugDrawer.cpp" />
     <ClCompile Include="Engine\Rendering\Lighting\ForwardAmbient.cpp" />
     <ClCompile Include="Engine\GameComponents\Lighting.cpp" />
     <ClCompile Include="Engine\Rendering\Material.cpp" />
     <ClCompile Include="Engine\Rendering\Mesh.cpp" />
+    <ClCompile Include="Engine\Rendering\RadianceHDRTexture.cpp" />
+    <ClCompile Include="Engine\Utils\AssimpImporter.cpp" />
     <ClCompile Include="Engine\Utils\OBJloader.cpp" />
     <ClCompile Include="Engine\Rendering\Shader.cpp" />
     <ClCompile Include="Engine\Rendering\Texture.cpp" />
     <ClCompile Include="Engine\Core\Time.cpp" />
-    <ClCompile Include="Engine\TestGame.cpp" />
     <ClCompile Include="Engine\Core\SDL_Backend.cpp" />
     <ClCompile Include="Engine\Core\GameObject.cpp" />
     <ClCompile Include="Engine\Core\RenderingEngine.cpp" />
@@ -185,6 +188,7 @@
     <ClCompile Include="include\BulletMultiThreading\btTaskScheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\AssimpTestGame.h" />
     <ClInclude Include="Engine\Core\Color.h" />
     <ClInclude Include="Engine\Core\CoreEngine.h" />
     <ClInclude Include="Engine\Core\Game.h" />
@@ -205,11 +209,16 @@
     <ClInclude Include="Engine\Physics\PhysicsEngine.h" />
     <ClInclude Include="Engine\GameComponents\Rigidbody.h" />
     <ClInclude Include="Engine\Physics\TriggerCollider.h" />
+    <ClInclude Include="Engine\Rendering\CubeMap.h" />
     <ClInclude Include="Engine\Rendering\DebugDrawer.h" />
     <ClInclude Include="Engine\Rendering\DebugShader.h" />
+    <ClInclude Include="Engine\Rendering\EquirectangularToCubemapShader.h" />
+    <ClInclude Include="Engine\Rendering\IrradianceShader.h" />
     <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />
     <ClInclude Include="Engine\Rendering\Material.h" />
     <ClInclude Include="Engine\Rendering\Mesh.h" />
+    <ClInclude Include="Engine\Rendering\RadianceHDRTexture.h" />
+    <ClInclude Include="Engine\Utils\AssimpImporter.h" />
     <ClInclude Include="Engine\Utils\DebuggingMacros.h" />
     <ClInclude Include="Engine\Utils\OBJloader.h" />
     <ClInclude Include="Engine\Rendering\Shader.h" />
@@ -227,7 +236,6 @@
     <ClInclude Include="Engine\Rendering\Texture.h" />
     <ClInclude Include="Engine\Core\Time.h" />
     <ClInclude Include="Engine\Core\Transform.h" />
-    <ClInclude Include="Engine\TestGame.h" />
     <ClInclude Include="Engine\Core\SDL_Backend.h" />
     <ClInclude Include="Engine\Core\GameObject.h" />
     <ClInclude Include="Engine\Core\RenderingEngine.h" />

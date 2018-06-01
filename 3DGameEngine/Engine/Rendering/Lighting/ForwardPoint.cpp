@@ -5,8 +5,8 @@
 
 ForwardPoint::ForwardPoint()
 {
-	AddShader(".\\res\\forward-point", GL_VERTEX_SHADER);
-	AddShader(".\\res\\forward-point", GL_FRAGMENT_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-point", GL_VERTEX_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-point", GL_FRAGMENT_SHADER);
 }
 
 
@@ -14,11 +14,12 @@ void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& ca
                                   RenderingEngine* renderingEngine) const
 {
 	material.GetTexture("diffuse").Bind();
+	material.GetTexture("specular").Bind(1);
+	Shader::SetUniform("specular", 1);
 	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("color", material.GetVector3("color"));
 	Shader::SetUniform("model", transform.GetModel());
-	Shader::SetUniform("specularIntensity", material.GetFloat("specularIntensity"));
 	Shader::SetUniform("specularExponent", material.GetFloat("specularExponent"));
 	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
 	SetUniform("pointLight", *dynamic_cast<const PointLight*>(renderingEngine->GetActiveLight()));

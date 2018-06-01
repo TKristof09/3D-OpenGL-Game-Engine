@@ -145,7 +145,7 @@ namespace math
 	}
 
 	template <typename T>
-	mat<T> toMat4(const quat<T>& q)
+	mat<T> ToMatrix4x4(const quat<T>& q)
 	{
 		T qxx(q.x * q.x);
 		T qyy(q.y * q.y);

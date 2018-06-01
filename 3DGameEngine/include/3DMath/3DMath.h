@@ -45,5 +45,17 @@ namespace math
 		else
 			return v2;
 	}
+
+	template<typename T>
+	T sign(T a)
+	{
+		if (a == (T)0)
+			return (T)0;
+		if (a > (T)0)
+			return (T)1;
+		if (a < (T)0)
+			return (T)-1;
+	}
+
 }
 #endif

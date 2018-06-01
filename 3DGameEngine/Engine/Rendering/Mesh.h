@@ -3,25 +3,22 @@
 
 #include "3DMath\3DMath.h"
 #include <GL\glew.h>
-#include "..\Utils\OBJloader.h"
+#include <vector>
 
 // TODO make calculate normals for meshes without normals
-class Vertex
+struct Vertex
 {
-public:
-	Vertex(const math::Vector3& pos, const math::Vector2& textCoord, const math::Vector3& normal)
-		:
-		m_pos(pos),
-		m_textCoord(textCoord.x, 1 - textCoord.y),
-		m_normal(normal) {};
-	const math::Vector3* GetPosition() const { return &m_pos; };
-	const math::Vector2* GetTextCoord() const { return &m_textCoord; };
-	const math::Vector3* GetNormal() const { return &m_normal; };
 
-private:
-	math::Vector3 m_pos;
-	math::Vector2 m_textCoord;
-	math::Vector3 m_normal;
+	math::Vector3 position;
+	math::Vector2 textCoords;
+	math::Vector3 normal;
+	math::Vector3 tangent;
+};
+
+struct Model
+{
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
 };
 
 class Mesh
@@ -29,38 +26,30 @@ class Mesh
 public:
 	//TODO mesh data structure
 	Mesh()
-		: m_vertexArrayObject(0),
-		  m_drawCount(0) { } ;
-	Mesh(Vertex vertices[], unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
-	Mesh(const std::string& fileName);
+		: m_vao(0),
+		  m_vbo(0),
+		  m_ebo(0),
+		  m_drawCount(0) { } 
+	Mesh(const Model& model);
+	Mesh(const std::string& fn);
 	~Mesh();
 
 	void Draw() const;
-	std::vector<math::Vector3> GetVerticesPosition() const;
+	std::vector<Vertex> GetVertices() const;
 	std::vector<unsigned int> GetIndices() const;
 	unsigned int GetNumVertices() const
 	{
-		return m_model.positions.size();
+		return m_model.vertices.size();
 	}
 
+	void InitMesh(const Model& model);
+
 private:
-	enum
-	{
-		POSITION_VB,
-		TEXTCOORD_VB,
-		NORMAL_VB,
-
-		INDEX_VB,
-
-		NUM_BUFFERS
-	};
-
-	void InitMesh(IndexedModel model);
-
-	GLuint m_vertexArrayObject;
-	GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+	Model m_model;
+	GLuint m_vao;
+	GLuint m_vbo;
+	GLuint m_ebo;
 	unsigned int m_drawCount;
-	IndexedModel m_model;
 };
 
 

@@ -9,21 +9,22 @@
 class MeshRenderer : public GameComponent
 {
 public:
-	MeshRenderer(const Mesh& mesh, const Material& material):
-		m_mesh(mesh),
-		m_material(material) {}
+	MeshRenderer(Mesh* mesh, Material* material):
+		mesh(mesh),
+		material(material) {}
 
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) override
 	{
 		shader->Bind();
-		shader->UpdateUniforms(*GetTransform(), m_material, renderingEngine);
+		shader->UpdateUniforms(*GetTransform(), *material, renderingEngine);
 
-		m_mesh.Draw();
+		mesh->Draw();
 	};
 
-private:
-	Mesh m_mesh;
-	Material m_material;
+	
+	Mesh* mesh;
+	Material* material;
+
 };
 
 #endif // !MESHRENDERER_H

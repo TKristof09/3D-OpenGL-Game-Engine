@@ -5,14 +5,15 @@
 #include "..\Utils\stb_image.h"
 
 
-Texture::Texture(const std::string& fileName)
+Texture::Texture(const std::string& path)
 {
+	m_path = path;
 	int width, height, numComponents;
-	stbi_uc* imageData = stbi_load(fileName.c_str(), &width, &height, &numComponents, 4);
+	stbi_uc* imageData = stbi_load(path.c_str(), &width, &height, &numComponents, 4);
 	if (imageData == nullptr)
-		std::cerr << "Texture loading failed for texture: " << fileName << std::endl;
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+		std::cerr << "Texture loading failed for texture: " << path << std::endl;
+	glGenTextures(1, &m_textureID);
+	glBindTexture(GL_TEXTURE_2D, m_textureID);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -27,13 +28,12 @@ Texture::Texture(const std::string& fileName)
 
 Texture::~Texture()
 {
-	std::cout << "texture destructor called" << std::endl;
-	glDeleteTextures(1, &m_texture);
+	glDeleteTextures(1, &m_textureID);
 }
 
 void Texture::Bind(unsigned int unit) const
 {
 	assert(unit >= 0 && unit <= 31);
 	glActiveTexture(GL_TEXTURE0 + unit);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_textureID);
 }

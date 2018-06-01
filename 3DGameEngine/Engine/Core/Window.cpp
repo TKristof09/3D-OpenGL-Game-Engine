@@ -32,7 +32,7 @@ void Window::Create(int width, int height, const std::string& title)
 		std::cerr << "Glew failed to initialize!" << std::endl;
 
 
-	std::cout<<"OpenGL version supported by this platform: " << glGetString(GL_VERSION)<<std::endl;
+	std::cout<<"\n OpenGL version supported by this platform: " << glGetString(GL_VERSION)<< "\n" <<std::endl;
 }
 
 void Window::Close()

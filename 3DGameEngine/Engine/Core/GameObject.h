@@ -23,7 +23,7 @@ public:
 	void Update() const;
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) const;
 	void Input() const;
-	void AddChild(GameObject* child);
+	GameObject* AddChild(GameObject* child);
 	void AddComponent(GameComponent* component);
 	void SetRenderingEngine(RenderingEngine* renderingEngine);
 	void SetPhysicsEngine(PhysicsEngine* physicsEngine);
@@ -39,6 +39,17 @@ public:
 		}
 		return nullptr;
 	}
+
+	GameObject* GetChild(unsigned int index) const
+	{
+		return m_children[index];
+	}
+
+	unsigned int GetNumChildren() const
+	{
+		return m_children.size();
+	}
+
 	std::string name;
 private:
 	Transform m_transform;

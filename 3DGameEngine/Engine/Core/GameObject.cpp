@@ -3,11 +3,12 @@
 #include "../GameComponents/Collider.h"
 
 
-void GameObject::AddChild(GameObject* child)
+GameObject* GameObject::AddChild(GameObject* child)
 {
 	child->SetRenderingEngine(m_renderingEngine);
 	child->GetTransform()->SetParent(&m_transform);
 	m_children.push_back(child);
+	return child;
 }
 
 void GameObject::AddComponent(GameComponent* component)

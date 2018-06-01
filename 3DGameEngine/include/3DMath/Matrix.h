@@ -11,22 +11,10 @@ namespace math
 		mat()
 		{
 			//might be bad layout but I think it is good
-			m_values[0][0] = 1;
-			m_values[1][0] = 0;
-			m_values[2][0] = 0;
-			m_values[3][0] = 0;
-			m_values[0][1] = 0;
-			m_values[1][1] = 1;
-			m_values[2][1] = 0;
-			m_values[3][1] = 0;
-			m_values[0][2] = 0;
-			m_values[1][2] = 0;
-			m_values[2][2] = 1;
-			m_values[3][2] = 0;
-			m_values[0][3] = 0;
-			m_values[1][3] = 0;
-			m_values[2][3] = 0;
-			m_values[3][3] = 1;
+			m_values[0][0] = 1; m_values[0][1] = 0; m_values[0][2] = 0; m_values[0][3] = 0;
+			m_values[1][0] = 0; m_values[1][1] = 1; m_values[1][2] = 0; m_values[1][3] = 0;
+			m_values[2][0] = 0; m_values[2][1] = 0; m_values[2][2] = 1; m_values[2][3] = 0;
+			m_values[3][0] = 0; m_values[3][1] = 0; m_values[3][2] = 0; m_values[3][3] = 1;
 		};
 
 		mat(T s)

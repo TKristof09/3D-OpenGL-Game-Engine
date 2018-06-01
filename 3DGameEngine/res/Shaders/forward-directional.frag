@@ -20,8 +20,8 @@ struct DirectionalLight{
 uniform vec3 eyePos;
 
 uniform sampler2D diffuse;
+uniform sampler2D specular;
 
-uniform float specularIntensity;
 uniform float specularExponent;
 
 uniform DirectionalLight directionalLight;
@@ -41,7 +41,7 @@ vec4 CalcLight(BaseLight base,vec3 direction){
     vec3 viewDir = normalize(eyePos - worldPos0);
     vec3 reflectDir = reflect(-lightDir, norm);  
     float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), specularExponent);
-    vec3 specular = specularIntensity * specularFactor * base.color;  
+    vec3 specular = specularFactor * base.color * texture(specular, textCoord0).rgb;  
         
     vec3 result = color + specular;
     return vec4(result,1.0);
@@ -53,5 +53,5 @@ vec4 CalcDirectionalLight(DirectionalLight directionalLight){
 
 void main()
 {
-	fragColor = vec4(color, 1) * CalcDirectionalLight(directionalLight) * texture(diffuse, textCoord0.xy);
+	fragColor = vec4(color, 1) * CalcDirectionalLight(directionalLight) *  texture(diffuse, textCoord0.xy);
 } 

@@ -26,9 +26,9 @@ public:
 
 	void Bind() const;
 
-	virtual void UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material,
-	                            RenderingEngine* renderingEngine) const {};
-	virtual void UpdateUniforms(RenderingEngine* renderingEngine, const Color& color, const Transform& transform) const {};
+	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine) const {};
+	virtual void UpdateUniforms(const Transform& transform, const Color& color, RenderingEngine* renderingEngine) const {};
+	void SetUniform(const std::string& uniform, int value) const;
 	void SetUniform(const std::string& uniform, float value) const;
 	void SetUniform(const std::string& uniform, const math::Vector3& value) const;
 	void SetUniform(const std::string& uniform, const math::Vector4& value) const;
@@ -43,16 +43,10 @@ public:
 private:
 	static const unsigned int NUM_SHADERS = 2;
 
-	enum
-	{
-		TRANSFORM_U,
-
-		NUM_UNIFORMS
-	};
-
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
-	GLuint m_uniforms[NUM_UNIFORMS];
+
+	mutable std::map<std::string, GLuint> m_uniformMap;
 };
 
 

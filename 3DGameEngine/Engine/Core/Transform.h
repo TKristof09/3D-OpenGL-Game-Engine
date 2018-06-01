@@ -22,7 +22,7 @@ public:
 	{
 		math::Matrix4x4 translationMatrix = math::translate(m_position);
 
-		math::Matrix4x4 rotationMatrix = math::toMat4(m_rotation);
+		math::Matrix4x4 rotationMatrix = math::ToMatrix4x4(m_rotation);
 
 		math::Matrix4x4 scaleMatrix = math::scale(m_scale);
 
@@ -72,7 +72,7 @@ public:
 	void SetRotation(const math::Quaternion& rotation) { m_rotation = rotation; };
 	void SetScale(const math::Vector3& scale) { m_scale = scale; };
 	void SetParent(Transform* parent) { m_parent = parent; };
-
+	
 	void Rotate(const math::Quaternion& rotation)
 	{
 		m_rotation = math::normalize(rotation * m_rotation);

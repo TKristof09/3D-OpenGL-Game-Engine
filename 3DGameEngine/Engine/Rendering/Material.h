@@ -9,15 +9,15 @@ class Material
 public:
 	Material():
 		m_defaultTexture(Texture()),
-		m_defaultVector3(math::Vector3(0, 0, 0)) { }
+		m_defaultVector3(math::Vector3(1)) { }
 
 	Material(const float& specularIntensity, const float& specularExponent);
 	Material(const Texture& texture, const float& specularIntensity, const float& specularExponent);
 	~Material();
 
-	void AddTexture(const std::string& name, const Texture& texture)
+	void AddTexture(const std::string& name, Texture* texture)
 	{
-		m_textureMap[name] = texture;
+		m_textureMap[name] = *texture;
 	}
 
 	const Texture& GetTexture(const std::string& name) const
@@ -60,7 +60,7 @@ public:
 			return it->second;
 		}
 
-		return 0;
+		return 1;
 	}
 
 

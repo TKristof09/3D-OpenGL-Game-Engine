@@ -1,86 +1,87 @@
 #include "Mesh.h"
 #include <iostream>
-#include "Shader.h"
+#include "../Utils/OBJloader.h"
 
 
-Mesh::Mesh(const std::string& fileName)
+Mesh::Mesh(const Model& model):
+m_vao(0),
+m_vbo(0),
+m_ebo(0),
+m_drawCount(0)
 {
-	//TODO Switch to ASSIMP
-	m_model = OBJModel(fileName).ToIndexedModel();
+	m_model = model;
 	InitMesh(m_model);
 }
 
-Mesh::Mesh(Vertex vertices[], const unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
+Mesh::Mesh(const std::string& fn)
 {
-	
-
-	for (unsigned int i = 0; i < numVertices; i++)
+	IndexedModel m = OBJModel(fn).ToIndexedModel();
+	Model m2;
+	for (unsigned int i = 0; i < m.positions.size(); ++i)
 	{
-		m_model.positions.push_back(*vertices[i].GetPosition());
-		m_model.texCoords.push_back(*vertices[i].GetTextCoord());
-		m_model.normals.push_back(*vertices[i].GetNormal());
+		Vertex v;
+		v.position = m.positions[i];
+		v.textCoords = m.texCoords[i];
+		v.normal = m.normals[i];
+		m2.vertices.push_back(v);
 	}
-	for (unsigned int i = 0; i < numIndices; i++)
-	{
-		m_model.indices.push_back(indices[i]);
-	}
+	m2.indices = m.indices;
+	m_model = m2;
 	InitMesh(m_model);
 }
 
 
 Mesh::~Mesh()
 {
-	glDeleteVertexArrays(1, &m_vertexArrayObject);
+	glDeleteVertexArrays(1, &m_vao);
 }
 
 
-void Mesh::InitMesh(const IndexedModel model)
+void Mesh::InitMesh(const Model& model)
 {
 	
-	m_drawCount = m_model.indices.size();
+	m_drawCount = model.indices.size();
 
-	glGenVertexArrays(1, &m_vertexArrayObject);
-	glBindVertexArray(m_vertexArrayObject);
+	glGenVertexArrays(1, &m_vao);
+	glGenBuffers(1, &m_vbo);
+	glGenBuffers(1, &m_ebo);
+	
+	glBindVertexArray(m_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
-	glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	glBufferData(GL_ARRAY_BUFFER, model.vertices.size() * sizeof(Vertex), &model.vertices[0], GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-	glBufferData(GL_ARRAY_BUFFER, m_model.positions.size() * sizeof(m_model.positions[0]), &m_model.positions[0],
-	             GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, model.indices.size() * sizeof(unsigned int), &model.indices[0], GL_STATIC_DRAW);
+
+	// vertex positions
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXTCOORD_VB]);
-	glBufferData(GL_ARRAY_BUFFER, m_model.positions.size() * sizeof(m_model.texCoords[0]), &m_model.texCoords[0],
-	             GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+	// vertex texture coords
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-	glBufferData(GL_ARRAY_BUFFER, m_model.normals.size() * sizeof(m_model.normals[0]), &m_model.normals[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, textCoords));
+	// vertex normals
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_model.indices.size() * sizeof(m_model.indices[0]), &m_model.indices[0],
-	             GL_STATIC_DRAW);
-
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	// vertex tangents
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
 
 	glBindVertexArray(0);
 }
 
 void Mesh::Draw() const
 {
-	glBindVertexArray(m_vertexArrayObject);
+	glBindVertexArray(m_vao);
 
 	glDrawElements(GL_TRIANGLES, m_drawCount, GL_UNSIGNED_INT, 0);
 
 	glBindVertexArray(0);
 }
 
-std::vector<math::Vector3> Mesh::GetVerticesPosition() const
+std::vector<Vertex> Mesh::GetVertices() const
 {
-	return m_model.positions;
+	return m_model.vertices;
 }
 std::vector<unsigned> Mesh::GetIndices() const
 {
