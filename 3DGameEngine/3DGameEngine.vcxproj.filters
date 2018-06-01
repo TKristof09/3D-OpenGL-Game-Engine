@@ -300,4 +300,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Notes\Plans.txt" />
+  </ItemGroup>
 </Project>
