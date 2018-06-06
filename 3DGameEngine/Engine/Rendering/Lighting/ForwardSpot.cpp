@@ -5,8 +5,8 @@
 
 ForwardSpot::ForwardSpot()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-spot", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-spot", GL_FRAGMENT_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-spot", GL_VERTEX_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-spot", GL_FRAGMENT_SHADER);
 }
 
 

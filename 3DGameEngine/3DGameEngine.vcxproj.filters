@@ -120,9 +120,6 @@
     <ClCompile Include="Engine\Rendering\RadianceHDRTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Rendering\CubeMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Rendering\Material.h">
@@ -296,7 +293,10 @@
     <ClInclude Include="Engine\Rendering\IrradianceShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Rendering\CubeMap.h">
+    <ClInclude Include="Engine\Rendering\PrefilterShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Rendering\BRDFLUTShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

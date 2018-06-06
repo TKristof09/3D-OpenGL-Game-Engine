@@ -51,8 +51,8 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: program linking failed: ");
 
-	glValidateProgram(m_program);
-	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
+	//glValidateProgram(m_program);
+	//CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
 }
 
 void Shader::SetUniform(const std::string& uniform, int value) const

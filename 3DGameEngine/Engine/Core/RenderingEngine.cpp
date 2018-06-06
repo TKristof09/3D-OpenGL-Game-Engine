@@ -13,11 +13,18 @@ RenderingEngine::RenderingEngine()
 	m_ambientLightIntensity(0.0f),
 	m_activeLight(nullptr)
 {
-	glClearColor(0, 0, 0, 0);
+	m_background = new RadianceHDRTexture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Newport_Loft\\Newport_Loft_Ref.hdr");
+	glClearColor(0.3, 0.3, 0.3, 0.3);
 	//glEnable(GL_FRAMEBUFFER_SRGB);
 	glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	glDepthFunc(GL_LEQUAL);
+	Texture* cubeMap = m_background->ToCubeMap(1024);
+	envMap = cubeMap;//m_background->ConvoluteIrradianceMap(cubeMap, 32);
+	//prefilterMap = m_background->PrefilterMap(envMap, 128);
+	//brdfLUT = m_background->GenerateBRDFLUT(512);
+	//glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 }
@@ -43,7 +50,7 @@ void RenderingEngine::Render(const GameObject& object)
 	}
 
 
-	glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LEQUAL);
 	glDepthMask(true);
 	glDisable(GL_BLEND);
 }

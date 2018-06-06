@@ -1,7 +1,7 @@
 #version 330 core
 
 out vec4 fragColor;
-in vec3 worldPos0;
+in vec3 localPos0;
 
 uniform samplerCube environmentMap;
 uniform float roughness;

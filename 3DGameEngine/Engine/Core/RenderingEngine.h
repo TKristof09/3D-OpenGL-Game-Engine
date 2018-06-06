@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "Color.h"
+#include "../Rendering/RadianceHDRTexture.h"
 
 class GameObject;
 class Camera;
@@ -35,7 +36,18 @@ public:
 		m_ambientLightIntensity = ambientLightIntensity;
 	}
 
+
+	RadianceHDRTexture* GetBackground() const
+	{
+		return m_background;
+	}
+
+	Texture* envMap, *prefilterMap;
+	Texture* brdfLUT;
+
 private:
+	RadianceHDRTexture* m_background;
+
 	Camera* m_mainCamera;
 
 	Color m_ambientLightColor;

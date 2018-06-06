@@ -5,8 +5,8 @@
 
 ForwardPoint::ForwardPoint()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-point", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-point", GL_FRAGMENT_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-point", GL_VERTEX_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-point", GL_FRAGMENT_SHADER);
 }
 
 

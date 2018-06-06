@@ -1,7 +1,7 @@
 #version 330 core
 
 out vec2 fragColor;
-in vec3 textCoords0;
+in vec2 textCoords0;
 
 
 const float PI = 3.14159265359;
@@ -93,7 +93,7 @@ vec2 IntegrateBRDF(float NdotV, float roughness)
         float NdotL = max(dot(normal, lightDir), 0.0);
         float NdotH = max(dot(normal, halfway), 0.0);
         float HdotV = max(dot(halfway, view), 0.0);
-
+        float VdotH = dot(view, halfway);
         if(NdotL > 0.0)
         {
             float G = GeometrySmith(normal, view, lightDir, roughness);

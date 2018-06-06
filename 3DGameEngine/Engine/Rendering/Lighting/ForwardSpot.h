@@ -21,10 +21,6 @@ public:
 		return &instance;
 	}
 
-	void Bind() const
-	{
-		Shader::Bind();
-	};
 	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
 	                    RenderingEngine* renderingEngine) const override;
 	void SetUniform(std::string uniform, const PointLight& pointLight) const;

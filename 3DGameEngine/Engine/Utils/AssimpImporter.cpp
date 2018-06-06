@@ -111,14 +111,18 @@ Material* AssimpImporter::ProcessMaterial(const aiMaterial* material)
 	aiString dName;	;
 	if(material->GetTexture(aiTextureType_DIFFUSE, 0, &dName) == aiReturn_SUCCESS)
 	{
-		Texture* diffuse = new Texture(directory + "\\" + dName.C_Str());
+		TextureConfig diffuseConfig;
+		diffuseConfig.path = directory + "\\" + dName.C_Str();
+		Texture* diffuse = new Texture(diffuseConfig);
 		result->AddTexture("diffuse", diffuse);
 	}
 
 	aiString spName;	;
 	if (material->GetTexture(aiTextureType_SPECULAR, 0, &spName) == aiReturn_SUCCESS)
 	{
-		Texture* specular = new Texture(directory + "\\" + spName.C_Str());
+		TextureConfig specConfig;
+		specConfig.path = directory + "\\" + spName.C_Str();
+		Texture* specular = new Texture(specConfig);
 		result->AddTexture("specular", specular);
 	}
 	result->AddFloat("specularExponent", 32);

@@ -5,8 +5,8 @@
 
 ForwardDirectional::ForwardDirectional()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-directional", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\forward-directional-PBR", GL_FRAGMENT_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-directional", GL_VERTEX_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-directional-PBR", GL_FRAGMENT_SHADER);
 }
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
@@ -17,8 +17,10 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	Shader::SetUniform("normalMap", 1);
 	material.GetTexture("metallic").Bind(2);
 	Shader::SetUniform("metallicMap", 2);
-	material.GetTexture("rougness").Bind(3);
+	material.GetTexture("roughness").Bind(3);
 	Shader::SetUniform("roughnessMap", 3);
+	material.GetTexture("ao").Bind(4);
+	Shader::SetUniform("aoMap", 4);
 	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("color", material.GetVector3("color"));

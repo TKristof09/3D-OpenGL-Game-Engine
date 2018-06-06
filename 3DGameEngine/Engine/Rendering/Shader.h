@@ -24,7 +24,7 @@ public:
 
 	void AddShader(const std::string& fileName, unsigned int type);
 
-	void Bind() const;
+	virtual void Bind() const;
 
 	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine) const {};
 	virtual void UpdateUniforms(const Transform& transform, const Color& color, RenderingEngine* renderingEngine) const {};

@@ -2,17 +2,20 @@
 
 out vec4 fragColor;
 
-in vec3 textCoord0;
+in vec2 textCoord0;
 in vec3 worldPos0;
 in mat3 TBN0;
 
-uniform samplerCube irradianceMap;
-
 uniform sampler2D albedoMap;
 uniform sampler2D normalMap;
+uniform sampler2D metallicMap;
 uniform sampler2D roughnessMap;
 uniform sampler2D aoMap;
 
+
+uniform samplerCube irradianceMap;
+uniform samplerCube prefilterMap;
+uniform sampler2D brdfLUT;
 
 uniform vec3 eyePos;
 
@@ -28,20 +31,27 @@ vec3 FresnelSchlickRoughness(float cosHalfView, vec3 F0, float roughness){
 }
 
 void main(){
-
-    vec3 viewDir = normalize(eyePos - worldPos0);
-
 	vec3 albedo     = pow(texture(albedoMap, textCoord0).rgb, vec3(2.2));
 	vec3 normal = GetNormalFromMap();
+	float metallic  = texture(metallicMap, textCoord0).r;
 	float roughness = texture(roughnessMap, textCoord0).r;
     float ao        = texture(aoMap, textCoord0).r;
-    vec3 ambient = texture(irradianceMap, normal);
-	
+
+    vec3 viewDir = normalize(eyePos - worldPos0);
+    vec3 reflectDir = reflect(-viewDir, normal);
+
+	vec3 F0 = vec3(0.04); //this is good for every non-metallic
+	F0      = mix(F0, albedo, metallic);
 	vec3 kS = FresnelSchlickRoughness(max(dot(normal, viewDir), 0.0), F0, roughness);
 	vec3 kD = 1.0 - kS;
-	vec3 irradiance = texture(irradianceMap, normal).rgb;
+	vec3 irradiance = texture(irradianceMap, worldPos0).rgb;
 	vec3 diffuse    = irradiance * albedo;
-	vec3 ambient    = (kD * diffuse) * ao; 
 
-	fragColor = vec4(ambient, 1.0);
+   	const float MAX_REFLECTION_LOD = 4.0;
+    vec3 prefilteredColor =textureLod(prefilterMap, reflectDir,  roughness * MAX_REFLECTION_LOD).rgb;
+    vec2 brdf  = texture(brdfLUT, vec2(max(dot(normal, viewDir), 0.0), roughness)).rg;
+    vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
+	vec3 ambient = (kD * diffuse + specular) * 1; 
+
+	fragColor = vec4(irradiance, 1.0);
 }

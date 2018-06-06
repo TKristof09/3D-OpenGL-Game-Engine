@@ -163,7 +163,6 @@
     <ClCompile Include="Engine\PhysicsTestGame.cpp" />
     <ClCompile Include="Engine\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="Engine\Physics\TriggerCollider.cpp" />
-    <ClCompile Include="Engine\Rendering\CubeMap.cpp" />
     <ClCompile Include="Engine\Rendering\DebugDrawer.cpp" />
     <ClCompile Include="Engine\Rendering\Lighting\ForwardAmbient.cpp" />
     <ClCompile Include="Engine\GameComponents\Lighting.cpp" />
@@ -209,7 +208,7 @@
     <ClInclude Include="Engine\Physics\PhysicsEngine.h" />
     <ClInclude Include="Engine\GameComponents\Rigidbody.h" />
     <ClInclude Include="Engine\Physics\TriggerCollider.h" />
-    <ClInclude Include="Engine\Rendering\CubeMap.h" />
+    <ClInclude Include="Engine\Rendering\BRDFLUTShader.h" />
     <ClInclude Include="Engine\Rendering\DebugDrawer.h" />
     <ClInclude Include="Engine\Rendering\DebugShader.h" />
     <ClInclude Include="Engine\Rendering\EquirectangularToCubemapShader.h" />
@@ -217,6 +216,7 @@
     <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />
     <ClInclude Include="Engine\Rendering\Material.h" />
     <ClInclude Include="Engine\Rendering\Mesh.h" />
+    <ClInclude Include="Engine\Rendering\PrefilterShader.h" />
     <ClInclude Include="Engine\Rendering\RadianceHDRTexture.h" />
     <ClInclude Include="Engine\Utils\AssimpImporter.h" />
     <ClInclude Include="Engine\Utils\DebuggingMacros.h" />
