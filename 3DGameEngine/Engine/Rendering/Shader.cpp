@@ -51,8 +51,8 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: program linking failed: ");
 
-	//glValidateProgram(m_program);
-	//CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
+//	glValidateProgram(m_program);
+//	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: program validation failed: ");
 }
 
 void Shader::SetUniform(const std::string& uniform, int value) const
@@ -94,15 +94,15 @@ void Shader::SetUniform(const std::string& uniform, const math::Vector3& value) 
 	if (m_uniformMap.find(uniform) != m_uniformMap.end())
 	{
 		loc = m_uniformMap[uniform];
-		glUniform3fv(loc, 1, math::value_ptr(value));
+		glUniform3fv(loc, 1, value_ptr(value));
 	}
 	else
 	{
 		loc = glGetUniformLocation(m_program, uniform.c_str());
-		glUniform3fv(loc, 1, math::value_ptr(value));
+		glUniform3fv(loc, 1, value_ptr(value));
 		m_uniformMap[uniform] = loc;
 	}
-	glUniform3fv(glGetUniformLocation(m_program, uniform.c_str()), 1, math::value_ptr(value));
+	
 }
 
 void Shader::SetUniform(const std::string& uniform, const math::Vector4& value) const
@@ -111,15 +111,14 @@ void Shader::SetUniform(const std::string& uniform, const math::Vector4& value) 
 	if (m_uniformMap.find(uniform) != m_uniformMap.end())
 	{
 		loc = m_uniformMap[uniform];
-		glUniform4fv(loc, 1, math::value_ptr(value));
+		glUniform4fv(loc, 1, value_ptr(value));
 	}
 	else
 	{
 		loc = glGetUniformLocation(m_program, uniform.c_str());
-		glUniform4fv(loc, 1, math::value_ptr(value));
+		glUniform4fv(loc, 1, value_ptr(value));
 		m_uniformMap[uniform] = loc;
 	}
-	glUniform4fv(glGetUniformLocation(m_program, uniform.c_str()), 1, math::value_ptr(value));
 }
 
 void Shader::SetUniform(const std::string& uniform, const math::Matrix4x4& value) const

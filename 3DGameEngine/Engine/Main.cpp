@@ -13,6 +13,7 @@ extern "C"
 
 int main(int argc, char* argv[])
 {
+	glewExperimental = GL_TRUE;
 //	PhysicsTestGame testGame;
 	AssimpTestGame testGame;
 

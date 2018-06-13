@@ -1,7 +1,7 @@
 #ifndef SDL_BACKEND_H
 #define SDL_BACKEND_H
 
-void SDLSetIsCloseRequested(bool value);
+void SDLRequestClose(bool value);
 bool SDLGetIsCloseRequested();
 void SDLSetFullScreen(bool value);
 

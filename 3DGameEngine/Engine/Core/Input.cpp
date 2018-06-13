@@ -17,9 +17,13 @@ void Input::Update()
 	{
 		if (e.type == SDL_QUIT)
 		{
-			SDLSetIsCloseRequested(true);
+			SDLRequestClose(true);
 		}
 
+		if(GetKeyDown(SDL_SCANCODE_ESCAPE))
+		{
+			SDLRequestClose(true);
+		}
 		/*if (e.type == SDL_MOUSEMOTION)
 		{
 		m_input.SetMouseX(e.motion.x);

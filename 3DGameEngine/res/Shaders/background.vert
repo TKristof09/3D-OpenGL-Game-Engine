@@ -11,5 +11,5 @@ void main()
 
 	vec4 clipPos = MVP * vec4(WorldPos, 1.0);
 
-	gl_Position = clipPos.xyww;
+	gl_Position = clipPos;
 }

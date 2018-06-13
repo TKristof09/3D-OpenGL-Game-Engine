@@ -6,13 +6,12 @@
 #include <assimp/postprocess.h>
 #include "../Rendering/Mesh.h"
 #include "../Rendering/Material.h"
-
 class GameObject;
 
 class AssimpImporter {
 public:
 	
-	GameObject* ImportFile(const std::string& path);
+	GameObject* LoadFile(const std::string& path);
 private:
 	Mesh* AiMeshToMesh(aiMesh* mesh);
 	void ProcessNode(const aiNode* node ,const aiScene* scene, GameObject* gameObject);

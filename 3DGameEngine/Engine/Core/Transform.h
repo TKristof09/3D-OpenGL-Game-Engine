@@ -20,11 +20,11 @@ public:
 
 	math::Matrix4x4 GetModel() const
 	{
-		math::Matrix4x4 translationMatrix = math::translate(m_position);
+		math::Matrix4x4 translationMatrix = translate(m_position);
 
-		math::Matrix4x4 rotationMatrix = math::ToMatrix4x4(m_rotation);
+		math::Matrix4x4 rotationMatrix = ToMatrix4x4(m_rotation);
 
-		math::Matrix4x4 scaleMatrix = math::scale(m_scale);
+		math::Matrix4x4 scaleMatrix = scale(m_scale);
 
 		return GetParentMatrix() * translationMatrix * rotationMatrix * scaleMatrix;
 	};
@@ -57,15 +57,15 @@ public:
 
 	math::Vector3 GetForward() const
 	{
-		return math::normalize(math::rotate(math::Vector3(0, 0, -1), GetWorldRotation()));
+		return normalize(rotate(math::Vector3(0, 0, -1), GetWorldRotation()));
 	};
 	math::Vector3 GetUp() const
 	{
-		return math::normalize(math::rotate(math::Vector3(0, 1, 0), GetWorldRotation()));
+		return normalize(rotate(math::Vector3(0, 1, 0), GetWorldRotation()));
 	};
 	math::Vector3 GetRight() const
 	{
-		return math::normalize(math::rotate(math::Vector3(1, 0, 0), GetWorldRotation()));
+		return normalize(rotate(math::Vector3(1, 0, 0), GetWorldRotation()));
 	};
 
 	void SetPosition(const math::Vector3& position) { m_position = position; };
@@ -75,7 +75,7 @@ public:
 	
 	void Rotate(const math::Quaternion& rotation)
 	{
-		m_rotation = math::normalize(rotation * m_rotation);
+		m_rotation = normalize(rotation * m_rotation);
 	}
 
 	void Rotate(float angle, const math::Vector3 axis)

@@ -79,5 +79,5 @@ double Time::GetDelta()
 
 void Time::SetDelta(double value)
 {
-	Time::m_delta = value;
+	m_delta = value;
 }

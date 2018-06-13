@@ -3,8 +3,15 @@
 #include <iostream>
 #include "Texture.h"
 #include "../Utils/stb_image.h"
+#include <3DMath/3DMath.h>
+#ifdef _DEBUG
+int e;
+#define CHECK_GL_ERROR e = glGetError(); if(e != 0) std::cout << "GL error: 0x" << std::hex << e << " file: " <<__FILE__ << " line: " << std::dec << __LINE__ <<std::endl
+#else
+#define CHECK_GL_ERROR
+#endif
 
-void GenTextures(TextureConfig* config, GLenum target);
+void GenTextures(TextureConfig* config);
 
 Texture::Texture(TextureConfig config)
 {
@@ -12,45 +19,50 @@ Texture::Texture(TextureConfig config)
 	glGenTextures(1, &m_textureID);
 	glBindTexture(config.target, m_textureID);
 
+	switch (config.target)
+	{
+		case GL_TEXTURE_2D:
+			GenTextures(&config);
+			break;
+
+		case GL_TEXTURE_CUBE_MAP:
+		{
+			glTexParameteri(config.target, GL_TEXTURE_WRAP_R, config.wrapModeR);
+			GenTextures(&config);
+			break;
+		}
+		default:
+			break;
+	}
+
 	glTexParameteri(config.target, GL_TEXTURE_WRAP_S, config.wrapModeS);
 	glTexParameteri(config.target, GL_TEXTURE_WRAP_T, config.wrapModeT);
-	if (config.generateMipMaps)
+	glTexParameterf(config.target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(config.target, GL_TEXTURE_MAX_LEVEL, config.maxMipMapLevels - 1);
+	if (config.maxMipMapLevels > 1)
 	{
 		glTexParameteri(config.target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glGenerateMipmap(config.target);
+		//glGenerateMipmap(config.target);
 	}
 	else
 	{
 		glTexParameteri(config.target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}
-	glTexParameterf(config.target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	switch (config.target)
-	{
-		case GL_TEXTURE_2D:
-			GenTextures(&config, GL_TEXTURE_2D);
-			break;
-
-		case GL_TEXTURE_CUBE_MAP:
-			for (unsigned int i = 0; i < 6; ++i)
-			{
-				GenTextures(&config, GL_TEXTURE_CUBE_MAP_POSITIVE_X+i);
-			}
-			break;
-		default:
-			break;
-	}
-	
-	
 }
-void GenTextures(TextureConfig* config, GLenum target)
+void GenTextures(TextureConfig* config)
 {
 	if (config->forFrameBuffer)
 	{
-		glTexImage2D(target, 0, config->internalFormat, config->width, config->height, 0, config->format, config->dataType, nullptr);
+		int ret;
+		glGetTexParameteriv(config->target, GL_TEXTURE_IMMUTABLE_FORMAT, &ret);
+		std::cout << ret << std::endl;
+		glTexParameteri(config->target, GL_TEXTURE_BASE_LEVEL, 0);
+		glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, config->width, config->height);
+		CHECK_GL_ERROR;
 	}
 	else
 	{
-		int width, height, numComponents;
+		int width, height, numComponents = 0;
 		if(config->hdrFormat)
 		{
 			stbi_set_flip_vertically_on_load(true);
@@ -58,7 +70,10 @@ void GenTextures(TextureConfig* config, GLenum target)
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
 
-			glTexImage2D(target, 0, config->internalFormat, width, height, 0, config->format, config->dataType, imageData);
+			glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
+			CHECK_GL_ERROR;
+			glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+			CHECK_GL_ERROR;
 
 			stbi_image_free(imageData);
 		}
@@ -68,7 +83,10 @@ void GenTextures(TextureConfig* config, GLenum target)
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
 
-			glTexImage2D(target, 0, config->internalFormat, width, height, 0, config->format, config->dataType, imageData);
+			glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
+			CHECK_GL_ERROR;
+			glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+			CHECK_GL_ERROR;
 
 			stbi_image_free(imageData);
 		}
@@ -93,6 +111,7 @@ Texture::Texture(const std::string& fileName)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+	CHECK_GL_ERROR;
 
 	stbi_image_free(imageData);
 }

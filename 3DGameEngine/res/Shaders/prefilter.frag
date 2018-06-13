@@ -65,7 +65,7 @@ vec3 ImportanceSampleGGX(vec2 Xi, vec3 normal, float roughness)
 // ----------------------------------------------------------------------------
 void main()
 {		
-    vec3 normal = normalize(worldPos0);
+    vec3 normal = normalize(localPos0);
     
     // make the simplifying assumption that view equals reflectionDir equals the normal 
     vec3 reflectionDir = normal;
@@ -102,7 +102,7 @@ void main()
         }
     }
 
-    prefilteredColor = prefilteredColor / totalWeight;
+    //prefilteredColor = prefilteredColor / totalWeight;
 
     fragColor = vec4(prefilteredColor, 1.0);
 }

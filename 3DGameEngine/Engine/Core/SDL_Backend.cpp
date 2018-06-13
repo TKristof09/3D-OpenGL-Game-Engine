@@ -6,7 +6,7 @@ static SDL_Window* window;
 static SDL_GLContext glContext;
 static bool isCloseRequested = false;
 
-void SDLSetIsCloseRequested(bool value)
+void SDLRequestClose(bool value)
 {
 	isCloseRequested = value;
 }

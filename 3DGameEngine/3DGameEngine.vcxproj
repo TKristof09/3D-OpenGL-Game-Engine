@@ -163,7 +163,6 @@
     <ClCompile Include="Engine\PhysicsTestGame.cpp" />
     <ClCompile Include="Engine\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="Engine\Physics\TriggerCollider.cpp" />
-    <ClCompile Include="Engine\Rendering\DebugDrawer.cpp" />
     <ClCompile Include="Engine\Rendering\Lighting\ForwardAmbient.cpp" />
     <ClCompile Include="Engine\GameComponents\Lighting.cpp" />
     <ClCompile Include="Engine\Rendering\Material.cpp" />
@@ -209,8 +208,6 @@
     <ClInclude Include="Engine\GameComponents\Rigidbody.h" />
     <ClInclude Include="Engine\Physics\TriggerCollider.h" />
     <ClInclude Include="Engine\Rendering\BRDFLUTShader.h" />
-    <ClInclude Include="Engine\Rendering\DebugDrawer.h" />
-    <ClInclude Include="Engine\Rendering\DebugShader.h" />
     <ClInclude Include="Engine\Rendering\EquirectangularToCubemapShader.h" />
     <ClInclude Include="Engine\Rendering\IrradianceShader.h" />
     <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />

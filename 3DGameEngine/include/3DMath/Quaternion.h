@@ -64,6 +64,9 @@ namespace math
 	};
 
 	template <typename T>
+	vec<3, T> rotate(const vec<3, T>& v, const quat<T>& q);
+
+	template <typename T>
 	vec<3, T> quat<T>::GetForward()
 	{
 		return math::rotate(vec<3, T>(0, 0, -1), *this);

@@ -20,10 +20,7 @@ RenderingEngine::RenderingEngine()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	glDepthFunc(GL_LEQUAL);
-	Texture* cubeMap = m_background->ToCubeMap(1024);
-	envMap = cubeMap;//m_background->ConvoluteIrradianceMap(cubeMap, 32);
-	//prefilterMap = m_background->PrefilterMap(envMap, 128);
-	//brdfLUT = m_background->GenerateBRDFLUT(512);
+
 	//glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
@@ -32,7 +29,6 @@ RenderingEngine::RenderingEngine()
 
 void RenderingEngine::Render(const GameObject& object)
 {
-	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	object.Render(ForwardAmbient::GetInstance(), this);
@@ -53,4 +49,12 @@ void RenderingEngine::Render(const GameObject& object)
 	glDepthFunc(GL_LEQUAL);
 	glDepthMask(true);
 	glDisable(GL_BLEND);
+}
+
+void RenderingEngine::Init()
+{
+	Texture* cubeMap = m_background->ToCubeMap(1024);
+	envMap = cubeMap;//m_background->ConvoluteIrradianceMap(cubeMap, 64);
+	prefilterMap = m_background->PrefilterMap(cubeMap, 128);
+	brdfLUT = m_background->GenerateBRDFLUT(512);
 }

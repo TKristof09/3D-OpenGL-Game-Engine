@@ -16,7 +16,8 @@ public:
 	RenderingEngine();
 	~RenderingEngine() = default;
 	void Render(const GameObject& object);
-	void AddLight(const BaseLight& light) { m_lights.push_back(&light); };
+	void AddLight(const BaseLight& light) { m_lights.push_back(&light); }
+	void Init();;
 
 	void SetMainCamera(Camera& camera) { m_mainCamera = &camera; };
 

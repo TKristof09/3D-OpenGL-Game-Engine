@@ -66,7 +66,7 @@ void IndexedModel::CalcNormals()
 		math::Vector3 v1 = positions[i1] - positions[i0];
 		math::Vector3 v2 = positions[i2] - positions[i0];
 
-		math::Vector3 normal = math::normalize(math::cross(v1, v2));
+		math::Vector3 normal = normalize(cross(v1, v2));
 
 		normals[i0] += normal;
 		normals[i1] += normal;
@@ -74,7 +74,7 @@ void IndexedModel::CalcNormals()
 	}
 
 	for (unsigned int i = 0; i < positions.size(); i++)
-		normals[i] = math::normalize(normals[i]);
+		normals[i] = normalize(normals[i]);
 }
 
 IndexedModel OBJModel::ToIndexedModel()

@@ -2,7 +2,7 @@
 #define TEXTURE_H
 
 #include <string>
-#include <GL\glew.h>
+#include <GL/glew.h>
 #include "../Core/Window.h"
 
 
@@ -11,7 +11,8 @@ struct TextureConfig
 	GLenum target = GL_TEXTURE_2D;
 	GLenum wrapModeS = GL_REPEAT;
 	GLenum wrapModeT = GL_REPEAT;
-	GLenum internalFormat = GL_RGBA;
+	GLenum wrapModeR = GL_REPEAT;
+	GLenum internalFormat = GL_RGBA8;
 	GLenum format = GL_RGBA;
 	GLenum dataType = GL_UNSIGNED_BYTE;
 
@@ -21,7 +22,7 @@ struct TextureConfig
 	unsigned height = *Window::GetHeight();
 
 	bool hdrFormat = false;
-	bool generateMipMaps = false;
+	unsigned maxMipMapLevels = 1;
 
 	std::string path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\defaultTexture.jpg";
 };

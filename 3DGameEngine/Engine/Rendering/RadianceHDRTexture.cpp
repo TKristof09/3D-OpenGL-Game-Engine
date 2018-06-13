@@ -15,17 +15,17 @@ RadianceHDRTexture::RadianceHDRTexture(const std::string& fileName)
 {
 	m_captureProjection = math::perspective(math::ToRadians(90.0f), 1.0f, 0.1f, 10.0f);
 	//+x -y for up
-	m_captureViews[1] = math::ToMatrix4x4(math::Quaternion(math::ToRadians(-90), math::Vector3(0, 1, 0)) * math::Quaternion(math::ToRadians(180), math::Vector3(1, 0, 0)));
+	m_captureViews[1] = ToMatrix4x4(math::Quaternion(math::ToRadians(-90), math::Vector3(0, 1, 0)) * math::Quaternion(math::ToRadians(180), math::Vector3(1, 0, 0)));
 	//-x -y for up
-	m_captureViews[0] = math::ToMatrix4x4(math::Quaternion(math::ToRadians(90), math::Vector3(0, 1, 0)) * math::Quaternion(math::ToRadians(180), math::Vector3(1, 0, 0)));	
+	m_captureViews[0] = ToMatrix4x4(math::Quaternion(math::ToRadians(90), math::Vector3(0, 1, 0)) * math::Quaternion(math::ToRadians(180), math::Vector3(1, 0, 0)));	
 	//+y +z for up
-	m_captureViews[3] = math::ToMatrix4x4(math::Quaternion(math::ToRadians(90), math::Vector3(1, 0, 0)));
+	m_captureViews[3] = ToMatrix4x4(math::Quaternion(math::ToRadians(90), math::Vector3(1, 0, 0)));
 	//-y -z for up
-	m_captureViews[2] = math::ToMatrix4x4(math::Quaternion(math::ToRadians(-90), math::Vector3(1, 0, 0)));
+	m_captureViews[2] = ToMatrix4x4(math::Quaternion(math::ToRadians(-90), math::Vector3(1, 0, 0)));
 	//+z -y for up
-	m_captureViews[4] = math::ToMatrix4x4(math::Quaternion(math::ToRadians(180), math::Vector3(0, 1, 0)) * math::Quaternion(math::ToRadians(180), math::Vector3(0, 0, 1)));
+	m_captureViews[4] = ToMatrix4x4(math::Quaternion(math::ToRadians(180), math::Vector3(0, 1, 0)) * math::Quaternion(math::ToRadians(180), math::Vector3(0, 0, 1)));
 	//-z -y for up
-	m_captureViews[5] = math::ToMatrix4x4(math::Quaternion(math::ToRadians(180), math::Vector3(0, 0, 1)));
+	m_captureViews[5] = ToMatrix4x4(math::Quaternion(math::ToRadians(180), math::Vector3(0, 0, 1)));
 	
 	stbi_set_flip_vertically_on_load(true);
 	int width, height, nrComponents;
@@ -189,17 +189,22 @@ void CreateCubeMap(unsigned int* id, unsigned int size)
 
 Texture* RadianceHDRTexture::ToCubeMap(unsigned int size)
 {
-	TextureConfig config;
+	TextureConfig config; //BUG 
 	config.target = GL_TEXTURE_CUBE_MAP;
+	config.wrapModeS = GL_CLAMP_TO_EDGE;
+	config.wrapModeT = GL_CLAMP_TO_EDGE;
+	config.wrapModeR = GL_CLAMP_TO_EDGE;
 	config.width = size;
 	config.height = size;
 	config.forFrameBuffer = true;
-	config.internalFormat = GL_RGB16F;
-	config.format = GL_RGB;
+	config.internalFormat = GL_RGBA16F;
+	config.format = GL_RGBA;
 	config.dataType = GL_FLOAT;
+	config.maxMipMapLevels = 5;
 	Texture* cubeMap = new Texture(config);
 
 	unsigned fbo, rbo;
+	GLenum status;
 
 	glGenFramebuffers(1, &fbo);
 	glGenRenderbuffers(1, &rbo);
@@ -209,36 +214,40 @@ Texture* RadianceHDRTexture::ToCubeMap(unsigned int size)
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, size, size);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
-
 	// convert HDR equirectangular environment map to cubemap equivalent
 	EquirectangularToCubeMap* equirectangularToCube = EquirectangularToCubeMap::GetInstance();
 	equirectangularToCube->Bind();
 	equirectangularToCube->SetUniform("equirectangularMap", 0);
-	equirectangularToCube->SetUniform("projection", m_captureProjection);
-	Bind();
 
+	AssimpImporter importer;
+	GameObject* cube = importer.LoadFile("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cubeUV.obj");
 	glViewport(0, 0, size, size);
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+	equirectangularToCube->SetUniform("projection", m_captureProjection);
+	Bind();
 	for (unsigned int i = 0; i < 6; ++i)
 	{
-		equirectangularToCube->SetUniform("view", m_captureViews[i]);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
 			GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, cubeMap->GetID(), 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+		equirectangularToCube->SetUniform("view", m_captureViews[i]);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		RenderCube();
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glDeleteFramebuffers(1, &fbo);
 	glDeleteRenderbuffers(1, &rbo);
 	glViewport(0, 0, *Window::GetWidth(), *Window::GetHeight());
-
+	glGenerateTextureMipmap(cubeMap->GetID());
 	return cubeMap;
 }
 
 Texture* RadianceHDRTexture::ConvoluteIrradianceMap(Texture* environmentcubeMap, unsigned int size)
 {
 	TextureConfig config;
+	config.wrapModeS = GL_CLAMP_TO_EDGE;
+	config.wrapModeT = GL_CLAMP_TO_EDGE;
 	config.target = GL_TEXTURE_CUBE_MAP;
 	config.width = size;
 	config.height = size;
@@ -288,11 +297,13 @@ Texture* RadianceHDRTexture::ConvoluteIrradianceMap(Texture* environmentcubeMap,
 Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned size)
 {
 	TextureConfig config;
+	config.wrapModeS = GL_CLAMP_TO_EDGE;
+	config.wrapModeT = GL_CLAMP_TO_EDGE;
 	config.target = GL_TEXTURE_CUBE_MAP;
 	config.width = size;
 	config.height = size;
 	config.forFrameBuffer = true;
-	config.generateMipMaps = true;
+	config.maxMipMapLevels = 5;
 
 	Texture* prefilterMap = new Texture(config);
 
@@ -318,8 +329,8 @@ Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned 
 	for (unsigned int mip = 0; mip < maxMipLevels; ++mip)
 	{
 		// reisze framebuffer according to mip-level size.
-		unsigned int mipWidth = 128 * std::pow(0.5, mip);
-		unsigned int mipHeight = 128 * std::pow(0.5, mip);
+		unsigned int mipWidth = size * std::pow(0.5, mip);
+		unsigned int mipHeight = size * std::pow(0.5, mip);
 		glBindRenderbuffer(GL_RENDERBUFFER, rbo);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
 		glViewport(0, 0, mipWidth, mipHeight);
@@ -345,7 +356,7 @@ Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned 
 
 Texture* RadianceHDRTexture::GenerateBRDFLUT(unsigned size)
 {
-	TextureConfig textureConfig;
+	TextureConfig textureConfig; //BUG
 	textureConfig.wrapModeS = GL_CLAMP_TO_EDGE;
 	textureConfig.wrapModeT = GL_CLAMP_TO_EDGE;
 	textureConfig.forFrameBuffer = true;

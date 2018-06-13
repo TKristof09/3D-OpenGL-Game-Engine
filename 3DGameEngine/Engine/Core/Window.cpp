@@ -8,6 +8,9 @@ int Window::m_width = 0;
 int Window::m_height = 0;
 std::string Window::m_title = "Title";
 
+
+
+
 void Window::Create(int width, int height, const std::string& title)
 {
 	m_width = width;
@@ -27,18 +30,20 @@ void Window::Create(int width, int height, const std::string& title)
 
 	SDLCreateWindow(m_title.c_str(), m_width, m_height, false);
 
+	glewExperimental = true;
 	const auto result = glewInit();
 	if (result != GLEW_OK)
 		std::cerr << "Glew failed to initialize!" << std::endl;
+	
 
 
 	std::cout<<"\n OpenGL version supported by this platform: " << glGetString(GL_VERSION)<< "\n" <<std::endl;
 }
 
+
 void Window::Close()
 {
 	SDLDestroyWindow();
-	SDL_Quit();
 	SDL_Quit();
 }
 

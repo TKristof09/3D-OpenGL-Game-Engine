@@ -22,9 +22,9 @@ public:
 	math::Matrix4x4 GetViewProjection() const
 	{
 		// need to take conjugate because everything appears to rotate opposite to the camera
-		const math::Matrix4x4 cameraRotation = math::ToMatrix4x4(math::conjugate(GetTransform().GetWorldRotation()));
+		const math::Matrix4x4 cameraRotation = ToMatrix4x4(conjugate(GetTransform().GetWorldRotation()));
 		// need to take the opposite here too because everything appears to move to the opposite direction than the camera
-		const math::Matrix4x4 cameraPosition = math::translate(GetTransform().GetWorldPosition() * -1.0f);
+		const math::Matrix4x4 cameraPosition = translate(GetTransform().GetWorldPosition() * -1.0f);
 		return math::perspective(math::ToRadians(m_fov), m_aspect, m_zNear, m_zFar) * cameraRotation * cameraPosition;
 	}
 

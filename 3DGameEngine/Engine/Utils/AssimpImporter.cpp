@@ -4,7 +4,7 @@
 #include "../GameComponents/MeshRenderer.h"
 #include "../Core/time.h"
 
-GameObject* AssimpImporter::ImportFile(const std::string& path)
+GameObject* AssimpImporter::LoadFile(const std::string& path)
 {
 	Assimp::Importer importer;
 	double t = Time::GetTime();

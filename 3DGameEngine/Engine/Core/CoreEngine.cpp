@@ -14,6 +14,7 @@ CoreEngine::CoreEngine(int width, int height, double framerate, Game* game):
 	m_renderingEngine(nullptr),
 	m_physicsEngine(nullptr)
 {
+	glewExperimental = GL_TRUE;
 	btITaskScheduler* scheduler = createDefaultTaskScheduler();
 	scheduler->setNumThreads(8);
 	btSetTaskScheduler(scheduler);
@@ -62,6 +63,7 @@ void CoreEngine::Run()
 	m_isRunning = true;
 
 	m_game->Init();
+	m_renderingEngine->Init();
 	m_game->SetRenderingEngine(m_renderingEngine);
 	m_game->SetPhysicsEngine(m_physicsEngine);
 
@@ -101,7 +103,7 @@ void CoreEngine::Run()
 		{
 			Window::Render();
 			m_game->Render(m_renderingEngine);
-			DebugLineDrawer::Draw(m_renderingEngine);
+			//DebugLineDrawer::Draw(m_renderingEngine);
 		}
 		else
 		{

@@ -11,7 +11,7 @@ namespace quickhull {
 		const math::Vector3 m_V;
 		const T m_VInvLengthSquared;
 		
-		Ray(const math::Vector3& S,const math::Vector3& V) : m_S(S), m_V(V), m_VInvLengthSquared(1/math::lengthSq(m_V)) {
+		Ray(const math::Vector3& S,const math::Vector3& V) : m_S(S), m_V(V), m_VInvLengthSquared(1/lengthSq(m_V)) {
 		}
 	};
 	
