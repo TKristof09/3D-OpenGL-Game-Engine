@@ -48,7 +48,7 @@ void main(){
 	vec3 irradiance = texture(irradianceMap, worldPos0).rgb;
 	vec3 diffuse    = irradiance * albedo;
 
-   	const float MAX_REFLECTION_LOD = 0.0;
+   	const float MAX_REFLECTION_LOD = 4.0;
     vec3 prefilteredColor = textureLod(prefilterMap, reflectDir,  roughness * MAX_REFLECTION_LOD).rgb;
     vec2 brdf  = texture(brdfLUT, vec2(max(dot(normal, viewDir), 0.0), roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
@@ -57,5 +57,5 @@ void main(){
 	ambient = ambient / (ambient + vec3(1.0));
 	ambient = pow(ambient, vec3(1.0 / 2.2));
 
-	fragColor = vec4(irradiance, 1.0);
+	fragColor = vec4(ambient, 1.0);
 }

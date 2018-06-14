@@ -189,11 +189,12 @@ void CreateCubeMap(unsigned int* id, unsigned int size)
 
 Texture* RadianceHDRTexture::ToCubeMap(unsigned int size)
 {
-	TextureConfig config; //BUG 
+	TextureConfig config; 
 	config.target = GL_TEXTURE_CUBE_MAP;
 	config.wrapModeS = GL_CLAMP_TO_EDGE;
 	config.wrapModeT = GL_CLAMP_TO_EDGE;
 	config.wrapModeR = GL_CLAMP_TO_EDGE;
+	config.minFilter = GL_LINEAR;
 	config.width = size;
 	config.height = size;
 	config.forFrameBuffer = true;
@@ -296,6 +297,7 @@ Texture* RadianceHDRTexture::ConvoluteIrradianceMap(Texture* environmentcubeMap,
 
 Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned size)
 {
+	const unsigned int maxMipLevels = 5;
 	TextureConfig config;
 	config.wrapModeS = GL_CLAMP_TO_EDGE;
 	config.wrapModeT = GL_CLAMP_TO_EDGE;
@@ -303,7 +305,7 @@ Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned 
 	config.width = size;
 	config.height = size;
 	config.forFrameBuffer = true;
-	config.maxMipMapLevels = 5;
+	config.maxMipMapLevels = maxMipLevels;
 
 	Texture* prefilterMap = new Texture(config);
 
@@ -325,7 +327,6 @@ Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned 
 	environmentCubeMap->Bind();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-	const unsigned int maxMipLevels = 5;
 	for (unsigned int mip = 0; mip < maxMipLevels; ++mip)
 	{
 		// reisze framebuffer according to mip-level size.
@@ -356,7 +357,7 @@ Texture* RadianceHDRTexture::PrefilterMap(Texture* environmentCubeMap, unsigned 
 
 Texture* RadianceHDRTexture::GenerateBRDFLUT(unsigned size)
 {
-	TextureConfig textureConfig; //BUG
+	TextureConfig textureConfig;
 	textureConfig.wrapModeS = GL_CLAMP_TO_EDGE;
 	textureConfig.wrapModeT = GL_CLAMP_TO_EDGE;
 	textureConfig.forFrameBuffer = true;

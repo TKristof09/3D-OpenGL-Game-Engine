@@ -12,6 +12,8 @@ struct TextureConfig
 	GLenum wrapModeS = GL_REPEAT;
 	GLenum wrapModeT = GL_REPEAT;
 	GLenum wrapModeR = GL_REPEAT;
+	GLenum minFilter = GL_LINEAR_MIPMAP_LINEAR;
+	GLenum magFilter = GL_LINEAR;
 	GLenum internalFormat = GL_RGBA8;
 	GLenum format = GL_RGBA;
 	GLenum dataType = GL_UNSIGNED_BYTE;

@@ -11,7 +11,7 @@ int e;
 #define CHECK_GL_ERROR
 #endif
 
-void GenTextures(TextureConfig* config);
+void GenTextures(TextureConfig* config, GLenum target);
 
 Texture::Texture(TextureConfig config)
 {
@@ -22,13 +22,16 @@ Texture::Texture(TextureConfig config)
 	switch (config.target)
 	{
 		case GL_TEXTURE_2D:
-			GenTextures(&config);
+			GenTextures(&config, config.target);
 			break;
 
 		case GL_TEXTURE_CUBE_MAP:
 		{
 			glTexParameteri(config.target, GL_TEXTURE_WRAP_R, config.wrapModeR);
-			GenTextures(&config);
+			for (unsigned int i = 0; i < 6; ++i)
+			{
+				GenTextures(&config, GL_TEXTURE_CUBE_MAP_POSITIVE_X+i);
+			}
 			break;
 		}
 		default:
@@ -37,27 +40,25 @@ Texture::Texture(TextureConfig config)
 
 	glTexParameteri(config.target, GL_TEXTURE_WRAP_S, config.wrapModeS);
 	glTexParameteri(config.target, GL_TEXTURE_WRAP_T, config.wrapModeT);
-	glTexParameterf(config.target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(config.target, GL_TEXTURE_MAG_FILTER, config.magFilter);
+	glTexParameteri(config.target, GL_TEXTURE_MIN_FILTER, config.minFilter);
 	glTexParameteri(config.target, GL_TEXTURE_MAX_LEVEL, config.maxMipMapLevels - 1);
+	glTexParameteri(config.target, GL_TEXTURE_BASE_LEVEL, 0);
 	if (config.maxMipMapLevels > 1)
 	{
-		glTexParameteri(config.target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		//glGenerateMipmap(config.target);
+		glGenerateMipmap(config.target);
 	}
 	else
 	{
 		glTexParameteri(config.target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	}
 }
-void GenTextures(TextureConfig* config)
+void GenTextures(TextureConfig* config, GLenum target)
 {
 	if (config->forFrameBuffer)
 	{
-		int ret;
-		glGetTexParameteriv(config->target, GL_TEXTURE_IMMUTABLE_FORMAT, &ret);
-		std::cout << ret << std::endl;
-		glTexParameteri(config->target, GL_TEXTURE_BASE_LEVEL, 0);
-		glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, config->width, config->height);
+		//glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, config->width, config->height);
+		glTexImage2D(target, 0, config->internalFormat, config->width, config->height, 0, config->format, config->dataType, nullptr);
 		CHECK_GL_ERROR;
 	}
 	else
