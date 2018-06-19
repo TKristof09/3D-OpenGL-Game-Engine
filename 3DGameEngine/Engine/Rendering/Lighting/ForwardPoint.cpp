@@ -6,21 +6,27 @@
 ForwardPoint::ForwardPoint()
 {
 	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-point", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-point", GL_FRAGMENT_SHADER);
+	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-point-PBR", GL_FRAGMENT_SHADER);
 }
 
 
 void ForwardPoint::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material,
                                   RenderingEngine* renderingEngine) const
 {
-	material.GetTexture("diffuse").Bind();
-	material.GetTexture("specular").Bind(1);
-	Shader::SetUniform("specular", 1);
+	material.GetTexture("albedo").Bind();
+	material.GetTexture("normal").Bind(1);
+	Shader::SetUniform("normalMap", 1);
+	material.GetTexture("metallic").Bind(2);
+	Shader::SetUniform("metallicMap", 2);
+	material.GetTexture("roughness").Bind(3);
+	Shader::SetUniform("roughnessMap", 3);
+	material.GetTexture("ao").Bind(4);
+	Shader::SetUniform("aoMap", 4);
+
 	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("color", material.GetVector3("color"));
 	Shader::SetUniform("model", transform.GetModel());
-	Shader::SetUniform("specularExponent", material.GetFloat("specularExponent"));
 	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
 	SetUniform("pointLight", *dynamic_cast<const PointLight*>(renderingEngine->GetActiveLight()));
 }

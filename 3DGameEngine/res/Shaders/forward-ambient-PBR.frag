@@ -18,6 +18,9 @@ uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
 
 uniform vec3 eyePos;
+uniform float ambientIntesnity;
+
+uniform vec3 color;
 
 vec3 GetNormalFromMap(){
 	vec3 normal = texture(normalMap, textCoord0).rgb;
@@ -46,14 +49,15 @@ void main(){
 	vec3 kD = 1.0 - kS;
 	kD *= 1.0 - metallic;
 	vec3 irradiance = texture(irradianceMap, worldPos0).rgb;
-	vec3 diffuse    = irradiance * albedo;
+	vec3 diffuse    = irradiance * albedo * color;
 
    	const float MAX_REFLECTION_LOD = 4.0;
     vec3 prefilteredColor = textureLod(prefilterMap, reflectDir,  roughness * MAX_REFLECTION_LOD).rgb;
     vec2 brdf  = texture(brdfLUT, vec2(max(dot(normal, viewDir), 0.0), roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
-	vec3 ambient = (kD * diffuse + specular) * 1; 
+	vec3 ambient = (kD * diffuse + specular) * ao; 
 
+	ambient = ambient * ambientIntesnity;
 	ambient = ambient / (ambient + vec3(1.0));
 	ambient = pow(ambient, vec3(1.0 / 2.2));
 

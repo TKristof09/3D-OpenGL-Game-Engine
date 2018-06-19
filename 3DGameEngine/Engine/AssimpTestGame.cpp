@@ -28,8 +28,10 @@ void AssimpTestGame::Init()
 	
 	
 	AssimpImporter importer;
-	GameObject* go = importer.LoadFile("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\sphere.obj");
+	GameObject* go = importer.LoadFile("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cubeUV.obj");
 	//go->GetTransform()->Rotate(math::ToRadians(-90.0f), math::Vector3(1, 0, 0));
+	//go->GetTransform()->SetScale(math::Vector3(10, 10, 10));
+    go->GetTransform()->SetScale(math::Vector3(10, 1, 10));
 	MeshRenderer* mr = go->GetChild(0)->GetComponent<MeshRenderer>();
 	//go->GetChild(0)->GetTransform()->SetScale(math::Vector3(2));
 	Material* material1 = mr->material;
@@ -45,30 +47,17 @@ void AssimpTestGame::Init()
 	material1->AddTexture("normal", new Texture(normal));
 	material1->AddTexture("metallic", new Texture(metallic));
 	material1->AddTexture("roughness", new Texture(roughness));
-	//material1->AddVector3("color", Color::White.ToVector3());
-	//material1->AddTexture("diffuse", new Texture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\checkerboard.png"));
-	//material1->AddTexture("specular", new Texture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\checkerboard - specular.jpg"));
-	//material1->AddFloat("specularExponent", 32);
-
-
-	//MeshRenderer* mr2 = go->GetChild(0)->GetChild(0)->GetChild(0)->GetChild(0)->GetComponent<MeshRenderer>();
-	//Material* material2 = mr->material;
-	//material2->AddTexture("diffuse", new Texture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\checkerboard.png"));
-	//material2->AddTexture("specular", new Texture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\checkerboard - specular.jpg"));
-	//material2->AddFloat("specularExponent", 32);
-
     //--------------------------------------------------------------------------------------------------------------------------------------
 	//Lights
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	
-	dLight->AddComponent(new DirectionalLight(Color(244.0f, 150.0f, 28.0f), 0.2f));
-	dLight->GetTransform()->Rotate(math::ToRadians(-65), math::Vector3(1, 0, 0));
-	
+	dLight->AddComponent(new PointLight(Color::Red, 0.6f, Attenuation(1,0,0)));
+	dLight->GetTransform()->Translate(math::Vector3(0, 2, -2));
+//	dLight->AddComponent(new DirectionalLight(Color(244.0f, 150.0f, 28.0f), 0.6f));
+//	dLight->GetTransform()->Rotate(math::ToRadians(-65), math::Vector3(1, 0, 0));
+//	dLight->GetTransform()->Translate(math::Vector3(2, 2, 0));
 	
 	AddToScene(go);
-	//AddToScene(dLight);
+	AddToScene(dLight);
 
-
-	SetAmbientLightColor(Color::White);
-	SetAmbientLightIntensity(0.3f);
 }

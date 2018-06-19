@@ -167,6 +167,7 @@
     <ClCompile Include="Engine\GameComponents\Lighting.cpp" />
     <ClCompile Include="Engine\Rendering\Material.cpp" />
     <ClCompile Include="Engine\Rendering\Mesh.cpp" />
+    <ClCompile Include="Engine\Rendering\PBR.cpp" />
     <ClCompile Include="Engine\Rendering\RadianceHDRTexture.cpp" />
     <ClCompile Include="Engine\Utils\AssimpImporter.cpp" />
     <ClCompile Include="Engine\Utils\OBJloader.cpp" />
@@ -207,12 +208,14 @@
     <ClInclude Include="Engine\Physics\PhysicsEngine.h" />
     <ClInclude Include="Engine\GameComponents\Rigidbody.h" />
     <ClInclude Include="Engine\Physics\TriggerCollider.h" />
+    <ClInclude Include="Engine\Rendering\BasicShapes.h" />
     <ClInclude Include="Engine\Rendering\BRDFLUTShader.h" />
     <ClInclude Include="Engine\Rendering\EquirectangularToCubemapShader.h" />
     <ClInclude Include="Engine\Rendering\IrradianceShader.h" />
     <ClInclude Include="Engine\Rendering\Lighting\ForwardAmbient.h" />
     <ClInclude Include="Engine\Rendering\Material.h" />
     <ClInclude Include="Engine\Rendering\Mesh.h" />
+    <ClInclude Include="Engine\Rendering\PBR.h" />
     <ClInclude Include="Engine\Rendering\PrefilterShader.h" />
     <ClInclude Include="Engine\Rendering\RadianceHDRTexture.h" />
     <ClInclude Include="Engine\Utils\AssimpImporter.h" />

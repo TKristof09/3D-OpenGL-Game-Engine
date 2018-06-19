@@ -18,17 +18,25 @@ uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
 
 struct BaseLight{
-	
-	vec3 color;
-	float intensity;
+    vec3 color;
+    float intensity;
 };
 
-struct DirectionalLight{
-	BaseLight base;
-	vec3 direction;
+struct Attenuation{
+    // exponent*x^2+linear*x+constant
+    float exponent;
+    float linear;
+    float constant;
 };
 
-uniform DirectionalLight directionalLight;
+struct PointLight{
+    BaseLight base;
+    Attenuation attenuation;
+    vec3 position;
+    float range;
+};
+
+uniform PointLight pointLight;
 
 uniform vec3 color;
 
@@ -92,7 +100,11 @@ void main(){
 
     vec3 viewDir = normalize(eyePos - worldPos0);
 
-    vec3 lightDir = -directionalLight.direction;
+    vec3 lightDir = pointLight.position - worldPos0;
+    float distanceToLight = length(lightDir);
+
+    
+    lightDir = normalize(lightDir);
     vec3 halfVector = normalize(lightDir + viewDir);
 
     vec3 F0 = vec3(0.04); //this is good for every non-metallic
@@ -114,12 +126,22 @@ void main(){
 
  	// scale light by NdotL
     float angle = max(dot(normal, lightDir), 0.0);        
+
     // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
-    vec3 outRadiance = (diffuse * albedo * color / PI + specular) * directionalLight.base.color * angle;  
+    vec3 outRadiance = (diffuse * albedo * color / PI + specular) * pointLight.base.color * angle;  
+
+    float attenuation = 1 / (pointLight.attenuation.exponent * distanceToLight * distanceToLight +
+                        pointLight.attenuation.linear * distanceToLight +
+                        pointLight.attenuation.constant + 0.00001); 
+                        // +0.00001 to prevent division with 0
+
+    outRadiance = outRadiance * attenuation;
 
     vec3 colorOut = outRadiance / (outRadiance + vec3(1.0));
     colorOut = pow(colorOut, vec3(1.0/2.2));  
-
-    FragColor = vec4(colorOut, 1.0);
+    if(distanceToLight > pointLight.range)
+        FragColor = vec4(0,0,0,0);
+    else
+        FragColor = vec4(colorOut, 1.0);
 
 }
