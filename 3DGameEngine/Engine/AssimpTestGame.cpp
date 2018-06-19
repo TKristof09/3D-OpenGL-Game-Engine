@@ -31,7 +31,7 @@ void AssimpTestGame::Init()
 	GameObject* go = importer.LoadFile("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cubeUV.obj");
 	//go->GetTransform()->Rotate(math::ToRadians(-90.0f), math::Vector3(1, 0, 0));
 	//go->GetTransform()->SetScale(math::Vector3(10, 10, 10));
-    go->GetTransform()->SetScale(math::Vector3(10, 1, 10));
+    //go->GetTransform()->SetScale(math::Vector3(10, 1, 10));
 	MeshRenderer* mr = go->GetChild(0)->GetComponent<MeshRenderer>();
 	//go->GetChild(0)->GetTransform()->SetScale(math::Vector3(2));
 	Material* material1 = mr->material;
@@ -51,10 +51,10 @@ void AssimpTestGame::Init()
 	//Lights
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	
-	dLight->AddComponent(new PointLight(Color::Red, 0.6f, Attenuation(1,0,0)));
-	dLight->GetTransform()->Translate(math::Vector3(0, 2, -2));
+	dLight->AddComponent(new SpotLight(Color::Red, 1.0f, Attenuation(1,0,0), math::ToRadians(30)));
+	dLight->GetTransform()->Translate(math::Vector3(0, 0, -2));
 //	dLight->AddComponent(new DirectionalLight(Color(244.0f, 150.0f, 28.0f), 0.6f));
-//	dLight->GetTransform()->Rotate(math::ToRadians(-65), math::Vector3(1, 0, 0));
+	dLight->GetTransform()->Rotate(math::ToRadians(65), math::Vector3(1, 0, 0));
 //	dLight->GetTransform()->Translate(math::Vector3(2, 2, 0));
 	
 	AddToScene(go);
