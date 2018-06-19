@@ -4,7 +4,7 @@ out vec4 fragColor;
 
 in vec3 worldPos0;
 in vec2 textCoord0;
-in vec3 normal0;
+in mat3 TBN0;
 
 struct BaseLight{
 	
@@ -37,19 +37,26 @@ uniform vec3 eyePos;
 uniform sampler2D diffuse;
 uniform sampler2D specular;
 
+uniform sampler2D normalMap;
+
 uniform float specularExponent;
 
 uniform SpotLight spotLight;
 
 uniform vec3 color;
-
+vec3 GetNormalFromMap(){
+	vec3 normal = texture(normalMap, textCoord0).rgb;
+	normal = normalize(normal * 2.0 - 1.0);
+	normal = normalize(TBN0 * normal);
+	return normal;
+}
 vec4 CalcLight(BaseLight base,vec3 direction){
 	// TODO idk why this is needed but it is 
 	direction = normalize(-direction);
 	// ambient
 
     // diffuse 
-    vec3 norm = normalize(normal0);
+    vec3 norm = GetNormalFromMap();
     float angle = max(dot(norm, direction), 0.0);
     vec3 diffuse = angle * base.color * base.intensity;
     
