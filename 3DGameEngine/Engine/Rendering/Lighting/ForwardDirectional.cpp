@@ -21,11 +21,12 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
 	Shader::SetUniform("roughnessMap", 3);
 	material.GetTexture("ao").Bind(4);
 	Shader::SetUniform("aoMap", 4);
+
+
 	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	Shader::SetUniform("MVP", MVP);
 	Shader::SetUniform("color", material.GetVector3("color"));
 	Shader::SetUniform("model", transform.GetModel());
-	Shader::SetUniform("specularExponent", material.GetFloat("specularExponent"));
 	Shader::SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
 	SetUniform("directionalLight", *static_cast<const DirectionalLight*>(renderingEngine->GetActiveLight()));
 }

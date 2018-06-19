@@ -17,6 +17,7 @@ struct TextureConfig
 	GLenum internalFormat = GL_RGBA8;
 	GLenum format = GL_RGBA;
 	GLenum dataType = GL_UNSIGNED_BYTE;
+    bool flipOnLoad = false;
 
 	bool forFrameBuffer = false;
 	//only used for frame buffer textures

@@ -3,6 +3,7 @@
 #include "Input.h"
 #include "..\Rendering\Lighting\ForwardAmbient.h"
 #include "..\GameComponents\Lighting.h"
+#include "../Rendering/PBR.h"
 
 
 RenderingEngine::RenderingEngine()
@@ -14,8 +15,7 @@ RenderingEngine::RenderingEngine()
 	m_activeLight(nullptr)
 {
 	m_background = new RadianceHDRTexture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Newport_Loft\\Newport_Loft_Ref.hdr");
-	glClearColor(0.3, 0.3, 0.3, 0.3);
-	//glEnable(GL_FRAMEBUFFER_SRGB);
+	//glClearColor(0.05f, 0.05f, 0.05f, 0.05f);
 	glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -56,8 +56,8 @@ void RenderingEngine::Init()
 {
 	glDisable(GL_CULL_FACE);
 	Texture* cubeMap = m_background->ToCubeMap(1024);
-	envMap = m_background->ConvoluteIrradianceMap(cubeMap, 128);
-	prefilterMap = m_background->PrefilterMap(cubeMap, 256);
-	brdfLUT = m_background->GenerateBRDFLUT(512);
+    envMap = PBR::ConvoluteIrradianceMap(cubeMap, 128);
+	prefilterMap = PBR::PrefilterMap(cubeMap, 256);
+	brdfLUT = PBR::GenerateBRDFLUT(512);
 	glEnable(GL_CULL_FACE);
 }

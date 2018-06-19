@@ -34,8 +34,6 @@ void Window::Create(int width, int height, const std::string& title)
 	const auto result = glewInit();
 	if (result != GLEW_OK)
 		std::cerr << "Glew failed to initialize!" << std::endl;
-	
-
 
 	std::cout<<"\n OpenGL version supported by this platform: " << glGetString(GL_VERSION)<< "\n" <<std::endl;
 }

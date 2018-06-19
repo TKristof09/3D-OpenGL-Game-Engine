@@ -12,9 +12,11 @@ int e;
 #endif
 
 void GenTextures(TextureConfig* config, GLenum target);
+int maxTextures;
 
 Texture::Texture(TextureConfig config)
 {
+    glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxTextures);
 	m_config = config;
 	glGenTextures(1, &m_textureID);
 	glBindTexture(config.target, m_textureID);
@@ -48,10 +50,7 @@ Texture::Texture(TextureConfig config)
 	{
 		glGenerateMipmap(config.target);
 	}
-	else
-	{
-		glTexParameteri(config.target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	}
+	
 }
 void GenTextures(TextureConfig* config, GLenum target)
 {
@@ -66,8 +65,8 @@ void GenTextures(TextureConfig* config, GLenum target)
 		int width, height, numComponents = 0;
 		if(config->hdrFormat)
 		{
-			stbi_set_flip_vertically_on_load(true);
-			float* imageData = stbi_loadf(config->path.c_str(), &width, &height, &numComponents, 4);
+			stbi_set_flip_vertically_on_load(config->flipOnLoad);
+			float* imageData = stbi_loadf(config->path.c_str(), &width, &height, &numComponents, 0);
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
 
@@ -80,6 +79,7 @@ void GenTextures(TextureConfig* config, GLenum target)
 		}
 		else
 		{
+            stbi_set_flip_vertically_on_load(config->flipOnLoad);
 			stbi_uc* imageData = stbi_load(config->path.c_str(), &width, &height, &numComponents, 4);
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
@@ -96,25 +96,12 @@ void GenTextures(TextureConfig* config, GLenum target)
 Texture::Texture(const std::string& fileName)
 {
 	glGenTextures(1, &m_textureID);
-	glBindTexture(GL_TEXTURE_2D, m_textureID);
-	int width, height, numComponents;
-	stbi_uc* imageData = stbi_load(fileName.c_str(), &width, &height, &numComponents, 4);
-	if (imageData == nullptr)
-		std::cerr << "Texture loading failed for texture: " << fileName << std::endl;
+	glBindTexture(m_config.target, m_textureID);
 
-	glGenTextures(1, &m_textureID);
-	glBindTexture(GL_TEXTURE_2D, m_textureID);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-	CHECK_GL_ERROR;
-
-	stbi_image_free(imageData);
+	m_config.minFilter = GL_LINEAR;
+    m_config.path = fileName;
+	
+    GenTextures(&m_config, m_config.target);
 }
 
 Texture::~Texture()
@@ -124,7 +111,7 @@ Texture::~Texture()
 
 void Texture::Bind(unsigned int unit) const
 {
-	assert(unit >= 0 && unit <= 31);
+	assert(unit >= 0 && unit < maxTextures);
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(m_config.target, m_textureID);
 }

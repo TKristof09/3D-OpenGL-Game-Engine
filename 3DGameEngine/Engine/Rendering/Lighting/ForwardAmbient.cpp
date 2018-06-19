@@ -12,7 +12,6 @@ void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& 
                                     RenderingEngine* renderingEngine) const
 {
 	material.GetTexture("albedo").Bind();
-	renderingEngine->envMap->Bind();
 	SetUniform("albedoMap", 0);
 	material.GetTexture("normal").Bind(1);
 	SetUniform("normalMap", 1);
@@ -37,4 +36,6 @@ void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& 
 	SetUniform("MVP", MVP);
 	SetUniform("model", transform.GetModel());
 	SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
+	SetUniform("ambientIntesnity", 1.0f);
+	SetUniform("color", material.GetVector3("color"));
 }
