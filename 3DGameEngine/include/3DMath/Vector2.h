@@ -11,7 +11,10 @@ namespace math
 	template <typename T>
 	struct vec<2, T>
 	{
-		vec() {}
+		vec()
+		{
+            vec(0);
+		}
 
 		vec(T _s)
 		{

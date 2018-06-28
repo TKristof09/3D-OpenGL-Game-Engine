@@ -7,6 +7,7 @@
 
 class RenderingEngine;
 class PhysicsEngine;
+class AudioEngine;
 class Shader;
 
 
@@ -17,11 +18,14 @@ public:
 	GameComponent() : m_parent(nullptr) {};
 	virtual ~GameComponent() = default;;
 
+    virtual void Start() {};
 	virtual void Input() {};
 	virtual void Update() {};
 	virtual void Render(const Shader* shader, RenderingEngine* renderingEngine) {};
-	virtual void AddToRenderingEngine(RenderingEngine* renderingEngine) {};
+
+    virtual void AddToRenderingEngine(RenderingEngine* renderingEngine) {};
 	virtual void AddToPhysicsEngine(PhysicsEngine* physicsEngine) {}
+    virtual void AddToAudioEngine(AudioEngine* audioEngine) {};
 
 	Transform* GetTransform() { return m_parent->GetTransform(); };
 	const Transform& GetTransform() const { return *m_parent->GetTransform(); };

@@ -24,6 +24,18 @@ void GameObject::AddComponent(GameComponent* component)
 }
 
 
+void GameObject::Start() const
+{
+    for (const auto& pair : m_components)
+    {
+        pair.second->Start();
+    }
+    for (GameObject* child : m_children)
+    {
+        child->Start();
+    }
+}
+
 void GameObject::Update() const
 {
 	for (const auto& pair : m_components)
@@ -94,4 +106,20 @@ void GameObject::SetPhysicsEngine(PhysicsEngine* physicsEngine)
 		}
 
 	}
+}
+
+void GameObject::SetAudioEngine(AudioEngine* audioEngine)
+{
+    if(m_audioEngine != audioEngine)
+    {
+        m_audioEngine = audioEngine;
+        for (const auto& pair : m_components)
+        {
+            pair.second->AddToAudioEngine(audioEngine);
+        }
+        for (auto child : m_children)
+        {
+            child->SetAudioEngine(audioEngine);
+        }
+    }
 }

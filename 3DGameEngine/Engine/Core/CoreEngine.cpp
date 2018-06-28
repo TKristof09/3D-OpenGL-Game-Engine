@@ -12,15 +12,19 @@ CoreEngine::CoreEngine(int width, int height, double framerate, Game* game):
 	m_frameTime(1.0 / framerate),
 	m_game(game),
 	m_renderingEngine(nullptr),
-	m_physicsEngine(nullptr)
+	m_physicsEngine(nullptr),
+    m_audioEngine(nullptr)
 {
 	glewExperimental = GL_TRUE;
+
 	btITaskScheduler* scheduler = createDefaultTaskScheduler();
 	scheduler->setNumThreads(8);
 	btSetTaskScheduler(scheduler);
 	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
 	m_physicsEngine = new PhysicsEngine(collisionConfiguration, new btCollisionDispatcherMt(collisionConfiguration),
 		new btDbvtBroadphase(), new btConstraintSolverPoolMt(8));
+
+    m_audioEngine = new AudioEngine();
 }
 
 
@@ -37,7 +41,6 @@ void CoreEngine::CreateWindow(const std::string& title)
 {
 	Window::Create(m_width, m_height, title);
 	m_renderingEngine = new RenderingEngine();
-	m_game->SetRenderingEngine(m_renderingEngine); //TODO find better solution
 	
 }
 
@@ -64,11 +67,15 @@ void CoreEngine::Run()
 
 	m_game->Init();
 	m_renderingEngine->Init();
+
 	m_game->SetRenderingEngine(m_renderingEngine);
 	m_game->SetPhysicsEngine(m_physicsEngine);
+    m_game->SetAudioEngine(m_audioEngine);
 
 	double lastTime = Time::GetTime();
 	double unprocessedTime = 0;
+
+    m_game->Start();
 
 	while (m_isRunning)
 	{
@@ -94,6 +101,7 @@ void CoreEngine::Run()
 			Time::SetDelta(m_frameTime);
 			
 			m_game->Update();
+            m_audioEngine->Update();
 			m_physicsEngine->Simulate(m_frameTime);
 
 			unprocessedTime -= m_frameTime;

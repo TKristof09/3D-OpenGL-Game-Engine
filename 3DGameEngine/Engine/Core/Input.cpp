@@ -4,10 +4,7 @@
 bool Input::GetKeyDown(SDL_Scancode scanCode)
 {
 	const Uint8* state = SDL_GetKeyboardState(NULL);
-	if (state[scanCode])
-		return true;
-	else
-		return false;
+    return state[scanCode];
 }
 
 void Input::Update()

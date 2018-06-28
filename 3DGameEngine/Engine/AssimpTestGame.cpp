@@ -7,10 +7,8 @@
 #include "Utils/OBJloader.h"
 #include "GameComponents/Lighting.h"
 #include "Rendering/RadianceHDRTexture.h"
-
 void AssimpTestGame::Init()
 {
-	
 	auto cameraOBJ = new GameObject("camera");
 	auto dLight = new GameObject("dLight");
 	

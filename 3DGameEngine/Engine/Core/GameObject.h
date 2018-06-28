@@ -9,6 +9,7 @@
 
 class RenderingEngine;
 class PhysicsEngine;
+class AudioEngine;
 class Shader;
 class GameComponent;
 
@@ -18,8 +19,10 @@ public:
 	GameObject(std::string name = "GameObject"):
 		name(std::move(name)),
 		m_renderingEngine(nullptr),
-		m_physicsEngine(nullptr) {};
-	~GameObject() = default;;
+		m_physicsEngine(nullptr) {}
+
+	~GameObject() = default;
+    void Start() const;
 	void Update() const;
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) const;
 	void Input() const;
@@ -27,6 +30,7 @@ public:
 	void AddComponent(GameComponent* component);
 	void SetRenderingEngine(RenderingEngine* renderingEngine);
 	void SetPhysicsEngine(PhysicsEngine* physicsEngine);
+    void SetAudioEngine(AudioEngine* audioEngine);;
 	Transform* GetTransform() { return &m_transform; };
 
 	template <typename T>
@@ -57,6 +61,7 @@ private:
 	std::map<std::type_index, GameComponent*> m_components;
 	RenderingEngine* m_renderingEngine;
 	PhysicsEngine* m_physicsEngine;
+    AudioEngine* m_audioEngine;
 };
 
 #endif // !GAMEOBJECT_H

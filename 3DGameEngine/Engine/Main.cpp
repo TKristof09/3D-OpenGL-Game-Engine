@@ -1,6 +1,7 @@
 #include "Core\CoreEngine.h"
 #include "PhysicsTestGame.h"
 #include "AssimpTestGame.h"
+#include "AudioTestGame.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -15,7 +16,8 @@ int main(int argc, char* argv[])
 {
 	glewExperimental = GL_TRUE;
 //	PhysicsTestGame testGame;
-	AssimpTestGame testGame;
+//	AssimpTestGame testGame;
+    AudioTestGame testGame;
 
 	Game* game = &testGame;
 	{

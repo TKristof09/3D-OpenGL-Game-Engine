@@ -10,8 +10,6 @@ RenderingEngine::RenderingEngine()
 	:
 	//   m_mainCamera(Camera(math::Vector3(0, 3, 10), math::Vector3(0, 0, -1), math::Vector3(0, 1, 0), 70.0f, static_cast<float>(*Window::GetWidth()) / static_cast<float>(*Window::GetHeight()), 0.01f, 1000.0f)),
 	m_mainCamera(nullptr),
-	m_ambientLightColor(Color::Black),
-	m_ambientLightIntensity(0.0f),
 	m_activeLight(nullptr)
 {
 	m_background = new RadianceHDRTexture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Newport_Loft\\Newport_Loft_Ref.hdr");
