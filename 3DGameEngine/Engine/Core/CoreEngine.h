@@ -5,12 +5,14 @@
 #include "RenderingEngine.h"
 #include "../Physics/PhysicsEngine.h"
 #include "../Audio/AudioEngine.h"
+#include "../Rendering/DebugUI.h"
 
 class CoreEngine
 {
 public:
-	CoreEngine(int width, int height, double framerate, Game* game);
+	CoreEngine(int width, int height, double framerate);
 	~CoreEngine();
+    void LoadGame(Game* game);
 	void CreateWindow(const std::string& title);
 	void Start();
 
@@ -27,6 +29,7 @@ private:
 	RenderingEngine* m_renderingEngine;
 	PhysicsEngine* m_physicsEngine;
     AudioEngine* m_audioEngine;
+    DebugUI* m_debugUI;
 };
 
 #endif // !COREENGINE_H

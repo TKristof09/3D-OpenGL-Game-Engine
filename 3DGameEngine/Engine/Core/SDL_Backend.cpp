@@ -1,7 +1,5 @@
 #include "SDL_Backend.h"
 
-#include "SDL2\SDL.h"
-
 static SDL_Window* window;
 static SDL_GLContext glContext;
 static bool isCloseRequested = false;
@@ -35,11 +33,9 @@ void SDLCreateWindow(const char* title, int width, int height, bool fullscreen)
 	if (fullscreen)
 		mode = SDL_WINDOW_FULLSCREEN;
 
-	//BUG this takes a really long time to execute
 	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
 	                          SDL_WINDOW_OPENGL | mode);
 	glContext = SDL_GL_CreateContext(window);
-
 	//SDL_GL_SetSwapInterval(1); This is VSync(i think)
 }
 
@@ -50,6 +46,15 @@ void SDLDestroyWindow()
 
 	SDL_GL_DeleteContext(glContext);
 	SDL_DestroyWindow(window);
+}
+
+SDL_Window* GetWindow()
+{
+    return window;
+}
+SDL_GLContext* GetContext()
+{
+    return &glContext;
 }
 
 void SDLSwapBuffers()

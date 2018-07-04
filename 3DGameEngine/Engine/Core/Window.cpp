@@ -26,7 +26,7 @@ void Window::Create(int width, int height, const std::string& title)
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32); //32 bit depth buffer to increase precision to prevent Z-fighting 
-
+    
 
 	SDLCreateWindow(m_title.c_str(), m_width, m_height, false);
 

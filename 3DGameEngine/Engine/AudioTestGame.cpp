@@ -13,18 +13,7 @@ public:
         audioSource = GetGameObject()->GetComponent<AudioSource>();
         audioSource->Play();
     }
-    void Update() override
-    {
-        volume++;
-        if (volume % 120 == 0)
-        {
-            audioSource->SetPaused(state);
-            state = !state;
-        }
-    }
     AudioSource* audioSource;
-    int volume = 1;
-    bool state = true;
 };
 
 void AudioTestGame::Init()

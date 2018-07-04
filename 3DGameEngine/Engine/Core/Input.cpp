@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "SDL_Backend.h"
+#include <imgui/imgui_impl_sdl.h>
 
 bool Input::GetKeyDown(SDL_Scancode scanCode)
 {
@@ -12,6 +13,7 @@ void Input::Update()
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
 	{
+        ImGui_ImplSDL2_ProcessEvent(&e);
 		if (e.type == SDL_QUIT)
 		{
 			SDLRequestClose(true);

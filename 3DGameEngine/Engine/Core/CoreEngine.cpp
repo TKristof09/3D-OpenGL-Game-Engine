@@ -5,15 +5,16 @@
 #include "Input.h"
 #include "BulletMultiThreading/btTaskScheduler.h"
 
-CoreEngine::CoreEngine(int width, int height, double framerate, Game* game):
+CoreEngine::CoreEngine(int width, int height, double framerate):
 	m_isRunning(false),
 	m_width(width),
 	m_height(height),
 	m_frameTime(1.0 / framerate),
-	m_game(game),
+	m_game(nullptr),
 	m_renderingEngine(nullptr),
 	m_physicsEngine(nullptr),
-    m_audioEngine(nullptr)
+    m_audioEngine(nullptr),
+    m_debugUI(nullptr)
 {
 	glewExperimental = GL_TRUE;
 
@@ -37,10 +38,16 @@ CoreEngine::~CoreEngine()
 
 }
 
+void CoreEngine::LoadGame(Game* game)
+{
+    m_game = game;
+}
+
 void CoreEngine::CreateWindow(const std::string& title)
 {
 	Window::Create(m_width, m_height, title);
 	m_renderingEngine = new RenderingEngine();
+    m_debugUI = new DebugUI(DARK);
 	
 }
 
@@ -48,7 +55,10 @@ void CoreEngine::Start()
 {
 	if (m_isRunning)
 		return;
-
+    if(!m_game)
+    {
+        std::cerr << "There is no game loaded, please load one before calling start" << std::endl;
+    }
 	Run();
 }
 
@@ -64,6 +74,8 @@ void CoreEngine::Run()
 {
 	
 	m_isRunning = true;
+
+    m_game->SetDebugUI(m_debugUI);
 
 	m_game->Init();
 	m_renderingEngine->Init();
@@ -112,6 +124,7 @@ void CoreEngine::Run()
 			Window::Render();
 			m_game->Render(m_renderingEngine);
 			//DebugLineDrawer::Draw(m_renderingEngine);
+            m_debugUI->FrameUpdate();
 		}
 		else
 		{

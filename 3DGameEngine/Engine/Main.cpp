@@ -2,6 +2,7 @@
 #include "PhysicsTestGame.h"
 #include "AssimpTestGame.h"
 #include "AudioTestGame.h"
+#include "ImGuiTestGame.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -14,17 +15,17 @@ extern "C"
 
 int main(int argc, char* argv[])
 {
-	glewExperimental = GL_TRUE;
 //	PhysicsTestGame testGame;
 //	AssimpTestGame testGame;
-    AudioTestGame testGame;
+//  AudioTestGame testGame;
+    ImGuiTestGame testGame;
 
 	Game* game = &testGame;
-	{
-		CoreEngine engine(800, 600, 60, game);
-		engine.CreateWindow("3D Game Engine");
-		engine.Start(); 
-	}
+	CoreEngine engine(800, 600, 60);
+	engine.CreateWindow("3D Game Engine");
+    engine.LoadGame(&testGame);
+	engine.Start();
+
 //	_CrtDumpMemoryLeaks();
 	return 0;
 }
