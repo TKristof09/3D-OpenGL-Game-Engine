@@ -13,7 +13,7 @@ void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Came
                                         RenderingEngine* renderingEngine) const
 {
 	material.GetTexture("albedo").Bind();
-	material.GetTexture("normal").Bind(1);
+	material.GetNormal("normal").Bind(1);
 	Shader::SetUniform("normalMap", 1);
 	material.GetTexture("metallic").Bind(2);
 	Shader::SetUniform("metallicMap", 2);

@@ -3,5 +3,5 @@
 
 void Game::Render(RenderingEngine* renderingEngine)
 {
-	renderingEngine->Render(m_root);
+	renderingEngine->Render(*m_root);
 }

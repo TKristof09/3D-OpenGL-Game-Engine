@@ -6,7 +6,8 @@
 
 #include "../Core/SDL_Backend.h"
 
-DebugUI::DebugUI(Style style)
+DebugUI::DebugUI(Style style):
+    m_index(0)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -15,11 +16,10 @@ DebugUI::DebugUI(Style style)
     ImGui_ImplSDL2_InitForOpenGL(GetWindow(), *GetContext());
     ImGui_ImplOpenGL3_Init();
 
-    if(style == LIGHT)
+    if (style == LIGHT)
         ImGui::StyleColorsClassic();
     else
         ImGui::StyleColorsDark();
-
 }
 
 DebugUI::~DebugUI()
@@ -35,11 +35,11 @@ void DebugUI::FrameUpdate()
     ImGui_ImplSDL2_NewFrame(GetWindow());
     ImGui::NewFrame();
 
-    for (DebugUIWindow* window : m_windows)
+    for (auto pair : m_windows)
     {
-        window->Update();
+        pair.second->Update();
     }
-
+    ImGui::ShowDemoWindow();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

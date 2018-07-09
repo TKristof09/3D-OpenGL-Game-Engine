@@ -9,8 +9,6 @@
 
 RadianceHDRTexture::RadianceHDRTexture(const std::string& fileName)
 {
-
-	
     TextureConfig config;
     config.wrapModeS = GL_CLAMP_TO_EDGE;
     config.wrapModeT = GL_CLAMP_TO_EDGE;

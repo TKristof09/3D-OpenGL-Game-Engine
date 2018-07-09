@@ -153,6 +153,9 @@
     <ClCompile Include="Engine\ImGuiTestGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Rendering\DebugUIElements.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Rendering\Material.h">

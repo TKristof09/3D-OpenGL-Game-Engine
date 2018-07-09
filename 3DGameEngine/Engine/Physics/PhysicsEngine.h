@@ -46,6 +46,11 @@ public:
 		m_triggerColliders.clear();
 	}
 
+    /**
+     * \brief Reinitializes the engine to base state
+     */
+    void ReInit();
+
 	void AddRigidbody(Rigidbody* rb);
 	void AddTriggerCollider(TriggerCollider* collider);
 

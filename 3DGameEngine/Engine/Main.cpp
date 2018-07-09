@@ -13,17 +13,23 @@ extern "C"
 //#include <stdlib.h>  
 //#include <crtdbg.h>  
 
+
+
 int main(int argc, char* argv[])
 {
 //	PhysicsTestGame testGame;
 //	AssimpTestGame testGame;
 //  AudioTestGame testGame;
-    ImGuiTestGame testGame;
+//  ImGuiTestGame testGame;
 
-	Game* game = &testGame;
 	CoreEngine engine(800, 600, 60);
+
+    engine.AddGame<PhysicsTestGame>("PhysicsTestGame");
+    engine.AddGame<AssimpTestGame>("AssimpTestGame");
+    engine.AddGame<AudioTestGame>("AudioTestGame");
+    engine.AddGame<ImGuiTestGame>("ImGuiTestGame");
+
 	engine.CreateWindow("3D Game Engine");
-    engine.LoadGame(&testGame);
 	engine.Start();
 
 //	_CrtDumpMemoryLeaks();

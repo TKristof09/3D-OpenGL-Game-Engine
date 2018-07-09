@@ -7,24 +7,50 @@
 
 
 RenderingEngine::RenderingEngine()
-	:
-	//   m_mainCamera(Camera(math::Vector3(0, 3, 10), math::Vector3(0, 0, -1), math::Vector3(0, 1, 0), 70.0f, static_cast<float>(*Window::GetWidth()) / static_cast<float>(*Window::GetHeight()), 0.01f, 1000.0f)),
-	m_mainCamera(nullptr),
-	m_activeLight(nullptr)
+    : envMap(nullptr),
+      prefilterMap(nullptr),
+      brdfLUT(nullptr),
+      m_background(nullptr),
+      m_mainCamera(nullptr),
+      m_activeLight(nullptr)
 {
-	m_background = new RadianceHDRTexture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Newport_Loft\\Newport_Loft_Ref.hdr");
-	//glClearColor(0.05f, 0.05f, 0.05f, 0.05f);
-	glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-	glDepthFunc(GL_LEQUAL);
+    //glClearColor(0.05f, 0.05f, 0.05f, 0.05f);
+    glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+    glDepthFunc(GL_LEQUAL);
 
-	
-	glEnable(GL_CULL_FACE); 
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 }
 
+
+void RenderingEngine::ReInit()
+{
+    for (const BaseLight* light : m_lights)
+    {
+        delete light;
+    }
+    m_lights.clear();
+    m_activeLight = nullptr;
+    if (envMap)
+        delete envMap;
+    envMap = nullptr;
+    if (prefilterMap)
+        delete prefilterMap;
+    prefilterMap = nullptr;
+    if (brdfLUT)
+        delete brdfLUT;
+    brdfLUT = nullptr;
+    if(m_background)
+        delete m_background;
+    m_background = nullptr;
+    if(m_mainCamera)
+        delete m_mainCamera;
+    m_mainCamera = nullptr;
+}
 
 void RenderingEngine::Render(const GameObject& object)
 {
@@ -52,6 +78,7 @@ void RenderingEngine::Render(const GameObject& object)
 
 void RenderingEngine::Init()
 {
+    m_background = new RadianceHDRTexture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Newport_Loft\\Newport_Loft_Ref.hdr");
 	glDisable(GL_CULL_FACE);
 	Texture* cubeMap = m_background->ToCubeMap(1024);
     envMap = PBR::ConvoluteIrradianceMap(cubeMap, 128);

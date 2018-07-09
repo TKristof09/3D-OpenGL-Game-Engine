@@ -1,5 +1,15 @@
 ﻿#include "PhysicsEngine.h"
 
+void PhysicsEngine::ReInit()
+{
+    for (Rigidbody* rb : m_rigidbodies)
+    {
+        delete rb;
+    }
+    m_rigidbodies.clear();
+    m_triggerColliders.clear();
+}
+
 void PhysicsEngine::AddRigidbody(Rigidbody* rb)
 {
 	rb->SetId(m_rigidbodies.size());

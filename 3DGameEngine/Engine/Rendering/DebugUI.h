@@ -15,11 +15,23 @@ public:
 
     void AddWindow(DebugUIWindow* window)
     {
-        m_windows.push_back(window);
+        window->SetIndex(m_index++);
+        window->SetDebugUI(this);
+        m_windows[m_index] = window;
     }
+
+    void RemoveWindow(unsigned int index)
+    {
+        auto it = m_windows.find(index);
+        if (it != m_windows.end())
+            m_windows.erase(it);
+    }
+
     void FrameUpdate();
 private:
-    std::vector<DebugUIWindow*> m_windows;
+    
+    unsigned int m_index;
+    std::map<unsigned int, DebugUIWindow*> m_windows;
 
     
 };

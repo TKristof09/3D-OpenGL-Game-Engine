@@ -157,6 +157,7 @@
     <ClCompile Include="Engine\Audio\AudioSource.cpp" />
     <ClCompile Include="Engine\Core\Color.cpp" />
     <ClCompile Include="Engine\Core\CoreEngine.cpp" />
+    <ClCompile Include="Engine\Rendering\DebugUIElements.cpp" />
     <ClCompile Include="Engine\Core\Game.cpp" />
     <ClCompile Include="Engine\Core\Input.cpp" />
     <ClCompile Include="Engine\Core\Window.cpp" />

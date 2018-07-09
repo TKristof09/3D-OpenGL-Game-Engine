@@ -5,7 +5,7 @@
 #include "Audio/AudioListener.h"
 #include "Audio/AudioSource.h"
 
-class Test : public GameComponent
+class TestA : public GameComponent
 {
 public:
     void Start() override
@@ -34,7 +34,7 @@ void AudioTestGame::Init()
     AddToScene(cameraOBJ);
 
     audioOBJ->AddComponent(new AudioSource("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Ed Sheeran - Afire Love.mp3", 1));
-    audioOBJ->AddComponent(new Test());
+    audioOBJ->AddComponent(new TestA());
     AddToScene(audioOBJ);
 
 }

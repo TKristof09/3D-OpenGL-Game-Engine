@@ -13,7 +13,7 @@ void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& 
 {
 	material.GetTexture("albedo").Bind();
 	SetUniform("albedoMap", 0);
-	material.GetTexture("normal").Bind(1);
+	material.GetNormal("normal").Bind(1);
 	SetUniform("normalMap", 1);
 	material.GetTexture("metallic").Bind(2);
 	SetUniform("metallicMap", 2);

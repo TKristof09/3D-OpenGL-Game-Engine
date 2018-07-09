@@ -13,6 +13,11 @@ public:
     ~AudioEngine();
 
     /**
+     * \brief Reinitializes the engine to base state
+     */
+    void ReInit();
+
+    /**
      * \brief Call this once every frame
      */
     void Update();

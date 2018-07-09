@@ -15,6 +15,12 @@ class RenderingEngine
 public:
 	RenderingEngine();
 	~RenderingEngine() = default;
+
+    /**
+     * \brief Reinitializes engine to base state
+     */
+    void ReInit();
+
 	void Render(const GameObject& object);
 	void AddLight(const BaseLight& light) { m_lights.push_back(&light); }
 	//Temporary

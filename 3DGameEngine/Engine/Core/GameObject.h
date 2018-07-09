@@ -12,14 +12,17 @@ class PhysicsEngine;
 class AudioEngine;
 class Shader;
 class GameComponent;
+class DebugUIWindow;
+class TreeNode;
 
 class GameObject
 {
 public:
 	GameObject(std::string name = "GameObject"):
-		name(std::move(name)),
-		m_renderingEngine(nullptr),
-		m_physicsEngine(nullptr) {}
+        name(std::move(name)),
+        m_renderingEngine(nullptr),
+        m_physicsEngine(nullptr),
+        m_audioEngine(nullptr) {}
 
 	~GameObject() = default;
     void Start() const;
@@ -30,7 +33,8 @@ public:
 	void AddComponent(GameComponent* component);
 	void SetRenderingEngine(RenderingEngine* renderingEngine);
 	void SetPhysicsEngine(PhysicsEngine* physicsEngine);
-    void SetAudioEngine(AudioEngine* audioEngine);;
+    void SetAudioEngine(AudioEngine* audioEngine);
+    void AddToHierarchyUI(DebugUIWindow* window, TreeNode* node);
 	Transform* GetTransform() { return &m_transform; };
 
 	template <typename T>

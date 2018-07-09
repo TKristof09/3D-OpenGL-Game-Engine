@@ -22,6 +22,7 @@ void AssimpTestGame::Init()
 	cameraOBJ->GetTransform()->SetPosition(math::Vector3(0, 0, 5));
 	cameraOBJ->AddComponent(new FreeLook());
 	cameraOBJ->AddComponent(new FreeMove());
+    cameraOBJ->AddComponent(new AudioListener());
 	AddToScene(cameraOBJ);
 	
 	

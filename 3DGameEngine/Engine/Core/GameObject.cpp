@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "../Engine/GameComponents/GameComponent.h"
 #include "../GameComponents/Collider.h"
-
+#include "../Rendering/DebugUIElements.h"
 
 GameObject* GameObject::AddChild(GameObject* child)
 {
@@ -121,5 +121,18 @@ void GameObject::SetAudioEngine(AudioEngine* audioEngine)
         {
             child->SetAudioEngine(audioEngine);
         }
+    }
+}
+
+void GameObject::AddToHierarchyUI(DebugUIWindow* window, TreeNode* node)
+{
+    TreeNode* currentNode = new TreeNode(name, this);
+    if (node)
+        node->AddElement(currentNode);
+    else
+        window->AddElement(currentNode);
+    for (GameObject* child : m_children)
+    {
+        child->AddToHierarchyUI(window, currentNode);
     }
 }

@@ -9,7 +9,12 @@ class Material
 public:
 	Material():
 		m_defaultTexture(Texture()),
-		m_defaultVector3(math::Vector3(1)) { }
+		m_defaultVector3(math::Vector3(1))
+	{
+        TextureConfig config;
+        config.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\defaultNormal.jpg";
+        m_defaultNormal = Texture(config);
+	}
 
 	Material(const float& specularIntensity, const float& specularExponent);
 	Material(const Texture& texture, const float& specularIntensity, const float& specularExponent);
@@ -29,6 +34,17 @@ public:
 		}
 
 		return m_defaultTexture;
+	}
+
+    const Texture& GetNormal(const std::string& name) const
+	{
+        auto it = m_textureMap.find(name);
+        if (it != m_textureMap.end())
+        {
+            return it->second;
+        }
+
+        return m_defaultNormal;
 	}
 
 	void AddVector3(const std::string& name, const math::Vector3& vector)
@@ -66,6 +82,7 @@ public:
 
 private:
 	Texture m_defaultTexture;
+    Texture m_defaultNormal;
 	math::Vector3 m_defaultVector3;
 	std::map<std::string, Texture> m_textureMap;
 	std::map<std::string, math::Vector3> m_vec3Map;

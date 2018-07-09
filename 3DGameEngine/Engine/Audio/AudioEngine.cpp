@@ -3,7 +3,9 @@
 #include <vector>
 
 
-AudioEngine::AudioEngine()
+AudioEngine::AudioEngine(): 
+    m_nextChannelID(0),
+    m_listener(nullptr)
 {
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     ErrorCheck(FMOD::System_Create(&m_system));
@@ -11,11 +13,10 @@ AudioEngine::AudioEngine()
     ErrorCheck(m_system->getVersion(&version));
     if (version < FMOD_VERSION)
     {
-        std::cout<<"FMOD lib version" << version << "doesn't match header version " << FMOD_VERSION << std::endl;
+        std::cout << "FMOD lib version" << version << "doesn't match header version " << FMOD_VERSION << std::endl;
     }
     ErrorCheck(m_system->init(100, FMOD_INIT_NORMAL | FMOD_INIT_3D_RIGHTHANDED, NULL));
     ErrorCheck(m_system->set3DSettings(1.0f, m_distanceFactor, 1.0f));
-
 }
 
 AudioEngine::~AudioEngine()
@@ -27,6 +28,18 @@ AudioEngine::~AudioEngine()
     ErrorCheck(m_system->close());
     ErrorCheck(m_system->release());
     CoUninitialize();
+}
+
+void AudioEngine::ReInit()
+{
+    m_nextChannelID = 0;
+    m_listener = nullptr;
+    for (auto pair : m_sounds)
+    {
+        pair.second->release();
+    }
+    m_sounds.clear();
+    m_channels.clear();
 }
 
 void AudioEngine::Update()
