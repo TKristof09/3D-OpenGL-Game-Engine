@@ -50,7 +50,7 @@ public:
 	void AddToGameObjectCallback() override
 	{
 		RequireComponent<Collider>();
-		m_btRigidBody = new btRigidBody(m_mass, GetTransform(), GetGameObject()->GetComponent<Collider>()->GetBtCollisionShape(), m_localInertia.ToBtVector3());
+		m_btRigidBody = new btRigidBody(m_mass, reinterpret_cast<btMotionState*>(GetTransform()), GetGameObject()->GetComponent<Collider>()->GetBtCollisionShape(), m_localInertia.ToBtVector3());
 		m_btRigidBody->setUserPointer(this);
 	};
 

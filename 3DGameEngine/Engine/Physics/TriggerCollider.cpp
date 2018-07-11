@@ -1,5 +1,6 @@
 ﻿#include "TriggerCollider.h"
 #include "../Physics/PhysicsEngine.h"
+#include "../Core/Transform.h"
 
 TriggerCollider::~TriggerCollider() 
 {

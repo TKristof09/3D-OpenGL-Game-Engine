@@ -3,6 +3,7 @@
 
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 #include "../GameComponents/Collider.h"
+#include "../Core/Transform.h"
 
 class TriggerCollider : public Collider{
 public:
@@ -24,7 +25,7 @@ public:
 
 	void OnTriggerEnter(Collider* other) const
 	{
-		std::cout << ToString(other->GetTransform()->GetWorldPosition()) << std::endl;
+		std::cout << math::ToString(other->GetTransform()->GetWorldPosition()) << std::endl;
 	};
 
 

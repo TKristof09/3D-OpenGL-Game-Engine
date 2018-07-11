@@ -18,14 +18,16 @@ void ImGuiTestGame::Init()
 
     DebugUIWindow* window = new DebugUIWindow();
     Text* text = new Text("This is a test text");
-    SliderVector3* sliderVector3 = new SliderVector3(0, 1);
+    math::Vector3* v = new math::Vector3(0);
+    DragVector3* sliderVector3 = new DragVector3(v, 0, 1);
 
     window->AddElement(text);
     window->AddElement(sliderVector3);
 
     DebugUIWindow* window2 = new DebugUIWindow("second");
     Text* text2 = new Text("This is a second \n test text");
-    ColorEdit3* colorEdit3 = new ColorEdit3();
+    Color* c = new Color();
+    ColorEdit3* colorEdit3 = new ColorEdit3(c);
 
     window2->AddElement(text2);
     window2->AddElement(colorEdit3);

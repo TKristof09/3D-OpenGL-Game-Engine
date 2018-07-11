@@ -274,3 +274,5 @@ __pycache__/
 .vscode/workspace.code-workspace
 .vscode/settings.json
 /3DGameEngine/res/Ed Sheeran - Afire Love.mp3
+/3DGameEngine/lib/
+/3DGameEngine/include/

@@ -3,7 +3,6 @@
 #include "..\Core\Input.h"
 
 
-
 void FreeMove::Update()
 {
 	if (Input::GetKeyDown(SDL_SCANCODE_UP))

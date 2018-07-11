@@ -4,7 +4,13 @@
 #include "3DMath\3DMath.h"
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btMotionState.h>
+#include "../Rendering/DebugUI.h"
+#include <iostream>
 
+//Currently not in use
+#define MAX_DISTANCE 1e6
+
+#define MAX_SCALE 1e3
 
 class Transform : public btMotionState
 {
@@ -15,7 +21,8 @@ public:
 		m_parent(nullptr),
 		m_position(position),
 		m_rotation(rotation),
-		m_scale(scale) {};
+		m_scale(scale),
+        m_eulerRotations(math::Vector3(0)){};
 
 
 	math::Matrix4x4 GetModel() const
@@ -98,6 +105,17 @@ public:
 		return btTransform(GetWorldRotation().ToBtQuaternion(), GetWorldPosition().ToBtVector3());
 	}
 
+    void AddToPropertyUIS(DebugUIWindow* hierarchyWindow) const
+	{
+        hierarchyWindow->AddElement(new DragVector3(const_cast<math::Vector3*>(&m_position), "Position"), 2);
+
+        hierarchyWindow->AddElement(new DragVector3(const_cast<math::Vector3*>(&m_eulerRotations), "Rotation", -180, 180), 2);
+
+        hierarchyWindow->AddElement(new DragVector3(const_cast<math::Vector3*>(&m_scale),"Scale", 0, MAX_SCALE), 2);
+
+        hierarchyWindow->AddElement(new Separator());
+	}
+
 private:
 
 	math::Matrix4x4 GetParentMatrix() const
@@ -110,6 +128,8 @@ private:
 		return math::Matrix4x4();
 	}
 
+
+//btMotionState functions needed for bullet physics to work
 public:
 	void getWorldTransform(btTransform& worldTrans) const override
 	{
@@ -120,10 +140,13 @@ public:
 	{
 		m_position = worldTrans.getOrigin() - m_parent->GetWorldPosition().ToBtVector3();
 		m_rotation = worldTrans.getRotation() * math::inverse(m_parent->GetWorldRotation()).ToBtQuaternion();
-	};
+	}
+
 private:
 	Transform* m_parent;
 
+
+    math::Vector3 m_eulerRotations; // TODO
 	math::Vector3 m_position;
 	math::Quaternion m_rotation;
 	math::Vector3 m_scale;

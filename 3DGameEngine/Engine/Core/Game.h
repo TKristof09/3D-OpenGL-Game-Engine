@@ -76,7 +76,7 @@ public:
 
     void SetUpHierarchyUI(DebugUIWindow* window)
     {
-        m_root->AddToHierarchyUI(window, nullptr);
+        m_root->AddToHierarchyUI(window, nullptr, true);
     }
 
 private:

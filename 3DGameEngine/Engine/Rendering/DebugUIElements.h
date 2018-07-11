@@ -6,7 +6,8 @@
 #include "imgui/imgui.h"
 #include <map>
 #include <functional>
-
+#include "../Core/Color.h"
+#include <iostream>
 
 class DebugUI;
 
@@ -47,12 +48,12 @@ private:
     std::string m_text;
 };
 
-class SliderFloat : public DebugUIElement
+class DragFloat : public DebugUIElement
 {
-    SliderFloat(float min, float max, const std::string& name = "Float", const void* id = nullptr) :
+    DragFloat(float* value, const std::string& name = "Float", float min = 0, float max = 0, const void* id = nullptr) :
         m_min(min),
         m_max(max),
-        m_value(0)
+        m_value(value)
     {
         m_name = name;
         m_id = id;
@@ -63,27 +64,27 @@ class SliderFloat : public DebugUIElement
         if (m_id)
             ImGui::PushID(m_id);
 
-        ImGui::SliderFloat(m_name.c_str(), &m_value, m_min, m_max);
+        ImGui::DragFloat(m_name.c_str(), m_value, 1, m_min, m_max);
         if(m_id)
             ImGui::PopID();
     }
 
-    float GetValue() const
+    float* GetValue() const
     {
         return m_value;
     }
 private:
     float m_min, m_max;
-    float m_value;
+    float* m_value;
 };
 
-class SliderVector3 : public DebugUIElement
+class DragVector3 : public DebugUIElement
 {
 public:
-    SliderVector3(float min, float max, const std::string& name = "Vector3", const void* id = nullptr) :
+    DragVector3(math::Vector3* value, const std::string& name = "Vector3", float min = 0, float max = 0, const void* id = nullptr) :
         m_min(min),
         m_max(max),
-        m_value(math::Vector3(0))
+        m_value(value)
     {
         m_name = name;
         m_id = id;
@@ -94,26 +95,58 @@ public:
         if (m_id)
             ImGui::PushID(m_id);
 
-        ImGui::SliderFloat3(m_name.c_str(), &m_value.x, m_min, m_max);
+        ImGui::DragFloat3(m_name.c_str(), &m_value->x, 1, m_min, m_max);
 
         if (m_id)
             ImGui::PopID();
     }
     
-    math::Vector3 GetValue() const
+    math::Vector3* GetValue() const
     {
         return m_value;
     }
 private:
     float m_min, m_max;
-    math::Vector3 m_value;
+    math::Vector3* m_value;
+};
+
+class DragVector4 : public DebugUIElement
+{
+public:
+    DragVector4(math::Vector4* value, const std::string& name = "Vector4", float min = 0, float max = 0, const void* id = nullptr) :
+        m_min(min),
+        m_max(max),
+        m_value(value)
+    {
+        m_name = name;
+        m_id = id;
+    };
+
+    void Update() override
+    {
+        if (m_id)
+            ImGui::PushID(m_id);
+
+        ImGui::DragFloat4(m_name.c_str(), &m_value->x, 1, m_min, m_max);
+
+        if (m_id)
+            ImGui::PopID();
+    }
+
+    math::Vector4* GetValue() const
+    {
+        return m_value;
+    }
+private:
+    float m_min, m_max;
+    math::Vector4* m_value;
 };
 
 class ColorEdit3 : public DebugUIElement
 {
 public:
-    ColorEdit3(const std::string& name = "Color", const void* id = nullptr):
-        m_value(math::Vector3(0))
+    ColorEdit3(Color* value, const std::string& name = "Color", const void* id = nullptr):
+        m_value(value)
     {
         m_name = name;
         m_id = id;
@@ -123,24 +156,24 @@ public:
         if (m_id)
             ImGui::PushID(m_id);
 
-        ImGui::ColorEdit3(m_name.c_str(), &m_value.x);
+        ImGui::ColorEdit3(m_name.c_str(), &m_value->r);
 
         if (m_id)
             ImGui::PopID();
     }
-    math::Vector3 GetValue() const
+    Color* GetValue() const
     {
         return m_value;
     }
 private:
-    math::Vector3 m_value;
+    Color* m_value;
 };
 
 class ColorEdit4 : public DebugUIElement
 {
 public:
-    ColorEdit4(const std::string& name = "Color", const void* id = nullptr):
-        m_value(math::Vector4(0))
+    ColorEdit4(Color* value, const std::string& name = "Color", const void* id = nullptr):
+        m_value(value)
 
     {
         m_name = name;
@@ -151,25 +184,25 @@ public:
         if (m_id)
             ImGui::PushID(m_id);
 
-        ImGui::ColorEdit3(m_name.c_str(), &m_value.x);
+        ImGui::ColorEdit4(m_name.c_str(), &m_value->r);
 
         if (m_id)
             ImGui::PopID();
     }
 
-    math::Vector4 GetValue() const
+    Color* GetValue() const
     {
         return m_value;
     }
 private:
-    math::Vector4 m_value;
+    Color* m_value;
 };
 
 class CheckBox : public DebugUIElement
 {
 public:
-    CheckBox(const std::string& name = "CheckBox", const void* id = nullptr):
-        m_value(false)
+    CheckBox(bool* value, const std::string& name = "CheckBox", const void* id = nullptr):
+        m_value(value)
     {
         m_name = name;
         m_id = id;
@@ -179,7 +212,7 @@ public:
         if (m_id)
             ImGui::PushID(m_id);
 
-        ImGui::Checkbox(m_name.c_str(), &m_value);
+        ImGui::Checkbox(m_name.c_str(), m_value);
 
         if (m_id)
             ImGui::PopID();
@@ -187,18 +220,18 @@ public:
 
     bool GetValue() const
     {
-        return m_value;
+        return *m_value;
     }
 
 private:
-    bool m_value;
+    bool* m_value;
 };
 
 class Button : public DebugUIElement
 {
 public: 
-    Button(const std::string& name = "Button", const void* id = nullptr):
-        m_value(false),
+    Button(const std::string& name = "Button", bool* value = nullptr, const void* id = nullptr):
+        m_value(value),
         m_callback(nullptr)
     {
         m_name = name;
@@ -209,11 +242,17 @@ public:
     {
         if (m_id)
             ImGui::PushID(m_id);
+        bool val = false;
+        if(m_value)
+            *m_value = ImGui::Button(m_name.c_str());
+        else
+            val = ImGui::Button(m_name.c_str());
 
-        m_value = ImGui::Button(m_name.c_str());
-        if (m_value)
+        if ((m_value && *m_value) || val)
+        {
             if(m_callback)
                 m_callback(this);
+        }
 
         if (m_id)
             ImGui::PopID();
@@ -226,11 +265,11 @@ public:
 
     bool GetValue() const
     {
-        return m_value;
+        return *m_value;
     }
 
 private:
-    bool m_value;
+    bool* m_value;
     std::function<void(Button*)> m_callback;
     
 
@@ -239,7 +278,8 @@ private:
 class TreeNode : public DebugUIElement
 {
 public:
-    TreeNode(const std::string& text, const void* id = nullptr)
+    TreeNode(const std::string& text, bool* value,const void* id = nullptr):
+        m_value(value)
     {
         m_name = text;
         m_id = id;
@@ -250,8 +290,9 @@ public:
         if (m_id)
             ImGui::PushID(m_id);
 
-        bool isOpen = ImGui::TreeNode(m_name.c_str());
-        if(isOpen)
+        ImGui::AlignTextToFramePadding();
+        *m_value = ImGui::TreeNode(m_name.c_str());
+        if(*m_value)
         {
             for (DebugUIElement* element : m_elements)
             {
@@ -269,31 +310,81 @@ public:
         m_elements.push_back(element);
     }
 
+    bool GetValue() const
+    {
+        return *m_value;
+    }
+
 private:
+    bool* m_value;
     std::vector<DebugUIElement*> m_elements;
+};
+
+class Separator : public DebugUIElement
+{
+public:
+    Separator(const std::string& name = "Separator")
+    {
+        m_name = name;
+    }
+    void Update() override
+    {
+        ImGui::Separator();
+    }
 };
 
 class DebugUIWindow
 {
 public:
-    DebugUIWindow(const std::string& name = "Debug", bool opened = true) :
-        m_name(name),
-        m_opened(opened){}
+    DebugUIWindow(const std::string& name = "Debug", bool opened = true) : m_debugUI(nullptr),                                                    m_index(0),       
+      m_name(name), 
+      m_opened(opened) {}
+
     ~DebugUIWindow();
 
-    void AddElement(DebugUIElement* element)
+    void AddElement(DebugUIElement* element, unsigned int column = 1)
     {
-        m_elements[element->GetName()] = element;
+        while(m_elements.size() < column)
+        {
+            m_elements.push_back(std::map<std::string, DebugUIElement*>());
+        }
+        m_elements[column - 1][element->GetName()] = element;
     }
 
-    DebugUIElement* GetElement(const std::string& name)
+    DebugUIElement* GetElement(const std::string& name, unsigned int column = 1)
     {
-        return m_elements[name];
+        if (m_elements.size() < column)
+        {
+            std::cerr << "Column higher than the existing columns" << std::endl;
+            return nullptr;
+        }
+        auto it = m_elements[column - 1].find(name);
+        if (it != m_elements[column - 1].end())
+        {
+            return m_elements[column - 1][name];
+        }
+        std::cerr << "Element can't be found" << std::endl;
+        return nullptr;
     }
 
-    void Clear()
+    void RemoveElement(const std::string& name, unsigned int column = 1)
     {
-        m_elements.clear();
+        if(m_elements.size() < column)
+        {
+            std::cerr << "Column higher than the existing columns" << std::endl;
+        }
+        auto it = m_elements[column - 1].find(name);
+        if(it != m_elements[column - 1].end())
+        {
+            m_elements[column - 1].erase(it);
+        }
+    }
+
+    void Clear(unsigned int column = 1)
+    {
+        if (m_elements.size() < column)
+            return;
+        m_elements[column - 1].clear();
     }
 
     void Update()
@@ -301,9 +392,14 @@ public:
         if(m_opened)
         {
             ImGui::Begin(m_name.c_str(), &m_opened);
-            for (auto element : m_elements)
+            ImGui::Columns(m_elements.size());
+            for (auto map : m_elements)
             {
-                element.second->Update();
+                for (auto pair : map)
+                {
+                    pair.second->Update();
+                }
+                ImGui::NextColumn();
             }
             ImGui::End();
         }
@@ -325,10 +421,7 @@ private:
     unsigned int m_index;
     std::string m_name;
     bool m_opened;
-    std::map<std::string, DebugUIElement*> m_elements;
+    std::vector<std::map<std::string, DebugUIElement*>> m_elements;
 };
-
-
-
 
 #endif

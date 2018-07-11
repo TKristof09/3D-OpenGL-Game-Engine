@@ -6,7 +6,7 @@
 GameObject* GameObject::AddChild(GameObject* child)
 {
 	child->SetRenderingEngine(m_renderingEngine);
-	child->GetTransform()->SetParent(&m_transform);
+	child->GetTransform()->SetParent(GetTransform());
 	m_children.push_back(child);
 	return child;
 }
@@ -24,6 +24,7 @@ void GameObject::AddComponent(GameComponent* component)
 }
 
 
+
 void GameObject::Start() const
 {
     for (const auto& pair : m_components)
@@ -38,6 +39,10 @@ void GameObject::Start() const
 
 void GameObject::Update() const
 {
+    if(m_hierarchySelected)
+    {
+        //Draw stuff on ui
+    }
 	for (const auto& pair : m_components)
 	{
 		pair.second->Update();
@@ -59,6 +64,20 @@ void GameObject::Render(const Shader* shader, RenderingEngine* renderingEngine) 
 	{
 		child->Render(shader, renderingEngine);
 	}
+
+    if (m_hierarchySelected && m_firstSelect)
+    {
+        m_firstSelect = false;
+        m_hierarchyWindow->Clear(2);
+        m_transform.AddToPropertyUIS(m_hierarchyWindow);
+        for (auto pair : m_components)
+        {
+            pair.second->AddToPropertyUI(m_hierarchyWindow);
+        }
+    }
+    else
+        m_firstSelect = true;
+    
 }
 
 void GameObject::Input() const
@@ -124,9 +143,18 @@ void GameObject::SetAudioEngine(AudioEngine* audioEngine)
     }
 }
 
-void GameObject::AddToHierarchyUI(DebugUIWindow* window, TreeNode* node)
+void GameObject::AddToHierarchyUI(DebugUIWindow* window, TreeNode* node, bool isRoot)
 {
-    TreeNode* currentNode = new TreeNode(name, this);
+    m_hierarchyWindow = window;
+    if(isRoot)
+    {
+        for (GameObject* child : m_children)
+        {
+            child->AddToHierarchyUI(window, nullptr);
+        }
+        return;
+    }
+    TreeNode* currentNode = new TreeNode(name, &m_hierarchySelected,this);
     if (node)
         node->AddElement(currentNode);
     else

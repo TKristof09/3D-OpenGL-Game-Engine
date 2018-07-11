@@ -1,27 +1,30 @@
 #ifndef GAMECOMPONENT_H
 #define GAMECOMPONENT_H
 
-#include "..\Core\Transform.h"
-#include "..\Engine\Core\GameObject.h"
 #include <iostream>
+#include "../Core/GameObject.h"
+#include "../Rendering/DebugUI.h"
+
 
 class RenderingEngine;
 class PhysicsEngine;
 class AudioEngine;
 class Shader;
-
+class Transform;
 
 
 class GameComponent
 {
 public:
-	GameComponent() : m_parent(nullptr) {};
+	GameComponent() : m_parent(nullptr) {}
 	virtual ~GameComponent() = default;;
 
     virtual void Start() {};
 	virtual void Input() {};
 	virtual void Update() {};
 	virtual void Render(const Shader* shader, RenderingEngine* renderingEngine) {};
+    virtual void AddToPropertyUI(DebugUIWindow* hierarchyWindow) {};
+    
 
     virtual void AddToRenderingEngine(RenderingEngine* renderingEngine) {};
 	virtual void AddToPhysicsEngine(PhysicsEngine* physicsEngine) {}

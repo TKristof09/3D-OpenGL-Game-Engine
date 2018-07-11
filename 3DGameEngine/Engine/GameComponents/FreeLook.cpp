@@ -22,11 +22,11 @@ void FreeLook::Update()
 	}
 	if (Input::GetKeyDown(SDL_SCANCODE_BACKSPACE))
 	{
-		std::cout << "Position: " << ToString(GetTransform()->GetWorldPosition()) << std::endl;
-		std::cout << "Rotation: " << ToString(GetTransform()->GetRotation()) << std::endl;
-		std::cout << "Forward: " << ToString(GetTransform()->GetForward()) << std::endl;
-		std::cout << "Up: " << ToString(GetTransform()->GetUp()) << std::endl;
-		std::cout << "Right: " << ToString(GetTransform()->GetRight()) << std::endl;
+		std::cout << "Position: " << math::ToString(GetTransform()->GetWorldPosition()) << std::endl;
+		std::cout << "Rotation: " << math::ToString(GetTransform()->GetRotation()) << std::endl;
+		std::cout << "Forward: " << math::ToString(GetTransform()->GetForward()) << std::endl;
+		std::cout << "Up: " << math::ToString(GetTransform()->GetUp()) << std::endl;
+		std::cout << "Right: " << math::ToString(GetTransform()->GetRight()) << std::endl;
 		std::cout << "\n" << std::endl;
 	}
 }
