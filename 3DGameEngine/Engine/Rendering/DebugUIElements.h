@@ -142,6 +142,38 @@ private:
     math::Vector4* m_value;
 };
 
+class DragQuaternion : public DebugUIElement
+{
+public:
+    DragQuaternion(math::Quaternion* value, const std::string& name = "Quaternion", float min = 0, float max = 0, const void* id = nullptr) :
+        m_min(min),
+        m_max(max),
+        m_value(value)
+    {
+        m_name = name;
+        m_id = id;
+    };
+
+    void Update() override
+    {
+        if (m_id)
+            ImGui::PushID(m_id);
+
+        ImGui::DragFloat4(m_name.c_str(), &m_value->w, 1, m_min, m_max);
+
+        if (m_id)
+            ImGui::PopID();
+    }
+
+    math::Quaternion* GetValue() const
+    {
+        return m_value;
+    }
+private:
+    float m_min, m_max;
+    math::Quaternion* m_value;
+};
+
 class ColorEdit3 : public DebugUIElement
 {
 public:

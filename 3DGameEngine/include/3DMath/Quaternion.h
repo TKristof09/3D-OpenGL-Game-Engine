@@ -5,6 +5,7 @@
 #include "Matrix.h"
 #include <string>
 #include "LinearMath/btQuaternion.h"
+#define MATH_PI 3.1415926535897932384626433832795
 
 namespace math
 {
@@ -13,10 +14,10 @@ namespace math
 	{
 		quat()
 		{
-			w = dynamic_cast<T>(1);
-			x = dynamic_cast<T>(0);
-			y = dynamic_cast<T>(0);
-			z = dynamic_cast<T>(0);
+			w = static_cast<T>(1);
+			x = static_cast<T>(0);
+			y = static_cast<T>(0);
+			z = static_cast<T>(0);
 		}
 
 		quat(T _w, T _x, T _y, T _z)
@@ -44,11 +45,29 @@ namespace math
 			w = q.w();
 		}
 
+        quat(const vec<3, T>& eulerAngles)
+		{
+            
+            T cosyaw = cos(eulerAngles.z * 0.5);
+            T sinyaw = sin(eulerAngles.z * 0.5);
+            T cosroll = cos(eulerAngles.x * 0.5);
+            T sinroll = sin(eulerAngles.x * 0.5);
+            T cospitch = cos(eulerAngles.y * 0.5);
+            T sinpitch = sin(eulerAngles.y * 0.5);
+
+            w = cosyaw * cosroll * cospitch + sinyaw * sinroll * sinpitch;
+            x = cosyaw * sinroll * cospitch - sinyaw * cosroll * sinpitch;
+            y = cosyaw * cosroll * sinpitch + sinyaw * sinroll * cospitch;
+            z = sinyaw * cosroll * cospitch - cosyaw * sinroll * cospitch;
+		}
+
 		T w, x, y, z;
 
-		vec<3, T> GetForward();
-		vec<3, T> GetUp();
-		vec<3, T> GetRight();
+		vec<3, T> GetForward() const;
+		vec<3, T> GetUp() const;
+		vec<3, T> GetRight() const;
+
+        vec<3, T> ToEulerAngles() const;
 
 		template <typename U>
 		quat<T>& operator+=(const quat<U>& q);
@@ -67,10 +86,45 @@ namespace math
 	vec<3, T> rotate(const vec<3, T>& v, const quat<T>& q);
 
 	template <typename T>
-	vec<3, T> quat<T>::GetForward()
+	vec<3, T> quat<T>::GetForward() const
 	{
 		return math::rotate(vec<3, T>(0, 0, -1), *this);
 	}
+    template <typename T>
+    vec<3, T> quat<T>::GetUp() const
+    {
+        return math::rotate(vec<3, T>(0, 1, 0), *this);
+    }
+    template <typename T>
+    vec<3, T> quat<T>::GetRight() const
+    {
+        return math::rotate(vec<3, T>(1, 0, 0), *this);
+    }
+
+    template <typename T>
+    vec<3, T> quat<T>::ToEulerAngles() const
+    {
+        vec<3, T> result;
+        // roll (x-axis rotation)
+        T sinr = +2.0 * (w * x + y * z);
+        T cosr = +1.0 - 2.0 * (x * x + y * y);
+        result.x = atan2(sinr, cosr);
+
+        // pitch (y-axis rotation)
+        T sinp = +2.0 * (w * y - z * x);
+        if (fabs(sinp) >= 1)
+            result.y = copysign(MATH_PI / 2, sinp); // use 90 degrees if out of range
+        else
+            result.y = asin(sinp);
+
+        // yaw (z-axis rotation)
+        T siny = +2.0 * (w * z + x * y);
+        T cosy = +1.0 - 2.0 * (y * y + z * z);
+        result.z = atan2(siny, cosy);
+        
+	    return result;
+    }
+
 
 
 	template <typename T>
