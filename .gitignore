@@ -277,3 +277,6 @@ __pycache__/
 /3DGameEngine/lib/*
 /3DGameEngine/include/*
 /3DGameEngine/includeWindows/*
+
+# ImGUI
+imgui.ini
