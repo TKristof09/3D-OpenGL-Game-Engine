@@ -1,18 +1,21 @@
 #include "ForwardSpot.h"
-#include "..\Engine\Core\RenderingEngine.h"
-#include "..\Engine\GameComponents\Lighting.h"
+#include "../Engine/Core/RenderingEngine.h"
+#include "../Engine/GameComponents/Lighting.h"
+#include "../Engine/Utils/FileLoader.h"
 
 
 ForwardSpot::ForwardSpot()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-spot", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-spot-PBR", GL_FRAGMENT_SHADER);
+	AddShader(GetPath("Shaders/forward-spot"), GL_VERTEX_SHADER);
+	AddShader(GetPath("Shaders/forward-spot-PBR"), GL_FRAGMENT_SHADER);
 }
 
 
 void ForwardSpot::UpdateUniforms(const Transform& transform, /*const Camera& camera,*/ const Material& material,
-                                 RenderingEngine* renderingEngine) const
+                                 RenderingEngine* renderingEngine, bool animated) const
 {
+    SetUniform("animated", animated);
+
     material.GetTexture("albedo").Bind();
     material.GetNormal("normal").Bind(1);
     Shader::SetUniform("normalMap", 1);

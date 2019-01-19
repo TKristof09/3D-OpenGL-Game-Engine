@@ -1,6 +1,6 @@
 ﻿#include "FreeMove.h"
 
-#include "..\Core\Input.h"
+#include "../Core/Input.h"
 
 
 void FreeMove::Update()

@@ -60,6 +60,11 @@ public:
 		return m_children[index];
 	}
 
+    const std::vector<GameObject*>& GetChildren() const
+    {
+        return m_children;
+    }
+
 	unsigned int GetNumChildren() const
 	{
 		return m_children.size();

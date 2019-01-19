@@ -13,6 +13,7 @@ public:
 	
 	GameObject* LoadFile(const std::string& path);
 private:
+	Animation* LoadAnimation(aiAnimation* animation);
 	Mesh* AiMeshToMesh(aiMesh* mesh);
 	void ProcessNode(const aiNode* node ,const aiScene* scene, GameObject* gameObject);
 	Material* ProcessMaterial(const aiMaterial* material);

@@ -1,4 +1,5 @@
 #include "SDL_Backend.h"
+#include <iostream>
 
 static SDL_Window* window;
 static SDL_GLContext glContext;
@@ -35,7 +36,10 @@ void SDLCreateWindow(const char* title, int width, int height, bool fullscreen)
 
 	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
 	                          SDL_WINDOW_OPENGL | mode);
+
+	std::cout << SDL_GetError() << std::endl;
 	glContext = SDL_GL_CreateContext(window);
+	std::cout << SDL_GetError() << std::endl;
 	//SDL_GL_SetSwapInterval(1); This is VSync(i think)
 }
 

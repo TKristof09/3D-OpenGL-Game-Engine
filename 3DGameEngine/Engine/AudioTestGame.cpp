@@ -4,6 +4,7 @@
 #include "GameComponents/Camera.h"
 #include "Audio/AudioListener.h"
 #include "Audio/AudioSource.h"
+#include "Utils/FileLoader.h"
 
 class TestA : public GameComponent
 {
@@ -33,7 +34,7 @@ void AudioTestGame::Init()
     cameraOBJ->AddComponent(new AudioListener());
     AddToScene(cameraOBJ);
 
-    audioOBJ->AddComponent(new AudioSource("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Ed Sheeran - Afire Love.mp3", 1));
+    audioOBJ->AddComponent(new AudioSource(GetPath("Ed Sheeran - Afire Love.mp3"), 1));
     audioOBJ->AddComponent(new TestA());
     AddToScene(audioOBJ);
 

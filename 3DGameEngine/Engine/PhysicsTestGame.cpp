@@ -8,6 +8,7 @@
 #include "GameComponents/FreeLook.h"
 #include "Core/Window.h"
 #include "GameComponents/Lighting.h"
+#include "Utils/FileLoader.h"
 
 #include "Physics/PhysicsEngine.h"
 #include "Physics/ConvexHull.h"
@@ -62,7 +63,7 @@ void PhysicsTestGame::Init()
 
     Material* material1 = new Material();
     material1->AddVector3("color", Color::White.ToVector3());
-    Mesh* mesh1 = new Mesh("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cube.obj");
+    Mesh* mesh1 = new Mesh(GetPath("cube.obj"));
     MeshRenderer* meshRenderer1 = new MeshRenderer(mesh1, material1);
     sphereOBJ1->AddComponent(meshRenderer1);
 
@@ -84,7 +85,7 @@ void PhysicsTestGame::Init()
 
 
     Material* material2 = new Material();
-    Mesh* mesh2 = new Mesh("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cube.obj");
+    Mesh* mesh2 = new Mesh(GetPath("cube.obj"));
     MeshRenderer* meshRenderer2 = new MeshRenderer(mesh1, material2);
     sphereOBJ2->AddComponent(meshRenderer2);
     sphereOBJ2->GetTransform()->SetPosition(math::Vector3(5, 10, 0));
@@ -98,7 +99,7 @@ void PhysicsTestGame::Init()
     Material* material3 = new Material();
     
     material3->AddVector3("color", Color::Red.ToVector3());
-    Mesh* mesh3 = new Mesh("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cube.obj");
+    Mesh* mesh3 = new Mesh(GetPath("cube.obj"));
     MeshRenderer* meshRenderer3 = new MeshRenderer(mesh1, material3);
     sphereOBJ3->AddComponent(meshRenderer3);
     sphereOBJ3->GetTransform()->SetPosition(math::Vector3(0, -5, 0));
@@ -112,7 +113,7 @@ void PhysicsTestGame::Init()
     Collider* triggerColl = new Box(math::Vector3(10, 0.5f, 10));
     trigger->AddComponent(new TriggerCollider(triggerColl));
     TextureConfig normal;
-    normal.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\rustediron2_normal.png";
+    normal.path = GetPath("rustediron2_normal.png");
     material1->AddTexture("albedo", new Texture(normal));
     trigger->AddComponent(new MeshRenderer(mesh1, material1));
     trigger->GetTransform()->SetScale(math::Vector3(10, 10, 10));

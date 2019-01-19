@@ -1,6 +1,7 @@
 #ifndef EQUIRECTANGULAR_TO_CUBEMAP_SHADER
 #define EQUIRECTANGULAR_TO_CUBEMAP_SHADER
 #include "Shader.h"
+#include "../Engine/Utils/FileLoader.h"
 
 class EquirectangularToCubeMap : public Shader
 {
@@ -12,8 +13,8 @@ public:
 	}
 	EquirectangularToCubeMap()
 	{
-		AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\cubeMap", GL_VERTEX_SHADER);
-		AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\equiToCubeMap", GL_FRAGMENT_SHADER);
+		AddShader(GetPath("Shaders/cubeMap"), GL_VERTEX_SHADER);
+		AddShader(GetPath("Shaders/equiToCubeMap"), GL_FRAGMENT_SHADER);
 	}
 };
 

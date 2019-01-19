@@ -1,6 +1,6 @@
 ﻿#ifndef AUDIOENGINE_H
 #define AUDIOENGINE_H
-#include <FMod/fmod.hpp>
+#include <FMOD/fmod.hpp>
 #include <map>
 #include <iostream>
 #include <3DMath/3DMath.h>

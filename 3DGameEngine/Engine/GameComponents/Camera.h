@@ -1,9 +1,9 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "3DMath\3DMath.h"
-#include "..\GameComponents\GameComponent.h"
-#include "..\Core\RenderingEngine.h"
+#include "3DMath/3DMath.h"
+#include "../GameComponents/GameComponent.h"
+#include "../Core/RenderingEngine.h"
 
 class Camera : public GameComponent
 {

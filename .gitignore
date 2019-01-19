@@ -25,6 +25,7 @@ bld/
 [Ll]og/
 html/
 latex/
+[Bb]uild/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -268,11 +269,11 @@ __pycache__/
 /3DGameEngine/gameEngine.sublime-project
 /Notes/
 
-.vscode/c_cpp_properties.json
-.vscode/launch.json
-.vscode/tasks.json
-.vscode/workspace.code-workspace
-.vscode/settings.json
+# VSCode
+.vscode/*
+# Large resources
 /3DGameEngine/res/Ed Sheeran - Afire Love.mp3
+# Includes and libraries
 /3DGameEngine/lib/*
 /3DGameEngine/include/*
+/3DGameEngine/includeWindows/*

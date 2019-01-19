@@ -1,7 +1,7 @@
 #ifndef OBJLOADER_H
 #define OBJLOADER_H
 
-#include "3DMath\3DMath.h"
+#include "3DMath/3DMath.h"
 #include <vector>
 #include <string>
 

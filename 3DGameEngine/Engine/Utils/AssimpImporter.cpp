@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../Core/GameObject.h"
 #include "../GameComponents/MeshRenderer.h"
-#include "../Core/time.h"
+#include "../Core/Time.h"
 
 GameObject* AssimpImporter::LoadFile(const std::string& path)
 {
@@ -21,12 +21,18 @@ GameObject* AssimpImporter::LoadFile(const std::string& path)
 
 	directory = path.substr(0, path.find_last_of('\\'));
 	//process scene
-	std::string name = path.substr(path.find_last_of('\\'), path.find_last_of('.'));
-	GameObject* root = new GameObject(name);
+	std::string name = path.substr(path.find_last_of('\\') + 1, path.find_last_of('.'));
+	GameObject* root = new GameObject(scene->mRootNode->mName.C_Str());
 	ProcessNode(scene->mRootNode, scene, root);
 	t = Time::GetTime() - t;
 	std::cout << "Processed: " << path << " in : " << t << " seconds" << std::endl;
 	return root;
+}
+
+Animation* AssimpImporter::LoadAnimation(aiAnimation* animation)
+{
+	Animation* result = new Animation(animation->m_name.c_str(), animation->mDuration, animation->mTicksPerSecond);
+
 }
 
 Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
@@ -68,7 +74,45 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 			model.indices.push_back(face.mIndices[j]);
 		}
 	}
-	Mesh* result = new Mesh(model);
+
+	std::vector<Bone> bones;
+	std::vector<VertexBoneData> boneData;
+	// Load the bones for skeletal animation if the mesh has any
+    if(mesh->HasBones())
+    {
+		unsigned int boneIndex = 0;
+		bones.reserve(mesh->mNumBones);
+        for (unsigned int i = 0; i < mesh->mNumBones; ++i)
+        {
+            Bone bone;
+			bone.index = boneIndex;
+            aiBone* currentBone = mesh->mBones[i];
+			
+			bone.offsetMatrix = currentBone->mOffsetMatrix;
+			
+            for (unsigned int j = 0; j < currentBone->mNumWeights; ++j)
+            {
+				// TODO got a feeling that there will be a prob with this
+				unsigned int vertexID = currentBone->mWeights[j].mVertexId;
+				float weight = currentBone->mWeights[j].mWeight;
+				boneData[vertexID].AddData(boneIndex, weight);
+            }
+
+			bones[boneIndex] = bone;
+			boneIndex++;
+        }
+    }
+
+	Mesh* result = nullptr;
+	if(mesh->HasBones())
+	{
+		AnimatedModel animatedModel(model);
+		result = new AnimatedMesh(animatedModel);
+		result.AddBones(bones);
+		result.AddBoneData(boneData);
+	}
+	else 
+		result = new Mesh(model);
 	return result;
 	
 }
@@ -93,7 +137,6 @@ void AssimpImporter::ProcessNode(const aiNode* node, const aiScene* scene, GameO
 	}
 	for (int i = 0; i < node->mNumChildren; ++i)
 	{
-		scene->mRootNode->mChildren[i]->mName.length;
 		if(scene->mRootNode->mChildren[i]->mName.length != 0)
 		{
 			const char* name = scene->mRootNode->mChildren[i]->mName.C_Str();
@@ -114,18 +157,18 @@ Material* AssimpImporter::ProcessMaterial(const aiMaterial* material)
 		TextureConfig diffuseConfig;
 		diffuseConfig.path = directory + "\\" + dName.C_Str();
 		Texture* diffuse = new Texture(diffuseConfig);
-		result->AddTexture("diffuse", diffuse);
+		result->AddTexture("albedo", diffuse);
 	}
 
-	aiString spName;	;
-	if (material->GetTexture(aiTextureType_SPECULAR, 0, &spName) == aiReturn_SUCCESS)
+	aiString normalName;	;
+	if (material->GetTexture(aiTextureType_NORMALS, 0, &normalName) == aiReturn_SUCCESS)
 	{
-		TextureConfig specConfig;
-		specConfig.path = directory + "\\" + spName.C_Str();
-		Texture* specular = new Texture(specConfig);
-		result->AddTexture("specular", specular);
+		TextureConfig normalConfig;
+        normalConfig.path = directory + "\\" + normalName.C_Str();
+		Texture* normal = new Texture(normalConfig);
+		result->AddTexture("normal", normal);
 	}
-	result->AddFloat("specularExponent", 32);
+
 	return result;
 
 }

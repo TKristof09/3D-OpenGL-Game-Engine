@@ -1,4 +1,4 @@
-#include "Core\CoreEngine.h"
+#include "Core/CoreEngine.h"
 #include "PhysicsTestGame.h"
 #include "AssimpTestGame.h"
 #include "AudioTestGame.h"
@@ -17,12 +17,9 @@ extern "C"
 
 int main(int argc, char* argv[])
 {
-//	PhysicsTestGame testGame;
-//	AssimpTestGame testGame;
-//  AudioTestGame testGame;
-//  ImGuiTestGame testGame;
 
-	CoreEngine engine(800, 600, 60);
+
+	CoreEngine engine(1280, 720, 60);
 
     engine.AddGame<PhysicsTestGame>("PhysicsTestGame");
     engine.AddGame<AssimpTestGame>("AssimpTestGame");

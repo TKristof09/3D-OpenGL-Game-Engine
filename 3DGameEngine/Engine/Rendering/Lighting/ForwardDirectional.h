@@ -1,8 +1,8 @@
 #ifndef FORWARD_DIRECTIONAL_H
 #define FORWARD_DIRECTIONAL_H
 
-#include "..\Shader.h"
-#include "..\Material.h"
+#include "../Shader.h"
+#include "../Material.h"
 
 class RenderingEngine;
 class DirectionalLight;
@@ -21,7 +21,7 @@ public:
 
 
 	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
-	                    RenderingEngine* renderingEngine) const override;
+	                    RenderingEngine* renderingEngine, bool animated = false) const override;
 	void SetUniform(std::string uniform, const DirectionalLight& directionalLight) const;
 };
 

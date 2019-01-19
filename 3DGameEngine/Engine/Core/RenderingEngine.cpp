@@ -1,9 +1,10 @@
 #include "RenderingEngine.h"
 #include "GameObject.h"
 #include "Input.h"
-#include "..\Rendering\Lighting\ForwardAmbient.h"
-#include "..\GameComponents\Lighting.h"
+#include "../Rendering/Lighting/ForwardAmbient.h"
+#include "../GameComponents/Lighting.h"
 #include "../Rendering/PBR.h"
+#include "../Utils/FileLoader.h"
 
 
 RenderingEngine::RenderingEngine()
@@ -78,7 +79,7 @@ void RenderingEngine::Render(const GameObject& object)
 
 void RenderingEngine::Init()
 {
-    m_background = new RadianceHDRTexture("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Newport_Loft\\Newport_Loft_Ref.hdr");
+    m_background = new RadianceHDRTexture(GetPath("Newport_Loft/Newport_Loft_Ref.hdr"));
 	glDisable(GL_CULL_FACE);
 	Texture* cubeMap = m_background->ToCubeMap(1024);
     envMap = PBR::ConvoluteIrradianceMap(cubeMap, 128);

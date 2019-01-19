@@ -2,9 +2,9 @@
 #define MESHRENDERER_H
 
 #include "GameComponent.h"
-#include "..\Rendering\Mesh.h"
-#include "..\Rendering\Material.h"
-#include "..\Rendering\Shader.h"
+#include "../Rendering/Mesh.h"
+#include "../Rendering/Material.h"
+#include "../Rendering/Shader.h"
 
 class MeshRenderer : public GameComponent
 {
@@ -25,6 +25,23 @@ public:
 	Mesh* mesh;
 	Material* material;
 
+};
+
+class AnimatedMeshRenderer : public MeshRenderer
+{
+public:
+    AnimatedMeshRenderer(AnimatedMesh* mesh, Material* material):
+        MeshRenderer(mesh, material){}
+
+    void Render(const Shader* shader, RenderingEngine* renderingEngine) override
+    {
+        shader->Bind();
+        shader->UpdateUniforms(*GetTransform(), *material, renderingEngine, true);
+
+        mesh->Draw();
+        
+    }
+		
 };
 
 #endif // !MESHRENDERER_H

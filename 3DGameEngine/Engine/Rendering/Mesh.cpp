@@ -88,4 +88,23 @@ std::vector<unsigned> Mesh::GetIndices() const
 	return m_model.indices;
 }
 
+AnimatedMesh::AnimatedMesh(const Model& Model)
+{
+	m_model = model;
+	InitAnimatedMesh(animatedModel);
+}
+
+void AnimatedMesh::InitAnimatedMesh(const Model& model)
+{
+	Mesh::InitMesh(model);	
+	glBindVertexArray(m_vao);
+	glGenBuffers(1, &m_boneDataBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_boneDataBuffer);
+	glBufferData(GL_ARRAY_BUFFER, m_boneData.size() * sizeof(VertexBoneData), &m_boneData[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(4);
+	glVertexAttribIPointer(4, 4, GL_INT, sizeof(VertexBoneData), (void*)offsetof(VertexBoneData, IDs[0]));
+	glEnableVertexAttribArray(5);
+	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (void*)offsetof(VertexBoneData, weights[0]));
+	glBindVertexArray(0);
+}
 

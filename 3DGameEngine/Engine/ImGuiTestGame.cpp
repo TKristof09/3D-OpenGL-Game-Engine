@@ -19,7 +19,7 @@ void ImGuiTestGame::Init()
     DebugUIWindow* window = new DebugUIWindow();
     Text* text = new Text("This is a test text");
     math::Vector3* v = new math::Vector3(0);
-    DragVector3* sliderVector3 = new DragVector3(v, 0, 1);
+    DragVector3* sliderVector3 = new DragVector3(v, "Vector3" ,0, 1);
 
     window->AddElement(text);
     window->AddElement(sliderVector3);

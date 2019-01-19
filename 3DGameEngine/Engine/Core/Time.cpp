@@ -1,9 +1,8 @@
-#include "time.h"
-
+#include "Time.h"
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(WIN64)
 #define OS_WINDOWS
 #else
-#ifdef __linux__
+#ifdef linux
 #define OS_LINUX
 #else
 #if __cplusplus >= 201103L
@@ -22,7 +21,7 @@ static bool g_timerInitialized = false;
 #endif
 
 #ifdef OS_LINUX
-#include <sys/time.h>
+#include <time.h>
 static const long NANOSECONDS_PER_SECOND = 1000000000L;
 #endif
 

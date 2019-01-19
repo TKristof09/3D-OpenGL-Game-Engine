@@ -1,8 +1,8 @@
 #ifndef FORWARD_SPOT_H
 #define FORWARD_SPOT_H
 
-#include "..\Shader.h"
-#include "..\Material.h"
+#include "../Shader.h"
+#include "../Material.h"
 
 class RenderingEngine;
 class SpotLight;
@@ -22,7 +22,7 @@ public:
 	}
 
 	void UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
-	                    RenderingEngine* renderingEngine) const override;
+	                    RenderingEngine* renderingEngine, bool animated = false) const override;
 	void SetUniform(std::string uniform, const PointLight& pointLight) const;
 	void SetUniform(std::string uniform, const Attenuation& attenuation) const;
 	void SetUniform(std::string uniform, const SpotLight& spotLight) const;

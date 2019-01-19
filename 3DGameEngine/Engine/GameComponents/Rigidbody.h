@@ -2,7 +2,8 @@
 #define RIGIDBODY_H
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <3DMath/3DMath.h>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
+//#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include "btBulletDynamicsCommon.h"
 #include "../GameComponents/GameComponent.h"
 #include "Collider.h"
 

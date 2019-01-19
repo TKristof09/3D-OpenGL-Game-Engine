@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Texture.h"
 #include "../Utils/stb_image.h"
-#include <3DMath/3DMath.h>
+#include "3DMath/3DMath.h"
 #ifdef _DEBUG
 int e;
 #define CHECK_GL_ERROR e = glGetError(); if(e != 0) std::cout << "GL error: 0x" << std::hex << e << " file: " <<__FILE__ << " line: " << std::dec << __LINE__ <<std::endl
@@ -70,9 +70,10 @@ void GenTextures(TextureConfig* config, GLenum target)
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
 
-			glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
+			//glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
 			CHECK_GL_ERROR;
-			glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+			//glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+			glTexImage2D(target, 0, config->internalFormat, width, height, 0, config->format, config->dataType, imageData);
 			CHECK_GL_ERROR;
 
 			stbi_image_free(imageData);
@@ -83,10 +84,12 @@ void GenTextures(TextureConfig* config, GLenum target)
 			stbi_uc* imageData = stbi_load(config->path.c_str(), &width, &height, &numComponents, 4);
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
+			
 
-			glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
+			//glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
 			CHECK_GL_ERROR;
-			glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+			//glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+			glTexImage2D(target, 0, config->internalFormat, width, height, 0, config->format, config->dataType, imageData);
 			CHECK_GL_ERROR;
 
 			stbi_image_free(imageData);

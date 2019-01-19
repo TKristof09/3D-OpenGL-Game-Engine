@@ -26,7 +26,7 @@ void PhysicsEngine::AddTriggerCollider(TriggerCollider* collider)
 
 void PhysicsEngine::Simulate(float delta) const
 {
-	m_dynamicsWorld->stepSimulation(delta);
+	m_dynamicsWorld->stepSimulation(delta, 1, btScalar(1.)/btScalar(60.));
 }
 
 void PhysicsEngine::PhysicsTickCallback(btScalar timeStep)

@@ -1,8 +1,7 @@
 #ifndef DEBUGUIELEMENTS_H
 #define DEBUGUIELEMENTS_H
 #include <vector>
-#include <3DMath/Vector2.h>
-#include <3DMath/3DMath.h>
+#include "3DMath/3DMath.h"
 #include "imgui/imgui.h"
 #include <map>
 #include <functional>

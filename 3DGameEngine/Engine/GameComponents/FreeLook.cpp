@@ -1,5 +1,5 @@
 ﻿#include "FreeLook.h"
-#include "..\Core\Input.h"
+#include "../Core/Input.h"
 #include <iostream>
 
 void FreeLook::Update()

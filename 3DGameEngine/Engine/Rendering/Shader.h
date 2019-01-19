@@ -2,9 +2,9 @@
 #define SHADER_H
 
 #include <string>
-#include <GL\glew.h>
-#include "..\Core\Transform.h"
-#include "..\GameComponents\Camera.h"
+#include <GL/glew.h>
+#include "../Core/Transform.h"
+#include "../GameComponents/Camera.h"
 #include "Material.h"
 
 class RenderingEngine;
@@ -26,8 +26,8 @@ public:
 
 	virtual void Bind() const;
 
-	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine) const {};
-	virtual void UpdateUniforms(const Transform& transform, const Color& color, RenderingEngine* renderingEngine) const {};
+	virtual void UpdateUniforms(const Transform& transform, const Material& material, RenderingEngine* renderingEngine, bool animated = false) const {};
+	virtual void UpdateUniforms(const Transform& transform, const Color& color, RenderingEngine* renderingEngine, bool animated = false) const {};
 	void SetUniform(const std::string& uniform, int value) const;
 	void SetUniform(const std::string& uniform, float value) const;
 	void SetUniform(const std::string& uniform, const math::Vector3& value) const;

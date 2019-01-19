@@ -1,17 +1,20 @@
 #include "ForwardDirectional.h"
-#include "..\Engine\Core\RenderingEngine.h"
-#include "..\Engine\GameComponents\Lighting.h"
+#include "../Engine/Core/RenderingEngine.h"
+#include "../Engine/GameComponents/Lighting.h"
+#include "../Engine/Utils/FileLoader.h"
 
 
 ForwardDirectional::ForwardDirectional()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-directional", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-directional-PBR", GL_FRAGMENT_SHADER);
+	AddShader(GetPath("Shaders/forward-directional"), GL_VERTEX_SHADER);
+	AddShader(GetPath("Shaders/forward-directional-PBR"), GL_FRAGMENT_SHADER);
 }
 
 void ForwardDirectional::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
-                                        RenderingEngine* renderingEngine) const
+                                        RenderingEngine* renderingEngine, bool animated) const
 {
+    Shader::SetUniform("animated", animated);
+
 	material.GetTexture("albedo").Bind();
 	material.GetNormal("normal").Bind(1);
 	Shader::SetUniform("normalMap", 1);

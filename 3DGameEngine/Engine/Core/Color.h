@@ -1,7 +1,7 @@
 ﻿#ifndef COLOR_H
 #define COLOR_H
 
-#include "3DMath\3DMath.h"
+#include "3DMath/3DMath.h"
 
 struct Color
 {

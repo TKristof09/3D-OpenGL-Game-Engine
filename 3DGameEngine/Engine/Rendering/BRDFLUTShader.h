@@ -1,6 +1,7 @@
 #ifndef BRDFLUT_SHADER
 #define BRDFLUT_SHADER
 #include "Shader.h"
+#include "../Engine/Utils/FileLoader.h"
 
 class BRDFLUTShader : public Shader
 {
@@ -12,8 +13,8 @@ public:
 	}
 	BRDFLUTShader()
 	{
-		AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\brdf", GL_VERTEX_SHADER);
-		AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\brdf", GL_FRAGMENT_SHADER);
+		AddShader(GetPath("Shaders/brdf"), GL_VERTEX_SHADER);
+		AddShader(GetPath("Shaders/brdf"), GL_FRAGMENT_SHADER);
 	}
 };
 

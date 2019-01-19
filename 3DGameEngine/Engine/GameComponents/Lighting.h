@@ -1,12 +1,12 @@
 #ifndef LIGHTING_H
 #define LIGHTING_H
 
-#include "3DMath\3DMath.h"
+#include "3DMath/3DMath.h"
 
-#include "..\Engine\GameComponents\GameComponent.h"
-#include "..\Rendering\Lighting\ForwardDirectional.h"
-#include "..\Rendering\Lighting\ForwardPoint.h"
-#include "..\Rendering\Lighting\ForwardSpot.h"
+#include "../Engine/GameComponents/GameComponent.h"
+#include "../Rendering/Lighting/ForwardDirectional.h"
+#include "../Rendering/Lighting/ForwardPoint.h"
+#include "../Rendering/Lighting/ForwardSpot.h"
 
 #define COLOR_DEPTH 256
 

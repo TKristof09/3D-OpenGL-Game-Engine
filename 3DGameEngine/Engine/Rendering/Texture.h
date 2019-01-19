@@ -4,7 +4,7 @@
 #include <string>
 #include <GL/glew.h>
 #include "../Core/Window.h"
-
+#include "../Utils/FileLoader.h"
 
 struct TextureConfig
 {
@@ -27,7 +27,7 @@ struct TextureConfig
 	bool hdrFormat = false;
 	unsigned maxMipMapLevels = 1;
 
-	std::string path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\defaultTexture.jpg";
+	std::string path = GetPath("defaultTexture.jpg");
 };
 
 class Texture

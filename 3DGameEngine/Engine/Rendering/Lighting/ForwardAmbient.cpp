@@ -1,16 +1,18 @@
 #include "ForwardAmbient.h"
-#include "..\Engine\Core\RenderingEngine.h"
-
+#include "../Engine/Core/RenderingEngine.h"
+#include "../Engine/Utils/FileLoader.h"
 
 ForwardAmbient::ForwardAmbient()
 {
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-ambient", GL_VERTEX_SHADER);
-	AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\forward-ambient-PBR", GL_FRAGMENT_SHADER);
+	AddShader(GetPath("Shaders/forward-ambient"), GL_VERTEX_SHADER);
+	AddShader(GetPath("Shaders/forward-ambient-PBR"), GL_FRAGMENT_SHADER);
 }
 
 void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
-                                    RenderingEngine* renderingEngine) const
+                                    RenderingEngine* renderingEngine, bool animated) const
 {
+    SetUniform("animated", animated);
+
 	material.GetTexture("albedo").Bind();
 	SetUniform("albedoMap", 0);
 	material.GetNormal("normal").Bind(1);

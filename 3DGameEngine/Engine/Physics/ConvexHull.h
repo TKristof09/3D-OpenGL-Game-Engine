@@ -4,6 +4,7 @@
 #include "../Rendering/Mesh.h"
 #include "3DMath/3DMath.h"
 #include "../GameComponents/Collider.h"
+#include "BulletCollision/CollisionShapes/btConvexHullShape.h"
 
 class ConvexHull : public Collider
 {

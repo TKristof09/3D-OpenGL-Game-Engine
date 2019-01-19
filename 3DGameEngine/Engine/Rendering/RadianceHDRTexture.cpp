@@ -1,7 +1,7 @@
 ﻿#include "RadianceHDRTexture.h"
 #include <iostream>
 #include <cassert>
-#include <3DMath/3DMath.h>
+#include "3DMath/3DMath.h"
 #include "../Utils/AssimpImporter.h"
 #include "../Core/GameObject.h"
 #include "EquirectangularToCubemapShader.h"

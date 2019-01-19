@@ -1,6 +1,7 @@
 #ifndef PREFILTER_SHADER
 #define PREFILTER_SHADER
 #include "Shader.h"
+#include "../Engine/Utils/FileLoader.h"
 
 class PrefilterShader : public Shader
 {
@@ -12,8 +13,8 @@ public:
 	}
 	PrefilterShader()
 	{
-		AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\cubeMap", GL_VERTEX_SHADER);
-		AddShader("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\Shaders\\prefilter", GL_FRAGMENT_SHADER);
+		AddShader(GetPath("Shaders/cubeMap"), GL_VERTEX_SHADER);
+		AddShader(GetPath("Shaders/prefilter"), GL_FRAGMENT_SHADER);
 	}
 };
 

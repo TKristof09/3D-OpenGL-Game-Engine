@@ -1,6 +1,6 @@
 #include "Window.h"
-#include <GL\glew.h>
-#include <SDL2\SDL.h>
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
 #include "SDL_Backend.h"
 #include <iostream>
 
@@ -23,17 +23,18 @@ void Window::Create(int width, int height, const std::string& title)
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32); //32 bit depth buffer to increase precision to prevent Z-fighting 
-    
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24); //32 bit depth buffer to increase precision to prevent Z-fighting 
+   	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE); 
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
 
 	SDLCreateWindow(m_title.c_str(), m_width, m_height, false);
 
-	glewExperimental = true;
 	const auto result = glewInit();
 	if (result != GLEW_OK)
-		std::cerr << "Glew failed to initialize!" << std::endl;
+		std::cerr << "Glew failed to initialize!" << glewGetErrorString(result) <<std::endl;
 
 	std::cout<<"\n OpenGL version supported by this platform: " << glGetString(GL_VERSION)<< "\n" <<std::endl;
 }

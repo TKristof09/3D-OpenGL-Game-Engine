@@ -268,6 +268,42 @@ namespace math
 		return conjugate(q) / lengthSq(q);
 	}
 
+    template <typename T>
+    // http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/index.htm
+    quat<T> slerp(const quat<T>& q1, const quat<T>& q2, float t)
+    {
+        float cosInitial = dot(q1, q2);
+        float cosHalfAngle = cosInitial >= 0 ? cosInitial : -cosInitial;
+
+        if(cosHalfAngle >= 1.0f)
+            return q1;
+
+        float sinHalfAngle = sqrt(1.0f - cosHalfAngle * cosHalfAngle);
+        // if the angle is 180 degrees then the result isnt fully defined
+        // we could rotate around any axis normal to q1 or q2
+        if(fabs(sinHalfAngle) < 0.0001)
+        {
+            return quat<T>(q1.w * 0.5f + q2.w * 0.5f,
+                           q1.x * 0.5f + q2.x * 0.5f,
+                           q1.y * 0.5f + q2.y * 0.5f,
+                           q1.z * 0.5f + q2.z * 0.5f);
+        }
+        
+        float invSinHalfAngle = 1 / sinHalfAngle;
+        float halfAngle = acosf(cosHalfAngle);
+
+        float amt1 = sin((1.0f - t) * halfAngle) * invSinHalfAngle;
+        float amt2 = sin(t * halfAngle) * invSinHalfAngle;
+
+        amt2 = cosInitial >= 0 ? amt2 : -amt2;
+
+        return quat<T>(q1.w * amt1 + q2.w * amt2,
+                       q1.x * amt1 + q2.x * amt2,
+                       q1.y * amt1 + q2.y * amt2,
+                       q1.z * amt1 + q2.z * amt2);
+    
+    }
+
 	template <typename T>
 	std::string ToString(const quat<T>& q)
 	{

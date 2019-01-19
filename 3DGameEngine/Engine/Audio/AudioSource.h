@@ -2,7 +2,7 @@
 #define AUDIOSOURCE_H
 #include <string>
 #include "../GameComponents/GameComponent.h"
-#include <FMod/fmod.hpp>
+#include <FMOD/fmod.hpp>
 
 
 class AudioSource : public GameComponent{

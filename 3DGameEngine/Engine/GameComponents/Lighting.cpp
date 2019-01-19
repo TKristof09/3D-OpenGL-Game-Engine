@@ -1,5 +1,5 @@
 #include "Lighting.h"
-#include "..\Engine\Core\RenderingEngine.h"
+#include "../Engine/Core/RenderingEngine.h"
 
 #include "../Utils/DebuggingMacros.h"
 #include "../Rendering/DebugDrawer.h"

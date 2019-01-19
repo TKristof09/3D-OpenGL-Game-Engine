@@ -5,12 +5,13 @@
 #include "GameComponents/FreeMove.h"
 #include "Core/Window.h"
 #include "Utils/OBJloader.h"
+#include "Utils/FileLoader.h"
 #include "GameComponents/Lighting.h"
 #include "Rendering/RadianceHDRTexture.h"
 void AssimpTestGame::Init()
 {
 	auto cameraOBJ = new GameObject("camera");
-	auto dLight = new GameObject("dLight");
+	auto sLight = new GameObject("sLight");
 	
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ void AssimpTestGame::Init()
 	
 	
 	AssimpImporter importer;
-	GameObject* go = importer.LoadFile("A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\cubeUV.obj");
+	GameObject* go = importer.LoadFile(GetPath("cubeUV.obj"));
 	//go->GetTransform()->Rotate(math::ToRadians(-90.0f), math::Vector3(1, 0, 0));
 	//go->GetTransform()->SetScale(math::Vector3(10, 10, 10));
     //go->GetTransform()->SetScale(math::Vector3(10, 1, 10));
@@ -35,13 +36,13 @@ void AssimpTestGame::Init()
 	//go->GetChild(0)->GetTransform()->SetScale(math::Vector3(2));
 	Material* material1 = mr->material;
 	TextureConfig albedo;
-	albedo.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\rustediron2_basecolor.png";
+	albedo.path = GetPath("rustediron2_basecolor.png");
 	TextureConfig normal;
-	normal.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\rustediron2_normal.png";
+	normal.path = GetPath("rustediron2_normal.png");
 	TextureConfig metallic;
-	metallic.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\rustediron2_metallic.png";
+	metallic.path = GetPath("rustediron2_metallic.png");
 	TextureConfig roughness;
-	roughness.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\rustediron2_roughness.png";
+	roughness.path = GetPath("rustediron2_roughness.png");
 	material1->AddTexture("albedo", new Texture(albedo));
 	material1->AddTexture("normal", new Texture(normal));
 	material1->AddTexture("metallic", new Texture(metallic));
@@ -50,13 +51,13 @@ void AssimpTestGame::Init()
 	//Lights
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	
-	dLight->AddComponent(new SpotLight(Color::Red, 1.0f, Attenuation(1,0,0), math::ToRadians(30)));
-	dLight->GetTransform()->Translate(math::Vector3(0, 0, -2));
-//	dLight->AddComponent(new DirectionalLight(Color(244.0f, 150.0f, 28.0f), 0.6f));
-	dLight->GetTransform()->Rotate(math::ToRadians(65), math::Vector3(1, 0, 0));
-//	dLight->GetTransform()->Translate(math::Vector3(2, 2, 0));
+	sLight->AddComponent(new SpotLight(Color::Red, 1.0f, Attenuation(1,0,0), math::ToRadians(30)));
+	sLight->GetTransform()->Translate(math::Vector3(0, 0, -2));
+//	sLight->AddComponent(new DirectionalLight(Color(244.0f, 150.0f, 28.0f), 0.6f));
+	sLight->GetTransform()->Rotate(math::ToRadians(65), math::Vector3(1, 0, 0));
+//	sLight->GetTransform()->Translate(math::Vector3(2, 2, 0));
 	
 	AddToScene(go);
-	AddToScene(dLight);
+	AddToScene(sLight);
 
 }

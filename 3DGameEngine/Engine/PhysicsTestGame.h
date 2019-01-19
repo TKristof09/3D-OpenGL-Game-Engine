@@ -1,7 +1,7 @@
 ﻿#ifndef PHYSICSTESTGAME_H
 #define PHYSICSTESTGAME_H
 
-#include "Core\Game.h"
+#include "Core/Game.h"
 
 const int DEBUG_LIGHT_DIRECTION = 1;
 

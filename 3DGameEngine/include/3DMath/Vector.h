@@ -87,6 +87,12 @@ namespace math
 		return v / length(v);
 	}
 
+    template <unsigned int L, typename T>
+    vec<L, T> lerp(const vec<L,T>& v1, const vec<L, T>& v2, float t)
+    {
+        return v1 + t * (v2 - v1);
+    }
+
 	template <typename T>
 	std::string ToString(const vec<2, T>& v)
 	{

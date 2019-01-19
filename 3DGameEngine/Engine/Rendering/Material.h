@@ -1,8 +1,9 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
-#include "3DMath\3DMath.h"
+#include "3DMath/3DMath.h"
 #include <map>
 #include "Texture.h"
+#include "../Engine/Utils/FileLoader.h"
 
 class Material
 {
@@ -12,7 +13,7 @@ public:
 		m_defaultVector3(math::Vector3(1))
 	{
         TextureConfig config;
-        config.path = "A:\\Programozas\\C++\\3DGameEngine\\3DGameEngine\\res\\defaultNormal.jpg";
+        config.path = GetPath("defaultNormal.jpg");
         m_defaultNormal = Texture(config);
 	}
 
