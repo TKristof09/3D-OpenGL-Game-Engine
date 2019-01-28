@@ -3,8 +3,8 @@
 #include "Window.h"
 #include "Time.h"
 #include "Input.h"
-#include "BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolverMt.h"
 #include "LinearMath/btThreads.h"
+#include "BulletMultiThreading/btTaskScheduler.h"
 #include <iostream>
 CoreEngine* engine = nullptr;
 
@@ -22,13 +22,13 @@ CoreEngine::CoreEngine(int width, int height, double framerate):
     engine = this;
 	glewExperimental = GL_TRUE;
 
-	btITaskScheduler* scheduler = btGetTBBTaskScheduler();
+	btITaskScheduler* scheduler = createDefaultTaskScheduler();
 	std::cout << (scheduler == nullptr) << std::endl;
 	scheduler->setNumThreads(8);
 	btSetTaskScheduler(scheduler);
 	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
 	m_physicsEngine = new PhysicsEngine(collisionConfiguration, new btCollisionDispatcherMt(collisionConfiguration),
-		new btDbvtBroadphase(), new btConstraintSolverPoolMt(8), new btSequentialImpulseConstraintSolverMt());
+		new btDbvtBroadphase(), new btConstraintSolverPoolMt(8));
 
     m_audioEngine = new AudioEngine();
 }

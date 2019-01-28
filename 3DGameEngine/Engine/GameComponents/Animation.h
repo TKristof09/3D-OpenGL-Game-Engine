@@ -64,6 +64,10 @@ public:
     {
         return m_channels;
     }
+    std::string GetName() const
+    {
+        return m_name;
+    }
 private:
 	std::string m_name;
 	unsigned int m_duration;

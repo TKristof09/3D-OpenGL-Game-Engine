@@ -1,11 +1,13 @@
 ﻿#ifndef ASSIMPIMPORTER_H
 #define ASSIMPIMPORTER_H
 #include <string>
-#include <assimp/Importer.hpp>
+
 #include <assimp/scene.h>
+#include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include "../Rendering/Mesh.h"
 #include "../Rendering/Material.h"
+#include "../GameComponents/Animation.h"
 class GameObject;
 
 class AssimpImporter {

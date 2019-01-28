@@ -28,7 +28,6 @@ int main(int argc, char* argv[])
 
 	engine.CreateWindow("3D Game Engine");
 	engine.Start();
-
 //	_CrtDumpMemoryLeaks();
 	return 0;
 }

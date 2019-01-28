@@ -2,16 +2,24 @@ cmake_minimum_required(VERSION 3.0.0)
 project(3DGameEngine)
 
 
-add_definitions(
-	-g
-	-std=c++17
-	-c
-	-Wall
-	-lstdc++fs
-)
+#add_definitions(
+#	-g
+#	-std=c++17
+#	-c
+#	-lstdc++fs
+#)
+# This doesnt seem to work(at least on windows with MSVC)
+#add_compile_options(# clang/GCC warnings
+#					$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+#						-Wall -std=c++17 -lstdc++fs>
+#					# MSVC warnings
+#					$<$<CXX_COMPILER_ID:MSVC>:
+#						/W4 /std:c++latest>)
 
 # This is needed for YouCompleteMe
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Build/bin)
 
 if ( CMAKE_BUILD_TYPE STREQUAL "" )
 		# CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
@@ -48,7 +56,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 # OpenGL
 find_package(OpenGL REQUIRED)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-
+	add_compile_options(-Wall -std=c++17 -lstdc++fs)
 	# Bullet
 	set(BULLET_ROOT /usr/local)
 	set(BULLET_ROOT 3DGameEngine/lib)
@@ -83,10 +91,11 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	find_package(TBB REQUIRED)
 	message( ${BULLET_LIBRARIES} )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	add_compile_options(/W4 /std:c++latest)
 	file(GLOB_RECURSE LIBS 3DGameEngine/lib/*.lib)
 	file(GLOB_RECURSE WINDOWS_HEADERS 3DGameEngine/includeWindows/*.h)
 	file(GLOB_RECURSE WINDOWS_ADDITIONAL_SOURCES 3DGameEngine/includeWindows/*.cpp)
-	add_definitions(-DB3_USE_CLEW)
+	add_definitions(-DB3_USE_CLEW -DBT_THREADSAFE)
 endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 
@@ -114,8 +123,6 @@ target_link_libraries( 3DGameEngine
 		${BULLET_LIBRARIES}
 		${FMOD_LIBRARIES}
 		${LIBS}
-		m
-		tbb
-		stdc++fs
+		
 		)
 

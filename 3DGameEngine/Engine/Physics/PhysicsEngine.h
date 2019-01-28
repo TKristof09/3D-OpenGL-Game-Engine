@@ -14,17 +14,16 @@ class PhysicsEngine
 public:
 
 	PhysicsEngine(btCollisionConfiguration* collisionConfiguration, btCollisionDispatcherMt* dispatcher,
-		btBroadphaseInterface* broadphase, btConstraintSolverPoolMt* solverPool, btConstraintSolver* solver)
+		btBroadphaseInterface* broadphase, btConstraintSolverPoolMt* solverPool)
 		: m_gravity(math::Vector3(0,-10, 0)),
 		  m_dispatcher(dispatcher),
 		  m_bp(broadphase),
-		  m_solver(solver),
 		  m_solverPool(solverPool),
 		  m_collisionConfig(collisionConfiguration),
 		  m_dynamicsWorld(nullptr)
 	{
 		
-		m_dynamicsWorld = new btDiscreteDynamicsWorldMt(m_dispatcher, m_bp, m_solverPool, m_solver,m_collisionConfig);
+		m_dynamicsWorld = new btDiscreteDynamicsWorldMt(m_dispatcher, m_bp, m_solverPool, m_collisionConfig);
 		m_dynamicsWorld->setInternalTickCallback(TickCallback, this);
 		m_dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 	}
@@ -38,7 +37,6 @@ public:
 		}
 		
 		delete m_dynamicsWorld;
-		delete m_solver;
 		delete m_solverPool;
 		delete m_bp;
 		delete m_dispatcher;
@@ -99,7 +97,6 @@ private:
 	btCollisionDispatcherMt* m_dispatcher;
 	btBroadphaseInterface* m_bp;
 	btConstraintSolverPoolMt* m_solverPool;
-	btConstraintSolver* m_solver;
 	btCollisionConfiguration* m_collisionConfig;
 	btDiscreteDynamicsWorldMt* m_dynamicsWorld;
 	

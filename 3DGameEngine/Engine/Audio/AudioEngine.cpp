@@ -79,7 +79,7 @@ FMOD::Sound* AudioEngine::AddSound(const std::string& name, FMOD_MODE mode)
     if (it == m_sounds.end())
     {
         m_sounds[name] = nullptr;
-        m_system->createSound(name.c_str(), mode, 0, &m_sounds[name]);
+        ErrorCheck(m_system->createSound(name.c_str(), mode, 0, &m_sounds[name]));
     }
     return m_sounds[name];
 }

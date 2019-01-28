@@ -4,6 +4,7 @@
 #include "../GameComponents/MeshRenderer.h"
 #include "../Core/Time.h"
 
+
 GameObject* AssimpImporter::LoadFile(const std::string& path)
 {
 	Assimp::Importer importer;
@@ -31,7 +32,9 @@ GameObject* AssimpImporter::LoadFile(const std::string& path)
 
 Animation* AssimpImporter::LoadAnimation(aiAnimation* animation)
 {
-	Animation* result = new Animation(animation->m_name.c_str(), animation->mDuration, animation->mTicksPerSecond);
+	Animation* result = new Animation(animation->mName.C_Str(), animation->mDuration, animation->mTicksPerSecond);
+
+	return result;
 
 }
 
@@ -106,10 +109,11 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 	Mesh* result = nullptr;
 	if(mesh->HasBones())
 	{
-		AnimatedModel animatedModel(model);
-		result = new AnimatedMesh(animatedModel);
-		result.AddBones(bones);
-		result.AddBoneData(boneData);
+		Model animatedModel(model);
+		AnimatedMesh* animMesh = new AnimatedMesh(animatedModel);
+		animMesh->AddBones(bones);
+		animMesh->AddBoneData(boneData);
+		result = animMesh;
 	}
 	else 
 		result = new Mesh(model);

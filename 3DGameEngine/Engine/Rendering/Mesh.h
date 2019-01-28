@@ -34,11 +34,10 @@ struct VertexBoneData
 			index++;
 		}
 	}
-private:
 	unsigned int index;
     unsigned int m_IDs[NUM_BONES_PER_VERTEX];
     float m_weights[NUM_BONES_PER_VERTEX];
-}
+};
 
 struct Model
 {
