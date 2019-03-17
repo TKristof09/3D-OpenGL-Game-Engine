@@ -23,7 +23,6 @@ CoreEngine::CoreEngine(int width, int height, double framerate):
 	glewExperimental = GL_TRUE;
 
 	btITaskScheduler* scheduler = createDefaultTaskScheduler();
-	std::cout << (scheduler == nullptr) << std::endl;
 	scheduler->setNumThreads(8);
 	btSetTaskScheduler(scheduler);
 	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();

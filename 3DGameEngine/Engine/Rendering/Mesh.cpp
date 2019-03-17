@@ -4,9 +4,9 @@
 
 
 Mesh::Mesh(const Model& model):
-m_vao(0),
+/*m_vao(0),
 m_vbo(0),
-m_ebo(0),
+m_ebo(0),*/
 m_drawCount(0)
 {
 	m_model = model;
@@ -33,7 +33,8 @@ Mesh::Mesh(const std::string& fn)
 
 Mesh::~Mesh()
 {
-	glDeleteVertexArrays(1, &m_vao);
+	m_vao.Delete();
+	//glDeleteVertexArrays(1, &m_vao);
 }
 
 
@@ -41,8 +42,17 @@ void Mesh::InitMesh(const Model& model)
 {
 	
 	m_drawCount = model.indices.size();
+	m_vao.Init();
+	m_vao.Bind();
+	m_vao.AttachBuffer(GL_ARRAY_BUFFER,  model.vertices.size() * sizeof(Vertex), GL_STATIC_DRAW, &model.vertices[0]);
+	m_vao.AttachBuffer(GL_ELEMENT_ARRAY_BUFFER,  model.indices.size() * sizeof(unsigned int), GL_STATIC_DRAW, &model.indices[0]);
 
-	glGenVertexArrays(1, &m_vao);
+	m_vao.AddAttributef(0, 3, sizeof(Vertex), (void*)0);
+	m_vao.AddAttributef(1, 2, sizeof(Vertex), (void*)offsetof(Vertex, textCoords));
+	m_vao.AddAttributef(2, 3, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	m_vao.AddAttributef(3, 3, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
+	m_vao.UnBind();
+	/*glGenVertexArrays(1, &m_vao);
 	glGenBuffers(1, &m_vbo);
 	glGenBuffers(1, &m_ebo);
 	
@@ -67,16 +77,17 @@ void Mesh::InitMesh(const Model& model)
 	glEnableVertexAttribArray(3);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
 
-	glBindVertexArray(0);
+	glBindVertexArray(0);*/
 }
 
 void Mesh::Draw() const
 {
-	glBindVertexArray(m_vao);
+	//glBindVertexArray(m_vao);
+	m_vao.Bind();
+	glDrawElements(GL_TRIANGLES, m_drawCount, GL_UNSIGNED_INT, nullptr);
+	m_vao.UnBind();
 
-	glDrawElements(GL_TRIANGLES, m_drawCount, GL_UNSIGNED_INT, 0);
-
-	glBindVertexArray(0);
+	//glBindVertexArray(0);
 }
 
 std::vector<Vertex> Mesh::GetVertices() const
@@ -88,8 +99,10 @@ std::vector<unsigned> Mesh::GetIndices() const
 	return m_model.indices;
 }
 
-AnimatedMesh::AnimatedMesh(const Model& model)
+AnimatedMesh::AnimatedMesh(const Model& model, const std::vector<Bone>& bones, const std::vector<VertexBoneData>& boneData)
 {
+	m_bones = bones;
+	m_boneData = boneData;
 	m_model = model;
 	InitAnimatedMesh(m_model);
 }
@@ -97,7 +110,7 @@ AnimatedMesh::AnimatedMesh(const Model& model)
 void AnimatedMesh::InitAnimatedMesh(const Model& model)
 {
 	Mesh::InitMesh(model);	
-	glBindVertexArray(m_vao);
+	/*glBindVertexArray(m_vao);
 	glGenBuffers(1, &m_boneDataBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_boneDataBuffer);
 	glBufferData(GL_ARRAY_BUFFER, m_boneData.size() * sizeof(VertexBoneData), &m_boneData[0], GL_STATIC_DRAW);
@@ -105,6 +118,6 @@ void AnimatedMesh::InitAnimatedMesh(const Model& model)
 	glVertexAttribIPointer(4, 4, GL_INT, sizeof(VertexBoneData), (void*)offsetof(VertexBoneData, m_IDs[0]));
 	glEnableVertexAttribArray(5);
 	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (void*)offsetof(VertexBoneData, m_weights[0]));
-	glBindVertexArray(0);
+	glBindVertexArray(0);*/
 }
 

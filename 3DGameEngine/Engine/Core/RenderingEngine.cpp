@@ -15,7 +15,6 @@ RenderingEngine::RenderingEngine()
       m_mainCamera(nullptr),
       m_activeLight(nullptr)
 {
-    //glClearColor(0.05f, 0.05f, 0.05f, 0.05f);
     glEnable(GL_DEPTH_CLAMP); //camera clipping prevention
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -56,7 +55,7 @@ void RenderingEngine::ReInit()
 void RenderingEngine::Render(const GameObject& object)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+	glClearColor(0.1f,0.1f,0.1f,1.0f);
 	object.Render(ForwardAmbient::GetInstance(), this);
 
 	glEnable(GL_BLEND); //enable blending the colors together

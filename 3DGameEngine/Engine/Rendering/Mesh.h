@@ -4,6 +4,7 @@
 #include "3DMath/3DMath.h"
 #include <GL/glew.h>
 #include <vector>
+#include "../Memory/VAO.h"
 
 #define NUM_BONES_PER_VERTEX 4
 
@@ -51,10 +52,7 @@ class Mesh
 public:
 	//TODO mesh data structure
 	Mesh()
-		: m_vao(0),
-		  m_vbo(0),
-		  m_ebo(0),
-		  m_drawCount(0) { } 
+		: m_drawCount(0) { } 
 	Mesh(const Model& model);
 	Mesh(const std::string& fn);
 	virtual	~Mesh();
@@ -71,25 +69,15 @@ public:
 
 protected:
 	Model m_model;
-	GLuint m_vao;
-	GLuint m_vbo;
-	GLuint m_ebo;
+	VAO m_vao;
 	unsigned int m_drawCount;
 };
 
 class AnimatedMesh : public Mesh
 {
 public:
-	AnimatedMesh(const Model& model);
+	AnimatedMesh(const Model& model, const std::vector<Bone>& bones, const std::vector<VertexBoneData>& boneData);
 	void InitAnimatedMesh(const Model& model);
-	void AddBones(const std::vector<Bone>& bones)
-	{
-		m_bones = bones;
-	}
-	void AddBoneData(const std::vector<VertexBoneData>& boneData)
-	{
-		m_boneData = boneData;
-	}
 private:
 	GLuint m_boneDataBuffer;
 	std::vector<Bone> m_bones;

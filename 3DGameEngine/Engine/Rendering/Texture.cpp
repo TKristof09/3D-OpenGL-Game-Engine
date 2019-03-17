@@ -32,7 +32,7 @@ Texture::Texture(TextureConfig config)
 			glTexParameteri(config.target, GL_TEXTURE_WRAP_R, config.wrapModeR);
 			for (unsigned int i = 0; i < 6; ++i)
 			{
-				GenTextures(&config, GL_TEXTURE_CUBE_MAP_POSITIVE_X+i);
+				GenTextures(&config, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
 			}
 			break;
 		}
@@ -85,13 +85,14 @@ void GenTextures(TextureConfig* config, GLenum target)
 			if (imageData == nullptr)
 				std::cerr << "Texture loading failed for texture: " << config->path << std::endl;
 			
-
-			//glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
-			CHECK_GL_ERROR;
-			//glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
-			glTexImage2D(target, 0, config->internalFormat, width, height, 0, config->format, config->dataType, imageData);
-			CHECK_GL_ERROR;
-
+			else
+			{
+				//glTexStorage2D(config->target, config->maxMipMapLevels, config->internalFormat, width, height);
+				//CHECK_GL_ERROR;
+				//glTexSubImage2D(config->target, 0, 0, 0, width, height, config->format, config->dataType, imageData);
+				glTexImage2D(target, 0, config->internalFormat, width, height, 0, config->format, config->dataType, imageData);
+				CHECK_GL_ERROR;
+			}
 			stbi_image_free(imageData);
 		}
 	}
@@ -102,7 +103,7 @@ Texture::Texture(const std::string& fileName)
 	glBindTexture(m_config.target, m_textureID);
 
 	m_config.minFilter = GL_LINEAR;
-    m_config.path = fileName;
+    m_config.path = GetPath(fileName);
 	
     GenTextures(&m_config, m_config.target);
 }
