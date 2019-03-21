@@ -12,15 +12,19 @@ class GameObject;
 
 class AssimpImporter {
 public:
-	
+
 	GameObject* LoadFile(const std::string& path);
 private:
 	Animation* LoadAnimation(aiAnimation* animation);
 	Mesh* AiMeshToMesh(aiMesh* mesh);
+	void ProcessAnimations(const aiScene* scene);
 	void ProcessNode(const aiNode* node ,const aiScene* scene, GameObject* gameObject);
 	Material* ProcessMaterial(const aiMaterial* material);
 
 	std::string directory;
-	
+
+	std::map<std::string, GameObject*> m_nodes;
+	std::map<std::string, Bone*> m_bones;
+
 };
 #endif

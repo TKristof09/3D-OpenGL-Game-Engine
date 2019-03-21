@@ -4,6 +4,7 @@
 #include "GameComponent.h"
 #include "Animation.h"
 
+// A gameobject with an animator component animates itself and its children but not its grandchildren
 class Animator : public GameComponent
 {
 public:

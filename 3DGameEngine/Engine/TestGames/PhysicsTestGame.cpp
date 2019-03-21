@@ -1,19 +1,19 @@
 ﻿#include "PhysicsTestGame.h"
 #include "3DMath/3DMath.h"
-#include "Rendering/Mesh.h"
-#include "Rendering/Texture.h"
-#include "Rendering/Material.h"
-#include "GameComponents/MeshRenderer.h"
-#include "GameComponents/FreeMove.h"
-#include "GameComponents/FreeLook.h"
-#include "Core/Window.h"
-#include "GameComponents/Lighting.h"
-#include "Utils/FileLoader.h"
+#include "../Rendering/Mesh.h"
+#include "../Rendering/Texture.h"
+#include "../Rendering/Material.h"
+#include "../GameComponents/MeshRenderer.h"
+#include "../GameComponents/FreeMove.h"
+#include "../GameComponents/FreeLook.h"
+#include "../Core/Window.h"
+#include "../GameComponents/Lighting.h"
+#include "../Utils/FileLoader.h"
 
-#include "Physics/PhysicsEngine.h"
-#include "Physics/ConvexHull.h"
-#include "Physics/Box.h"
-#include "Core/Input.h"
+#include "../Physics/PhysicsEngine.h"
+#include "../Physics/ConvexHull.h"
+#include "../Physics/Box.h"
+#include "../Core/Input.h"
 
 class TestP :public GameComponent
 {
@@ -97,7 +97,7 @@ void PhysicsTestGame::Init()
 
 
     Material* material3 = new Material();
-    
+
     material3->AddVector3("color", Color::Red.ToVector3());
     Mesh* mesh3 = new Mesh(GetPath("cube.obj"));
     MeshRenderer* meshRenderer3 = new MeshRenderer(mesh1, material3);

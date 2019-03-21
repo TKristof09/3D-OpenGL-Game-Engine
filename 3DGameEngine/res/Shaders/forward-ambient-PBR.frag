@@ -18,7 +18,7 @@ uniform samplerCube prefilterMap;
 uniform sampler2D brdfLUT;
 
 uniform vec3 eyePos;
-uniform float ambientIntesnity;
+uniform float ambientIntensity;
 
 uniform vec3 color;
 
@@ -55,9 +55,10 @@ void main(){
     vec3 prefilteredColor = textureLod(prefilterMap, reflectDir,  roughness * MAX_REFLECTION_LOD).rgb;
     vec2 brdf  = texture(brdfLUT, vec2(max(dot(normal, viewDir), 0.0), roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
-	vec3 ambient = (kD * diffuse + specular) * ao; 
+	ao = 1.0;
+	vec3 ambient = (kD * diffuse + specular) * ao;
 
-	ambient = ambient * ambientIntesnity;
+	ambient = ambient * ambientIntensity;
 	ambient = ambient / (ambient + vec3(1.0));
 	ambient = pow(ambient, vec3(1.0 / 2.2));
 

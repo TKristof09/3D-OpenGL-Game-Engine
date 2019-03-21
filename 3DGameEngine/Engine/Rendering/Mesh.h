@@ -1,5 +1,6 @@
 #ifndef MESH_H
 #define MESH_H
+#define MAX_BONES (int)100
 
 #include "3DMath/3DMath.h"
 #include <GL/glew.h>
@@ -52,7 +53,7 @@ class Mesh
 public:
 	//TODO mesh data structure
 	Mesh()
-		: m_drawCount(0) { } 
+		: m_drawCount(0) { }
 	Mesh(const Model& model);
 	Mesh(const std::string& fn);
 	virtual	~Mesh();
@@ -78,6 +79,10 @@ class AnimatedMesh : public Mesh
 public:
 	AnimatedMesh(const Model& model, const std::vector<Bone>& bones, const std::vector<VertexBoneData>& boneData);
 	void InitAnimatedMesh(const Model& model);
+	const std::vector<Bone>& GetBones() const
+	{
+		return m_bones;
+	}
 private:
 	GLuint m_boneDataBuffer;
 	std::vector<Bone> m_bones;

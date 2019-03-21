@@ -4,7 +4,11 @@
 #include "Time.h"
 #include "Input.h"
 #include "LinearMath/btThreads.h"
+#ifdef LINUX
+#include "BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolverMt.h"
+#else
 #include "BulletMultiThreading/btTaskScheduler.h"
+#endif
 #include <iostream>
 CoreEngine* engine = nullptr;
 
@@ -19,16 +23,24 @@ CoreEngine::CoreEngine(int width, int height, double framerate):
     m_audioEngine(nullptr),
     m_debugUI(nullptr)
 {
+#ifdef BT_THREADSAFE & DEBUG
+	std::cout << "BT threadsafe is defined" << std::endl;
+#endif
     engine = this;
 	glewExperimental = GL_TRUE;
 
-	btITaskScheduler* scheduler = createDefaultTaskScheduler();
+	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
+#ifdef WINDOWS
+	btITaskScheduler* scheduler = btCreateDefaultTaskScheduler();
+	m_physicsEngine = new PhysicsEngine(collisionConfiguration, new btCollisionDispatcherMt(collisionConfiguration),
+		new btDbvtBroadphase(), new btConstraintSolverPoolMt(8), nullptr);
+#elif LINUX
+	btITaskScheduler* scheduler = btGetTBBTaskScheduler();
+	m_physicsEngine = new PhysicsEngine(collisionConfiguration, new btCollisionDispatcherMt(collisionConfiguration),
+		new btDbvtBroadphase(), new btConstraintSolverPoolMt(8), new btSequentialImpulseConstraintSolverMt());
+#endif
 	scheduler->setNumThreads(8);
 	btSetTaskScheduler(scheduler);
-	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
-	m_physicsEngine = new PhysicsEngine(collisionConfiguration, new btCollisionDispatcherMt(collisionConfiguration),
-		new btDbvtBroadphase(), new btConstraintSolverPoolMt(8));
-
     m_audioEngine = new AudioEngine();
 }
 

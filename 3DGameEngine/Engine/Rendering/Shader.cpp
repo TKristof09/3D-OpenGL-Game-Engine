@@ -42,7 +42,7 @@ void Shader::AddShader(const std::string& fileName, unsigned int type)
 			break;
 	}
 
-	
+
 	for (auto shader : m_shaders)
 	{
 		glAttachShader(m_program, shader);
@@ -102,7 +102,7 @@ void Shader::SetUniform(const std::string& uniform, const math::Vector3& value) 
 		glUniform3fv(loc, 1, value_ptr(value));
 		m_uniformMap[uniform] = loc;
 	}
-	
+
 }
 
 void Shader::SetUniform(const std::string& uniform, const math::Vector4& value) const
@@ -135,7 +135,35 @@ void Shader::SetUniform(const std::string& uniform, const math::Matrix4x4& value
 		glUniformMatrix4fv(loc, 1, GL_FALSE, &value[0][0]);
 		m_uniformMap[uniform] = loc;
 	}
-	
+
+}
+
+void Shader::SetUniform(const std::string& uniform, const std::vector<Bone>& value) const
+{
+	if(value.size() > MAX_BONES)
+	{
+		std::cerr << "Bones size greatar than MAX_BONES" << std::endl;
+	}
+	GLuint loc;
+	size_t size = value.size() > MAX_BONES ? MAX_BONES : value.size();
+	math::Matrix4x4 array[size];
+	for(size_t i = 0; i < size; i++)
+	{
+		array[i] = value[i].offsetMatrix;
+
+	}
+
+	if (m_uniformMap.find(uniform) != m_uniformMap.end())
+	{
+		loc = m_uniformMap[uniform];
+		glUniformMatrix4fv(loc, value.size(), GL_FALSE, &array[0][0][0]);
+	}
+	else
+	{
+		loc = glGetUniformLocation(m_program, uniform.c_str());
+		glUniformMatrix4fv(loc, value.size(), GL_FALSE, &array[0][0][0]);
+		m_uniformMap[uniform] = loc;
+	}
 }
 
 void Shader::Bind() const

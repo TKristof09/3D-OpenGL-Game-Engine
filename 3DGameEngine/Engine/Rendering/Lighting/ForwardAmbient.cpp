@@ -11,9 +11,9 @@ ForwardAmbient::ForwardAmbient()
 void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& camera,*/ const Material& material,
                                     RenderingEngine* renderingEngine, bool animated) const
 {
-    SetUniform("animated", animated);
+    //SetUniform("animated", animated);
 
-	material.GetTexture("albedo").Bind();
+	material.GetTexture("albedo").Bind(0);
 	SetUniform("albedoMap", 0);
 	material.GetNormal("normal").Bind(1);
 	SetUniform("normalMap", 1);
@@ -24,20 +24,20 @@ void ForwardAmbient::UpdateUniforms(const Transform& transform,/* const Camera& 
 	material.GetTexture("ao").Bind(4);
 	SetUniform("aoMap", 4);
 
-	
+
 	renderingEngine->envMap->Bind(5);
 	renderingEngine->prefilterMap->Bind(6);
 	renderingEngine->brdfLUT->Bind(7);
 	SetUniform("irradianceMap", 5);
 	SetUniform("prefilterMap", 6);
 	SetUniform("brdfLUT", 7);
-	
-	
+
+
 
 	const math::Matrix4x4 MVP = renderingEngine->GetMainCamera()->GetViewProjection() * transform.GetModel();
 	SetUniform("MVP", MVP);
 	SetUniform("model", transform.GetModel());
 	SetUniform("eyePos", renderingEngine->GetMainCamera()->GetTransform().GetWorldPosition());
-	SetUniform("ambientIntesnity", 1.0f);
+	SetUniform("ambientIntensity", 1.0f);
 	SetUniform("color", material.GetVector3("color"));
 }

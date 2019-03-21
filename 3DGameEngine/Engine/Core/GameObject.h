@@ -57,6 +57,8 @@ public:
 
 	GameObject* GetChild(unsigned int index) const
 	{
+		if(index >= m_children.size())
+			return nullptr;
 		return m_children[index];
 	}
 

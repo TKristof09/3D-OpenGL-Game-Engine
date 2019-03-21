@@ -16,10 +16,16 @@ project(3DGameEngine)
 #					$<$<CXX_COMPILER_ID:MSVC>:
 #						/W4 /std:c++latest>)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+add_definitions(-DLINUX -DBT_THREADSAFE -std=c++17 -lstdc++fs)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+add_definitions(-DWINDOWS)
+endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+
 # This is needed for YouCompleteMe
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
-set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Build/bin)
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Build/${CMAKE_SYSTEM_NAME}/bin)
 
 if ( CMAKE_BUILD_TYPE STREQUAL "" )
 		# CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
@@ -101,6 +107,19 @@ endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 add_executable(3DGameEngine ${HEADERS} ${SOURCES} ${WINDOWS_HEADERS} ${WINDOWS_ADDITIONAL_SOURCES})
 # Define the include DIRs
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+include_directories( 
+		${3DGameEngine_SOURCE_DIR}/3DGameEngine/Engine
+		${3DGameEngine_SOURCE_DIR}/3DGameEngine/include
+		${OPENGL_INCLUDE_DIRS}
+		${GLEW_INCLUDE_DIRS}
+		${SDL2_INCLUDE_DIRS}
+		${ASSIMP_INCLUDE_DIRS}
+		${BULLET_INCLUDE_DIRS}
+		${FMOD_INCLUDE_DIRS}
+		)
+
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 include_directories( 
 		${3DGameEngine_SOURCE_DIR}/3DGameEngine/Engine
 		${3DGameEngine_SOURCE_DIR}/3DGameEngine/include
@@ -112,7 +131,7 @@ include_directories(
 		${BULLET_INCLUDE_DIRS}
 		${FMOD_INCLUDE_DIRS}
 		)
-
+endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
 # Define the link libraries
 target_link_libraries( 3DGameEngine
@@ -123,6 +142,7 @@ target_link_libraries( 3DGameEngine
 		${BULLET_LIBRARIES}
 		${FMOD_LIBRARIES}
 		${LIBS}
-		
+		tbb
+		stdc++fs
 		)
 

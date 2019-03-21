@@ -1,10 +1,10 @@
 ﻿#include "AudioTestGame.h"
-#include "GameComponents/FreeMove.h"
-#include "GameComponents/FreeLook.h"
-#include "GameComponents/Camera.h"
-#include "Audio/AudioListener.h"
-#include "Audio/AudioSource.h"
-#include "Utils/FileLoader.h"
+#include "../GameComponents/FreeMove.h"
+#include "../GameComponents/FreeLook.h"
+#include "../GameComponents/Camera.h"
+#include "../Audio/AudioListener.h"
+#include "../Audio/AudioSource.h"
+#include "../Utils/FileLoader.h"
 
 class TestA : public GameComponent
 {

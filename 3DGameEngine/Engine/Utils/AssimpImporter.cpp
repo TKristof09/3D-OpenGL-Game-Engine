@@ -3,6 +3,7 @@
 #include "../Core/GameObject.h"
 #include "../GameComponents/MeshRenderer.h"
 #include "../Core/Time.h"
+#include <assimp/cimport.h>
 
 
 GameObject* AssimpImporter::LoadFile(const std::string& path)
@@ -10,6 +11,7 @@ GameObject* AssimpImporter::LoadFile(const std::string& path)
 	Assimp::Importer importer;
 	double t = Time::GetTime();
 	const aiScene* scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
+	//aiApplyPostProcessing(scene, aiProcess_CalcTangentSpace);
 	t = Time::GetTime() - t;
 	std::cout << "Assimp loaded: " << path << " in : " << t << " seconds" << std::endl;
 	t = Time::GetTime();
@@ -24,7 +26,9 @@ GameObject* AssimpImporter::LoadFile(const std::string& path)
 	//process scene
 	std::string name = path.substr(path.find_last_of('\\') + 1, path.find_last_of('.'));
 	GameObject* root = new GameObject(scene->mRootNode->mName.C_Str());
+	std::cout<<scene->mNumAnimations<<std::endl;
 	ProcessNode(scene->mRootNode, scene, root);
+	ProcessAnimations(scene);
 	t = Time::GetTime() - t;
 	std::cout << "Processed: " << path << " in : " << t << " seconds" << std::endl;
 	return root;
@@ -32,7 +36,25 @@ GameObject* AssimpImporter::LoadFile(const std::string& path)
 
 Animation* AssimpImporter::LoadAnimation(aiAnimation* animation)
 {
+	std::cout << "LOADED ANIMATION: " << animation->mName.C_Str() << std::endl;
 	Animation* result = new Animation(animation->mName.C_Str(), animation->mDuration, animation->mTicksPerSecond);
+	for(size_t i = 0; i < animation->mNumChannels; i++)
+	{
+		auto currentChannel = animation->mChannels[i];
+		std::vector<KeyFrame> keyframes;
+		for(size_t j = 0; j < currentChannel->mNumPositionKeys; j++) // Assume that the channel has equal number of position, rotation and scaling keys
+		{
+			auto poskey = currentChannel->mPositionKeys[j];
+			auto rotkey = currentChannel->mRotationKeys[j];
+			auto scalekey = currentChannel->mScalingKeys[j];
+			float t = poskey.mTime;
+			KeyFrame kf(t, math::Vector3(poskey.mValue), math::Quaternion(rotkey.mValue), math::Vector3(scalekey.mValue));
+			keyframes.push_back(kf);
+		}
+		std::cout << "node : " << currentChannel->mNodeName.C_Str() << std::endl;
+		AnimationChannel* channel = new AnimationChannel(m_nodes[currentChannel->mNodeName.C_Str()], m_bones[currentChannel->mNodeName.C_Str()], keyframes);
+		result->AddChannel(*channel);
+	}
 
 	return result;
 
@@ -83,16 +105,19 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 	// Load the bones for skeletal animation if the mesh has any
     if(mesh->HasBones())
     {
+		std::cout << "has bones" << std::endl;
 		unsigned int boneIndex = 0;
 		bones.reserve(mesh->mNumBones);
+		boneData.resize(mesh->mNumVertices);
         for (unsigned int i = 0; i < mesh->mNumBones; ++i)
         {
             Bone bone;
 			bone.index = boneIndex;
             aiBone* currentBone = mesh->mBones[i];
-			
+			std::cout<< "bone : " <<currentBone->mName.C_Str() << std::endl;
+			m_bones[currentBone->mName.C_Str()] = &bone;
 			bone.offsetMatrix = currentBone->mOffsetMatrix;
-			
+
             for (unsigned int j = 0; j < currentBone->mNumWeights; ++j)
             {
 				// TODO got a feeling that there will be a prob with this
@@ -101,7 +126,7 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 				boneData[vertexID].AddData(boneIndex, weight);
             }
 
-			bones[boneIndex] = bone;
+			bones.push_back(bone);
 			boneIndex++;
         }
     }
@@ -109,41 +134,54 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 	Mesh* result = nullptr;
 	if(mesh->HasBones())
 	{
-		Model animatedModel(model);
-		AnimatedMesh* animMesh = new AnimatedMesh(animatedModel);
-		animMesh->AddBones(bones);
-		animMesh->AddBoneData(boneData);
-		result = animMesh;
+		result = new AnimatedMesh(model, bones, boneData);
 	}
-	else 
+	else
 		result = new Mesh(model);
 	return result;
-	
+
 }
 
+void AssimpImporter::ProcessAnimations(const aiScene* scene)
+{
+	if(!scene->HasAnimations())
+		return;
+
+	for (size_t i = 0; i < scene->mNumAnimations; i++)
+	{
+		LoadAnimation(scene->mAnimations[i]);
+	}
+}
 
 void AssimpImporter::ProcessNode(const aiNode* node, const aiScene* scene, GameObject* gameObject)
 {
+	m_nodes[node->mName.C_Str()] = gameObject;
 	aiVector3D pos, scale;
 	aiQuaternion rot;
 	node->mTransformation.Decompose(scale, rot, pos);
-	gameObject->GetTransform()->SetPosition(math::Vector3(pos.x, pos.y, pos.z));
+	if(math::Vector3(100.f) == math::Vector3(scale))
+	{
+		std::cout << gameObject->name << " has a scale of " << math::ToString(math::Vector3(scale)) << " might be a bug of assimp, dividing scale by 100" << std::endl;
+		scale /= 100.f;
+	}
+	gameObject->GetTransform()->SetPosition(math::Vector3(pos));
 	//need to divide scale by 100 because aiProcess_GlobalScale doesn't work for some reason so objects are way too big
-	gameObject->GetTransform()->SetScale(math::Vector3(scale.x, scale.y, scale.z));
-	gameObject->GetTransform()->SetRotation(math::Quaternion(rot.w, rot.x, rot.y, rot.z));
+	std::cout << gameObject->name << " : " << math::ToString(math::Vector3(scale)) << std::endl;
+	gameObject->GetTransform()->SetScale(math::Vector3(scale));
+	gameObject->GetTransform()->SetRotation(math::Quaternion(rot));
 
 	for (int i = 0; i < node->mNumMeshes; ++i)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		
+
 		gameObject->AddComponent(new MeshRenderer(AiMeshToMesh(mesh), ProcessMaterial(scene->mMaterials[mesh->mMaterialIndex])));
-		
+
 	}
 	for (int i = 0; i < node->mNumChildren; ++i)
 	{
-		if(scene->mRootNode->mChildren[i]->mName.length != 0)
+		if(node->mChildren[i]->mName.length != 0)
 		{
-			const char* name = scene->mRootNode->mChildren[i]->mName.C_Str();
+			const char* name = node->mChildren[i]->mName.C_Str();
 			ProcessNode(node->mChildren[i], scene, gameObject->AddChild(new GameObject(name)));
 		}
 		else
@@ -155,20 +193,20 @@ Material* AssimpImporter::ProcessMaterial(const aiMaterial* material)
 {
 	Material* result = new Material();
 
-	aiString dName;	;
+	aiString dName;
 	if(material->GetTexture(aiTextureType_DIFFUSE, 0, &dName) == aiReturn_SUCCESS)
 	{
 		TextureConfig diffuseConfig;
-		diffuseConfig.path = directory + "\\" + dName.C_Str();
+		diffuseConfig.path = GetPath(dName.C_Str());
 		Texture* diffuse = new Texture(diffuseConfig);
 		result->AddTexture("albedo", diffuse);
 	}
 
-	aiString normalName;	;
+	aiString normalName;
 	if (material->GetTexture(aiTextureType_NORMALS, 0, &normalName) == aiReturn_SUCCESS)
 	{
 		TextureConfig normalConfig;
-        normalConfig.path = directory + "\\" + normalName.C_Str();
+        normalConfig.path = GetPath(normalName.C_Str());
 		Texture* normal = new Texture(normalConfig);
 		result->AddTexture("normal", normal);
 	}

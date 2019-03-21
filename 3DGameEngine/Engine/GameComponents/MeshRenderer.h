@@ -16,12 +16,12 @@ public:
 	void Render(const Shader* shader, RenderingEngine* renderingEngine) override
 	{
 		shader->Bind();
+		shader->SetUniform("animated", int(false));
 		shader->UpdateUniforms(*GetTransform(), *material, renderingEngine);
 
 		mesh->Draw();
 	};
 
-	
 	Mesh* mesh;
 	Material* material;
 
@@ -36,12 +36,13 @@ public:
     void Render(const Shader* shader, RenderingEngine* renderingEngine) override
     {
         shader->Bind();
+		shader->SetUniform("animated", int(true));
+		shader->SetUniform("bones", static_cast<AnimatedMesh*>(mesh)->GetBones());
         shader->UpdateUniforms(*GetTransform(), *material, renderingEngine, true);
-
         mesh->Draw();
-        
+
     }
-		
+
 };
 
 #endif // !MESHRENDERER_H

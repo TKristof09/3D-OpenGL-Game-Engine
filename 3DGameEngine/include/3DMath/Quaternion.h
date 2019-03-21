@@ -5,6 +5,7 @@
 #include "Matrix.h"
 #include <string>
 #include "LinearMath/btQuaternion.h"
+#include <assimp/quaternion.h>
 #define MATH_PI 3.1415926535897932384626433832795
 
 namespace math
@@ -37,6 +38,8 @@ namespace math
 			z = axis.z * sinHalfAngle;
 		}
 
+		quat(mat<T> mat);
+
 		quat(const btQuaternion& q)
 		{
 			x = q.x();
@@ -44,10 +47,17 @@ namespace math
 			z = q.z();
 			w = q.w();
 		}
+		quat(const aiQuaternion& q)
+		{
+			x = q.x;
+			y = q.y;
+			z = q.z;
+			w = q.w;
+		}
 
         quat(const vec<3, T>& eulerAngles)
 		{
-            
+
             T cosyaw = cos(eulerAngles.z * 0.5);
             T sinyaw = sin(eulerAngles.z * 0.5);
             T cosroll = cos(eulerAngles.x * 0.5);
@@ -81,6 +91,42 @@ namespace math
 			return btQuaternion(x, y, z, w);
 		}
 	};
+
+
+	// http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/
+	template<typename T>
+	quat<T>::quat(mat<T> mat)
+	{
+
+		float trace = mat[0][0] + mat[1][1] + mat[2][2];
+		if( trace > 0 ) {
+			float s = 0.5f / sqrtf(trace+ 1.0f);
+			this->w = 0.25f / s;
+			this->x = ( mat[2][1] - mat[1][2] ) * s;
+			this->y = ( mat[0][2] - mat[2][0] ) * s;
+			this->z = ( mat[1][0] - mat[0][1] ) * s;
+		} else {
+			if ( mat[0][0] > mat[1][1] && mat[0][0] > mat[2][2] ) {
+			float s = 2.0f * sqrtf( 1.0f + mat[0][0] - mat[1][1] - mat[2][2]);
+			this->w = (mat[2][1] - mat[1][2] ) / s;
+			this->x = 0.25f * s;
+			this->y = (mat[0][1] + mat[1][0] ) / s;
+			this->z = (mat[0][2] + mat[2][0] ) / s;
+			} else if (mat[1][1] > mat[2][2]) {
+			float s = 2.0f * sqrtf( 1.0f + mat[1][1] - mat[0][0] - mat[2][2]);
+			this->w = (mat[0][2] - mat[2][0] ) / s;
+			this->x = (mat[0][1] + mat[1][0] ) / s;
+			this->y = 0.25f * s;
+			this->z = (mat[1][2] + mat[2][1] ) / s;
+			} else {
+			float s = 2.0f * sqrtf( 1.0f + mat[2][2] - mat[0][0] - mat[1][1] );
+			this->w = (mat[1][0] - mat[0][1] ) / s;
+			this->x = (mat[0][2] + mat[2][0] ) / s;
+			this->y = (mat[1][2] + mat[2][1] ) / s;
+			this->z = 0.25f * s;
+			}
+		}
+	}
 
 	template <typename T>
 	vec<3, T> rotate(const vec<3, T>& v, const quat<T>& q);
@@ -121,7 +167,7 @@ namespace math
         T siny = +2.0 * (w * z + x * y);
         T cosy = +1.0 - 2.0 * (y * y + z * z);
         result.z = atan2(siny, cosy);
-        
+
 	    return result;
     }
 
@@ -288,7 +334,7 @@ namespace math
                            q1.y * 0.5f + q2.y * 0.5f,
                            q1.z * 0.5f + q2.z * 0.5f);
         }
-        
+
         float invSinHalfAngle = 1 / sinHalfAngle;
         float halfAngle = acosf(cosHalfAngle);
 
@@ -301,7 +347,7 @@ namespace math
                        q1.x * amt1 + q2.x * amt2,
                        q1.y * amt1 + q2.y * amt2,
                        q1.z * amt1 + q2.z * amt2);
-    
+
     }
 
 	template <typename T>

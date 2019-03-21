@@ -7,31 +7,38 @@
 #include <string>
 #include <iostream>
 #include "Core/GameObject.h"
+#include "../Rendering/Mesh.h"
 struct KeyFrame
 {
     float timestamp;
 	// TODO maybe just store pos/rot/scale instead of transform
-    Transform transform;
-    KeyFrame(float timestamp, const Transform& transform):
+    math::Vector3 translation;
+    math::Quaternion rotation;
+    math::Vector3 scale;
+    KeyFrame(float timestamp, const math::Vector3& translation, const math::Quaternion& rotation, const math::Vector3& scale):
         timestamp(timestamp),
-        transform(transform){}
+        translation(translation),
+        rotation(rotation),
+        scale(scale){}
 };
 
 // Every bone has its own animation channel
 struct AnimationChannel
 {
     GameObject* object;
-    std::vector<KeyFrame> keyframes; 
-    AnimationChannel(GameObject* object, std::vector<KeyFrame>& keyframes):
+    Bone* bone;
+    std::vector<KeyFrame> keyframes;
+    AnimationChannel(GameObject* object, Bone* bone, std::vector<KeyFrame>& keyframes):
         object(object),
+        bone(bone),
         keyframes(keyframes){}
 
 };
 
-class Animation 
+class Animation
 {
 public:
-	
+
     /**
      * duration: in ticks
 	 * TODO might need to make the params double instead of float
@@ -39,8 +46,17 @@ public:
     Animation(const std::string& name, unsigned int duration, float tickspersec):
         m_duration(duration),
 		m_tickspersec(tickspersec),
-		m_name(name){}
+		m_name(name){
+            std::cout<< "animation"<< std::endl;
+        }
 
+    ~Animation()
+    {
+        for(auto pair : m_channels)
+        {
+            delete &pair.second;
+        }
+    }
     void AddChannel(const AnimationChannel& channel)
     {
         m_channels.insert({channel.object, channel});

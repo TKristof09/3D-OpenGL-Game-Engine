@@ -1,5 +1,7 @@
 ﻿#include "AudioEngine.h"
+#ifdef WINDOWS
 #include <Windows.h>
+#endif
 #include <vector>
 
 
@@ -7,7 +9,9 @@ AudioEngine::AudioEngine():
     m_nextChannelID(0),
     m_listener(nullptr)
 {
+#ifdef WINDOWS
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+#endif
     ErrorCheck(FMOD::System_Create(&m_system));
     unsigned int version;
     ErrorCheck(m_system->getVersion(&version));
@@ -27,7 +31,9 @@ AudioEngine::~AudioEngine()
     }
     ErrorCheck(m_system->close());
     ErrorCheck(m_system->release());
+#ifdef WINDOWS
     CoUninitialize();
+#endif
 }
 
 void AudioEngine::ReInit()

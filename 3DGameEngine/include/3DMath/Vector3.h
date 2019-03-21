@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cassert>
 #include "LinearMath/btVector3.h"
+#include <assimp/vector3.h>
 
 namespace math
 {
@@ -50,6 +51,13 @@ namespace math
 			x = v.x();
 			y = v.y();
 			z = v.z();
+		}
+		
+		vec(const aiVector3D& v)
+		{
+			x = v.x;
+			y = v.y;
+			z = v.z;
 		}
 
 		union

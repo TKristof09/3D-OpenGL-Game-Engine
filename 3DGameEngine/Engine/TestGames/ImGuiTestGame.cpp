@@ -1,8 +1,8 @@
 ﻿#include "ImGuiTestGame.h"
-#include "Rendering/DebugUI.h"
-#include "Audio/AudioListener.h"
-#include "GameComponents/FreeMove.h"
-#include "GameComponents/FreeLook.h"
+#include "../Rendering/DebugUI.h"
+#include "../Audio/AudioListener.h"
+#include "../GameComponents/FreeMove.h"
+#include "../GameComponents/FreeLook.h"
 
 void ImGuiTestGame::Init()
 {

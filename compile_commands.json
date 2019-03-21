@@ -1,227 +1,257 @@
 [
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/AssimpTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/AssimpTestGame.cpp",
-  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/AssimpTestGame.cpp"
-},
-{
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Audio/AudioEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioEngine.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Audio/AudioEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioEngine.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioEngine.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Audio/AudioListener.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioListener.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Audio/AudioListener.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioListener.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioListener.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Audio/AudioSource.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioSource.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Audio/AudioSource.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioSource.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Audio/AudioSource.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/AudioTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/AudioTestGame.cpp",
-  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/AudioTestGame.cpp"
-},
-{
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Color.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Color.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Color.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Color.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Color.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/CoreEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/CoreEngine.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/CoreEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/CoreEngine.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/CoreEngine.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Game.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Game.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Game.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Game.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Game.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/GameObject.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/GameObject.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/GameObject.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/GameObject.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/GameObject.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Input.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Input.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Input.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Input.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Input.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/RenderingEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/RenderingEngine.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/RenderingEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/RenderingEngine.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/RenderingEngine.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/SDL_Backend.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/SDL_Backend.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/SDL_Backend.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/SDL_Backend.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/SDL_Backend.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Time.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Time.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Time.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Time.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Time.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Window.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Window.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Core/Window.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Window.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Core/Window.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/Animator.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Animator.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/Animator.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Animator.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Animator.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/FreeLook.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/FreeLook.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/FreeLook.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/FreeLook.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/FreeLook.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/FreeMove.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/FreeMove.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/FreeMove.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/FreeMove.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/FreeMove.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/Lighting.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Lighting.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/Lighting.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Lighting.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Lighting.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/Rigidbody.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Rigidbody.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/GameComponents/Rigidbody.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Rigidbody.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/GameComponents/Rigidbody.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/ImGuiTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/ImGuiTestGame.cpp",
-  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/ImGuiTestGame.cpp"
-},
-{
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Main.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Main.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Main.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Main.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Main.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Physics/PhysicsEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Physics/PhysicsEngine.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Memory/VAO.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Memory/VAO.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Memory/VAO.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Physics/PhysicsEngine.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Physics/PhysicsEngine.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Physics/PhysicsEngine.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Physics/TriggerCollider.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Physics/TriggerCollider.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Physics/TriggerCollider.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Physics/TriggerCollider.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Physics/TriggerCollider.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/PhysicsTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/PhysicsTestGame.cpp",
-  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/PhysicsTestGame.cpp"
-},
-{
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/DebugDrawer.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugDrawer.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/DebugDrawer.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugDrawer.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugDrawer.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/DebugUI.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugUI.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/DebugUI.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugUI.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugUI.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/DebugUIElements.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugUIElements.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/DebugUIElements.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugUIElements.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/DebugUIElements.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardAmbient.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardAmbient.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardAmbient.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardAmbient.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardAmbient.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardDirectional.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardDirectional.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardDirectional.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardDirectional.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardDirectional.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardPoint.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardPoint.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardPoint.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardPoint.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardPoint.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardSpot.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardSpot.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Lighting/ForwardSpot.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardSpot.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Lighting/ForwardSpot.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Material.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Material.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Material.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Material.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Material.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Mesh.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Mesh.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Mesh.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Mesh.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Mesh.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/PBR.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/PBR.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/PBR.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/PBR.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/PBR.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/RadianceHDRTexture.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/RadianceHDRTexture.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/RadianceHDRTexture.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/RadianceHDRTexture.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/RadianceHDRTexture.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Shader.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Shader.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Shader.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Shader.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Shader.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Texture.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Texture.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Rendering/Texture.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Texture.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Rendering/Texture.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Utils/AssimpImporter.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/AssimpImporter.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/TestGames/AnimationTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/AnimationTestGame.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/AnimationTestGame.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/TestGames/AssimpTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/AssimpTestGame.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/AssimpTestGame.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/TestGames/AudioTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/AudioTestGame.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/AudioTestGame.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/TestGames/ImGuiTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/ImGuiTestGame.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/ImGuiTestGame.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/TestGames/PhysicsTestGame.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/PhysicsTestGame.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/TestGames/PhysicsTestGame.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Utils/AssimpImporter.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/AssimpImporter.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/AssimpImporter.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Utils/FileLoader.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/FileLoader.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Utils/FileLoader.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/FileLoader.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/FileLoader.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Utils/OBJloader.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/OBJloader.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/Engine/Utils/OBJloader.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/OBJloader.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine/Utils/OBJloader.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_demo.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_demo.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_demo.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_demo.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_demo.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_draw.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_draw.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_draw.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_draw.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_draw.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_impl_opengl3.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_impl_opengl3.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_impl_opengl3.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_impl_opengl3.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_impl_opengl3.cpp"
 },
 {
-  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build",
-  "command": "/usr/bin/g++-8   -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -g -std=c++17 -c -Wall -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_impl_sdl.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_impl_sdl.cpp",
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/imgui/imgui_impl_sdl.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_impl_sdl.cpp",
   "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/imgui/imgui_impl_sdl.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/BulletMultiThreading/b3PosixThreadSupport.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/b3PosixThreadSupport.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/b3PosixThreadSupport.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/BulletMultiThreading/b3ThreadSupportInterface.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/b3ThreadSupportInterface.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/b3ThreadSupportInterface.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/BulletMultiThreading/b3Win32ThreadSupport.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/b3Win32ThreadSupport.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/b3Win32ThreadSupport.cpp"
+},
+{
+  "directory": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/Build/Linux",
+  "command": "/usr/bin/g++-8  -DBT_THREADSAFE -DLINUX -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/Engine -I/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include -I/usr/include/SDL2 -I/usr/include/assimp -I/usr/local/include/bullet -I/usr/include/FMOD  -g   -std=c++17 -lstdc++fs -Wall -std=c++17 -lstdc++fs -o CMakeFiles/3DGameEngine.dir/3DGameEngine/include/BulletMultiThreading/btTaskScheduler.cpp.o -c /mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/btTaskScheduler.cpp",
+  "file": "/mnt/2A365FAC365F7831/Programozas/C++/3DGameEngine/3DGameEngine/include/BulletMultiThreading/btTaskScheduler.cpp"
 }
 ]

@@ -6,6 +6,7 @@
 #include "../Core/Transform.h"
 #include "../GameComponents/Camera.h"
 #include "Material.h"
+#include "Mesh.h"
 
 class RenderingEngine;
 
@@ -33,6 +34,7 @@ public:
 	void SetUniform(const std::string& uniform, const math::Vector3& value) const;
 	void SetUniform(const std::string& uniform, const math::Vector4& value) const;
 	void SetUniform(const std::string& uniform, const math::Matrix4x4& value) const;
+	void SetUniform(const std::string& uniform, const std::vector<Bone>& value) const;
 
 	inline GLuint GetUniformLocation(const GLchar* uniform) const
 	{

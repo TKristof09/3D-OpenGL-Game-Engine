@@ -14,16 +14,20 @@ class PhysicsEngine
 public:
 
 	PhysicsEngine(btCollisionConfiguration* collisionConfiguration, btCollisionDispatcherMt* dispatcher,
-		btBroadphaseInterface* broadphase, btConstraintSolverPoolMt* solverPool)
+		btBroadphaseInterface* broadphase, btConstraintSolverPoolMt* solverPool, btConstraintSolver* solver)
 		: m_gravity(math::Vector3(0,-10, 0)),
 		  m_dispatcher(dispatcher),
 		  m_bp(broadphase),
 		  m_solverPool(solverPool),
 		  m_collisionConfig(collisionConfiguration),
+			m_solver(solver),
 		  m_dynamicsWorld(nullptr)
 	{
-		
+#ifdef WINDOWS
 		m_dynamicsWorld = new btDiscreteDynamicsWorldMt(m_dispatcher, m_bp, m_solverPool, m_collisionConfig);
+#elif LINUX
+		m_dynamicsWorld = new btDiscreteDynamicsWorldMt(m_dispatcher, m_bp, m_solverPool, m_solver, m_collisionConfig);
+#endif
 		m_dynamicsWorld->setInternalTickCallback(TickCallback, this);
 		m_dynamicsWorld->getBroadphase()->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 	}
@@ -46,10 +50,10 @@ public:
 		m_triggerColliders.clear();
 	}
 
-    /**
-     * \brief Reinitializes the engine to base state
-     */
-    void ReInit();
+	/**
+	 * \brief Reinitializes the engine to base state
+	 */
+	void ReInit();
 
 	void AddRigidbody(Rigidbody* rb);
 	void AddTriggerCollider(TriggerCollider* collider);
@@ -98,6 +102,7 @@ private:
 	btBroadphaseInterface* m_bp;
 	btConstraintSolverPoolMt* m_solverPool;
 	btCollisionConfiguration* m_collisionConfig;
+	btConstraintSolver* m_solver;
 	btDiscreteDynamicsWorldMt* m_dynamicsWorld;
 	
 };

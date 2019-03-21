@@ -1,5 +1,6 @@
 #include "Animator.h"
 #include "../Core/Time.h"
+#include <iostream>
 
 void Animator::AddToGameObjectCallback()
 {
@@ -10,11 +11,16 @@ void Animator::AddToGameObjectCallback()
         if(anim)
             child->AddComponent(new Animator(&m_animation));
     }
+    std::cout << GetGameObject()->name << " has an animator" << std::endl;
 
 }
 
 void Animator::Render(const Shader* shader, RenderingEngine* renderingEngine)
 {
+    AnimationChannel* channel = m_animation.GetChannel(GetGameObject());
+    if(channel)
+        UpdateAnimation(*channel);
+
     for(unsigned int i = 0; i < GetGameObject()->GetNumChildren(); ++i)
     {
         AnimationChannel* channel = m_animation.GetChannel(GetGameObject()->GetChild(i));
@@ -59,7 +65,7 @@ std::pair<KeyFrame*, KeyFrame*> Animator::FindPrevAndNextKeyFrames(const Animati
         {
             next = &keyFrame;
             if(next->timestamp > m_animationTime)
-            break;
+                break;
             prev = &keyFrame;
         }
         m_prevKeyFrame = prev;
@@ -69,7 +75,7 @@ std::pair<KeyFrame*, KeyFrame*> Animator::FindPrevAndNextKeyFrames(const Animati
     else
     {
         std::pair<KeyFrame*, KeyFrame*> res;
-        KeyFrame* next = m_prevKeyFrame + 1; 
+        KeyFrame* next = m_prevKeyFrame + 1;
         if(m_animationTime > m_prevKeyFrame->timestamp && m_animationTime < next->timestamp)
         {
             res = std::make_pair(m_prevKeyFrame, next);
@@ -90,10 +96,29 @@ void Animator::Interpolate(const std::pair<KeyFrame*, KeyFrame*>& prevAndNext, f
     KeyFrame* prev = prevAndNext.first;
     KeyFrame* next = prevAndNext.second;
 
-    GetTransform()->SetPosition(math::lerp(prev->transform.GetWorldPosition(), next->transform.GetWorldPosition(), t));
+    math::Vector3 prevTranslation;
+    math::Quaternion prevRotation;
+    math::Vector3 prevScale;
 
-    GetTransform()->SetRotation(math::slerp(prev->transform.GetWorldRotation(), next->transform.GetWorldRotation(), t));
+    //math::decompose(prev->bone->offsetmatrix, prevTranslation, prevRotation, prevScale);
 
-    GetTransform()->SetScale(math::lerp(prev->transform.GetWorldScale(), next->transform.GetWorldScale(), t));
+    math::Vector3 nextTranslation;
+    math::Quaternion nextRotation;
+    math::Vector3 nextScale;
+
+    //math::decompose(next->bone->offsetmatrix, nextTranslation, nextRotation, nextScale);
+
+    auto translation = math::lerp(prevTranslation, nextTranslation, t);
+
+    auto rotation = math::slerp(prevRotation, nextRotation, t);
+
+    auto scale = math::lerp(prevScale, nextScale, t);
+    Transform* t = GetTransform();
+    t->SetPosition(translation);
+    t->SetRotation(rotation);
+    t->SetScale(scale);
+
+    // global inverse transform = rootnode->transform->inverse
+    //final transform = global inverse transform * t->GetModel() * offsetmatrix -----> idk what the inverse transform does so might not need it
 
 }

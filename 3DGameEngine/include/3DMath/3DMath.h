@@ -57,5 +57,40 @@ namespace math
 			return (T)-1;
 	}
 
+	template<typename T>
+	void decompose(const Matrix4x4& mat, Vector3& translationOut, Quaternion& rotationOut, Vector3& scaleOut)
+	{
+		translationOut.x = mat[0][3];
+		translationOut.y = mat[1][3];
+		translationOut.z = mat[2][3];
+
+		scaleOut.y = length(Vector3(mat[0][0], mat[1][0], mat[2][0]));
+		scaleOut.x = length(Vector3(mat[0][1], mat[1][1], mat[2][1]));
+		scaleOut.z = length(Vector3(mat[0][2], mat[1][2], mat[2][2]));
+		if(determinant(mat) < 0)
+			scaleOut = -scaleOut;
+
+		Matrix4x4 rot;
+		if(scaleOut.x)
+		{
+			rot[0][0] = mat[0][0] / scaleOut.x;
+			rot[1][0] = mat[1][0] / scaleOut.x;
+			rot[2][0] = mat[2][0] / scaleOut.x;
+		}
+		if(scaleOut.y)
+		{
+			rot[0][1] = mat[0][1] / scaleOut.y;
+			rot[1][1] = mat[1][1] / scaleOut.y;
+			rot[2][1] = mat[2][1] / scaleOut.y;
+		}
+		if(scaleOut.z)
+		{
+			rot[0][2] = mat[0][2] / scaleOut.z;
+			rot[1][2] = mat[1][2] / scaleOut.z;
+			rot[2][2] = mat[2][2] / scaleOut.z;
+		}
+		rotationOut = Quaternion(rot);
+	}
+
 }
 #endif

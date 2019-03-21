@@ -5,17 +5,13 @@
 #include "Texture.h"
 #include "../Engine/Utils/FileLoader.h"
 
+
 class Material
 {
 public:
 	Material():
-		m_defaultTexture(Texture()),
 		m_defaultVector3(math::Vector3(1))
-	{
-        TextureConfig config;
-        config.path = GetPath("defaultNormal.jpg");
-        m_defaultNormal = Texture(config);
-	}
+	{}
 
 	Material(const float& specularIntensity, const float& specularExponent);
 	Material(const Texture& texture, const float& specularIntensity, const float& specularExponent);
@@ -23,30 +19,11 @@ public:
 
 	void AddTexture(const std::string& name, Texture* texture)
 	{
-		m_textureMap[name] = *texture;
+		m_textureMap[name] = texture;
 	}
 
-	const Texture& GetTexture(const std::string& name) const
-	{
-		auto it = m_textureMap.find(name);
-		if (it != m_textureMap.end())
-		{
-			return it->second;
-		}
-
-		return m_defaultTexture;
-	}
-
-    const Texture& GetNormal(const std::string& name) const
-	{
-        auto it = m_textureMap.find(name);
-        if (it != m_textureMap.end())
-        {
-            return it->second;
-        }
-
-        return m_defaultNormal;
-	}
+	const Texture& GetTexture(const std::string& name) const;
+    const Texture& GetNormal(const std::string& name) const;
 
 	void AddVector3(const std::string& name, const math::Vector3& vector)
 	{
@@ -82,10 +59,9 @@ public:
 
 
 private:
-	Texture m_defaultTexture;
-    Texture m_defaultNormal;
+	
 	math::Vector3 m_defaultVector3;
-	std::map<std::string, Texture> m_textureMap;
+	std::map<std::string, Texture*> m_textureMap;
 	std::map<std::string, math::Vector3> m_vec3Map;
 	std::map<std::string, float> m_floatMap;
 };

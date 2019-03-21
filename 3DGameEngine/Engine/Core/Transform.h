@@ -112,7 +112,7 @@ public:
 
     void Translate(const math::Vector3& direction, float amount)
     {
-        Translate(direction * amount);
+        Translate(normalize(direction) * amount);
     }
 
     btTransform ToBtTransform() const

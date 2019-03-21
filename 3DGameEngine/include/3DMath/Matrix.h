@@ -43,12 +43,12 @@ namespace math
 		}
 		mat<T>& operator=(const aiMatrix4x4& aiMatrix)
 		{
-			
+
 			m_values[0][0] = aiMatrix.a1; m_values[0][1] = aiMatrix.a2; m_values[0][2] = aiMatrix.a3; m_values[0][3] = aiMatrix.a4;
 			m_values[1][0] = aiMatrix.b1; m_values[1][1] = aiMatrix.b2; m_values[1][2] = aiMatrix.b3; m_values[1][3] = aiMatrix.b4;
 			m_values[2][0] = aiMatrix.c1; m_values[2][1] = aiMatrix.c2; m_values[2][2] = aiMatrix.c3; m_values[2][3] = aiMatrix.c4;
 			m_values[3][0] = aiMatrix.d1; m_values[3][1] = aiMatrix.d2; m_values[3][2] = aiMatrix.d3; m_values[3][3] = aiMatrix.d4;
-			
+
 			return *this;
 		}
 
@@ -240,6 +240,17 @@ namespace math
 
         return Inverse * OneOverDeterminant;
     }
+
+	template <typename T>
+	T determinant(const mat<T>& m)
+	{
+		return    m[0][0]*m[1][1]*m[2][2]*m[3][3] - m[0][0]*m[1][1]*m[2][3]*m[3][2] + m[0][0]*m[1][2]*m[2][3]*m[3][1] - m[0][0]*m[1][2]*m[2][1]*m[3][3]
+				+ m[0][0]*m[1][3]*m[2][1]*m[3][2] - m[0][0]*m[1][3]*m[2][2]*m[3][1] - m[0][1]*m[1][2]*m[2][3]*m[3][0] + m[0][1]*m[1][2]*m[2][0]*m[3][3]
+				- m[0][1]*m[1][3]*m[2][0]*m[3][2] + m[0][1]*m[1][3]*m[2][2]*m[3][0] - m[0][1]*m[1][0]*m[2][2]*m[3][3] + m[0][1]*m[1][0]*m[2][3]*m[3][2]
+				+ m[0][2]*m[1][3]*m[2][0]*m[3][1] - m[0][2]*m[1][3]*m[2][1]*m[3][0] + m[0][2]*m[1][0]*m[2][1]*m[3][3] - m[0][2]*m[1][0]*m[2][3]*m[3][1]
+				+ m[0][2]*m[1][1]*m[2][3]*m[3][0] - m[0][2]*m[1][1]*m[2][0]*m[3][3] - m[0][3]*m[1][0]*m[2][1]*m[3][2] + m[0][3]*m[1][0]*m[2][2]*m[3][1]
+				- m[0][3]*m[1][1]*m[2][2]*m[3][0] + m[0][3]*m[1][1]*m[2][0]*m[3][2] - m[0][3]*m[1][2]*m[2][0]*m[3][1] + m[0][3]*m[1][2]*m[2][1]*m[3][0];
+	}
 
 	template <typename T>
 	std::string ToString(const mat<T>& m)
