@@ -52,6 +52,7 @@ public:
 		{
 			return dynamic_cast<T*>(it->second);
 		}
+		std::cout << name << " doesn't have component " << typeid(T).name() << std::endl;
 		return nullptr;
 	}
 

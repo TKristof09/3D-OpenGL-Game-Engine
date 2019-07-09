@@ -32,6 +32,19 @@ namespace math
 			}
 		}
 
+		mat(const math::vec<4,T>& c1, const math::vec<4,T>& c2, const math::vec<4,T>& c3, const math::vec<4,T>& c4)
+		{
+			m_values[0][0] = c1.x; m_values[0][1] = c2.x; m_values[0][2] = c3.x; m_values[0][3] = c4.x;
+			m_values[1][0] = c1.y; m_values[1][1] = c2.y; m_values[1][2] = c3.y; m_values[1][3] = c4.y;
+			m_values[2][0] = c1.z; m_values[2][1] = c2.z; m_values[2][2] = c3.z; m_values[2][3] = c4.z;
+			m_values[3][0] = c1.w; m_values[3][1] = c2.w; m_values[3][2] = c3.w; m_values[3][3] = c4.w;
+		}
+
+		mat(const aiMatrix4x4& aiMatrix)
+		{
+			*this = aiMatrix;
+		}
+
 		const T* operator[](unsigned int i) const
 		{
 			return m_values[i];
@@ -229,16 +242,16 @@ namespace math
 
         math::vec<4, T> SignA(+1, -1, +1, -1);
         math::vec<4, T> SignB(-1, +1, -1, +1);
-        math::mat<T> Inverse(Inv0 * SignA, Inv1 * SignB, Inv2 * SignA, Inv3 * SignB);
+        math::mat<T> _inverse(Inv0 * SignA, Inv1 * SignB, Inv2 * SignA, Inv3 * SignB);
 
-        math::vec<4, T> Row0(Inverse[0][0], Inverse[1][0], Inverse[2][0], Inverse[3][0]);
+        math::vec<4, T> Row0(_inverse[0][0], _inverse[1][0], _inverse[2][0], _inverse[3][0]);
 
-        math::vec<4, T> Dot0(m[0] * Row0);
+        math::vec<4, T> Dot0(math::vec<4,T>(m[0][0], m[0][1], m[0][2], m[0][3]) * Row0);
         T Dot1 = (Dot0.x + Dot0.y) + (Dot0.z + Dot0.w);
 
         T OneOverDeterminant = static_cast<T>(1) / Dot1;
 
-        return Inverse * OneOverDeterminant;
+        return _inverse * OneOverDeterminant;
     }
 
 	template <typename T>

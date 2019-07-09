@@ -79,7 +79,29 @@ public:
         m_root->AddToHierarchyUI(window, nullptr, true);
     }
 
+	GameObject* FindGameObject(const std::string& name)
+	{
+		GameObject* result = SearchChildren(m_root, name);
+		if(!result)
+			std::cout << "Gameobject oof name: " << name << "not found" << std::endl;
+		return result;
+	}
+
+
 private:
+	GameObject* SearchChildren(GameObject* root, const std::string& name)
+	{
+		for(auto child : root->GetChildren())
+		{
+			if(child->name == name)
+				return child;
+			GameObject* result = SearchChildren(child, name);
+			if(result)
+				return result;
+		}
+		return nullptr;
+	}
+
 	GameObject* m_root;
 	RenderingEngine* m_renderingEngine;
 	PhysicsEngine* m_physicsEngine;

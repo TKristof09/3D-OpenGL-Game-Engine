@@ -1,13 +1,16 @@
 ﻿#include "AssimpImporter.h"
 #include <iostream>
+#include <assimp/cimport.h>
 #include "../Core/GameObject.h"
 #include "../GameComponents/MeshRenderer.h"
 #include "../Core/Time.h"
-#include <assimp/cimport.h>
+#include "../GameComponents/Animator.h"
+#include "../Core/Game.h"
 
 
-GameObject* AssimpImporter::LoadFile(const std::string& path)
+GameObject* AssimpImporter::LoadFile(const std::string& path, Game* game)
 {
+	m_game = game;
 	Assimp::Importer importer;
 	double t = Time::GetTime();
 	const aiScene* scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -27,8 +30,10 @@ GameObject* AssimpImporter::LoadFile(const std::string& path)
 	std::string name = path.substr(path.find_last_of('\\') + 1, path.find_last_of('.'));
 	GameObject* root = new GameObject(scene->mRootNode->mName.C_Str());
 	std::cout<<scene->mNumAnimations<<std::endl;
+	m_globalInverse = math::Matrix4x4(scene->mRootNode->mTransformation.Inverse());
 	ProcessNode(scene->mRootNode, scene, root);
-	ProcessAnimations(scene);
+	m_game->AddToScene(root);
+	ProcessAnimations(scene);	
 	t = Time::GetTime() - t;
 	std::cout << "Processed: " << path << " in : " << t << " seconds" << std::endl;
 	return root;
@@ -41,21 +46,29 @@ Animation* AssimpImporter::LoadAnimation(aiAnimation* animation)
 	for(size_t i = 0; i < animation->mNumChannels; i++)
 	{
 		auto currentChannel = animation->mChannels[i];
+		std::cout << i << currentChannel->mNodeName.C_Str()<<std::endl;
 		std::vector<KeyFrame> keyframes;
-		for(size_t j = 0; j < currentChannel->mNumPositionKeys; j++) // Assume that the channel has equal number of position, rotation and scaling keys
+		unsigned int numPosKeys = currentChannel->mNumPositionKeys;
+		unsigned int numRotKeys = currentChannel->mNumRotationKeys;
+		unsigned int numScaleKeys = currentChannel->mNumScalingKeys;
+		math::Vector3 pos, scale;
+		math::Quaternion rot;
+		assert(numPosKeys == numRotKeys && numPosKeys == numScaleKeys);
+		for(unsigned int i = 0; i < currentChannel->mNumPositionKeys - 1; i++)
 		{
-			auto poskey = currentChannel->mPositionKeys[j];
-			auto rotkey = currentChannel->mRotationKeys[j];
-			auto scalekey = currentChannel->mScalingKeys[j];
-			float t = poskey.mTime;
-			KeyFrame kf(t, math::Vector3(poskey.mValue), math::Quaternion(rotkey.mValue), math::Vector3(scalekey.mValue));
+			auto poskey = currentChannel->mPositionKeys[i];
+			pos = math::Vector3(poskey.mValue);
+			auto rotkey = currentChannel->mRotationKeys[i];
+			rot = math::normalize(math::Quaternion(rotkey.mValue));
+			auto scalekey = currentChannel->mScalingKeys[i];
+			scale = math::Vector3(scalekey.mValue);
+			KeyFrame kf(currentChannel->mPositionKeys[i].mTime, pos, rot, scale);
 			keyframes.push_back(kf);
 		}
-		std::cout << "node : " << currentChannel->mNodeName.C_Str() << std::endl;
-		AnimationChannel* channel = new AnimationChannel(m_nodes[currentChannel->mNodeName.C_Str()], m_bones[currentChannel->mNodeName.C_Str()], keyframes);
-		result->AddChannel(*channel);
+		auto go = m_nodes[currentChannel->mNodeName.C_Str()];
+		AnimationChannel* channel = new AnimationChannel(go, m_bones[currentChannel->mNodeName.C_Str()], keyframes);
+		result->AddChannel(channel);
 	}
-
 	return result;
 
 }
@@ -63,6 +76,7 @@ Animation* AssimpImporter::LoadAnimation(aiAnimation* animation)
 Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 {
 	Model model;
+	model.vertices.resize(mesh->mNumVertices);
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
@@ -89,7 +103,7 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 		vertex.tangent.y = mesh->mTangents[i].y;
 		vertex.tangent.z = mesh->mTangents[i].z;
 
-		model.vertices.push_back(vertex);
+		model.vertices[i] = vertex;
 	}
 	for (unsigned int i = 0; i < mesh->mNumFaces; ++i)
 	{
@@ -100,23 +114,20 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
 		}
 	}
 
-	std::vector<Bone> bones;
+	std::vector<Bone*> bones;
 	std::vector<VertexBoneData> boneData;
 	// Load the bones for skeletal animation if the mesh has any
     if(mesh->HasBones())
     {
-		std::cout << "has bones" << std::endl;
 		unsigned int boneIndex = 0;
 		bones.reserve(mesh->mNumBones);
 		boneData.resize(mesh->mNumVertices);
         for (unsigned int i = 0; i < mesh->mNumBones; ++i)
         {
-            Bone bone;
-			bone.index = boneIndex;
+            Bone* bone = new Bone();
             aiBone* currentBone = mesh->mBones[i];
-			std::cout<< "bone : " <<currentBone->mName.C_Str() << std::endl;
-			m_bones[currentBone->mName.C_Str()] = &bone;
-			bone.offsetMatrix = currentBone->mOffsetMatrix;
+			m_bones[currentBone->mName.C_Str()] = bone;
+			bone->offsetMatrix = currentBone->mOffsetMatrix;
 
             for (unsigned int j = 0; j < currentBone->mNumWeights; ++j)
             {
@@ -132,8 +143,9 @@ Mesh* AssimpImporter::AiMeshToMesh(aiMesh* mesh)
     }
 
 	Mesh* result = nullptr;
-	if(mesh->HasBones())
+	if(mesh->mNumBones != 0)
 	{
+		std::cout << "Animated mesh : " << mesh->mName.C_Str() << std::endl;
 		result = new AnimatedMesh(model, bones, boneData);
 	}
 	else
@@ -149,7 +161,8 @@ void AssimpImporter::ProcessAnimations(const aiScene* scene)
 
 	for (size_t i = 0; i < scene->mNumAnimations; i++)
 	{
-		LoadAnimation(scene->mAnimations[i]);
+		GameObject* object = m_game->FindGameObject(scene->mAnimations[i]->mChannels[0]->mNodeName.C_Str());
+		object->AddComponent(new Animator(LoadAnimation(scene->mAnimations[i]), m_globalInverse));
 	}
 }
 
@@ -173,8 +186,13 @@ void AssimpImporter::ProcessNode(const aiNode* node, const aiScene* scene, GameO
 	for (int i = 0; i < node->mNumMeshes; ++i)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-
-		gameObject->AddComponent(new MeshRenderer(AiMeshToMesh(mesh), ProcessMaterial(scene->mMaterials[mesh->mMaterialIndex])));
+		if(mesh->mNumBones == 0)
+			gameObject->AddComponent(new MeshRenderer(AiMeshToMesh(mesh), ProcessMaterial(scene->mMaterials[mesh->mMaterialIndex])));
+		else
+		{
+			gameObject->AddComponent(new AnimatedMeshRenderer((AnimatedMesh*)AiMeshToMesh(mesh), ProcessMaterial(scene->mMaterials[mesh->mMaterialIndex])));
+			m_animatedObject = gameObject;
+		}
 
 	}
 	for (int i = 0; i < node->mNumChildren; ++i)

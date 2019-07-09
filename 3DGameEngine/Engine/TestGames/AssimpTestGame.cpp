@@ -28,7 +28,7 @@ void AssimpTestGame::Init()
 
 
 	AssimpImporter importer;
-	GameObject* go = importer.LoadFile(GetPath("cubeUV.fbx"));
+	GameObject* go = importer.LoadFile(GetPath("cubeUV.fbx"), this);
 	//go->GetTransform()->Rotate(math::ToRadians(-90.0f), math::Vector3(1, 0, 0));
 	//go->GetTransform()->SetScale(math::Vector3(10, 10, 10));
     //go->GetTransform()->SetScale(math::Vector3(10, 1, 10));

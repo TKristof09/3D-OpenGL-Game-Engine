@@ -30,11 +30,11 @@ void AnimationTestGame::Init()
 
 
     AssimpImporter importer;
-    GameObject* go = importer.LoadFile(GetPath("Character Running.fbx"));
+    importer.LoadFile(GetPath("anim_cube.dae"), this);
     //Animator* a = go->GetChild(0)->GetChild(0)->GetComponent<Animator>();
     //std::cout << "Animator" << a << std::endl;
-    AddToScene(go);
-	AddToScene(dLight);
+	//FindGameObject("Cube")->AddComponent(new FreeMove());
+	//AddToScene(dLight);
 
 
 }

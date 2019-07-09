@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(3DGameEngine)
 
+cmake_policy(SET CMP0072 NEW)
 
 #add_definitions(
 #	-g
@@ -64,8 +65,6 @@ find_package(OpenGL REQUIRED)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	add_compile_options(-Wall -std=c++17 -lstdc++fs)
 	# Bullet
-	set(BULLET_ROOT /usr/local)
-	set(BULLET_ROOT 3DGameEngine/lib)
 	find_package(Bullet REQUIRED)
 
 	# GLEW
@@ -96,6 +95,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	# Threading building blocks
 	find_package(TBB REQUIRED)
 	message( ${BULLET_LIBRARIES} )
+	message( ${BULLET_INCLUDE_DIRS} )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	add_compile_options(/W4 /std:c++latest)
 	file(GLOB_RECURSE LIBS 3DGameEngine/lib/*.lib)

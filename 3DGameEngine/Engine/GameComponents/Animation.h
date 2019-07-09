@@ -11,7 +11,6 @@
 struct KeyFrame
 {
     float timestamp;
-	// TODO maybe just store pos/rot/scale instead of transform
     math::Vector3 translation;
     math::Quaternion rotation;
     math::Vector3 scale;
@@ -44,9 +43,9 @@ public:
 	 * TODO might need to make the params double instead of float
      */
     Animation(const std::string& name, unsigned int duration, float tickspersec):
+		m_name(name),
         m_duration(duration),
-		m_tickspersec(tickspersec),
-		m_name(name){
+		m_tickspersec(tickspersec){
             std::cout<< "animation"<< std::endl;
         }
 
@@ -57,13 +56,13 @@ public:
             delete &pair.second;
         }
     }
-    void AddChannel(const AnimationChannel& channel)
+    void AddChannel(AnimationChannel* channel)
     {
-        m_channels.insert({channel.object, channel});
+        m_channels.insert({channel->object, channel});
     }
     double GetLength()
     {
-        return m_duration;
+        return m_duration * m_tickspersec;
     }
     AnimationChannel* GetChannel(GameObject* object)
     {
@@ -74,9 +73,9 @@ public:
             return nullptr;
         }
         else
-            return &it->second;
+            return it->second;
     }
-    const std::map<GameObject*, AnimationChannel>& GetChannels()
+    const std::map<GameObject*, AnimationChannel*>& GetChannels()
     {
         return m_channels;
     }
@@ -88,7 +87,7 @@ private:
 	std::string m_name;
 	unsigned int m_duration;
 	float m_tickspersec;
-    std::map<GameObject*, AnimationChannel> m_channels;
+    std::map<GameObject*, AnimationChannel*> m_channels;
 
 };
 

@@ -70,7 +70,7 @@ std::vector<unsigned> Mesh::GetIndices() const
 	return m_model.indices;
 }
 
-AnimatedMesh::AnimatedMesh(const Model& model, const std::vector<Bone>& bones, const std::vector<VertexBoneData>& boneData)
+AnimatedMesh::AnimatedMesh(const Model& model, const std::vector<Bone*>& bones, const std::vector<VertexBoneData>& boneData)
 {
 	m_bones = bones;
 	m_boneData = boneData;

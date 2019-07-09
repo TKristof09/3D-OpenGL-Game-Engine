@@ -138,7 +138,7 @@ void Shader::SetUniform(const std::string& uniform, const math::Matrix4x4& value
 
 }
 
-void Shader::SetUniform(const std::string& uniform, const std::vector<Bone>& value) const
+void Shader::SetUniform(const std::string& uniform, const std::vector<Bone*>& value) const
 {
 	if(value.size() > MAX_BONES)
 	{
@@ -149,7 +149,7 @@ void Shader::SetUniform(const std::string& uniform, const std::vector<Bone>& val
 	math::Matrix4x4 array[size];
 	for(size_t i = 0; i < size; i++)
 	{
-		array[i] = value[i].offsetMatrix;
+		array[i] = value[i]->finalTransform;
 
 	}
 

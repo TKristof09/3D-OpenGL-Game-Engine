@@ -6,6 +6,8 @@
 #include <GL/glew.h>
 #include <vector>
 #include "../Memory/VAO.h"
+#include <iostream>
+#include <map>
 
 #define NUM_BONES_PER_VERTEX 4
 
@@ -21,7 +23,7 @@ struct Vertex
 
 struct Bone
 {
-	unsigned int index;
+	math::Matrix4x4 finalTransform;
 	math::Matrix4x4 offsetMatrix;
 };
 
@@ -33,11 +35,15 @@ struct VertexBoneData
 		{
 			m_IDs[index] = id;
 			m_weights[index] = weight;
+			sum += weight;
 			index++;
+			if(sum > 1)
+				std::cout << "sum = " << sum << std::endl;
 		}
 	}
 	unsigned int index;
     unsigned int m_IDs[NUM_BONES_PER_VERTEX];
+	float sum;
     float m_weights[NUM_BONES_PER_VERTEX];
 };
 
@@ -77,16 +83,18 @@ protected:
 class AnimatedMesh : public Mesh
 {
 public:
-	AnimatedMesh(const Model& model, const std::vector<Bone>& bones, const std::vector<VertexBoneData>& boneData);
+	AnimatedMesh(const Model& model, const std::vector<Bone*>& bones, const std::vector<VertexBoneData>& boneData);
 	void InitAnimatedMesh(const Model& model);
-	const std::vector<Bone>& GetBones() const
+	const std::vector<Bone*>& GetBones() const
 	{
 		return m_bones;
 	}
 private:
 	GLuint m_boneDataBuffer;
-	std::vector<Bone> m_bones;
+	std::vector<Bone*> m_bones;
 	std::vector<VertexBoneData> m_boneData;
+	std::map<std::string, unsigned int> m_boneMapping;
+	math::Matrix4x4 m_globalInverse;
 };
 
 #endif // !MESH_H

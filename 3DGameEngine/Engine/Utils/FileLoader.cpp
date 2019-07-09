@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 std::string GetPath(const std::string& name)
 {
 	/*fs::path resourceFolder;
-	for(auto& p : fs::recursive_directory_iterator("../../../3DGameEngine"))
+	for(auto& p : fs::recursive_directory_iterator("/mnt/A/Programozas/C++/3DGameEngine/3DGameEngine"))
 	{
 		std::cout << p.path() << std::endl;
 		if(fs::is_directory(p.status()))
@@ -18,7 +18,7 @@ std::string GetPath(const std::string& name)
 				break;
 			}
 	}*/
-	fs::path resourceFolder = "../../../3DGameEngine/res";
+	fs::path resourceFolder = "/mnt/A/Programozas/C++/3DGameEngine/3DGameEngine/res";
 	fs::path filePath = fs::absolute(resourceFolder / fs::path(name));
 	return filePath.string();
 }

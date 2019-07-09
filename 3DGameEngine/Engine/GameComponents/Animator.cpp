@@ -4,37 +4,28 @@
 
 void Animator::AddToGameObjectCallback()
 {
-    auto children = GetGameObject()->GetChildren();
-    for(GameObject* child : children)
-    {
-        AnimationChannel* anim = m_animation.GetChannel(child);
-        if(anim)
-            child->AddComponent(new Animator(&m_animation));
-    }
     std::cout << GetGameObject()->name << " has an animator" << std::endl;
 
 }
 
 void Animator::Render(const Shader* shader, RenderingEngine* renderingEngine)
 {
-    AnimationChannel* channel = m_animation.GetChannel(GetGameObject());
-    if(channel)
-        UpdateAnimation(*channel);
-
-    for(unsigned int i = 0; i < GetGameObject()->GetNumChildren(); ++i)
-    {
-        AnimationChannel* channel = m_animation.GetChannel(GetGameObject()->GetChild(i));
-        if(channel)
-            GetGameObject()->GetChild(i)->GetComponent<Animator>()->UpdateAnimation(*channel);
-    }
+    UpdateAnimation();
 }
 
-void Animator::UpdateAnimation(const AnimationChannel& channel)
+void Animator::UpdateAnimation()
 {
     IncreaseAnimationTime();
-    auto prevAndNext = FindPrevAndNextKeyFrames(channel);
-    float progression = GetProgression(prevAndNext);
-    Interpolate(prevAndNext, progression);
+    for(auto pair : m_animation.GetChannels())
+    {
+        AnimationChannel* channel = pair.second;
+        if(channel)
+        {
+            auto prevAndNext = FindPrevAndNextKeyFrames(*channel);
+            float progression = GetProgression(prevAndNext);
+            Interpolate(prevAndNext, progression, pair.first, channel);
+        }
+    }
 }
 void Animator::IncreaseAnimationTime()
 {
@@ -61,12 +52,12 @@ std::pair<KeyFrame*, KeyFrame*> Animator::FindPrevAndNextKeyFrames(const Animati
         // for some reason &channel.keyframes[0] is a const *
         KeyFrame* prev = const_cast<KeyFrame*>(&channel.keyframes[0]);
         KeyFrame* next = const_cast<KeyFrame*>(&channel.keyframes[0]);
-        for(KeyFrame keyFrame : channel.keyframes)
+        for(size_t i = 0; i < channel.keyframes.size(); i++)
         {
-            next = &keyFrame;
+            next = const_cast<KeyFrame*>(&channel.keyframes[i]);
             if(next->timestamp > m_animationTime)
                 break;
-            prev = &keyFrame;
+            prev = const_cast<KeyFrame*>(&channel.keyframes[i]);;
         }
         m_prevKeyFrame = prev;
         return std::make_pair(prev,next);
@@ -84,6 +75,7 @@ std::pair<KeyFrame*, KeyFrame*> Animator::FindPrevAndNextKeyFrames(const Animati
         // somehow we skipped one or more keyframes so lets search for the keyframes the hard way
         else
         {
+            m_prevKeyFrame = nullptr;
             res = FindPrevAndNextKeyFrames(channel);
         }
 
@@ -91,34 +83,36 @@ std::pair<KeyFrame*, KeyFrame*> Animator::FindPrevAndNextKeyFrames(const Animati
     }
 }
 
-void Animator::Interpolate(const std::pair<KeyFrame*, KeyFrame*>& prevAndNext, float t)
+void Animator::Interpolate(const std::pair<KeyFrame*, KeyFrame*>& prevAndNext, float t, GameObject* go, AnimationChannel* channel)
 {
     KeyFrame* prev = prevAndNext.first;
     KeyFrame* next = prevAndNext.second;
 
-    math::Vector3 prevTranslation;
-    math::Quaternion prevRotation;
-    math::Vector3 prevScale;
+    //math::Vector3 prevTranslation;
+    //math::Quaternion prevRotation;
+    //math::Vector3 prevScale;
 
     //math::decompose(prev->bone->offsetmatrix, prevTranslation, prevRotation, prevScale);
 
-    math::Vector3 nextTranslation;
-    math::Quaternion nextRotation;
-    math::Vector3 nextScale;
+    //math::Vector3 nextTranslation;
+    //math::Quaternion nextRotation;
+    //math::Vector3 nextScale;
 
     //math::decompose(next->bone->offsetmatrix, nextTranslation, nextRotation, nextScale);
 
-    auto translation = math::lerp(prevTranslation, nextTranslation, t);
+    auto translation = math::lerp(prev->translation, next->translation, t);
 
-    auto rotation = math::slerp(prevRotation, nextRotation, t);
+    auto rotation = math::slerp(prev->rotation, next->rotation, t);
 
-    auto scale = math::lerp(prevScale, nextScale, t);
-    Transform* t = GetTransform();
-    t->SetPosition(translation);
-    t->SetRotation(rotation);
-    t->SetScale(scale);
+    auto scale = math::lerp(prev->scale, next->scale, t);
 
-    // global inverse transform = rootnode->transform->inverse
-    //final transform = global inverse transform * t->GetModel() * offsetmatrix -----> idk what the inverse transform does so might not need it
-
+    Transform* transform = go->GetTransform();
+    transform->SetPosition(translation);
+    transform->SetRotation(math::normalize(rotation));
+    transform->SetScale(scale);
+    //std::cout << m_animationTime << " : "<<go->name << " : " << math::ToString(transform->GetWorldPosition()) <<
+    //" : " << math::ToString(transform->GetWorldRotation()) <<
+    //" : " << math::ToString(transform->GetWorldScale()) << std::endl;
+	if(channel->bone)
+	    channel->bone->finalTransform = m_globalInverse * transform->GetModel() * channel->bone->offsetMatrix;
 }

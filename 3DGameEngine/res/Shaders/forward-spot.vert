@@ -6,7 +6,7 @@ layout (location = 3) in vec3 tangent;
 layout (location = 4) in ivec4 ids;
 layout (location = 5) in vec4 weights;
 
-out vec3 worldPos0;
+out vec3 worldPos0;MVPMVP
 out vec2 textCoord0;
 out mat3 TBN0;
 
@@ -23,7 +23,7 @@ void main(){
 	mat4 bone_transform;
 	if(animated)
 	{
-		bone_transform += bones[ids[0]] * weights[0];
+		bone_transform  = bones[ids[0]] * weights[0];
 		bone_transform += bones[ids[1]] * weights[1];
 		bone_transform += bones[ids[2]] * weights[2];
 		bone_transform += bones[ids[3]] * weights[3];
@@ -39,5 +39,5 @@ void main(){
 	vec3 B = cross(N, T);
    	TBN0 = mat3(T, B, N);
 
-	gl_Position = MVP * vec4(position, 1.0);
+	gl_Position = MVP * bone_transform * vec4(position, 1.0);
 }

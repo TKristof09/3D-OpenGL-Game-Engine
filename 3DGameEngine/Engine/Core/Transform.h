@@ -30,6 +30,7 @@ public:
         //For the property editor
         if (m_rotation.ToEulerAngles() != m_eulerRotations)
         {
+			math::Quaternion rotx,roty, rotz;
             if(m_lastEuler.x != m_eulerRotations.x)
                 rotx = math::Quaternion(math::ToRadians(m_eulerRotations.x), math::Vector3(1, 0, 0));
             if (m_lastEuler.y != m_eulerRotations.y)
@@ -90,7 +91,7 @@ public:
     };
 
     void SetPosition(const math::Vector3& position) { m_position = position; };
-    void SetRotation(const math::Quaternion& rotation) { m_rotation = rotation; };
+    void SetRotation(const math::Quaternion& rotation) { m_rotation = rotation; m_eulerRotations = m_rotation.ToEulerAngles(); };
     void SetScale(const math::Vector3& scale) { m_scale = scale; };
     void SetParent(Transform* parent) { m_parent = parent; };
 
@@ -166,9 +167,6 @@ private:
     math::Vector3 m_scale;
     math::Vector3 m_eulerRotations;
     mutable math::Vector3 m_lastEuler;
-    mutable math::Quaternion rotx;
-    mutable math::Quaternion roty;
-    mutable math::Quaternion rotz;
 };
 
 

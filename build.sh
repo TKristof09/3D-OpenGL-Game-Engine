@@ -13,7 +13,7 @@ fi
 echo $ONLY_CMAKE
 mkdir Build/Linux
 cd Build/Linux
-cmake -DCMAKE_BUILD_TYPE="$BUILD_TARGET" -DCMAKE_CXX_COMPILER=g++-8 ../..
+cmake -DCMAKE_BUILD_TYPE="$BUILD_TARGET" ../..
 if [ $ONLY_CMAKE -eq 0 ]; then
 	make -j4 VERBOSE=1 
 fi
