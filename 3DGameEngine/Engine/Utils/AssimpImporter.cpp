@@ -8,7 +8,7 @@
 #include "../Core/Game.h"
 
 
-GameObject* AssimpImporter::LoadFile(const std::string& path, Game* game)
+GameObject* AssimpImporter::LoadFile(const std::string& path, Game* game, const std::string& name)
 {
 	m_game = game;
 	Assimp::Importer importer;
@@ -27,8 +27,12 @@ GameObject* AssimpImporter::LoadFile(const std::string& path, Game* game)
 
 	directory = path.substr(0, path.find_last_of('\\'));
 	//process scene
-	std::string name = path.substr(path.find_last_of('\\') + 1, path.find_last_of('.'));
-	GameObject* root = new GameObject(scene->mRootNode->mName.C_Str());
+	//std::string name = path.substr(path.find_last_of('\\') + 1, path.find_last_of('.'));
+	GameObject* root;
+	if(name == "")
+		root = new GameObject(scene->mRootNode->mName.C_Str());
+	else
+		root = new GameObject(name);
 	std::cout<<scene->mNumAnimations<<std::endl;
 	m_globalInverse = math::Matrix4x4(scene->mRootNode->mTransformation.Inverse());
 	ProcessNode(scene->mRootNode, scene, root);

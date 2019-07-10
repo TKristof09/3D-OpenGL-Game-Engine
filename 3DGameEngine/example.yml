@@ -1,0 +1,21 @@
+Name:
+	Model: /path/to/file
+	Transform:
+		- Position: [x,y,z]
+		- Rotation: [w,x,y,z]
+		- Scale: [x,y,z]
+	Example component: 
+		- first parameter
+		- second parameter
+		...
+Name2:
+	Model: /path/to/file2
+	Transform:
+		- Position: [x,y,z]
+		- Rotation: [w,x,y,z]
+		- Scale: [x,y,z]
+	Example component: 
+		- first parameter
+		- second parameter
+		...
+    Example component 2

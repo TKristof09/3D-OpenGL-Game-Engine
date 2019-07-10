@@ -6,6 +6,17 @@
 #include "../GameComponents/Animator.h"
 #include "../GameComponents/Lighting.h"
 #include <iostream>
+#include "../Utils/Registry.h"
+
+
+class Test:public GameComponent
+{
+	public:
+		Test(int i, char c)
+		{
+			std::cout << "Test registry "<<c << " " <<i<<std::endl;
+		}
+};
 
 void AnimationTestGame::Init()
 {
@@ -27,6 +38,7 @@ void AnimationTestGame::Init()
 	auto dLight = new GameObject("Light");
 	dLight->AddComponent(new DirectionalLight(Color(Color::White), 0.2f));
 
+	ComponentRegistry::GetInstance().Register("test", CreateFunction<Test, int, char>); 
 
 
     AssimpImporter importer;

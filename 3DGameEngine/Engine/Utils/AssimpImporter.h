@@ -15,7 +15,7 @@ class GameObject;
 class AssimpImporter {
 public:
 
-	GameObject* LoadFile(const std::string& path, Game* game);
+	GameObject* LoadFile(const std::string& path, Game* game, const std::string& name="");
 private:
 	Animation* LoadAnimation(aiAnimation* animation);
 	Mesh* AiMeshToMesh(aiMesh* mesh);
